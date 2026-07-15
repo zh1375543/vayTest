@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#33000000">
+
+    <com.vaycore.finance.ui.views.StyledConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="@dimen/dp_20"
+        app:radius="@dimen/dp_16"
+        app:solidColor="@color/white">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_20"
+            android:gravity="center"
+            android:text="@string/dialog_feedback_title"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.vaycore.finance.ui.views.StyledEditTextView
+            android:id="@+id/etContent"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_180"
+            android:layout_margin="20dp"
+            android:gravity="start"
+            android:hint="@string/enter_feedback"
+            android:padding="@dimen/dp_12"
+            android:textColor="@color/C_111827"
+            android:textColorHint="@color/C_9CA3AF"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            app:radius="@dimen/dp_16"
+            app:solidColor="@color/C_F6F6F6" />
+
+        <com.vaycore.finance.ui.views.StyledTextView
+            android:id="@+id/tvSubmit"
+            style="@style/mainButton"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_44"
+            android:layout_marginHorizontal="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_24"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:text="@string/submit"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etContent" />
+
+    </com.vaycore.finance.ui.views.StyledConstraintLayout>
+</FrameLayout>

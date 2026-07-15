@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.vaycore.finance.ui.views.StyledConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/mainBg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.vaycore.finance.ui.views.PageHeaderView
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:centerText="@string/close_account"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.vaycore.finance.ui.views.StyledTextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        app:layout_constraintBottom_toBottomOf="@id/tvTips"
+        app:layout_constraintTop_toBottomOf="@id/titleBar"
+        app:radius="@dimen/dp_12"
+        app:solidColor="@color/white" />
+
+    <com.vaycore.finance.ui.views.StyledConstraintLayout
+        android:id="@+id/top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_14"
+        android:layout_marginTop="@dimen/dp_10"
+        app:layout_constraintTop_toBottomOf="@id/titleBar"
+        app:radius="@dimen/dp_12"
+        app:strokeWidth="@dimen/dp_1">
+
+        <TextView
+            android:id="@+id/tvAppName"
+            style="@style/LogoutAccountValueText"
+            android:layout_marginTop="@dimen/dp_16"
+            android:text="@string/app_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvAccount"
+            style="@style/LogoutAccountValueText"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_16"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvAppName"
+            tools:text="000" />
+
+        <TextView
+            style="@style/LogoutAccountLabelText"
+            android:text="@string/close_app_name"
+            app:layout_constraintBottom_toBottomOf="@id/tvAppName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvAppName" />
+
+        <TextView
+            style="@style/LogoutAccountLabelText"
+            android:text="@string/account_number"
+            app:layout_constraintBottom_toBottomOf="@id/tvAccount"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvAccount" />
+    </com.vaycore.finance.ui.views.StyledConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0_5"
+        android:alpha="0.2"
+        android:background="@color/black"
+        android:layout_marginHorizontal="@dimen/dp_30"
+        app:layout_constraintTop_toBottomOf="@id/top_layout" />
+
+    <TextView
+        android:id="@+id/tvTips"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_28"
+        android:layout_marginTop="@dimen/dp_8"
+        android:lineSpacingExtra="@dimen/dp_4"
+        android:paddingBottom="@dimen/dp_8"
+        android:text="@string/close_account_tips"
+        android:textColor="@color/C_F62909"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintTop_toBottomOf="@id/top_layout" />
+
+    <com.vaycore.finance.ui.views.StyledLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_8"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/tvSelectTitle"
+        app:radius="@dimen/dp_12"
+        app:solidColor="@color/transparent">
+
+        <com.vaycore.finance.ui.views.StyledTextView
+            android:id="@+id/tvReason1"
+            style="@style/LogoutReasonItem"
+            android:text="@string/close_account_reason1" />
+
+        <com.vaycore.finance.ui.views.StyledTextView
+            android:id="@+id/tvReason2"
+            style="@style/LogoutReasonItem"
+            android:layout_marginTop="@dimen/dp_8"
+            android:text="@string/close_account_reason2" />
+
+        <com.vaycore.finance.ui.views.StyledTextView
+            android:id="@+id/tvReason3"
+            style="@style/LogoutReasonItem"
+            android:layout_marginTop="@dimen/dp_8"
+            android:text="@string/close_account_reason3" />
+
+        <com.vaycore.finance.ui.views.StyledTextView
+            android:id="@+id/tvReason4"
+            style="@style/LogoutReasonItem"
+            android:layout_marginTop="@dimen/dp_8"
+            android:text="@string/close_account_reason4" />
+
+    </com.vaycore.finance.ui.views.StyledLinearLayout>
+
+    <TextView
+        android:id="@+id/tvSelectTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_8"
+        android:gravity="start"
+        android:lineSpacingExtra="@dimen/dp_4"
+        android:text="@string/close_account_reason"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/tvTips" />
+    <com.vaycore.finance.ui.widget.ActionButtonView
+        android:id="@+id/btnSubmit"
+         android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:layout_marginHorizontal="@dimen/dp_34"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:text="@string/submit"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</com.vaycore.finance.ui.views.StyledConstraintLayout>

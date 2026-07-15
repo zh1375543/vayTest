@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipeRefreshLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragments.HomeFragment">
+
+    <com.vaycore.finance.ui.views.ContentStateLayout
+        android:id="@+id/loading_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include
+                android:id="@+id/calm_layout"
+                layout="@layout/home_calm_layout" />
+
+            <include
+                android:id="@+id/content_layout"
+                layout="@layout/home_content_layout" />
+
+        </FrameLayout>
+    </com.vaycore.finance.ui.views.ContentStateLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

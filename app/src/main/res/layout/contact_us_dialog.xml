@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <com.vaycore.finance.ui.views.StyledConstraintLayout
+        android:id="@+id/cardLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_50"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        app:gradientEndColor="@color/white"
+        app:gradientOrientation="TOP_BOTTOM"
+        app:gradientCenterColor="@color/white"
+        app:gradientStartColor="#BDC8FF"
+        app:layout_constraintTop_toTopOf="parent"
+        app:radius="@dimen/dp_20">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCustomer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_150"
+            android:orientation="vertical"
+            android:overScrollMode="never"
+            android:paddingBottom="@dimen/dp_10"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:itemCount="2"
+            tools:listitem="@layout/contacts_us_dialog_adapter" />
+
+    </com.vaycore.finance.ui.views.StyledConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivCustomer"
+        android:layout_width="@dimen/dp_152"
+        android:layout_height="@dimen/dp_190"
+        android:layout_marginEnd="@dimen/dp_36"
+        android:importantForAccessibility="no"
+        android:scaleType="fitCenter"
+        android:src="@mipmap/ic_contact_customer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.vaycore.finance.ui.views.StyledTextView
+        android:id="@+id/tvTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginEnd="@dimen/dp_12"
+        android:gravity="center"
+        android:text="@string/contact_us"
+        android:textColor="@color/C_111827"
+        android:textSize="@dimen/sp_20"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/ivCustomer"
+        app:layout_constraintEnd_toStartOf="@id/ivCustomer"
+        app:layout_constraintStart_toStartOf="@id/cardLayout"
+        app:layout_constraintTop_toTopOf="@id/ivCustomer" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivClose"
+        android:layout_width="@dimen/dp_30"
+        android:layout_height="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_28"
+        android:importantForAccessibility="no"
+        android:src="@mipmap/ic_dialog_bottom_close"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardLayout" />
+</androidx.constraintlayout.widget.ConstraintLayout>

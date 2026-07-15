@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.vaycore.finance.ui.views.StyledConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/mainBg">
+
+    <com.vaycore.finance.ui.views.PageHeaderView
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:centerText="@string/order_center"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.vaycore.finance.ui.views.ContentStateLayout
+        android:id="@+id/loading_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleBar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvOrder"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/dp_20"
+                android:layout_marginVertical="@dimen/dp_14"
+                android:orientation="vertical"
+                android:overScrollMode="never"
+                android:visibility="visible"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:itemCount="2"
+                tools:listitem="@layout/item_order"
+                tools:visibility="visible" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.vaycore.finance.ui.views.ContentStateLayout>
+</com.vaycore.finance.ui.views.StyledConstraintLayout>

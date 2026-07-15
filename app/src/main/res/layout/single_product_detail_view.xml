@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.vaycore.finance.ui.views.StyledConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="@dimen/dp_12"
+    android:paddingTop="@dimen/dp_16"
+    android:paddingBottom="@dimen/dp_14"
+    app:radius="@dimen/dp_12"
+    app:solidColor="@color/white"
+    tools:background="@color/C_FEF8ED">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvPlan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:overScrollMode="never"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/product_repayment_menu_adapter" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/planGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="rvPlan" />
+
+    <TextView
+        android:id="@+id/tvInstallDetail"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_28"
+        android:layout_marginTop="@dimen/dp_8"
+        android:gravity="center_vertical"
+        android:text="@string/installment_details"
+        android:textColor="@color/C_111827"
+        android:textSize="@dimen/sp_15"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/ivMorePlan"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rvPlan" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivMorePlan"
+        android:layout_width="@dimen/dp_28"
+        android:layout_height="@dimen/dp_28"
+        android:padding="@dimen/dp_4"
+        android:src="@mipmap/product_bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvInstallDetail" />
+
+    <com.vaycore.finance.ui.views.StyledTextView
+        android:id="@+id/bg"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/dp_m_8"
+        app:layout_constraintBottom_toBottomOf="@id/rvRepayment"
+        app:layout_constraintTop_toTopOf="@id/tvDueDateTitle"
+        app:radius="@dimen/dp_8"
+        app:solidColor="@color/C_F8F7F3" />
+
+    <TextView
+        android:id="@+id/tvDueDateTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_18"
+        android:paddingStart="@dimen/dp_10"
+        android:text="@string/due_date"
+        android:textColor="@color/C_6D7280"
+        android:textSize="@dimen/sp_13"
+        app:layout_constraintEnd_toStartOf="@id/tvRepaymentAmountTitle"
+        app:layout_constraintHorizontal_weight="2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvInstallDetail" />
+
+    <TextView
+        android:id="@+id/tvRepaymentAmountTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:paddingEnd="@dimen/dp_10"
+        android:text="@string/repayment_amount"
+        android:textColor="@color/C_6D7280"
+        android:textSize="@dimen/sp_13"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="3"
+        app:layout_constraintStart_toEndOf="@id/tvDueDateTitle"
+        app:layout_constraintTop_toTopOf="@id/tvDueDateTitle" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRepayment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:overScrollMode="never"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/tvDueDateTitle"
+        tools:itemCount="3"
+        tools:listitem="@layout/product_installment_adapter" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/repaymentGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="tvDueDateTitle,tvRepaymentAmountTitle,rvRepayment,bg" />
+</com.vaycore.finance.ui.views.StyledConstraintLayout>

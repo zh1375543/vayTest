@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ContentStateLayout">
+        <attr name="emptyView" format="reference" />
+        <attr name="errorView" format="reference" />
+        <attr name="loadingView" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="ShapeView">
+        <attr name="shape" format="enum">
+            <enum name="rectangle" value="0" />
+            <enum name="oval" value="1" />
+            <enum name="line" value="2" />
+            <enum name="ring" value="3" />
+        </attr>
+        <attr name="radius" format="dimension" />
+        <attr name="left_top_radius" format="dimension" />
+        <attr name="right_top_radius" format="dimension" />
+        <attr name="right_bottom_radius" format="dimension" />
+        <attr name="left_bottom_radius" format="dimension" />
+
+        <attr name="solidColor" format="color" />
+        <attr name="strokeWidth" format="dimension" />
+        <attr name="strokeColor" format="color" />
+
+        <attr name="pressedColor" format="color" />
+        <attr name="selectedColor" format="color" />
+        <attr name="disabledColor" format="color" />
+
+        <attr name="pressedStrokeColor" format="color" />
+        <attr name="focusedStrokeColor" format="color" />
+        <attr name="selectedStrokeColor" format="color" />
+        <attr name="disabledStrokeColor" format="color" />
+
+        <attr name="autoFillPressedColor" format="boolean" />
+
+        <attr name="textColorPressed" format="color" />
+        <attr name="textColorSelected" format="color" />
+        <attr name="textColorDisabled" format="color" />
+
+        <!-- Dashed line support -->
+        <attr name="dashWidth" format="dimension" />
+        <attr name="dashGap" format="dimension" />
+
+        <attr name="drawableStartSelected" format="reference" />
+        <attr name="drawableEndSelected" format="reference" />
+        <attr name="drawableTopSelected" format="reference" />
+        <attr name="drawableBottomSelected" format="reference" />
+
+        <attr name="drawableWidth" format="dimension" />
+        <attr name="drawableHeight" format="dimension" />
+
+        <!-- Gradient direction -->
+        <attr name="gradientOrientation" format="enum">
+            <enum name="LEFT_RIGHT" value="0"/>
+            <enum name="RIGHT_LEFT" value="1"/>
+            <enum name="TOP_BOTTOM" value="2"/>
+            <enum name="BOTTOM_TOP" value="3"/>
+            <enum name="TL_BR" value="4"/>
+            <enum name="TR_BL" value="5"/>
+            <enum name="BL_TR" value="6"/>
+            <enum name="BR_TL" value="7"/>
+        </attr>
+        <!-- Normal state gradient -->
+        <attr name="gradientStartColor" format="color"/>
+        <attr name="gradientEndColor" format="color"/>
+        <attr name="gradientCenterColor" format="color"/>
+        <!-- Pressed state gradient -->
+        <attr name="pressedGradientStartColor" format="color"/>
+        <attr name="pressedGradientEndColor" format="color"/>
+        <!-- Selected state gradient -->
+        <attr name="selectedGradientStartColor" format="color"/>
+        <attr name="selectedGradientEndColor" format="color"/>
+        <!-- Disabled state gradient -->
+        <attr name="disabledGradientStartColor" format="color"/>
+        <attr name="disabledGradientEndColor" format="color"/>
+    </declare-styleable>
+    <declare-styleable name="StyledEditTextView">
+        <attr name="validationSuccessDrawable" format="reference" />
+        <attr name="validationErrorDrawable" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="SelectableImageView">
+        <attr name="srcSelected" format="reference" />
+        <attr name="android:src" />
+    </declare-styleable>
+    <declare-styleable name="CloudLoadingView">
+        <attr name="cl_barColor" format="color" />
+        <attr name="cl_barCount" format="integer" />
+        <attr name="cl_barWidth" format="dimension" />
+        <attr name="cl_barSpacing" format="dimension" />
+        <attr name="cl_radius" format="dimension" />
+        <attr name="cl_minHeightRatio" format="float" /> <!-- Height ratio relative to View (0~1) -->
+        <attr name="cl_maxHeightRatio" format="float" /> <!-- Height ratio relative to View (0~1) -->
+        <attr name="cl_duration" format="integer" /> <!-- ms -->
+    </declare-styleable>
+    <declare-styleable name="VerticalSolidLineView">
+        <attr name="solidLineColor" format="color" />
+        <attr name="solidLineWidth" format="dimension" />
+    </declare-styleable>
+    <declare-styleable name="FormItemView">
+        <attr name="titleText" format="string" />
+        <attr name="hintText" format="string" />
+        <attr name="errorText" format="string" />
+
+        <attr name="formType">
+            <enum name="input" value="0" />
+            <enum name="select" value="1" />
+        </attr>
+
+        <attr name="inputType">
+            <enum name="text" value="0" />
+            <enum name="number" value="1" />
+            <enum name="phone" value="2" />
+            <enum name="email" value="3"/>
+        </attr>
+
+        <!-- Additional attributes -->
+        <attr name="editMaxLength" format="integer" />
+        <attr name="showContactIcon" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="PageHeaderView">
+        <attr name="centerText" format="string" />
+        <attr name="rightText" format="string" />
+        <attr name="tintColor" format="color"/>
+        <attr name="fitStatusBar" format="boolean" />
+    </declare-styleable>
+
+
+    <!--sssss-->
+    <declare-styleable name="ActionButtonView">
+        <attr name="actionButtonVariant" format="enum">
+            <enum name="filled" value="0" />
+            <enum name="outline" value="1" />
+        </attr>
+        <attr name="buttonRadius" format="dimension" />
+        <attr name="buttonSolidColor" format="color|reference" />
+        <attr name="buttonPressedColor" format="color|reference" />
+        <attr name="buttonDisabledColor" format="color|reference" />
+        <attr name="buttonStrokeWidth" format="dimension" />
+        <attr name="buttonStrokeColor" format="color|reference" />
+        <attr name="buttonTextColor" format="color|reference" />
+        <attr name="buttonDisabledTextColor" format="color|reference" />
+        <attr name="buttonDisabledAlpha" format="float" />
+    </declare-styleable>
+
+    <declare-styleable name="TicketBackgroundLayout">
+        <attr name="ticketColor" format="color|reference" />
+        <attr name="ticketCornerRadius" format="dimension" />
+        <attr name="ticketSideCutoutRadius" format="dimension" />
+        <attr name="ticketSideCutoutCenterPercent" format="float" />
+        <attr name="ticketSideCutoutCenterFromBottom" format="dimension" />
+        <attr name="ticketSideCutoutAnchor" format="reference" />
+        <attr name="ticketSideCutoutAnchorVerticalBias" format="float" />
+        <attr name="ticketSideCutoutAnchorOffsetY" format="dimension" />
+    </declare-styleable>
+</resources>

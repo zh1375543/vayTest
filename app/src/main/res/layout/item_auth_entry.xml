@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.vaycore.finance.ui.views.StyledConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootView"
+    app:solidColor="@color/white"
+    app:radius="@dimen/dp_12"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_81"
+    android:layout_marginTop="@dimen/dp_12"
+    android:layout_marginEnd="@dimen/dp_12">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivIcon"
+        android:layout_width="@dimen/dp_60"
+        android:layout_height="@dimen/dp_60"
+        android:layout_marginStart="@dimen/dp_16"
+        android:src="@mipmap/ic_cert_kyc"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.vaycore.finance.ui.views.StyledTextView
+        android:id="@+id/tvTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_20"
+        android:gravity="center_vertical"
+        android:text="@string/kyc_certification"
+        android:textColor="@color/C_9CA3AF"
+        android:textSize="@dimen/sp_13"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/ivRight"
+        app:layout_constraintStart_toEndOf="@id/ivIcon"
+        app:textColorSelected="@color/C_111827" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivRight"
+        android:layout_width="@dimen/dp_24"
+        android:layout_height="@dimen/dp_24"
+        android:layout_marginEnd="@dimen/dp_12"
+        android:src="@mipmap/ic_mine_arrow"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</com.vaycore.finance.ui.views.StyledConstraintLayout>

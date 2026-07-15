@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/dp_22"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+    <androidx.appcompat.widget.AppCompatImageView android:layout_width="@dimen/dp_20" android:layout_height="@dimen/dp_20" android:importantForAccessibility="no" android:src="@mipmap/ic_dialog_choose" />
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="@dimen/dp_12" android:text="@string/credit_dialog_fast_application" android:textColor="@color/C_6D7280" android:textSize="@dimen/sp_15" />
+</LinearLayout>

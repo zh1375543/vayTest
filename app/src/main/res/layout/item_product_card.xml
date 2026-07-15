@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.vaycore.finance.ui.views.StyledConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_58"
+    android:layout_marginHorizontal="@dimen/dp_12"
+    android:layout_marginTop="@dimen/dp_8"
+    android:gravity="center"
+    android:orientation="vertical"
+    app:radius="@dimen/dp_8"
+    app:solidColor="@color/color_E3E8FF"
+    app:gradientOrientation="TL_BR">
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Loan A"
+        android:textColor="@color/color_FF8000"
+        android:textSize="@dimen/sp_14"
+        android:textStyle="normal"
+        android:layout_marginEnd="@dimen/dp_10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="200,000,000₫"
+        android:textColor="@color/C_111827"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        android:layout_marginStart="@dimen/dp_10"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvLoan" />
+
+    <TextView
+        android:id="@+id/tvLoan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/loan_amount"
+        android:textColor="@color/C_111827"
+        android:textSize="@dimen/sp_13"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</com.vaycore.finance.ui.views.StyledConstraintLayout>

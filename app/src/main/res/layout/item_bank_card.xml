@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dp_10"
+    android:background="@mipmap/ic_account_bg"
+    android:minHeight="@dimen/dp_109">
+
+    <TextView
+        android:id="@+id/ivIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_12"
+        android:drawableEnd="@mipmap/icon_close_checked"
+        android:drawablePadding="@dimen/dp_12"
+        android:gravity="center_vertical"
+        android:text="@string/default_str"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_13"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvBankCard" />
+
+    <TextView
+        android:id="@+id/tvBankName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_12"
+        android:layout_marginTop="@dimen/dp_28"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="GT Bank"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_13"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvBankCard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_5"
+        android:layout_marginBottom="@dimen/dp_13"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="111"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_20"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/tvDefault"
+        app:layout_constraintEnd_toStartOf="@id/ivIcon"
+        app:layout_constraintStart_toStartOf="@id/tvBankName"
+        app:layout_constraintTop_toBottomOf="@id/tvBankName"
+        app:layout_goneMarginBottom="@dimen/dp_28" />
+
+    <com.vaycore.finance.ui.widget.ActionButtonView
+        android:id="@+id/tvDefault"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_38"
+        android:layout_marginStart="@dimen/dp_12"
+        android:layout_marginTop="@dimen/dp_12"
+        android:layout_marginBottom="@dimen/dp_15"
+        android:text="@string/default_str"
+        android:textSize="@dimen/sp_14"
+        android:textStyle="bold"
+        app:actionButtonVariant="outline"
+        app:buttonSolidColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/ivIcon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tvDelete"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.vaycore.finance.ui.widget.ActionButtonView
+        android:id="@+id/tvDelete"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_38"
+        android:layout_marginStart="@dimen/dp_8"
+        android:layout_marginEnd="@dimen/dp_12"
+        android:gravity="center"
+        android:text="@string/untie"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_14"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvDefault"
+        app:layout_constraintTop_toTopOf="@id/tvDefault" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/menuGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="tvDefault,tvDelete" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@mipmap/ic_page_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.vaycore.finance.ui.views.PageHeaderView
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_44"
+        app:centerText="@string/bank_and_contact"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.vaycore.finance.ui.views.ContentStateLayout
+        android:id="@+id/loading_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/dp_15"
+        android:paddingTop="@dimen/dp_10"
+        app:layout_constraintBottom_toTopOf="@id/bottomActionLayout"
+        app:layout_constraintTop_toBottomOf="@id/titleBar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/scrollView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_0"
+                android:layout_weight="1"
+                android:clipToPadding="false"
+                android:fillViewport="true"
+                android:overScrollMode="never"
+                android:paddingBottom="@dimen/dp_24">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp_16"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/confirm_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="visible"
+                    tools:visibility="visible">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_12"
+                        android:gravity="center_vertical"
+                        android:text="@string/withdraw_method"
+                        android:textColor="@color/C_111827"
+                        android:textSize="@dimen/sp_18"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_12"
+                        android:text="@string/bank_tips"
+                        android:textColor="@color/C_6D7280"
+                        android:textSize="@dimen/sp_12" />
+
+                    <com.vaycore.finance.ui.views.StyledLinearLayout
+                        android:id="@+id/withdrawMethodCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_14"
+                        android:orientation="vertical"
+                        app:radius="@dimen/dp_12"
+                        app:solidColor="@color/white">
+
+                    <com.vaycore.finance.ui.views.StyledTextView
+                        android:id="@+id/methodSelectionView"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_64"
+                        android:clickable="true"
+                        android:drawablePadding="@dimen/dp_12"
+                        android:focusable="true"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="@dimen/dp_16"
+                        android:text="@string/please_select"
+                        android:textColor="@color/C_374151"
+                        android:textSize="@dimen/sp_14" />
+
+                    <LinearLayout
+                        android:id="@+id/bankFieldsLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                    <!-- Bank selection -->
+                    <com.vaycore.finance.ui.widget.FormItemView
+                        android:id="@+id/bankView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:errorText="@string/please_choose_current_info"
+                        app:formType="select"
+                        app:hintText="@string/please_choose"
+                        app:titleText="@string/please_choose_bank" />
+
+                    <!-- Cardholder -->
+                    <com.vaycore.finance.ui.widget.FormItemView
+                        android:id="@+id/holderView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:errorText="@string/please_enter_holder_name"
+                        app:formType="input"
+                        app:hintText="@string/please_enter_holder_name"
+                        app:inputType="text"
+                        app:titleText="@string/cardholder_name" />
+
+                    <!-- Bank card number -->
+                    <com.vaycore.finance.ui.widget.FormItemView
+                        android:id="@+id/bankAccountView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:errorText="@string/please_enter_bank_account"
+                        app:formType="input"
+                        app:hintText="@string/please_enter_bank_account"
+                        app:inputType="number"
+                        app:titleText="@string/bank_account" />
+
+                    <!-- Confirm bank card -->
+                    <com.vaycore.finance.ui.widget.FormItemView
+                        android:id="@+id/confirmBankView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:errorText="@string/bank_account_not_match"
+                        app:formType="input"
+                        app:hintText="@string/please_enter_bank_account"
+                        app:inputType="number"
+                        app:titleText="@string/confirm_bank_account" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_18" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/walletFieldsLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <com.vaycore.finance.ui.widget.FormItemView
+                            android:id="@+id/walletProviderView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:errorText="@string/please_choose_wallet"
+                            app:formType="select"
+                            app:hintText="@string/please_choose"
+                            app:titleText="@string/first_name" />
+
+                        <com.vaycore.finance.ui.widget.FormItemView
+                            android:id="@+id/walletAccountView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:errorText="@string/please_enter_wallet_account"
+                            app:formType="input"
+                            app:hintText="@string/please_enter_wallet_account"
+                            app:inputType="number"
+                            app:titleText="@string/account_number" />
+
+                        <com.vaycore.finance.ui.widget.FormItemView
+                            android:id="@+id/confirmWalletAccountView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:errorText="@string/wallet_account_not_match"
+                            app:formType="input"
+                            app:hintText="@string/please_enter_wallet_account"
+                            app:inputType="number"
+                            app:titleText="@string/confirm_account_number" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_18" />
+                    </LinearLayout>
+                    </com.vaycore.finance.ui.views.StyledLinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_24"
+                    android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="@string/contact_info"
+                    android:textColor="@color/C_111827"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvContactTips"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="@string/contact_tips"
+                    android:textColor="@color/C_6D7280"
+                    android:textSize="@dimen/sp_12" />
+
+                <com.vaycore.finance.ui.views.StyledLinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_12"
+                    android:orientation="vertical"
+                    app:radius="@dimen/dp_12"
+                    app:solidColor="@color/white">
+
+                <!-- Relationship 1 -->
+                <com.vaycore.finance.ui.widget.FormItemView
+                    android:id="@+id/relativesView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:errorText="@string/please_choose_current_info"
+                    app:formType="select"
+                    app:hintText="@string/please_choose"
+                    app:titleText="@string/contact_people1" />
+
+                <!-- Contact name -->
+                <com.vaycore.finance.ui.widget.FormItemView
+                    android:id="@+id/relativesNameView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:errorText="@string/please_enter_contact_name"
+                    app:formType="input"
+                    app:hintText="@string/please_enter_contact_name"
+                    app:inputType="text"
+                    app:titleText="@string/contact_name" />
+
+                <!-- Contact phone -->
+                <com.vaycore.finance.ui.widget.FormItemView
+                    android:id="@+id/relativesPhoneView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:editMaxLength="40"
+                    app:errorText="@string/please_enter_phone_number"
+                    app:formType="input"
+                    app:hintText="@string/please_enter_phone_number"
+                    app:inputType="phone"
+                    app:showContactIcon="true"
+                    app:titleText="@string/contact_phone_number" />
+
+                <com.vaycore.finance.ui.widget.FormItemView
+                    android:id="@+id/friendView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:errorText="@string/please_choose_current_info"
+                    app:formType="select"
+                    app:hintText="@string/please_choose"
+                    app:titleText="@string/contact_people2" />
+
+                <com.vaycore.finance.ui.widget.FormItemView
+                    android:id="@+id/friendNameView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:errorText="@string/please_enter_contact_name"
+                    app:formType="input"
+                    app:hintText="@string/please_enter_contact_name"
+                    app:inputType="text"
+                    app:titleText="@string/contact_name" />
+
+                <com.vaycore.finance.ui.widget.FormItemView
+                    android:id="@+id/friendPhoneView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:editMaxLength="40"
+                    app:errorText="@string/please_enter_phone_number"
+                    app:formType="input"
+                    app:hintText="@string/please_enter_phone_number"
+                    app:inputType="phone"
+                    app:showContactIcon="true"
+                    app:titleText="@string/contact_phone_number" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_18" />
+                </com.vaycore.finance.ui.views.StyledLinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+        </LinearLayout>
+
+    </com.vaycore.finance.ui.views.ContentStateLayout>
+
+    <LinearLayout
+        android:id="@+id/bottomActionLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_15"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:visibility="visible">
+
+        <TextView
+            style="@style/AuthDataEncryptedTipText"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="@dimen/dp_16"
+            android:layout_marginBottom="@dimen/dp_10" />
+
+        <com.vaycore.finance.ui.widget.ActionButtonView
+            android:id="@+id/btNext"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_48"
+            android:layout_marginHorizontal="@dimen/dp_16"
+            android:text="@string/next"
+            app:actionButtonVariant="filled" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

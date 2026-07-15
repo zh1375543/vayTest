@@ -1,0 +1,72 @@
+[versions]
+agp = "9.1.0"
+coil = "3.4.0"
+crashreport = "4.1.9.3"
+kotlin = "2.3.21"
+coreKtx = "1.18.0"
+glide = "5.0.7"
+constraintlayout = "2.2.1"
+activity-ktx = "1.13.0"
+fragment-ktx="1.8.9"
+appcompat = "1.7.1"
+kotlinx-coroutines-core = "1.11.0"
+gson = "2.14.0"
+lifecycle-viewmodel-ktx = "2.10.0"
+retrofit = "3.0.0"
+githubXxpermissions = "28.2"
+material = "1.14.0"
+okhttp = "5.3.2"
+identifier = "18.3.0"
+appsflyer = "6.18.0"
+installreferrer = "2.2"
+swiperefreshlayout = "1.2.0"
+firebaseBom = "34.14.0"
+review= "2.0.2"
+playServicesAuth = "21.6.0"
+playServicesAuthApiPhone = "18.3.0"
+
+
+
+[libraries]
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activity-ktx" }
+androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment-ktx" }
+androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
+androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycle-viewmodel-ktx" }
+androidx-lifecycle-process = { module = "androidx.lifecycle:lifecycle-process", version.ref = "lifecycle-viewmodel-ktx" }
+androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle-viewmodel-ktx" }
+androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefreshlayout" }
+coil = { module = "io.coil-kt.coil3:coil", version.ref = "coil" }
+coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil" }
+compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glide" }
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+crashreport = { module = "com.tencent.bugly:crashreport", version.ref = "crashreport" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines-core" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+github-xxpermissions = { module = "com.github.getActivity:XXPermissions", version.ref = "githubXxpermissions" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
+logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
+google-identifier = { group = "com.google.android.gms", name = "play-services-ads-identifier", version.ref = "identifier" }
+df-liveness-silent-sdk = { module = "com.dfsdk.liveness:df-liveness-silent-sdk", version = "2.2.7"}
+df-liveness-silent-ui  = { module = "com.liveness.dflivenesslibrary:df-liveness-silent-ui", version = "1.0.16"}
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+firebase-messaging = { module = "com.google.firebase:firebase-messaging"}
+firebase-appcheck-playintegrity = { module = "com.google.firebase:firebase-appcheck-playintegrity" }
+review = { module = "com.google.android.play:review", version.ref = "review" }
+gms-play-services-auth-api-phone = { module = "com.google.android.gms:play-services-auth-api-phone", version.ref = "playServicesAuthApiPhone" }
+play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
+
+
+appsflyer = { group = "com.appsflyer", name = "af-android-sdk", version.ref = "appsflyer" }
+installreferrer = { group = "com.android.installreferrer", name = "installreferrer", version.ref = "installreferrer" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+

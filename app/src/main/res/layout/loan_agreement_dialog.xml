@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.vaycore.finance.ui.views.StyledConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/dp_20"
+    app:left_top_radius="@dimen/dp_20"
+    app:right_top_radius="@dimen/dp_20"
+    app:solidColor="@color/white">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_24"
+        android:gravity="center"
+        android:text="@string/agreement_confirmation"
+        android:textColor="@color/color_7087F8"
+        android:textSize="@dimen/sp_20"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_16"
+        android:gravity="center"
+        android:lineSpacingExtra="@dimen/dp_3"
+        android:text="@string/agreement_confirmation_desc"
+        android:textColor="@color/C_6D7280"
+        android:textSize="@dimen/sp_13"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+    <TextView
+        android:id="@+id/tvPlease"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_20"
+        android:gravity="center"
+        android:text="@string/please_review_agreement_confirmation"
+        android:textColor="@color/color_7087F8"
+        android:textSize="@dimen/sp_14"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/tvDesc"
+        tools:visibility="visible" />
+
+    <com.vaycore.finance.ui.views.StyledTextView
+        android:id="@+id/tvLease"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_44"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_10"
+        android:drawableEnd="@mipmap/mine_right"
+        android:drawableTint="@color/C_374151"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="@dimen/dp_16"
+        android:text="@string/lease_contract"
+        android:textColor="@color/C_374151"
+        android:textSize="@dimen/sp_14"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/tvPlease"
+        app:radius="@dimen/dp_50"
+        app:solidColor="@color/C_F6F6F6"
+        tools:visibility="visible" />
+
+    <com.vaycore.finance.ui.views.StyledTextView
+        android:id="@+id/tvMortgage"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_44"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_10"
+        android:drawableEnd="@mipmap/mine_right"
+        android:drawableTint="@color/C_374151"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="@dimen/dp_16"
+        android:text="@string/mortgage_contract"
+        android:textColor="@color/C_374151"
+        android:textSize="@dimen/sp_14"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/tvLease"
+        app:radius="@dimen/dp_50"
+        app:solidColor="@color/C_F6F6F6"
+        tools:visibility="visible" />
+
+    <com.vaycore.finance.ui.widget.ActionButtonView
+        android:id="@+id/btnApply"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_25"
+        android:text="@string/confirm"
+        app:layout_constraintTop_toBottomOf="@id/tvMortgage"/>
+
+</com.vaycore.finance.ui.views.StyledConstraintLayout>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.vaycore.finance.ui.views.StyledConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/dp_20"
+    app:left_top_radius="@dimen/dp_20"
+    app:right_top_radius="@dimen/dp_20"
+    app:solidColor="@color/white">
+
+    <!--    <com.tin.phat.ui.layout.PickerView-->
+    <!--        android:id="@+id/pickView"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="@dimen/dp_200"-->
+    <!--        android:maxHeight="@dimen/dp_500"-->
+    <!--        app:autoFitSize="true"-->
+    <!--        app:isCyclic="false"-->
+    <!--        app:itemHeight="40dp"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <com.vaycore.finance.ui.views.WheelView
+        android:id="@+id/wheelView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_200"
+        android:maxHeight="@dimen/dp_500"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.vaycore.finance.ui.views.StyledTextView
+        android:id="@+id/tvOk"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_44"
+        android:layout_marginHorizontal="@dimen/dp_40"
+        android:layout_marginVertical="@dimen/dp_20"
+        style="@style/mainButton"
+        android:text="@string/ok"
+        app:layout_constraintTop_toBottomOf="@id/wheelView"/>
+</com.vaycore.finance.ui.views.StyledConstraintLayout>

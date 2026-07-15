@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Constraint set for buttonResult == "3".
+    Constraint-only placeholder layout cloned via ConstraintSet.clone() and applied to
+    bottomActionLayout in LoanOrderDetailActivity. Only ids + constraints + visibility matter here.
+
+    Layout: amount label / value on one row (left & right); agreement checkbox row;
+    tvBorrow full width at the bottom with the badge shown. No tvRepay — the checkbox
+    toggles tvBorrow's text between "Repay" and "Repay & Auto-Apply" (handled in code).
+-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glButtons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <View
+        android:id="@+id/tvSelect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/tvSelectAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/tvSelect"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvSelect" />
+
+    <View
+        android:id="@+id/tvRepay"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_48"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/glButtons"
+        app:layout_constraintTop_toTopOf="@id/tvSelect" />
+
+    <View
+        android:id="@+id/cbAutoApply"
+        android:layout_width="@dimen/dp_24"
+        android:layout_height="@dimen/dp_24"
+        android:layout_marginTop="@dimen/dp_16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSelectAmount" />
+
+    <View
+        android:id="@+id/tvPrivacy"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_8"
+        app:layout_constraintBottom_toBottomOf="@id/cbAutoApply"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/cbAutoApply"
+        app:layout_constraintTop_toTopOf="@id/cbAutoApply" />
+
+    <View
+        android:id="@+id/tvBorrow"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_52"
+        android:layout_marginTop="@dimen/dp_16"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cbAutoApply" />
+
+    <View
+        android:id="@+id/tvBorrowTip"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_28"
+        android:layout_marginEnd="@dimen/dp_8"
+        app:layout_constraintEnd_toEndOf="@id/tvBorrow"
+        app:layout_constraintTop_toTopOf="@id/tvBorrow" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

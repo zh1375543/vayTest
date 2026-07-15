@@ -1,0 +1,115 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="MyTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:navigationBarColor">@color/white</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+        <item name="editTextStyle">@style/AppEditTextStyle</item>
+        <item name="android:editTextStyle">@style/AppEditTextStyle</item>
+    </style>
+
+    <style name="AppEditTextStyle" parent="@style/Widget.AppCompat.EditText">
+        <item name="android:textCursorDrawable">@drawable/input_cursor_color_7087f8</item>
+    </style>
+
+    <style name="CustomDialog" parent="Theme.AppCompat.Dialog.Alert">
+        <!-- Window frame -->
+        <item name="android:windowFrame">@null</item>
+        <!-- No title -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- Translucent -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- Transparent background -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- Background dim -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- Enter / exit animation -->
+        <item name="android:windowAnimationStyle">@style/DialogIOSAnim</item>
+        <!-- Float above activity -->
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+    <style name="DialogIOSAnim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_center_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_center_out</item>
+    </style>
+
+    <style name="BottomSheetDialog" parent="@style/Theme.AppCompat.DayNight.Dialog.Alert">
+        <!-- Window frame -->
+        <item name="android:windowFrame">@null</item>
+        <!-- No title -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- Translucent -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- Transparent background -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- Background dim -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- Enter / exit animation -->
+        <item name="android:windowAnimationStyle">@style/dialog_bottom_animation</item>
+        <!-- Float above activity -->
+        <item name="android:windowIsFloating">false</item>
+    </style>
+
+    <style name="dialog_bottom_animation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_bottom_out</item>
+    </style>
+
+    <style name="Round_6">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/dp_6</item>
+    </style>
+    <style name="Round_8">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/dp_8</item>
+    </style>
+
+    <style name="mainBg">
+        <item name="gradientStartColor">@color/C_F6F6F6</item>
+        <item name="gradientEndColor">@color/C_F6F6F6</item>
+    </style>
+
+    <style name="Round_Bottom_12">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeBottomLeft">@dimen/dp_12</item>
+        <item name="cornerSizeBottomRight">@dimen/dp_12</item>
+    </style>
+    <style name="mainButton">
+        <item name="solidColor">@color/color_7087F8</item>
+        <item name="radius">@dimen/dp_50</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/sp_18</item>
+        <item name="android:textStyle">bold</item>
+        <item name="disabledColor">@color/C_9CA3AF</item>
+        <item name="textColorDisabled">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="otherButton">
+        <item name="solidColor">@color/color_7087F8</item>
+        <item name="radius">@dimen/dp_24</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/sp_18</item>
+        <item name="android:textStyle">bold</item>
+        <item name="disabledColor">@color/C_9CA3AF</item>
+        <item name="textColorDisabled">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+
+<!--    <style name="mainGradientButton">-->
+<!--        <item name="gradientStartColor">@color/C_FBD247</item>-->
+<!--        <item name="gradientEndColor">@color/C_FFE382</item>-->
+<!--        <item name="gradientOrientation">LEFT_RIGHT</item>-->
+<!--        <item name="radius">@dimen/dp_6</item>-->
+<!--        <item name="android:gravity">center</item>-->
+<!--        <item name="android:textSize">@dimen/sp_18</item>-->
+<!--        <item name="android:textStyle">bold</item>-->
+<!--        <item name="android:textColor">@color/C_492E0D</item>-->
+<!--    </style>-->
+</resources>

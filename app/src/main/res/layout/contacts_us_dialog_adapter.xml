@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_64">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivTelegram"
+        android:layout_width="@dimen/dp_24"
+        android:layout_height="@dimen/dp_24"
+        android:layout_marginStart="@dimen/dp_20"
+        android:src="@mipmap/ic_contact_cc"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTelegramTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_16"
+        android:text="@string/telegram"
+        android:textColor="@color/C_9CA3AF"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintBottom_toTopOf="@id/tvTelegram"
+        app:layout_constraintStart_toEndOf="@id/ivTelegram"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/tvTelegram"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_16"
+        android:text="911922933"
+        android:textColor="@color/C_111827"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivTelegram"
+        app:layout_constraintTop_toBottomOf="@id/tvTelegramTitle"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <com.vaycore.finance.ui.widget.ActionButtonView
+        android:id="@+id/tvCopyTelegram"
+        android:layout_width="@dimen/dp_73"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginEnd="@dimen/dp_20"
+        app:autoSizeMaxTextSize="@dimen/sp_14"
+        app:autoSizeMinTextSize="@dimen/sp_12"
+        app:autoSizeTextType="uniform"
+        android:textStyle="bold"
+        android:paddingHorizontal="@dimen/dp_4"
+        android:text="@string/copy"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

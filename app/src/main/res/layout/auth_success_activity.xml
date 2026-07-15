@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.vaycore.finance.ui.views.StyledConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:gradientCenterColor="@color/C_F6F6F6"
+    app:gradientEndColor="@color/C_F6F6F6"
+    app:gradientOrientation="TR_BL"
+    app:gradientStartColor="@color/color_A3B2FF">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/successCard"
+        android:layout_width="fill_parent"
+        android:layout_marginHorizontal="@dimen/dp_30"
+        android:layout_height="@dimen/dp_250"
+        android:layout_marginTop="@dimen/dp_110"
+        android:background="@mipmap/ic_success_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_100"
+            android:gravity="center"
+            android:text="@string/submit_success"
+            android:textColor="@color/color_7CE834"
+            android:textSize="@dimen/sp_20"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_24"
+            android:layout_marginTop="@dimen/dp_8"
+            android:gravity="center"
+            android:text="@string/you_can_borrow"
+            android:textColor="@color/C_6D7280"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivSuccess"
+        android:layout_width="@dimen/dp_132"
+        android:layout_height="@dimen/dp_132"
+        android:translationX="@dimen/dp_20"
+        android:translationY="@dimen/dp_m_30"
+        android:src="@mipmap/ic_kyc_cert_success"
+        app:layout_constraintEnd_toEndOf="@id/successCard"
+        app:layout_constraintTop_toTopOf="@id/successCard" />
+
+    <TextView
+        android:id="@+id/tvTips"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:layout_marginBottom="@dimen/dp_7"
+        android:gravity="center"
+        android:text="@string/back_to_home_tips"
+        android:textColor="@color/C_374151"
+        android:textSize="@dimen/sp_13"
+        app:layout_constraintBottom_toTopOf="@id/BtnOK" />
+
+    <com.vaycore.finance.ui.widget.ActionButtonView
+        android:id="@+id/BtnOK"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:layout_margin="@dimen/dp_24"
+        android:layout_marginBottom="@dimen/dp_25"
+        android:text="@string/back_to_home"
+        app:actionButtonVariant="filled"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</com.vaycore.finance.ui.views.StyledConstraintLayout>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.vaycore.finance.ui.views.StyledConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/dp_30"
+    app:left_top_radius="@dimen/dp_24"
+    app:right_top_radius="@dimen/dp_24"
+    app:solidColor="@color/white">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_36"
+        android:layout_marginTop="@dimen/dp_20"
+        android:gravity="center"
+        android:text="@string/rate_title"
+        android:textColor="@color/C_111827"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.vaycore.finance.ui.views.StyledTextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_8"
+        app:layout_constraintBottom_toBottomOf="@id/finger"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        app:radius="@dimen/dp_16"
+        app:solidColor="@color/C_F6F6F6" />
+
+    <TextView
+        android:id="@+id/tvDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_28"
+        android:layout_marginTop="@dimen/dp_20"
+        android:gravity="center"
+        android:text="@string/rate_content"
+        android:textColor="@color/C_6D7280"
+        android:textSize="@dimen/sp_14"
+        android:textStyle="normal"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+    <LinearLayout
+        android:id="@+id/tvButton"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_74"
+        android:layout_marginTop="@dimen/dp_28"
+        android:layout_marginEnd="@dimen/dp_28"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDesc">
+
+        <com.vaycore.finance.ui.views.StyledLinearLayout
+            android:id="@+id/rate_button"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_48"
+            app:gradientStartColor="@color/color_7087F8"
+            app:gradientEndColor="@color/color_7087F8"
+            app:radius="@dimen/dp_6"
+            app:gradientOrientation="LEFT_RIGHT"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/dp_20">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/dp_16"
+                android:layout_height="@dimen/dp_16"
+                android:layout_marginEnd="@dimen/dp_10"
+                android:src="@mipmap/icon_review_star" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/dp_16"
+                android:layout_height="@dimen/dp_16"
+                android:layout_marginEnd="@dimen/dp_10"
+                android:src="@mipmap/icon_review_star" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/dp_16"
+                android:layout_height="@dimen/dp_16"
+                android:layout_marginEnd="@dimen/dp_10"
+                android:src="@mipmap/icon_review_star" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/dp_16"
+                android:layout_height="@dimen/dp_16"
+                android:layout_marginEnd="@dimen/dp_10"
+                android:src="@mipmap/icon_review_star" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/dp_16"
+                android:layout_height="@dimen/dp_16"
+                android:src="@mipmap/icon_review_star" />
+        </com.vaycore.finance.ui.views.StyledLinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/very_sat"
+            android:textColor="@color/C_111827"
+            android:textSize="@dimen/sp_16" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_28"
+        android:layout_marginEnd="@dimen/dp_10"
+        android:text="@string/rate_name"
+        android:textColor="@color/C_111827"
+        android:textSize="@dimen/sp_12"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toStartOf="@id/tvButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvButton" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/finger"
+        android:layout_width="@dimen/dp_49"
+        android:layout_height="@dimen/dp_42"
+        android:layout_marginTop="@dimen/dp_m_40"
+        android:src="@mipmap/icon_review_tap"
+        app:layout_constraintStart_toEndOf="@id/tvName"
+        app:layout_constraintTop_toBottomOf="@id/tvButton" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivBg"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_12"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_rate_dialog_img"
+        app:layout_constraintDimensionRatio="343:168"
+        app:layout_constraintTop_toBottomOf="@id/finger" />
+
+    <TextView
+        android:id="@+id/tvNo"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_44"
+        android:gravity="center"
+        android:text="@string/no"
+        android:textColor="@color/C_111827"
+        android:textSize="@dimen/sp_16"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/ivBg" />
+</com.vaycore.finance.ui.views.StyledConstraintLayout>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.vaycore.finance.ui.views.StyledConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/mainBg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.vaycore.finance.ui.views.PageHeaderView
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:centerText="@string/cert_center"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvCertTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:text="@string/certification"
+        android:textColor="@color/C_111827"
+        android:textSize="@dimen/sp_24"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/titleBar" />
+
+    <com.vaycore.finance.ui.views.StyledTextView
+        android:id="@+id/tvTips"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_4"
+        android:gravity="start"
+        android:text="@string/cert_desc"
+        android:textColor="@color/C_374151"
+        android:textSize="@dimen/sp_14"
+        android:textStyle="normal"
+        app:layout_constraintTop_toBottomOf="@id/tvCertTitle" />
+
+    <com.vaycore.finance.ui.views.ContentStateLayout
+        android:id="@+id/loading_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTips">
+
+        <com.vaycore.finance.ui.views.StyledRecyclerView
+            android:id="@+id/rvAuth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_18"
+            android:orientation="vertical"
+            android:overScrollMode="never"
+            android:visibility="visible"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/item_auth_entry" />
+
+    </com.vaycore.finance.ui.views.ContentStateLayout>
+</com.vaycore.finance.ui.views.StyledConstraintLayout>

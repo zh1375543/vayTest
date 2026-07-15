@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.vaycore.finance.ui.views.StyledConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/mainBg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.vaycore.finance.ui.views.PageHeaderView
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:centerText="@string/message_content"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleBar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_10"
+                android:textColor="@color/C_111827"
+                android:textSize="@dimen/sp_14"
+                android:textStyle="bold"
+                tools:text="Message" />
+
+            <TextView
+                android:id="@+id/tvDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_6"
+                android:textColor="@color/C_6D7280"
+                android:textSize="@dimen/sp_12"
+                android:textStyle="normal"
+                tools:text="Message" />
+
+            <com.vaycore.finance.ui.views.StyledTextView
+                android:id="@+id/tvContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_10"
+                android:minHeight="@dimen/dp_226"
+                android:padding="@dimen/dp_16"
+                android:textColor="@color/C_111827"
+                android:textSize="@dimen/sp_13"
+                app:radius="@dimen/dp_12"
+                app:solidColor="@color/white" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</com.vaycore.finance.ui.views.StyledConstraintLayout>

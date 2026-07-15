@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "203797639795",
+    "project_id": "gaan-puhunan-ddca3",
+    "storage_bucket": "gaan-puhunan-ddca3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:203797639795:android:d0e61d41f46f0abe98b006",
+        "android_client_info": {
+          "package_name": "com.eta.gaan.tc.puhunan"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfO71VHfO9zzdKOB2qn06zzzvHULgXRpk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

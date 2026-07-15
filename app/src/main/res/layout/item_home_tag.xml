@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.vaycore.finance.ui.views.StyledTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tvTitle"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/dp_26"
+    android:layout_marginEnd="@dimen/dp_6"
+    android:gravity="center"
+    android:paddingHorizontal="@dimen/dp_12"
+    android:text="fast"
+    android:textColor="@color/C_111827"
+    android:textSize="@dimen/sp_15"
+    app:radius="@dimen/dp_6"
+    app:selectedColor="@color/C_89F5C7"
+    app:solidColor="@color/color_7CE834"
+    app:textColorSelected="@color/C_374151" />

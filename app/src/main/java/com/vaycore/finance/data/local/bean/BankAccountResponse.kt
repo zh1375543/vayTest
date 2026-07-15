@@ -1,0 +1,28 @@
+package com.vaycore.finance.data.local.bean
+
+data class BankAccountResponse(
+    var id: Long? = 0,
+    var countryId: Int = 0,
+    val userId: Int = 0,
+    val bindTime: String = "",
+    var bankNo: String? = "",
+    val bankPhone: String = "",
+    val appId: Int = 0,
+    var isDefault: Int = 0,
+    val createTime: String = "",
+    val updateTime: String = "",
+    val accountUser: String = "",
+    val loanState: Int = 0,
+    val payOutFailSign: Boolean = false,
+    var bankCode: String = "",
+    var bankName: String = "",
+    var cardNo: String = "",
+    var status: Int = 0,
+    var isSelect: Boolean = false,
+    val type: Int? = null,
+    val account: String? = null,
+    val name: String? = null,
+    val infoStr: String? = null,
+    val branchName: String? = null,
+    val bankAccount: String? = null,
+)

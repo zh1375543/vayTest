@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.vaycore.finance.ui.views.StyledConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/dp_20"
+    app:left_top_radius="@dimen/dp_20"
+    app:right_top_radius="@dimen/dp_20"
+    app:solidColor="@color/white">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_16"
+        android:gravity="center"
+        android:text="@string/select_e_wallet"
+        android:textColor="@color/C_111827"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.vaycore.finance.ui.views.StyledEditTextView
+        android:id="@+id/etSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_12"
+        android:drawablePadding="@dimen/dp_8"
+        android:drawableStart="@mipmap/icon_bank_find"
+        android:gravity="center_vertical"
+        android:hint="@string/search"
+        android:imeOptions="actionDone"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingHorizontal="@dimen/dp_16"
+        android:paddingVertical="@dimen/dp_10"
+        android:textColor="@color/C_111827"
+        android:textColorHint="@color/C_9CA3AF"
+        android:textSize="@dimen/sp_13"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        app:radius="@dimen/dp_24"
+        app:solidColor="@color/C_F6F6F6"
+        tools:text="GCash" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvWallet"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_500"
+        android:layout_marginHorizontal="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_12"
+        android:layout_marginBottom="@dimen/dp_16"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/etSearch"
+        tools:itemCount="4"
+        tools:listitem="@layout/choose_wallet_dialog_adapter" />
+
+    <TextView
+        android:id="@+id/tvEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_500"
+        android:gravity="center"
+        android:text="@string/empty_search"
+        android:textColor="@color/C_9CA3AF"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintTop_toBottomOf="@id/etSearch" />
+</com.vaycore.finance.ui.views.StyledConstraintLayout>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="OrderDetailCardTitleIcon">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">@dimen/dp_40</item>
+        <item name="android:layout_marginLeft">@dimen/dp_16</item>
+        <item name="android:layout_marginRight">@dimen/dp_16</item>
+        <item name="android:layout_marginTop">@dimen/dp_12</item>
+        <item name="android:drawablePadding">@dimen/dp_10</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/C_111827</item>
+        <item name="android:textSize">@dimen/sp_18</item>
+        <item name="android:textStyle">bold</item>
+        <item name="drawableHeight">@dimen/dp_32</item>
+        <item name="drawableWidth">@dimen/dp_32</item>
+    </style>
+
+    <style name="OrderDetailCardTitleSmall">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/dp_14</item>
+        <item name="android:layout_marginRight">@dimen/dp_14</item>
+        <item name="android:layout_marginTop">@dimen/dp_14</item>
+        <item name="android:textColor">@color/C_111827</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="OrderDetailInfoLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/dp_16</item>
+        <item name="android:layout_marginTop">@dimen/dp_16</item>
+        <item name="android:textColor">@color/C_6D7280</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+    </style>
+
+    <style name="OrderDetailInfoValue">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/dp_12</item>
+        <item name="android:layout_marginEnd">@dimen/dp_16</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textColor">@color/C_111827</item>
+        <item name="android:textSize">@dimen/sp_15</item>
+    </style>
+
+    <style name="OrderDetailAmountLabel">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/C_6D7280</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+    </style>
+
+    <style name="OrderDetailAmountValue">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/dp_4</item>
+        <item name="android:textColor">@color/C_111827</item>
+        <item name="android:textSize">@dimen/sp_13</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="OtpInputStyle">
+        <item name="android:background">@null</item>
+        <item name="android:hint">@string/otp_enter</item>
+        <item name="android:imeOptions">actionDone</item>
+        <item name="android:inputType">number</item>
+        <item name="android:paddingLeft">@dimen/dp_12</item>
+        <item name="android:paddingRight">@dimen/dp_12</item>
+        <item name="android:textColor">@color/C_111827</item>
+        <item name="android:textColorHint">@color/C_9CA3AF</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="focusedStrokeColor">@color/color_7087F8</item>
+        <item name="radius">@dimen/dp_8</item>
+        <item name="solidColor">@color/white</item>
+        <item name="strokeColor">@color/C_D2D5DA</item>
+        <item name="strokeWidth">@dimen/dp_1</item>
+    </style>
+
+    <style name="AuthDataEncryptedTipText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawableStart">@mipmap/ic_certpage_tip</item>
+        <item name="android:drawablePadding">@dimen/dp_6</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:text">@string/data_encrypted_tips</item>
+        <item name="android:textColor">@color/C_6D7280</item>
+        <item name="android:textSize">@dimen/sp_11</item>
+    </style>
+
+    <style name="LogoutAccountValueText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">@dimen/dp_18</item>
+        <item name="android:textColor">@color/C_111827</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="LogoutAccountLabelText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/dp_18</item>
+        <item name="android:textColor">@color/C_374151</item>
+        <item name="android:textSize">@dimen/sp_13</item>
+    </style>
+
+    <style name="LogoutReasonItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dp_63</item>
+        <item name="android:drawableStart">@mipmap/icon_close_unchecked</item>
+        <item name="android:drawablePadding">@dimen/dp_16</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingHorizontal">@dimen/dp_15</item>
+        <item name="android:textColor">@color/C_6D7280</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="drawableStartSelected">@mipmap/icon_close_checked</item>
+        <item name="radius">@dimen/dp_12</item>
+        <item name="selectedColor">@color/C_ECEEF3</item>
+        <item name="selectedStrokeColor">@color/color_7087F8</item>
+        <item name="strokeColor">@color/C_6D7280</item>
+        <item name="strokeWidth">@dimen/dp_1</item>
+        <item name="textColorSelected">@color/C_111827</item>
+    </style>
+
+    <style name="PersonalMenuItemText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dp_48</item>
+        <item name="android:drawablePadding">@dimen/dp_14</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingStart">@dimen/dp_18</item>
+        <item name="android:paddingEnd">@dimen/dp_18</item>
+        <item name="android:textColor">@color/C_374151</item>
+        <item name="android:textSize">@dimen/sp_13</item>
+        <item name="android:textStyle">bold</item>
+        <item name="drawableEndCompat">@mipmap/ic_mine_arrow</item>
+    </style>
+
+
+</resources>

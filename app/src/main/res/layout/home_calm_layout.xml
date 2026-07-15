@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.vaycore.finance.ui.views.StyledConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/calm_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:solidColor="@color/transparent">
+
+    <TextView
+        android:id="@+id/tvEmptyCalm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_108"
+        android:drawableTop="@mipmap/ic_withdraw_null"
+        android:drawablePadding="@dimen/dp_10"
+        android:gravity="center"
+        android:lineSpacingExtra="@dimen/dp_4"
+        android:text="@string/home_calm"
+        android:textColor="@color/C_9CA3AF"
+        android:textSize="@dimen/sp_13"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.vaycore.finance.ui.views.StyledTextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@id/tvCalmTips1"
+        app:solidColor="@color/C_F6F6F6"
+        app:radius="@dimen/dp_12"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        app:layout_constraintBottom_toBottomOf="@id/tvCalmTips3"/>
+
+    <TextView
+        android:id="@+id/tvCalmTips1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_34"
+        android:layout_marginTop="@dimen/dp_24"
+        android:drawableStart="@drawable/shape_gray_dot"
+        android:drawablePadding="@dimen/dp_8"
+        android:paddingTop="@dimen/dp_12"
+        android:text="@string/home_calm_tips1"
+        android:textColor="@color/C_9CA3AF"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintTop_toBottomOf="@id/tvEmptyCalm" />
+
+    <TextView
+        android:id="@+id/tvCalmTips2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_34"
+        android:layout_marginTop="@dimen/dp_10"
+        android:drawableStart="@drawable/shape_gray_dot"
+        android:drawablePadding="@dimen/dp_8"
+        android:text="@string/home_calm_tips2"
+        android:textColor="@color/C_9CA3AF"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintTop_toBottomOf="@id/tvCalmTips1" />
+
+    <TextView
+        android:id="@+id/tvCalmTips3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_34"
+        android:layout_marginTop="@dimen/dp_10"
+        android:drawableStart="@drawable/shape_gray_dot"
+        android:drawablePadding="@dimen/dp_8"
+        android:paddingBottom="@dimen/dp_12"
+        android:text="@string/home_calm_tips3"
+        android:textColor="@color/C_9CA3AF"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintTop_toBottomOf="@id/tvCalmTips2" />
+</com.vaycore.finance.ui.views.StyledConstraintLayout>

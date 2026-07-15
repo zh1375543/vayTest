@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.vaycore.finance.ui.views.StyledConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/dp_20"
+    app:left_top_radius="@dimen/dp_20"
+    app:right_top_radius="@dimen/dp_20"
+    app:solidColor="@color/white">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_30"
+        android:layout_marginEnd="@dimen/dp_12"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="@string/choose_account"
+        android:textColor="@color/color_7087F8"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/tvCardCount"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvCardCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:textColor="@color/color_7087F8"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="1/2" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCard"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_133"
+        android:layout_marginStart="@dimen/dp_12"
+        android:layout_marginTop="@dimen/dp_26"
+        android:orientation="horizontal"
+        android:overScrollMode="never"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        tools:itemCount="2"
+        tools:listitem="@layout/add_account_dialog_adapter" />
+
+    <com.vaycore.finance.ui.views.StyledLinearLayout
+        android:id="@+id/tvAdd"
+        android:layout_width="@dimen/dp_284"
+        android:layout_height="@dimen/dp_44"
+        android:layout_marginTop="@dimen/dp_18"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rvCard"
+        app:radius="@dimen/dp_22"
+        app:solidColor="@color/white"
+        app:strokeColor="@color/color_7087F8"
+        app:strokeWidth="@dimen/dp_1">
+
+        <ImageView
+            android:layout_width="@dimen/dp_18"
+            android:layout_height="@dimen/dp_18"
+            android:layout_marginEnd="@dimen/dp_8"
+            android:src="@mipmap/ic_add_bank" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_account_receivable"
+            android:textColor="@color/C_374151"
+            android:textSize="@dimen/sp_14"
+            android:textStyle="bold" />
+    </com.vaycore.finance.ui.views.StyledLinearLayout>
+
+    <com.vaycore.finance.ui.widget.ActionButtonView
+        android:id="@+id/BtnApply"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:layout_marginHorizontal="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_16"
+        android:text="@string/confirm"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/tvAdd" />
+</com.vaycore.finance.ui.views.StyledConstraintLayout>

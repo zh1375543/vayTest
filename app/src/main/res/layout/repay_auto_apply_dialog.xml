@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.vaycore.finance.ui.views.StyledConstraintLayout
+        android:id="@+id/cardLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToOutline="true"
+        android:paddingBottom="@dimen/dp_24"
+        app:layout_constraintTop_toTopOf="parent"
+        app:radius="@dimen/dp_12"
+        app:solidColor="@color/white">
+
+        <com.vaycore.finance.ui.views.StyledConstraintLayout
+            android:id="@+id/headerLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/dp_20"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:solidColor="@color/color_E3E8FF">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp_36"
+                android:layout_marginTop="@dimen/dp_36"
+                android:gravity="center"
+                android:text="@string/repay_auto_apply_dialog_title"
+                android:textColor="@color/C_111827"
+                android:textSize="@dimen/sp_18"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvDesc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp_36"
+                android:layout_marginTop="@dimen/dp_16"
+                android:gravity="center"
+                android:lineSpacingExtra="@dimen/dp_3"
+                android:text="@string/repay_auto_apply_dialog_desc"
+                android:textColor="@color/C_111827"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+        </com.vaycore.finance.ui.views.StyledConstraintLayout>
+
+        <TextView
+            android:id="@+id/tvHint"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_0"
+            android:gravity="center"
+            android:lineSpacingExtra="@dimen/dp_3"
+            android:paddingHorizontal="@dimen/dp_36"
+            android:paddingVertical="@dimen/dp_10"
+            android:text="@string/repay_auto_apply_dialog_hint"
+            android:textColor="@color/color_7087F8"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/headerLayout" />
+
+        <com.vaycore.finance.ui.views.SelectableImageView
+            android:id="@+id/cbUnderstand"
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="@dimen/dp_24"
+            android:layout_marginStart="@dimen/dp_36"
+            android:layout_marginTop="@dimen/dp_10"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:padding="0dp"
+            android:src="@mipmap/ic_privacy_check_normal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvHint"
+            app:srcSelected="@mipmap/ic_privacy_check_select" />
+
+        <TextView
+            android:id="@+id/tvUnderstand"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_8"
+            android:layout_marginEnd="@dimen/dp_36"
+            android:text="@string/repay_auto_apply_dialog_understand"
+            android:textColor="@color/C_111827"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintBottom_toBottomOf="@id/cbUnderstand"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cbUnderstand"
+            app:layout_constraintTop_toTopOf="@id/cbUnderstand" />
+
+        <com.vaycore.finance.ui.widget.ActionButtonView
+            android:id="@+id/btnApply"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_52"
+            android:layout_marginHorizontal="@dimen/dp_36"
+            android:layout_marginTop="@dimen/dp_14"
+            android:text="@string/repay_auto_apply"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold"
+            app:buttonRadius="@dimen/dp_26"
+            app:buttonSolidColor="@color/color_7087F8"
+            app:buttonTextColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cbUnderstand"
+            tools:text="Tat toan va vay lai" />
+
+    </com.vaycore.finance.ui.views.StyledConstraintLayout>
+
+    <ImageView
+        android:id="@+id/btnClose"
+        android:layout_width="@dimen/dp_30"
+        android:layout_height="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_28"
+        android:importantForAccessibility="no"
+        android:src="@mipmap/ic_dialog_bottom_close"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardLayout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

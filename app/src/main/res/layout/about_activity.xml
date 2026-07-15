@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.vaycore.finance.ui.views.StyledConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:gradientCenterColor="@color/C_F6F6F6"
+    app:gradientEndColor="@color/C_F6F6F6"
+    app:gradientOrientation="TOP_BOTTOM"
+    app:gradientStartColor="@color/color_A3B2FF"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.vaycore.finance.ui.views.PageHeaderView
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:centerText="@string/about_us"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="@dimen/dp_65"
+        android:layout_height="@dimen/dp_65"
+        android:layout_marginTop="@dimen/dp_82"
+        android:padding="@dimen/dp_2"
+        android:src="@mipmap/logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleBar"
+        app:shapeAppearanceOverlay="@style/Round_8" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_6"
+        android:gravity="center"
+        android:text="@string/app_name"
+        android:textColor="@color/C_111827"
+        android:textSize="@dimen/sp_20"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/ivLogo" />
+
+    <TextView
+        android:id="@+id/tvVersion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_3"
+        android:gravity="center"
+        android:text="1.0.0"
+        android:textColor="@color/C_9CA3AF"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintTop_toBottomOf="@id/tvName" />
+</com.vaycore.finance.ui.views.StyledConstraintLayout>

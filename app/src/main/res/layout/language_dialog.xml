@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.vaycore.finance.ui.views.StyledConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginHorizontal="@dimen/dp_20"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dp_20"
+    app:radius="@dimen/dp_16"
+    app:solidColor="@color/white">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_34"
+        android:layout_marginTop="@dimen/dp_35"
+        android:gravity="center"
+        android:text="Please choose language"
+        android:textColor="@color/C_111827"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        android:visibility="visible"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_24"
+        android:layout_marginTop="@dimen/dp_10"
+        android:gravity="center"
+        android:text="Vui lÃng chon ngón ngür"
+        android:textColor="@color/C_111827"
+        android:textSize="@dimen/sp_16"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        app:layout_goneMarginTop="@dimen/dp_50" />
+
+    <com.vaycore.finance.ui.widget.ActionButtonView
+        android:id="@+id/tvEnglish"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_44"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_20"
+        android:gravity="center"
+        app:actionButtonVariant="outline"
+        android:text="English"
+        android:textSize="@dimen/sp_14"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/tvVN"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDesc" />
+
+    <com.vaycore.finance.ui.widget.ActionButtonView
+        android:id="@+id/tvVN"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_44"
+        android:layout_marginStart="@dimen/dp_12"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:gravity="center"
+        android:text="Tiếng Việt"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_14"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvEnglish"
+        app:layout_constraintTop_toTopOf="@id/tvEnglish" />
+
+</com.vaycore.finance.ui.views.StyledConstraintLayout>

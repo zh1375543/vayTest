@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.vaycore.finance.ui.views.StyledLinearLayout
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="@dimen/dp_100"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:radius="@dimen/dp_8"
+        app:solidColor="@color/p50_000000">
+
+        <!--        <com.papa.vay.ui.views.CloudLoadingView-->
+        <!--            android:layout_width="@dimen/dp_40"-->
+        <!--            android:layout_height="@dimen/dp_40"-->
+        <!--            app:cl_barColor="@color/white"-->
+        <!--            app:cl_barCount="5"-->
+        <!--            app:cl_barSpacing="@dimen/dp_6"-->
+        <!--            app:cl_barWidth="@dimen/dp_3"-->
+        <!--            app:cl_duration="900"-->
+        <!--            app:cl_maxHeightRatio="0.9"-->
+        <!--            app:cl_minHeightRatio="0.25"-->
+        <!--            app:cl_radius="@dimen/dp_2" />-->
+        <com.vaycore.finance.ui.views.RotateImageView
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:src="@mipmap/ic_loading" />
+
+        <TextView
+            android:id="@+id/tvMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_4"
+            android:gravity="center"
+            android:text="@string/loading"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_15"
+            android:textStyle="bold" />
+    </com.vaycore.finance.ui.views.StyledLinearLayout>
+</FrameLayout>

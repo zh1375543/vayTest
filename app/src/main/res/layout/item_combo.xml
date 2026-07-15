@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dp_8">
+
+    <com.vaycore.finance.ui.views.StyledConstraintLayout
+        android:id="@+id/amountBg"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_124"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        app:layout_constraintTop_toTopOf="parent"
+        app:radius="@dimen/dp_12"
+        app:solidColor="@color/color_7087F8">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivIcon"
+            android:layout_width="@dimen/dp_1"
+            android:layout_height="@dimen/dp_1"
+            android:src="@mipmap/product_icon"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/Round_8" />
+
+        <TextView
+            android:id="@+id/tvProductName"
+            android:layout_width="@dimen/dp_180"
+            android:layout_height="@dimen/dp_32"
+            android:background="@mipmap/ic_product_title_bg"
+            android:ellipsize="end"
+            android:layout_margin="@dimen/dp_1"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:paddingStart="@dimen/dp_22"
+            android:paddingEnd="@dimen/dp_28"
+            android:text="@string/product_name"
+            android:textColor="@color/C_111827"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvLoanAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_12"
+            android:layout_marginTop="@dimen/dp_18"
+            android:gravity="end"
+            android:text="@string/l_amount"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvProductName" />
+
+        <TextView
+            android:id="@+id/tvAmount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_12"
+            android:layout_marginTop="@dimen/dp_4"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:maxLines="1"
+            android:text="2000,000"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_20"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/ivArrow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLoanAmount" />
+
+        <TextView
+            android:id="@+id/tvDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_20"
+            android:layout_marginBottom="@dimen/dp_12"
+            android:layout_marginEnd="@dimen/dp_8"
+            android:gravity="center_vertical"
+            android:text="@string/product_details"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/ivArrow" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivArrow"
+            android:layout_width="@dimen/dp_16"
+            android:layout_height="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:src="@mipmap/product_bottom"
+            app:layout_constraintBottom_toBottomOf="@id/tvDetails"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvDetails"
+            app:tint="@color/white" />
+
+    </com.vaycore.finance.ui.views.StyledConstraintLayout>
+
+    <com.vaycore.finance.ui.views.ProductDetailView
+        android:id="@+id/detailView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/dp_6"
+        app:layout_constraintTop_toBottomOf="@id/amountBg" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

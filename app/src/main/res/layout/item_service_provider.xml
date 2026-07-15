@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.vaycore.finance.ui.views.StyledConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootView"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_88"
+    android:layout_marginHorizontal="@dimen/dp_16"
+    android:layout_marginBottom="@dimen/dp_12"
+    app:radius="@dimen/dp_12"
+    app:solidColor="@color/transparent"
+    app:strokeColor="@color/C_6D7280"
+    app:selectedStrokeColor="@color/color_7087F8"
+    app:strokeWidth="@dimen/dp_1">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivIcon"
+        android:layout_width="@dimen/dp_92"
+        android:layout_height="@dimen/dp_70"
+        android:layout_marginStart="@dimen/dp_10"
+        android:src="@mipmap/carrier_viettel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.vaycore.finance.ui.views.StyledTextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_20"
+        android:text="Viet"
+        android:textColor="@color/C_6D7280"
+        app:textColorSelected="@color/C_111827"
+        android:textSize="@dimen/sp_20"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/ivIcon"
+        app:layout_constraintStart_toEndOf="@id/ivIcon"
+        app:layout_constraintTop_toTopOf="@id/ivIcon" />
+
+    <com.vaycore.finance.ui.views.SelectableImageView
+        android:id="@+id/ivCheck"
+        android:layout_width="@dimen/dp_26"
+        android:layout_height="@dimen/dp_26"
+        android:layout_marginEnd="@dimen/dp_10"
+        android:src="@mipmap/icon_close_unchecked"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcSelected="@mipmap/icon_close_checked" />
+
+</com.vaycore.finance.ui.views.StyledConstraintLayout>

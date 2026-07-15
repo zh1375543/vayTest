@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.vaycore.finance.ui.views.StyledConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/mainBg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.vaycore.finance.ui.views.PageHeaderView
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:centerText="@string/settings"
+        app:layout_constraintTop_toTopOf="parent"
+         />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="@dimen/dp_52"
+        android:layout_height="@dimen/dp_52"
+        android:layout_marginTop="@dimen/dp_45"
+        android:padding="@dimen/dp_2"
+        android:scaleType="centerInside"
+        android:src="@mipmap/logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleBar"
+        app:shapeAppearanceOverlay="@style/Round_8" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_6"
+        android:gravity="center"
+        android:text="@string/app_name"
+        android:textColor="@color/C_111827"
+        android:textSize="@dimen/sp_16"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/ivLogo" />
+
+    <TextView
+        android:id="@+id/tvVersion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_3"
+        android:gravity="center"
+        android:text="1.0"
+        android:textColor="@color/C_6D7280"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintTop_toBottomOf="@id/tvName" />
+
+    <com.vaycore.finance.ui.views.StyledTextView
+        android:id="@+id/tvCloseAccount"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_56"
+        android:layout_marginHorizontal="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_52"
+        android:drawableEnd="@mipmap/ic_mine_arrow"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="@dimen/dp_12"
+        android:text="@string/close_account"
+        android:textColor="@color/C_374151"
+        android:textSize="@dimen/sp_14"
+        android:textStyle="bold"
+        app:autoFillPressedColor="false"
+        app:layout_constraintTop_toBottomOf="@id/tvVersion"
+        app:radius="@dimen/dp_8"
+        app:solidColor="@color/white" />
+
+    <com.vaycore.finance.ui.views.StyledTextView
+        android:id="@+id/tvFeedback"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_56"
+        android:layout_marginHorizontal="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_10"
+        android:drawableEnd="@mipmap/ic_mine_arrow"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="@dimen/dp_12"
+        android:text="@string/feedback"
+        android:textColor="@color/C_374151"
+        android:textSize="@dimen/sp_14"
+        android:textStyle="bold"
+        app:autoFillPressedColor="false"
+        app:layout_constraintTop_toBottomOf="@id/tvCloseAccount"
+        app:radius="@dimen/dp_8"
+        app:solidColor="@color/white" />
+
+    <com.vaycore.finance.ui.widget.ActionButtonView
+        android:id="@+id/tvLogout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:layout_marginHorizontal="@dimen/dp_40"
+        android:layout_marginBottom="@dimen/dp_24"
+        android:gravity="center"
+        android:text="@string/logout"
+        app:actionButtonVariant="outline"
+        android:textSize="@dimen/sp_16"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</com.vaycore.finance.ui.views.StyledConstraintLayout>

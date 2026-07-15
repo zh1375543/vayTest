@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.vaycore.finance.ui.views.StyledConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/mainBg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.vaycore.finance.ui.views.PageHeaderView
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:centerText="@string/feedback"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.vaycore.finance.ui.views.StyledEditTextView
+        android:id="@+id/etContent"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_226"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_11"
+        android:gravity="start"
+        android:hint="@string/enter_feedback"
+        android:imeOptions="actionDone"
+        android:inputType="textMultiLine"
+        android:padding="@dimen/dp_16"
+        android:textColor="@color/C_111827"
+        android:textColorHint="@color/C_9CA3AF"
+        android:textSize="@dimen/sp_13"
+        app:layout_constraintTop_toBottomOf="@id/titleBar"
+        app:radius="@dimen/dp_12"
+        app:solidColor="@color/white" />
+    <com.vaycore.finance.ui.widget.ActionButtonView
+        android:id="@+id/tvSubmit"
+        android:textStyle="bold"
+        android:textSize="@dimen/dp_18"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:layout_marginHorizontal="@dimen/dp_36"
+        android:layout_marginBottom="@dimen/dp_30"
+        android:text="@string/submit"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</com.vaycore.finance.ui.views.StyledConstraintLayout>

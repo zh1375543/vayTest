@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.vaycore.finance.ui.views.StyledConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginHorizontal="@dimen/dp_20"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dp_20"
+    app:radius="@dimen/dp_12"
+    app:solidColor="@color/white">
+
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_34"
+        android:layout_marginBottom="@dimen/dp_8"
+        android:gravity="center"
+        android:text="@string/dialog_permission_title"
+        android:textColor="@color/C_111827"
+        android:textSize="@dimen/sp_16"
+        android:visibility="visible"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_48"
+        android:layout_marginTop="@dimen/dp_12"
+        android:gravity="center"
+        android:textColor="@color/C_6D7280"
+        android:textSize="@dimen/sp_14"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        app:layout_goneMarginTop="@dimen/dp_50"
+        tools:text="Make sure you want to unbind the electronic wallet" />
+
+    <com.vaycore.finance.ui.views.StyledTextView
+        android:id="@+id/tvClose"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_44"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_30"
+        android:gravity="center"
+        android:text="@string/closed"
+        android:textColor="@color/color_7087F8"
+        android:textSize="@dimen/sp_14"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/tvSure"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDesc"
+        app:radius="@dimen/dp_41"
+        app:solidColor="@color/C_F6F6F6"
+        app:strokeColor="@color/C_F6F6F6"
+        app:strokeWidth="@dimen/dp_1" />
+
+    <com.vaycore.finance.ui.views.StyledTextView
+        android:id="@+id/tvSure"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_44"
+        android:layout_marginStart="@dimen/dp_12"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:gravity="center"
+        android:text="@string/sure"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_14"
+        android:textStyle="bold"
+        app:radius="@dimen/dp_41"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvClose"
+        app:layout_constraintTop_toTopOf="@id/tvClose"
+        app:solidColor="@color/color_7087F8" />
+
+</com.vaycore.finance.ui.views.StyledConstraintLayout>
