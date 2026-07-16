@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/C_F6F6F6"
-    tools:background="@color/C_FEF8ED">
+    android:layout_height="match_parent">
 
     <com.vaycore.finance.ui.views.ContentStateLayout
         android:id="@+id/loading_layout"
@@ -16,6 +14,27 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <com.vaycore.finance.ui.views.StyledConstraintLayout
+                android:id="@+id/noticeLayout"
+                style="@style/NoticeBar"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp_24"
+                android:layout_marginTop="@dimen/dp_12"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.vaycore.finance.ui.widget.RollingNoticeView
+                    android:id="@+id/marqueeView"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </com.vaycore.finance.ui.views.StyledConstraintLayout>
 
             <com.vaycore.finance.ui.widget.TicketBackgroundLayout
                 android:id="@+id/repayment_layout"
@@ -27,7 +46,7 @@
                 android:clipToPadding="false"
                 android:paddingBottom="@dimen/dp_18"
                 android:visibility="gone"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/noticeLayout"
                 app:ticketColor="@color/color_7087F8"
                 app:ticketCornerRadius="@dimen/dp_16"
                 app:ticketSideCutoutCenterFromBottom="@dimen/dp_61"
@@ -137,28 +156,23 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="@dimen/dp_24"
                 android:orientation="vertical"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@id/noticeLayout">
 
-                <com.vaycore.finance.ui.widget.TicketBackgroundLayout
+                <com.vaycore.finance.ui.views.StyledConstraintLayout
                     android:id="@+id/emptyOrderBg"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_212"
-                    android:layout_marginHorizontal="@dimen/dp_20"
+                    android:layout_marginHorizontal="@dimen/dp_24"
                     android:layout_marginTop="@dimen/dp_14"
-                    android:clipChildren="false"
-                    android:clipToPadding="false"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:ticketColor="@color/color_7087F8"
-                    app:ticketCornerRadius="@dimen/dp_16"
-                    app:ticketSideCutoutCenterFromBottom="@dimen/dp_61"
-                    app:ticketSideCutoutRadius="@dimen/dp_16">
+                    app:radius="@dimen/dp_24"
+                    app:solidColor="@color/white">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/ivEmptyOrder"
-                        android:layout_width="@dimen/dp_44"
-                        android:layout_height="@dimen/dp_44"
-                        android:layout_marginTop="@dimen/dp_46"
-                        android:src="@mipmap/ic_order_null"
+                        android:layout_width="@dimen/dp_80"
+                        android:layout_height="@dimen/dp_80"
+                        android:layout_marginTop="@dimen/dp_40"
+                        android:src="@mipmap/ic_tab_order_null"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -166,60 +180,59 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_24"
+                        android:layout_marginTop="@dimen/dp_12"
                         android:gravity="center"
                         android:text="@string/empty_home_order"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/sp_13"
+                        android:textColor="@color/C_6D7280"
+                        android:textSize="@dimen/sp_14"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/ivEmptyOrder" />
 
-                </com.vaycore.finance.ui.widget.TicketBackgroundLayout>
+                </com.vaycore.finance.ui.views.StyledConstraintLayout>
 
                 <TextView
                     android:id="@+id/tvBenefits"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_20"
-                    android:layout_marginTop="@dimen/dp_12"
+                    android:layout_marginHorizontal="@dimen/dp_24"
+                    android:layout_marginTop="@dimen/dp_20"
                     android:gravity="center"
                     android:text="@string/benefits_of_paying"
                     android:textColor="@color/C_111827"
-                    android:textSize="@dimen/sp_16"
+                    android:textSize="@dimen/sp_18"
                     android:textStyle="bold" />
 
                 <com.vaycore.finance.ui.views.StyledConstraintLayout
                     android:id="@+id/tip_layout1"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_20"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:paddingHorizontal="@dimen/dp_14"
-                    app:radius="@dimen/dp_8"
-                    app:solidColor="@color/color_E3E8FF">
+                    android:layout_height="@dimen/dp_80"
+                    android:layout_marginHorizontal="@dimen/dp_24"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:paddingHorizontal="@dimen/dp_20"
+                    app:radius="@dimen/dp_24"
+                    app:solidColor="@color/white">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/ivTip1"
-                        android:layout_width="@dimen/dp_72"
-                        android:layout_height="@dimen/dp_72"
-                        android:src="@mipmap/ic_order_tip1"
+                        android:layout_width="@dimen/dp_48"
+                        android:layout_height="@dimen/dp_48"
+                        android:src="@mipmap/ic_tab_order_credit"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/tvTitle1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_10"
                         android:text="@string/home_order_title1"
                         android:textColor="@color/C_111827"
-                        android:textSize="@dimen/sp_12"
+                        android:textSize="@dimen/sp_14"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toTopOf="@id/tvDesc1"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/ivTip1"
+                        app:layout_constraintEnd_toStartOf="@id/ivTip1"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_chainStyle="packed" />
 
@@ -231,7 +244,7 @@
                         android:lineSpacingExtra="@dimen/dp_1"
                         android:text="@string/home_order_desc1"
                         android:textColor="@color/C_6D7280"
-                        android:textSize="@dimen/sp_10"
+                        android:textSize="@dimen/sp_12"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@id/tvTitle1"
                         app:layout_constraintStart_toStartOf="@id/tvTitle1"
@@ -241,18 +254,18 @@
                 <com.vaycore.finance.ui.views.StyledConstraintLayout
                     android:id="@+id/tip_layout2"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_74"
-                    android:layout_marginHorizontal="@dimen/dp_20"
+                    android:layout_height="@dimen/dp_80"
+                    android:layout_marginHorizontal="@dimen/dp_24"
                     android:layout_marginTop="@dimen/dp_12"
-                    android:paddingHorizontal="@dimen/dp_14"
-                    app:radius="@dimen/dp_8"
-                    app:solidColor="@color/color_E3E8FF">
+                    android:paddingHorizontal="@dimen/dp_20"
+                    app:radius="@dimen/dp_24"
+                    app:solidColor="@color/white">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/ivTip2"
-                        android:layout_width="@dimen/dp_72"
-                        android:layout_height="@dimen/dp_72"
-                        android:src="@mipmap/ic_order_tip2"
+                        android:layout_width="@dimen/dp_48"
+                        android:layout_height="@dimen/dp_48"
+                        android:src="@mipmap/ic_tab_order_increase"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -261,10 +274,11 @@
                         android:id="@+id/tvTitle2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_10"
+                        android:layout_marginStart="@dimen/dp_12"
+                        android:gravity="end"
                         android:text="@string/home_order_title2"
                         android:textColor="@color/C_111827"
-                        android:textSize="@dimen/sp_12"
+                        android:textSize="@dimen/sp_14"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toTopOf="@id/tvDesc2"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -277,10 +291,11 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_2"
+                        android:gravity="end"
                         android:lineSpacingExtra="@dimen/dp_1"
                         android:text="@string/home_order_desc2"
                         android:textColor="@color/C_6D7280"
-                        android:textSize="@dimen/sp_10"
+                        android:textSize="@dimen/sp_12"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@id/tvTitle2"
                         app:layout_constraintStart_toStartOf="@id/tvTitle2"
@@ -290,34 +305,33 @@
                 <com.vaycore.finance.ui.views.StyledConstraintLayout
                     android:id="@+id/tip_layout3"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_74"
-                    android:layout_marginHorizontal="@dimen/dp_20"
+                    android:layout_height="@dimen/dp_80"
+                    android:layout_marginHorizontal="@dimen/dp_24"
                     android:layout_marginTop="@dimen/dp_12"
-                    android:paddingHorizontal="@dimen/dp_14"
-                    app:radius="@dimen/dp_8"
-                    app:solidColor="@color/color_E3E8FF">
+                    android:paddingHorizontal="@dimen/dp_20"
+                    app:radius="@dimen/dp_24"
+                    app:solidColor="@color/white">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/ivTip3"
-                        android:layout_width="@dimen/dp_72"
-                        android:layout_height="@dimen/dp_72"
-                        android:src="@mipmap/ic_order_tip3"
+                        android:layout_width="@dimen/dp_48"
+                        android:layout_height="@dimen/dp_48"
+                        android:src="@mipmap/ic_tab_order_improve"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/tvTitle3"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_10"
                         android:text="@string/home_order_title3"
                         android:textColor="@color/C_111827"
-                        android:textSize="@dimen/sp_12"
+                        android:textSize="@dimen/sp_14"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toTopOf="@id/tvDesc3"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/ivTip3"
+                        app:layout_constraintEnd_toStartOf="@id/ivTip3"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_chainStyle="packed" />
 
@@ -329,7 +343,7 @@
                         android:lineSpacingExtra="@dimen/dp_1"
                         android:text="@string/home_order_desc3"
                         android:textColor="@color/C_6D7280"
-                        android:textSize="@dimen/sp_10"
+                        android:textSize="@dimen/sp_12"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@id/tvTitle3"
                         app:layout_constraintStart_toStartOf="@id/tvTitle3"

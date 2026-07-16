@@ -4,6 +4,7 @@ data class PersonalProfileResponse(
     val id: Long,
     val userId: Long,
     val firstName: String? = null,
+    val lastName: String? = null,
     val marryState: Int?,
     val sex: Int?,
     val birthDate: String?,
@@ -28,4 +29,7 @@ data class PersonalProfileResponse(
     val telecom: String? = null,
     val email: String? = null,
     val zaloAccount: String? = null,
+    val jobNature: String? = null,
+    val industry: String? = null,
+    val workTime: String? = null,
 )

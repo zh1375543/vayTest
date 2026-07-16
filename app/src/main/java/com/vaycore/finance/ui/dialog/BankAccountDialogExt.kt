@@ -187,12 +187,12 @@ private fun filterBankChannels(
     list: List<BankChannelResponse>,
     keyword: String,
 ): List<BankChannelResponse> {
-    val query = keyword.normalizeBankKeyword()
+    val query = keyword.normalizeSearchKeyword()
     if (query.isBlank()) return list
 
     return list.mapNotNull { item ->
-        val longCode = item.longCode.normalizeBankKeyword()
-        val bankName = item.bankName.normalizeBankKeyword()
+        val longCode = item.longCode.normalizeSearchKeyword()
+        val bankName = item.bankName.normalizeSearchKeyword()
         val rank = when {
             longCode == query || bankName == query -> 0
             longCode.startsWith(query) || bankName.startsWith(query) -> 1
@@ -208,16 +208,29 @@ private fun filterWallets(
     list: List<WalletResponse>,
     keyword: String,
 ): List<WalletResponse> {
-    val query = keyword.normalizeBankKeyword()
+    val query = keyword.normalizeSearchKeyword()
     if (query.isBlank()) return list
 
-    return list.filter { item ->
-        listOf(item.walletName, item.walletCode, item.walletType, item.walletDesc)
-            .any { it.normalizeBankKeyword().contains(query) }
-    }
+    return list.mapNotNull { item ->
+        val searchableFields = listOf(
+            item.walletName,
+            item.walletCode,
+            item.walletType,
+            item.walletDesc,
+        ).map { it.normalizeSearchKeyword() }
+
+        val rank = when {
+            searchableFields.any { it == query } -> 0
+            searchableFields.any { it.startsWith(query) } -> 1
+            searchableFields.any { it.contains(query) } -> 2
+            else -> return@mapNotNull null
+        }
+        rank to item
+    }.sortedBy { it.first }
+        .map { it.second }
 }
 
-private fun String?.normalizeBankKeyword(): String {
+private fun String?.normalizeSearchKeyword(): String {
     val value = this?.trim().orEmpty()
     if (value.isBlank()) return ""
     return Normalizer.normalize(value, Normalizer.Form.NFD)

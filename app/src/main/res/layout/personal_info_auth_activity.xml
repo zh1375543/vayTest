@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.vaycore.finance.ui.views.StyledConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/mainBg"
     android:layout_width="match_parent"
+    android:background="@mipmap/ic_page_bg"
     android:layout_height="match_parent">
 
     <com.vaycore.finance.ui.views.PageHeaderView
@@ -26,18 +26,22 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <com.vaycore.finance.ui.widget.AuthProgressView
-                android:id="@+id/authProgressView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:layout_marginBottom="@dimen/dp_14"
-                tools:visibility="visible" />
+            <com.vaycore.finance.ui.views.StyledTextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_36"
+                android:layout_marginStart="@dimen/dp_24"
+                android:layout_marginTop="@dimen/dp_9"
+                android:gravity="center_vertical"
+                android:text="@string/personal_info"
+                android:textColor="@color/C_111827"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold" />
 
             <androidx.core.widget.NestedScrollView
                 android:id="@+id/scrollView"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_0"
+                android:layout_marginTop="@dimen/dp_10"
                 android:layout_weight="1"
                 android:clipToPadding="false"
                 android:fillViewport="true"
@@ -47,42 +51,39 @@
             <com.vaycore.finance.ui.views.StyledLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="@dimen/dp_16"
+                android:layout_marginHorizontal="@dimen/dp_24"
                 android:orientation="vertical"
-                app:radius="@dimen/dp_12"
+                app:radius="@dimen/dp_24"
                 app:solidColor="@color/white">
 
-                <com.vaycore.finance.ui.views.StyledTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dp_36"
-                    android:layout_marginTop="@dimen/dp_9"
-                    android:drawablePadding="@dimen/dp_6"
-                    android:gravity="center_vertical"
-                    app:radius="@dimen/dp_18"
-                    android:layout_marginStart="@dimen/dp_12"
-                    app:solidColor="@color/color_E3E8FF"
-                    android:paddingHorizontal="@dimen/dp_16"
-                    android:text="@string/personal_info"
-                    android:textColor="@color/C_111827"
-                    android:textSize="@dimen/sp_16"
-                    android:textStyle="bold" />
+
 
                 <com.vaycore.finance.ui.widget.FormItemView
-                    android:id="@+id/nameView"
+                    android:id="@+id/lastNameView"
                     android:layout_marginTop="@dimen/dp_10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:errorText="@string/please_enter_current_info"
+                    app:errorText="@string/please_enter_last_name"
                     app:formType="input"
                     app:hintText="@string/please_enter_name"
                     app:inputType="text"
-                    app:titleText="@string/name" />
+                    app:titleText="@string/last_name" />
+
+                <com.vaycore.finance.ui.widget.FormItemView
+                    android:id="@+id/firstNameView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:errorText="@string/please_enter_first_name"
+                    app:formType="input"
+                    app:hintText="@string/please_enter_name"
+                    app:inputType="text"
+                    app:titleText="@string/first_name" />
 
                 <com.vaycore.finance.ui.widget.FormItemView
                     android:id="@+id/genderView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:errorText="@string/please_choose_current_info"
+                    app:errorText="@string/please_choose_gender"
                     app:formType="select"
                     app:hintText="@string/please_choose"
                     app:inputType="text"
@@ -92,7 +93,7 @@
                     android:id="@+id/birthView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:errorText="@string/please_choose_current_info"
+                    app:errorText="@string/please_choose_date_of_birth"
                     app:formType="select"
                     app:hintText="@string/please_choose"
                     app:inputType="text"
@@ -103,7 +104,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:editMaxLength="12"
-                    app:errorText="@string/please_enter_current_info"
+                    app:errorText="@string/please_enter_id_card"
                     app:formType="input"
                     app:hintText="@string/please_enter_id_card"
                     app:inputType="number"
@@ -113,10 +114,46 @@
                     android:id="@+id/educationView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:errorText="@string/please_choose_current_info"
+                    app:errorText="@string/please_choose_education"
                     app:formType="select"
                     app:hintText="@string/please_choose"
                     app:titleText="@string/education" />
+
+                <com.vaycore.finance.ui.widget.FormItemView
+                    android:id="@+id/industryView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:errorText="@string/please_choose_industry"
+                    app:formType="select"
+                    app:hintText="@string/please_choose"
+                    app:titleText="@string/industry" />
+
+                <com.vaycore.finance.ui.widget.FormItemView
+                    android:id="@+id/professionView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:errorText="@string/please_choose_profession"
+                    app:formType="select"
+                    app:hintText="@string/please_choose"
+                    app:titleText="@string/profession" />
+
+                <com.vaycore.finance.ui.widget.FormItemView
+                    android:id="@+id/workTimeView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:errorText="@string/please_choose_work_time"
+                    app:formType="select"
+                    app:hintText="@string/please_choose"
+                    app:titleText="@string/work_time" />
+
+                <com.vaycore.finance.ui.widget.FormItemView
+                    android:id="@+id/reasonView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:errorText="@string/please_choose_loan_purpose"
+                    app:formType="select"
+                    app:hintText="@string/please_choose"
+                    app:titleText="@string/loan_purpose" />
 
                 <com.vaycore.finance.ui.widget.FormItemView
                     android:id="@+id/monthlyView"
@@ -133,28 +170,17 @@
                     android:id="@+id/marryView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:errorText="@string/please_choose_current_info"
+                    app:errorText="@string/please_choose_marital_status"
                     app:formType="select"
                     app:hintText="@string/please_choose"
                     app:titleText="@string/marry_status" />
-
-                <!-- Zalo -->
-                <com.vaycore.finance.ui.widget.FormItemView
-                    android:id="@+id/zaloView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:errorText="@string/please_enter_zalo"
-                    app:formType="input"
-                    app:hintText="@string/please_enter_zalo"
-                    app:inputType="text"
-                    app:titleText="@string/zalo" />
 
                 <!-- Province / city -->
                 <com.vaycore.finance.ui.widget.FormItemView
                     android:id="@+id/provinceView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:errorText="@string/please_choose_current_info"
+                    app:errorText="@string/please_choose_province_city_town"
                     app:formType="select"
                     app:hintText="@string/please_choose"
                     app:titleText="@string/province_city_town" />
@@ -192,15 +218,15 @@
         <TextView
             style="@style/AuthDataEncryptedTipText"
             android:layout_gravity="center_horizontal"
-            android:layout_marginHorizontal="@dimen/dp_16"
+            android:layout_marginHorizontal="@dimen/dp_24"
             android:layout_marginBottom="@dimen/dp_10" />
 
         <com.vaycore.finance.ui.widget.ActionButtonView
             android:id="@+id/btNext"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_48"
-            android:layout_marginHorizontal="@dimen/dp_16"
+            android:layout_marginHorizontal="@dimen/dp_24"
             android:text="@string/next"
             app:actionButtonVariant="filled" />
     </LinearLayout>
-</com.vaycore.finance.ui.views.StyledConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

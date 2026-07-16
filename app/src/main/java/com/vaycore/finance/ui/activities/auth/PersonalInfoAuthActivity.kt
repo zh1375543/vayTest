@@ -30,10 +30,16 @@ import com.vaycore.finance.data.ACT_inputNameEnd
 import com.vaycore.finance.data.ACT_inputNameStart
 import com.vaycore.finance.data.ACT_inputSalaryEnd
 import com.vaycore.finance.data.ACT_inputSalaryStart
-import com.vaycore.finance.data.ACT_inputZaloEnd
-import com.vaycore.finance.data.ACT_inputZaloStart
+import com.vaycore.finance.data.ACT_selectIndustryEnd
+import com.vaycore.finance.data.ACT_selectIndustryStart
+import com.vaycore.finance.data.ACT_selectProfessionEnd
+import com.vaycore.finance.data.ACT_selectProfessionStart
+import com.vaycore.finance.data.ACT_selectReasonOfLoanEnd
+import com.vaycore.finance.data.ACT_selectReasonOfLoanStart
 import com.vaycore.finance.data.ACT_selectDateEnd
 import com.vaycore.finance.data.ACT_selectDateStart
+import com.vaycore.finance.data.ACT_selectWorkTimeEnd
+import com.vaycore.finance.data.ACT_selectWorkTimeStart
 import com.vaycore.finance.data.local.authConfigList
 import com.vaycore.finance.util.PERSON_INFO_COMMIT
 import com.vaycore.finance.util.PERSON_INFO_PAGE
@@ -77,8 +83,6 @@ class PersonalInfoAuthActivity :
     private var salaryJob: Job? = null
     private var startNameTime: Long = 0L
     private var nameJob: Job? = null
-    private var startZaloTime: Long = 0L
-    private var zaloJob: Job? = null
     private var startIDTime: Long = 0L
     private var idJob: Job? = null
 
@@ -98,17 +102,7 @@ class PersonalInfoAuthActivity :
         titleBar.setAction(
             "${authConfigList.indexOf("ID") + 1}/${authConfigList.size}"
         )
-        if (isCert) {
-            authProgressView.isVisible = false
-        } else {
-            authProgressView.bind(
-                requiredTypes = authConfigList.filterNot { it.isBlank() },
-                currentType = "ID",
-                title = getString(R.string.kyc_title),
-                desc = getString(R.string.auth_personal_desc),
-            )
-        }
-        nameView.getEditText().doOnTextChanged { _, _, _, _ ->
+        lastNameView.getEditText().doOnTextChanged { _, _, _, _ ->
             val now = System.currentTimeMillis()
             // 1. first input → record start time
             if (startNameTime == 0L) {
@@ -135,6 +129,9 @@ class PersonalInfoAuthActivity :
                 )
             }
         }
+        firstNameView.getEditText().doAfterTextChanged {
+            firstNameView.hideError()
+        }
         idCardView.getEditText().doOnTextChanged { _, _, _, _ ->
             val now = System.currentTimeMillis()
             // 1. first input → record start time
@@ -157,33 +154,6 @@ class PersonalInfoAuthActivity :
                     TrackBean(
                         p = PageInfoPersonal,
                         act = ACT_inputIDCardNumberEnd,
-                        result = System.currentTimeMillis().toString()
-                    )
-                )
-            }
-        }
-        zaloView.getEditText().doOnTextChanged { _, _, _, _ ->
-            val now = System.currentTimeMillis()
-            // 1. first input → record start time
-            if (startZaloTime == 0L) {
-                startZaloTime = now
-                vm.recordEvent(
-                    TrackBean(
-                        p = PageInfoPersonal,
-                        act = ACT_inputZaloStart,
-                        result = now.toString()
-                    )
-                )
-            }
-            // 2. typing → reset end timer
-            zaloJob?.cancel()
-            zaloJob = lifecycleScope.launch {
-                delay(debounceTime)
-                // 3. user stopped typing → record end time
-                vm.recordEvent(
-                    TrackBean(
-                        p = PageInfoPersonal,
-                        act = ACT_inputZaloEnd,
                         result = System.currentTimeMillis().toString()
                     )
                 )
@@ -289,6 +259,114 @@ class PersonalInfoAuthActivity :
                 }
             }
         }
+        industryView.setOnClick {
+            vm.recordEvent(
+                TrackBean(
+                    p = PageInfoPersonal,
+                    act = ACT_selectIndustryStart,
+                    result = System.currentTimeMillis().toString(),
+                ),
+            )
+            vm.getWorkInfoOptions {
+                val options = it.industry.orEmpty()
+                showOptionPickerDialog(
+                    options.indexOfFirst { option -> option.info == industryView.getText() },
+                    options,
+                ) { index ->
+                    industryView.setText(options[index].info)
+                    industryView.hideError()
+                    industryStatus = options[index].state
+                    vm.recordEvent(
+                        TrackBean(
+                            p = PageInfoPersonal,
+                            act = ACT_selectIndustryEnd,
+                            result = System.currentTimeMillis().toString(),
+                        ),
+                    )
+                }
+            }
+        }
+        professionView.setOnClick {
+            vm.recordEvent(
+                TrackBean(
+                    p = PageInfoPersonal,
+                    act = ACT_selectProfessionStart,
+                    result = System.currentTimeMillis().toString(),
+                ),
+            )
+            vm.getWorkInfoOptions {
+                val options = it.jobnature.orEmpty()
+                showOptionPickerDialog(
+                    options.indexOfFirst { option -> option.info == professionView.getText() },
+                    options,
+                ) { index ->
+                    professionView.setText(options[index].info)
+                    professionView.hideError()
+                    professionStatus = options[index].state
+                    vm.recordEvent(
+                        TrackBean(
+                            p = PageInfoPersonal,
+                            act = ACT_selectProfessionEnd,
+                            result = System.currentTimeMillis().toString(),
+                        ),
+                    )
+                }
+            }
+        }
+        workTimeView.setOnClick {
+            vm.recordEvent(
+                TrackBean(
+                    p = PageInfoPersonal,
+                    act = ACT_selectWorkTimeStart,
+                    result = System.currentTimeMillis().toString(),
+                ),
+            )
+            vm.getEnums {
+                val options = it.workTime.orEmpty()
+                showOptionPickerDialog(
+                    options.indexOfFirst { option -> option.info == workTimeView.getText() },
+                    options,
+                ) { index ->
+                    workTimeView.setText(options[index].info)
+                    workTimeView.hideError()
+                    workTimeStatus = options[index].state
+                    vm.recordEvent(
+                        TrackBean(
+                            p = PageInfoPersonal,
+                            act = ACT_selectWorkTimeEnd,
+                            result = System.currentTimeMillis().toString(),
+                        ),
+                    )
+                }
+            }
+        }
+        reasonView.setOnClick {
+            vm.recordEvent(
+                TrackBean(
+                    p = PageInfoPersonal,
+                    act = ACT_selectReasonOfLoanStart,
+                    result = System.currentTimeMillis().toString(),
+                ),
+            )
+            vm.getEnums {
+                val options = it.purpose.orEmpty()
+                showOptionPickerDialog(
+                    options.indexOfFirst { option -> option.info == reasonView.getText() },
+                    options,
+                ) { index ->
+                    reasonView.setText(options[index].info)
+                    reasonView.hideError()
+                    reasonStatus = options[index].state
+                    vm.recordEvent(
+                        TrackBean(
+                            p = PageInfoPersonal,
+                            act = ACT_selectReasonOfLoanEnd,
+                            result = System.currentTimeMillis().toString(),
+                        ),
+                    )
+                }
+            }
+        }
         marryView.setOnClick {
             vm.recordEvent(
                 TrackBean(
@@ -344,12 +422,16 @@ class PersonalInfoAuthActivity :
                 )
             }
         }
-        zaloView.setEnableEdit(!isCert)
-        nameView.setEnableEdit(!isCert)
+        lastNameView.setEnableEdit(!isCert)
+        firstNameView.setEnableEdit(!isCert)
         genderView.setEnableEdit(!isCert)
         birthView.setEnableEdit(!isCert)
         idCardView.setEnableEdit(!isCert)
         educationView.setEnableEdit(!isCert)
+        industryView.setEnableEdit(!isCert)
+        professionView.setEnableEdit(!isCert)
+        workTimeView.setEnableEdit(!isCert)
+        reasonView.setEnableEdit(!isCert)
         marryView.setEnableEdit(!isCert)
         provinceView.setEnableEdit(!isCert)
         addressView.setEnableEdit(!isCert)
@@ -359,9 +441,14 @@ class PersonalInfoAuthActivity :
             btNext.resetScale()
         }
         btNext.singleClick {
-            if (nameView.getText().isBlank()) {
-                nameView.showError()
-                scrollView.scrollTo(0, nameView.top)
+            if (lastNameView.getText().isBlank()) {
+                lastNameView.showError()
+                scrollView.scrollTo(0, lastNameView.top)
+                return@singleClick
+            }
+            if (firstNameView.getText().isBlank()) {
+                firstNameView.showError()
+                scrollView.scrollTo(0, firstNameView.top)
                 return@singleClick
             }
             if (genderView.getText().isBlank()) {
@@ -388,6 +475,26 @@ class PersonalInfoAuthActivity :
                 scrollView.scrollTo(0, educationView.top)
                 return@singleClick
             }
+            if (industryView.getText().isBlank()) {
+                industryView.showError()
+                scrollView.scrollTo(0, industryView.top)
+                return@singleClick
+            }
+            if (professionView.getText().isBlank()) {
+                professionView.showError()
+                scrollView.scrollTo(0, professionView.top)
+                return@singleClick
+            }
+            if (workTimeView.getText().isBlank()) {
+                workTimeView.showError()
+                scrollView.scrollTo(0, workTimeView.top)
+                return@singleClick
+            }
+            if (reasonView.getText().isBlank()) {
+                reasonView.showError()
+                scrollView.scrollTo(0, reasonView.top)
+                return@singleClick
+            }
             if (monthlyView.getText().isBlank()) {
                 monthlyView.showError()
                 scrollView.scrollTo(0, monthlyView.top)
@@ -396,11 +503,6 @@ class PersonalInfoAuthActivity :
             if (marryView.getText().isBlank()) {
                 marryView.showError()
                 scrollView.scrollTo(0, marryView.top)
-                return@singleClick
-            }
-            if (zaloView.getText().isBlank()) {
-                zaloView.showError()
-                scrollView.scrollTo(0, zaloView.top)
                 return@singleClick
             }
             if (provinceId == null || cityId == null || areaId == null) {
@@ -476,15 +578,19 @@ class PersonalInfoAuthActivity :
                 education = eduStatus.toString(),
                 sex = genderStatus.toString(),
                 marryState = marStatus.toString(),
-                userName = binding.nameView.getText(),
+                lastName = binding.lastNameView.getText(),
+                firstName = binding.firstNameView.getText(),
                 cardNo = binding.idCardView.getText(),
                 birthDate = binding.birthView.getText().toYmdDateString(),
                 province = provinceId.toString(),
                 address = binding.addressView.getText(),
                 region = areaId.toString(),
                 city = cityId.toString(),
-                zaloAccount = binding.zaloView.getText(),
-                salary = binding.monthlyView.getText()
+                salary = binding.monthlyView.getText(),
+                jobNature = professionStatus.toString(),
+                industry = industryStatus.toString(),
+                loanPurpose = reasonStatus.toString(),
+                workTime = workTimeStatus.toString(),
 //                                userCommunicationRecordStr = Gson().toJson(getCallLog()).encodeBase64()
             )
         )
@@ -492,6 +598,10 @@ class PersonalInfoAuthActivity :
 
     private var genderStatus: Int? = null
     private var eduStatus: Int? = null
+    private var industryStatus: Int? = null
+    private var professionStatus: Int? = null
+    private var workTimeStatus: Int? = null
+    private var reasonStatus: Int? = null
     private var marStatus: Int? = null
     private var provinceId: Long? = null
     private var cityId: Long? = null
@@ -503,14 +613,18 @@ class PersonalInfoAuthActivity :
             binding.apply {
                 loadingLayout.showContent()
                 it?.let {
-                    nameView.setText(it.firstName)
+                    lastNameView.setText(it.lastName)
+                    firstNameView.setText(it.firstName)
                     idCardView.setText(it.cardNo)
                     genderView.setText(it.sexStr)
                     birthView.setText(it.birthDateStr?.toDmyDateString())
                     educationView.setText(it.educationStr)
+                    industryView.setText(it.industry)
+                    professionView.setText(it.jobNature)
+                    workTimeView.setText(it.workTime)
+                    reasonView.setText(it.purposeStr)
                     marryView.setText(it.marryStateStr)
                     addressView.setText(it.currentAddress)
-                    zaloView.setText(it.zaloAccount)
                     monthlyView.setText(if (it.salary == null) "" else it.salary.toString())
                     if (it.provinceStr != null) {
                         provinceView.setText(
@@ -525,6 +639,7 @@ class PersonalInfoAuthActivity :
                     provinceId = it.province
                     cityId = it.city
                     areaId = it.region
+                    restoreSelectionStates()
                 }
             }
         }
@@ -534,6 +649,28 @@ class PersonalInfoAuthActivity :
         }
         submitResult.observe(this@PersonalInfoAuthActivity) {
             homeVm.getUserAuthStatus()
+        }
+    }
+
+    private fun restoreSelectionStates() {
+        vm.getEnums { options ->
+            eduStatus = options.education.orEmpty()
+                .firstOrNull { it.info == binding.educationView.getText() }
+                ?.state ?: eduStatus
+            workTimeStatus = options.workTime.orEmpty()
+                .firstOrNull { it.info == binding.workTimeView.getText() }
+                ?.state ?: workTimeStatus
+            reasonStatus = options.purpose.orEmpty()
+                .firstOrNull { it.info == binding.reasonView.getText() }
+                ?.state ?: reasonStatus
+        }
+        vm.getWorkInfoOptions { options ->
+            industryStatus = options.industry.orEmpty()
+                .firstOrNull { it.info == binding.industryView.getText() }
+                ?.state ?: industryStatus
+            professionStatus = options.jobnature.orEmpty()
+                .firstOrNull { it.info == binding.professionView.getText() }
+                ?.state ?: professionStatus
         }
     }
 

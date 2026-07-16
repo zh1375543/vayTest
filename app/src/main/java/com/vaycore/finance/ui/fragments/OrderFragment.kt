@@ -39,6 +39,7 @@ class OrderFragment : BaseFragment<OrderFragmentBinding>(R.layout.order_fragment
 
     override fun initView() = with(binding) {
         rvOrder.adapter = orderAdapter
+        marqueeView.setTexts(isWhiteColor = false)
         loadingLayout.setOnRetryClickListener {
             loadingLayout.showLoading()
             vm.getAuthData()

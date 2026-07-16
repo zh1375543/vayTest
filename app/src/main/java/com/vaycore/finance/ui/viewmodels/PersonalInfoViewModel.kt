@@ -9,6 +9,7 @@ import com.vaycore.finance.data.local.bean.PersonalProfileOptionsResponse
 import com.vaycore.finance.data.local.bean.PersonalProfileResponse
 import com.vaycore.finance.data.local.bean.SelectionOption
 import com.vaycore.finance.data.local.bean.TrackBean
+import com.vaycore.finance.data.local.bean.WorkProfileOptionsResponse
 import com.vaycore.finance.data.repository.IdentityVerificationRepository
 import com.vaycore.finance.util.toJsonString
 
@@ -50,6 +51,13 @@ class PersonalInfoViewModel(
         launchData { verificationRepository.fetchAddressOptions(id) }
             .showLoading()
             .onSuccess { action(it ?: emptyList()) }
+            .execute()
+    }
+
+    fun getWorkInfoOptions(action: (WorkProfileOptionsResponse) -> Unit) {
+        launchData { verificationRepository.fetchWorkInfoOptions() }
+            .showLoading()
+            .onSuccess { it?.let(action) }
             .execute()
     }
 

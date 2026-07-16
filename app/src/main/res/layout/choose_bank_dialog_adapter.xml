@@ -36,7 +36,6 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="1"
-        android:visibility="gone"
         android:text="Vietcombank"
         android:textColor="@color/C_9CA3AF"
         android:textSize="@dimen/sp_12"

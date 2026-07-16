@@ -16,6 +16,7 @@ class AuthSuccessActivity :
 
     override val binding by viewBinding(AuthSuccessActivityBinding::inflate)
     override fun initView() = with(binding) {
+        applyTopInset(root)
         onBackAction(null) {
             finish()
             MainActivity.launch(this@AuthSuccessActivity, isFromAuth = true)
@@ -23,13 +24,13 @@ class AuthSuccessActivity :
         binding.tvTips.setClickableTextWithScale(
             String.format(getString(R.string.back_to_home_tips), "10"),
             "10",
-            getColor2(R.color.C_F62909)
+            getColor2(R.color.color_7087F8)
         )
         lifecycleScope.countdownTimer(10, next = { seconds ->
             binding.tvTips.setClickableTextWithScale(
                 String.format(getString(R.string.back_to_home_tips), seconds.toString()),
                 seconds.toString(),
-                getColor2(R.color.C_F62909)
+                getColor2(R.color.color_7087F8)
             )
         }, end = {
             BtnOK.performClick()

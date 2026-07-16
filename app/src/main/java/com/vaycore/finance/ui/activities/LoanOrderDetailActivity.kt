@@ -268,7 +268,6 @@ class LoanOrderDetailActivity :
                             ORDER_STATUS_PAYMENT_PROCESS -> {
                                 tvOrderStatus.text =
                                     getString(R.string.repayment_processing)
-                                tvOrderStatus.setTextColor(getColor2(R.color.C_FA560D))
                             }
 
                             ORDER_STATUS_PAYMENT_PENDING,
@@ -276,7 +275,6 @@ class LoanOrderDetailActivity :
                             ORDER_STATUS_IN_RENEWAL_PROCESS,
                                 -> {
                                 tvOrderStatus.text = getString(R.string.pending_repayment)
-                                tvOrderStatus.setTextColor(getColor2(R.color.C_FA560D))
                             }
 
                             ORDER_STATUS_OVERDUE,

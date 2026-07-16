@@ -38,11 +38,6 @@ fun UserAuthStatusResponse.routeToNextAuthStep(
                 context.start<BankAccountAuthActivity>()
                 return
             }
-
-            it.uppercase() == "TELECOM" && telecomPermissionState != "30" -> {
-                context.start<CarrierAuthActivity>()
-                return
-            }
         }
     }
 }

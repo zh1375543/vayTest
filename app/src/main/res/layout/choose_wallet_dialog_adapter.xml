@@ -50,5 +50,5 @@
         android:background="@color/C_ECEEF3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/tvContent" />
+        app:layout_constraintStart_toStartOf="@id/tvTitle" />
 </androidx.constraintlayout.widget.ConstraintLayout>

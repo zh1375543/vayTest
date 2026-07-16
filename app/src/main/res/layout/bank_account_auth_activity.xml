@@ -285,6 +285,44 @@
                     app:showContactIcon="true"
                     app:titleText="@string/contact_phone_number" />
 
+                <LinearLayout
+                    android:id="@+id/additionalContactContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.vaycore.finance.ui.widget.FormItemView
+                        android:id="@+id/additionalContactRelationshipView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:errorText="@string/please_choose_current_info"
+                        app:formType="select"
+                        app:hintText="@string/please_choose"
+                        app:titleText="@string/contact_people3" />
+
+                    <com.vaycore.finance.ui.widget.FormItemView
+                        android:id="@+id/additionalContactNameView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:errorText="@string/please_enter_contact_name"
+                        app:formType="input"
+                        app:hintText="@string/please_enter_contact_name"
+                        app:inputType="text"
+                        app:titleText="@string/contact_name" />
+
+                    <com.vaycore.finance.ui.widget.FormItemView
+                        android:id="@+id/additionalContactPhoneView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:editMaxLength="40"
+                        app:errorText="@string/please_enter_phone_number"
+                        app:formType="input"
+                        app:hintText="@string/please_enter_phone_number"
+                        app:inputType="phone"
+                        app:showContactIcon="true"
+                        app:titleText="@string/contact_phone_number" />
+                </LinearLayout>
+
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_18" />

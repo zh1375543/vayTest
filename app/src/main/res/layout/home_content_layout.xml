@@ -14,19 +14,16 @@
 
         <com.vaycore.finance.ui.views.StyledConstraintLayout
             android:id="@+id/notice_layout"
+            style="@style/NoticeBar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp_24"
             android:layout_marginTop="@dimen/dp_12"
             android:gravity="center"
             android:orientation="horizontal"
-            android:paddingHorizontal="@dimen/dp_8"
-            android:paddingVertical="@dimen/dp_12"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:radius="@dimen/dp_18"
-            app:solidColor="@color/C_F6F6F6">
+            app:layout_constraintTop_toTopOf="parent">
 
 
             <com.vaycore.finance.ui.widget.RollingNoticeView

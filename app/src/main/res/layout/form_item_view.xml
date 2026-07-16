@@ -44,7 +44,7 @@
             android:focusable="true"
             android:visibility="gone"
             android:padding="@dimen/dp_10"
-            android:src="@mipmap/icon_bank_holder" />
+            android:src="@mipmap/ic_verify_contact_img" />
 
     </FrameLayout>
 

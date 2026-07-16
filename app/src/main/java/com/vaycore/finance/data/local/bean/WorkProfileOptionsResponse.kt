@@ -6,4 +6,5 @@ data class WorkProfileOptionsResponse(
     val otherRelatives: MutableList<SelectionOption>? = null,
     val jobnature: MutableList<SelectionOption>? = null,
     val staffSize: MutableList<SelectionOption>? = null,
+    val industry: MutableList<SelectionOption>? = null,
 )

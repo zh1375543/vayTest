@@ -21,7 +21,7 @@ class HomeProductAdapter :
         tvName.text = item.productName
         tvLoanAmount.text = context.getString(R.string.home_product_loan_amount_title)
         tvAmount.text =
-            if (item.canApply && item.isFillBank) item.maxLoanAmount.formatAmount(item.currencySymbol) else item.loanAmountRange
+            if (item.canApply) item.maxLoanAmount.formatAmount(item.currencySymbol) else item.loanAmountRange
         tvDays.text = context.formatDays(item.timeLimit)
         tvApply.isEnabled = item.canApply
         enableView.isVisible = !tvApply.isEnabled

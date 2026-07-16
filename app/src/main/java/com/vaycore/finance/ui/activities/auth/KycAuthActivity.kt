@@ -102,7 +102,6 @@ class KycAuthActivity : BaseActivity<KycAuthActivityBinding>() {
             }
         }
     }
-
     private val photoLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -180,16 +179,6 @@ class KycAuthActivity : BaseActivity<KycAuthActivityBinding>() {
             "${authConfigList.indexOf("KYC") + 1}/${authConfigList.size}"
         )
         titleBar.showAction(!isCert)
-        if (isCert) {
-            authProgressView.isVisible = false
-        } else {
-            authProgressView.bind(
-                requiredTypes = authConfigList.filterNot { it.isBlank() },
-                currentType = "KYC",
-                title = getString(R.string.kyc_title),
-                desc = getString(R.string.kyc_desc),
-            )
-        }
         tvExample1.singleClick {
             showKycCardExampleDialog()
         }

@@ -7,7 +7,7 @@
         android:id="@+id/ivBack"
         android:layout_width="@dimen/dp_34"
         android:layout_height="@dimen/dp_34"
-        android:layout_marginStart="@dimen/dp_18"
+        android:layout_marginStart="@dimen/dp_24"
         android:background="@drawable/bg_header_back"
         android:contentDescription="@null"
         android:padding="@dimen/dp_6"

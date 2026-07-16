@@ -8,7 +8,6 @@ import com.vaycore.finance.data.local.authConfigList
 import com.vaycore.finance.data.local.bean.AuthOptionResponse
 import com.vaycore.finance.data.local.bean.UserAuthStatusResponse
 import com.vaycore.finance.ui.activities.auth.BankAccountAuthActivity
-import com.vaycore.finance.ui.activities.auth.CarrierAuthActivity
 import com.vaycore.finance.ui.activities.auth.KycAuthActivity
 import com.vaycore.finance.ui.activities.auth.PersonalInfoAuthActivity
 import com.vaycore.finance.ui.adapters.AuthEntryAdapter
@@ -36,12 +35,6 @@ class AuthCenterActivity : BaseActivity<AuthCenterActivityBinding>() {
 
                     getString(R.string.personal_info) -> {
                         context.start<PersonalInfoAuthActivity> {
-                            putExtra("isCert", item.isCertified)
-                        }
-                    }
-
-                    getString(R.string.service_provider) -> {
-                        context.start<CarrierAuthActivity> {
                             putExtra("isCert", item.isCertified)
                         }
                     }

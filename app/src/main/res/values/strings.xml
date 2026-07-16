@@ -300,7 +300,7 @@ No personal SMS messages will be accessed, read, or collected.</string>
     <string name="please_enter_wallet_account">Please enter the account number</string>
     <string name="wallet_account_not_match">The account numbers do not match.</string>
     <string name="choose_bank">Choose Bank</string>
-    <string name="select_bank">select Bank</string>
+    <string name="select_bank">Select Bank</string>
     <string name="search">Search</string>
     <string name="empty_search">Search is empty</string>
     <string name="cardholder_name">Cardholder\'s name</string>
@@ -360,21 +360,34 @@ No personal SMS messages will be accessed, read, or collected.</string>
 
     <string name="personal">Personal</string>
     <string name="name">Name</string>
-    <string name="id_card_number">ID Card number</string>
+    <string name="last_name">Last name</string>
+    <string name="id_card_number">Identity card number</string>
     <string name="please_enter_current_info">Please enter the correct information</string>
     <string name="please_choose_current_info">Please choose the correct information</string>
     <string name="gender">Gender</string>
     <string name="please_choose_gender">Please choose gender</string>
     <string name="please_choose">please choose</string>
     <string name="please_enter_name">Please enter the name</string>
-    <string name="please_enter_id_card">Please enter the ID card number</string>
+    <string name="please_enter_last_name">Please enter your last name</string>
+    <string name="please_enter_first_name">Please enter your first name</string>
+    <string name="please_enter_id_card">Please enter your ID number</string>
     <string name="monthly_salary">Monthly salary</string>
     <string name="please_enter_monthly">please enter the monthly salary</string>
     <string name="date_of_birth">Date of birth</string>
+    <string name="please_choose_date_of_birth">Please choose your date of birth</string>
     <string name="education">Education</string>
+    <string name="please_choose_education">Please choose education</string>
+    <string name="industry">Industry</string>
+    <string name="please_choose_industry">Please choose industry</string>
+    <string name="work_time">Work time</string>
+    <string name="please_choose_profession">Please choose profession</string>
+    <string name="please_choose_work_time">Please choose work time</string>
     <string name="loan_purpose">Reason for loan</string>
+    <string name="please_choose_loan_purpose">Please choose a reason for loan</string>
     <string name="marry_status">Marital status</string>
+    <string name="please_choose_marital_status">Please choose marital status</string>
     <string name="province_city_town">Province/City/Town</string>
+    <string name="please_choose_province_city_town">Please choose province, city and town</string>
     <string name="residential_address">Residential address</string>
     <string name="residential_address_hint">Please enter your detailed address</string>
     <string name="cancel">Cancel</string>
@@ -388,17 +401,14 @@ No personal SMS messages will be accessed, read, or collected.</string>
     <string name="please_enter_otp">Please enter the verification code</string>
     <string name="verify_phone">Verified mobile phone number</string>
 
-    <string name="bank_and_contact">Bank card and contact information</string>
-    <string name="auth_step_format">Step %1$d of %2$d</string>
-    <string name="auth_bank_desc">Please fill in accurate account information and contact information.</string>
-    <string name="auth_personal_desc">Please enter accurate personal information.</string>
-    <string name="auth_service_desc">Select your mobile carrier to complete phone verification.</string>
+    <string name="bank_and_contact">Withdraw method and contact</string>
     <string name="data_encrypted_tips">Your data is encrypted to protect your personal information.</string>
     <string name="bank_tips">Please fill in the correct bank account of your chosen bank, bank mismatch or account error will cause the loan to fail.</string>
     <string name="contact_tips">Please fill in the correct emergency contact person and contact information to improve the reliability of the information.</string>
     <string name="contact">Contact</string>
     <string name="contact_people1">Contact person 1</string>
     <string name="contact_people2">Contact person 2</string>
+    <string name="contact_people3">Contact person 3 (optional)</string>
     <string name="contact_name">Contact name</string>
     <string name="contact_phone_number">Contact the phone number</string>
     <string name="please_enter_contact_name">Please enter the contact name</string>
@@ -491,7 +501,7 @@ No personal SMS messages will be accessed, read, or collected.</string>
     <string name="home_product_loan_amount_title">Loan amount</string>
     <string name="cert_center">Certification Center</string>
     <string name="cert_desc">Please make sure your information is ture and valid</string>
-    <string name="shoot_req">Shooting requirements</string>
+    <string name="shoot_req">Shooting example</string>
     <string name="please_select_auth">Please select an authorized carrier</string>
     <string name="verify_code">Verification code</string>
     <string name="succeed">Succeed</string>
@@ -527,6 +537,7 @@ No personal SMS messages will be accessed, read, or collected.</string>
 
     <string name="kyc_title">Verify Your Identity</string>
     <string name="kyc_desc">Please upload a valid ID card and a clear selfie photo</string>
+    <string name="identity_verification_tip">Through facial recognition, we verify that you are a real person to ensure the best quality service and vetting process.</string>
     <string name="view_sample">View Sample</string>
     <string name="phone_collect_title">Notice Regarding Phone Number Collection</string>
     <string name="phone_collect_desc">%s collects, transmits, synchronizes, processes, and stores your phone number information to support SMS verification code login during user authentication.</string>

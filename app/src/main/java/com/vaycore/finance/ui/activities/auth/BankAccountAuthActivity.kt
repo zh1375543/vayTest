@@ -22,8 +22,11 @@ import com.vaycore.finance.data.ACT_selectContactName1End
 import com.vaycore.finance.data.ACT_selectContactName1Start
 import com.vaycore.finance.data.ACT_selectContactName2End
 import com.vaycore.finance.data.ACT_selectContactName2Start
+import com.vaycore.finance.data.ACT_selectContactName3End
+import com.vaycore.finance.data.ACT_selectContactName3Start
 import com.vaycore.finance.data.PageInfoBank
 import com.vaycore.finance.data.local.authConfigList
+import com.vaycore.finance.data.local.loginInfo
 import com.vaycore.finance.data.local.bean.ApiRequest
 import com.vaycore.finance.data.local.bean.BankChannelResponse
 import com.vaycore.finance.data.local.bean.RelativesBean
@@ -54,6 +57,12 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
     private enum class WithdrawMethod {
         BANK,
         WALLET,
+    }
+
+    private enum class ContactPickTarget {
+        PRIMARY,
+        SECONDARY,
+        ADDITIONAL,
     }
 
     override val binding by viewBinding(BankAccountAuthActivityBinding::inflate)
@@ -141,6 +150,21 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
                 }
             }
         }
+        additionalContactRelationshipView.setOnClick {
+            vm.getContactEnum {
+                val relationshipOptions = it.otherRelatives ?: arrayListOf()
+                showOptionPickerDialog(
+                    relationshipOptions.indexOfFirst {
+                        additionalContactRelationshipView.getText() == it.info
+                    },
+                    relationshipOptions,
+                ) { index ->
+                    additionalContactRelationshipView.setText(relationshipOptions[index].info)
+                    additionalContactRelationshipView.hideError()
+                    additionalContactStatus = relationshipOptions[index].state
+                }
+            }
+        }
         relativesPhoneView.setContactClick {
             vm.recordEvent(
                 TrackBean(
@@ -149,7 +173,7 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
                     result = System.currentTimeMillis().toString()
                 )
             )
-            pickType = 0
+            contactPickTarget = ContactPickTarget.PRIMARY
             pickContact()
         }
         friendPhoneView.setContactClick {
@@ -160,7 +184,18 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
                     result = System.currentTimeMillis().toString()
                 )
             )
-            pickType = 1
+            contactPickTarget = ContactPickTarget.SECONDARY
+            pickContact()
+        }
+        additionalContactPhoneView.setContactClick {
+            vm.recordEvent(
+                TrackBean(
+                    p = PageInfoBank,
+                    act = ACT_selectContactName3Start,
+                    result = System.currentTimeMillis().toString(),
+                ),
+            )
+            contactPickTarget = ContactPickTarget.ADDITIONAL
             pickContact()
         }
         btNext.singleClick {
@@ -273,8 +308,13 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
         friendView.setEnableEdit(!isCert)
         friendNameView.setEnableEdit(!isCert)
         friendPhoneView.setEnableEdit(!isCert)
+        additionalContactRelationshipView.setEnableEdit(!isCert)
+        additionalContactNameView.setEnableEdit(!isCert)
+        additionalContactPhoneView.setEnableEdit(!isCert)
         relativesPhoneView.setContactVisible(!isCert)
         friendPhoneView.setContactVisible(!isCert)
+        additionalContactPhoneView.setContactVisible(!isCert)
+        additionalContactContainer.isVisible = !isCert
         confirmLayout.isVisible = !isCert
         titleBar.updateTitle(
             if (isCert) getString(R.string.contact_info) else getString(R.string.bank_and_contact)
@@ -375,35 +415,41 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
         vm.recordEvent(TrackBean(p = PageInfoBank, act = ACT_clickNext))
         trackEvent(SUPPLEMENTARY_INFO_COMMIT)
         val isWallet = selectedWithdrawMethod == WithdrawMethod.WALLET
+        val contactEntries = arrayListOf(
+            RelativesBean(
+                relativesStatus,
+                binding.relativesNameView.getText(),
+                binding.relativesPhoneView.getText(),
+            ),
+            RelativesBean(
+                friendStatus,
+                binding.friendNameView.getText(),
+                binding.friendPhoneView.getText(),
+            ),
+        )
+        if (
+            additionalContactStatus != null &&
+            binding.additionalContactNameView.getText().isNotBlank() &&
+            binding.additionalContactPhoneView.getText().isNotBlank()
+        ) {
+            contactEntries += RelativesBean(
+                additionalContactStatus,
+                binding.additionalContactNameView.getText(),
+                binding.additionalContactPhoneView.getText(),
+            )
+        }
         vm.submitBankAndCtsInfo(
             ApiRequest(
                 bankInfoId = if (isWallet) null else bankBean?.countryId?.toString(),
                 bankId = if (isWallet) null else bankBean?.id?.toString(),
-                accountUser = if (isWallet) {
-                    binding.walletProviderView.getText()
-                } else {
-                    binding.holderView.getText()
-                },
-                bankNo = if (isWallet) {
-                    binding.walletAccountView.getText()
-                } else {
-                    binding.bankAccountView.getText()
-                },
-                bankCode = if (isWallet) walletBean?.walletCode else bankBean?.bankCode,
-                bankName = if (isWallet) walletBean?.walletName else bankBean?.bankName,
-                payWay = if (isWallet) "E_WALLET" else "BANK",
-                relativesInfoVOList = arrayListOf(
-                    RelativesBean(
-                        relativesStatus,
-                        binding.relativesNameView.getText(),
-                        binding.relativesPhoneView.getText()
-                    ),
-                    RelativesBean(
-                        friendStatus,
-                        binding.friendNameView.getText(),
-                        binding.friendPhoneView.getText()
-                    )
-                )
+                accountUser = binding.holderView.getText(),
+                bankNo = if (isWallet) null else binding.bankAccountView.getText(),
+                bankCode = if (isWallet) null else bankBean?.bankCode,
+                bankName = if (isWallet) null else bankBean?.bankName,
+                payWay = if (isWallet) "WALLET" else "CARD",
+                walletId = if (isWallet) walletBean?.id else null,
+                accountCode = if (isWallet) binding.walletAccountView.getText().trim() else null,
+                relativesInfoVOList = contactEntries,
             )
         )
     }
@@ -412,6 +458,7 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
     private var walletBean: WalletResponse? = null
     private var relativesStatus: Int? = null
     private var friendStatus: Int? = null
+    private var additionalContactStatus: Int? = null
     override fun initObserve() = with(vm) {
         super.initObserve()
         accountVm.payChannelList.observe(this@BankAccountAuthActivity) {
@@ -432,6 +479,7 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
                 binding.walletProviderView.setText(wallet.walletName)
                 binding.walletProviderView.hideError()
                 walletBean = wallet
+                fillWalletAccountFromLoginPhone()
             }
         }
         contractResult.observe(this@BankAccountAuthActivity) {
@@ -463,7 +511,18 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
         }
     }
 
-    private var pickType: Int = 0
+    private fun fillWalletAccountFromLoginPhone() {
+        with(binding) {
+            if (walletAccountView.getText().isNotBlank()) return
+            val phone = loginInfo?.phone.orEmpty()
+            if (phone.isBlank()) return
+            val walletAccount = if (phone.startsWith('0')) phone else "0$phone"
+            walletAccountView.setText(walletAccount)
+            confirmWalletAccountView.setText(walletAccount)
+        }
+    }
+
+    private var contactPickTarget = ContactPickTarget.PRIMARY
 
     @SuppressLint("Range")
     private val pickContactLauncher =
@@ -471,20 +530,41 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
             if (result.resultCode == RESULT_OK) {
                 result.data?.data?.let {
                     it.getContactInfo { name, number ->
-                        if (pickType == 0) {
-                            binding.relativesNameView.setText(name)
-                            binding.relativesPhoneView.setText(number)
-                        } else {
-                            binding.friendNameView.setText(name)
-                            binding.friendPhoneView.setText(number)
+                        when (contactPickTarget) {
+                            ContactPickTarget.PRIMARY -> {
+                                binding.relativesNameView.setText(name)
+                                binding.relativesPhoneView.setText(number)
+                                vm.recordEvent(
+                                    TrackBean(
+                                        p = PageInfoBank,
+                                        act = ACT_selectContactName1End,
+                                        result = System.currentTimeMillis().toString(),
+                                    ),
+                                )
+                            }
+                            ContactPickTarget.SECONDARY -> {
+                                binding.friendNameView.setText(name)
+                                binding.friendPhoneView.setText(number)
+                                vm.recordEvent(
+                                    TrackBean(
+                                        p = PageInfoBank,
+                                        act = ACT_selectContactName2End,
+                                        result = System.currentTimeMillis().toString(),
+                                    ),
+                                )
+                            }
+                            ContactPickTarget.ADDITIONAL -> {
+                                binding.additionalContactNameView.setText(name)
+                                binding.additionalContactPhoneView.setText(number)
+                                vm.recordEvent(
+                                    TrackBean(
+                                        p = PageInfoBank,
+                                        act = ACT_selectContactName3End,
+                                        result = System.currentTimeMillis().toString(),
+                                    ),
+                                )
+                            }
                         }
-                        vm.recordEvent(
-                            TrackBean(
-                                p = PageInfoBank,
-                                act = if (pickType == 0) ACT_selectContactName1End else ACT_selectContactName2End,
-                                result = System.currentTimeMillis().toString()
-                            )
-                        )
                     }
                 }
             }

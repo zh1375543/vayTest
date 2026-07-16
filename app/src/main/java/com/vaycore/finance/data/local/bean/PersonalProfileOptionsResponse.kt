@@ -6,4 +6,5 @@ data class PersonalProfileOptionsResponse(
     val maritalStatus: MutableList<SelectionOption>? = null,
     val purpose: MutableList<SelectionOption>? = null,
     val education: MutableList<SelectionOption>? = null,
+    val workTime: MutableList<SelectionOption>? = null,
 )

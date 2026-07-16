@@ -6,7 +6,7 @@
     android:layout_gravity="center"
     android:layout_marginHorizontal="@dimen/dp_20"
     android:paddingBottom="@dimen/dp_20"
-    app:radius="@dimen/dp_8"
+    app:radius="@dimen/dp_24"
     app:solidColor="@color/white">
 
     <TextView
@@ -37,13 +37,11 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv1"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        style="@style/KycExampleImage"
         android:layout_marginStart="@dimen/dp_20"
         android:layout_marginTop="@dimen/dp_20"
         android:layout_marginEnd="@dimen/dp_8"
-        android:scaleType="fitXY"
-        android:src="@mipmap/ic_kyc_face_standard"
+        android:src="@mipmap/ic_face_standard"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toStartOf="@id/iv2"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,12 +49,10 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        style="@style/KycExampleImage"
         android:layout_marginStart="@dimen/dp_8"
         android:layout_marginEnd="@dimen/dp_20"
-        android:scaleType="fitXY"
-        android:src="@mipmap/ic_kyc_face_dark"
+        android:src="@mipmap/ic_face_dart"
         app:layout_constraintBottom_toBottomOf="@id/iv1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/iv1"
@@ -64,35 +60,25 @@
 
     <TextView
         android:id="@+id/tv1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_5"
+        style="@style/KycExampleLabel"
         android:text="@string/standard"
-        android:textColor="@color/C_111827"
-        android:textSize="@dimen/sp_12"
         app:layout_constraintEnd_toEndOf="@id/iv1"
         app:layout_constraintStart_toStartOf="@id/iv1"
         app:layout_constraintTop_toBottomOf="@id/iv1" />
 
     <TextView
         android:id="@+id/tv2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_5"
+        style="@style/KycExampleLabel"
         android:text="@string/dark_light"
-        android:textColor="@color/C_111827"
-        android:textSize="@dimen/sp_12"
         app:layout_constraintEnd_toEndOf="@id/iv2"
         app:layout_constraintStart_toStartOf="@id/iv2"
         app:layout_constraintTop_toBottomOf="@id/iv2" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv3"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        style="@style/KycExampleImage"
         android:layout_marginTop="@dimen/dp_20"
-        android:scaleType="fitXY"
-        android:src="@mipmap/ic_kyc_face_vague"
+        android:src="@mipmap/ic_face_vague"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="@id/iv1"
         app:layout_constraintStart_toStartOf="@id/iv1"
@@ -100,10 +86,8 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv4"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scaleType="fitXY"
-        android:src="@mipmap/ic_kyc_face_higlight"
+        style="@style/KycExampleImage"
+        android:src="@mipmap/ic_face_highlight"
         app:layout_constraintBottom_toBottomOf="@id/iv3"
         app:layout_constraintEnd_toEndOf="@id/iv2"
         app:layout_constraintStart_toStartOf="@id/iv2"
@@ -111,24 +95,16 @@
 
     <TextView
         android:id="@+id/tv3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_5"
+        style="@style/KycExampleLabel"
         android:text="@string/vague"
-        android:textColor="@color/C_111827"
-        android:textSize="@dimen/sp_12"
         app:layout_constraintEnd_toEndOf="@id/iv3"
         app:layout_constraintStart_toStartOf="@id/iv3"
         app:layout_constraintTop_toBottomOf="@id/iv3" />
 
     <TextView
         android:id="@+id/tv4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_5"
+        style="@style/KycExampleLabel"
         android:text="@string/high_light"
-        android:textColor="@color/C_111827"
-        android:textSize="@dimen/sp_12"
         app:layout_constraintEnd_toEndOf="@id/iv4"
         app:layout_constraintStart_toStartOf="@id/iv4"
         app:layout_constraintTop_toBottomOf="@id/iv4" />
@@ -140,7 +116,7 @@
         android:layout_height="@dimen/dp_48"
         android:layout_marginHorizontal="@dimen/dp_34"
         android:layout_marginTop="@dimen/dp_20"
-        android:text="@string/i_know"
+        android:text="@string/confirm"
         app:layout_constraintTop_toBottomOf="@id/tv4" />
 
 </com.vaycore.finance.ui.views.StyledConstraintLayout>
