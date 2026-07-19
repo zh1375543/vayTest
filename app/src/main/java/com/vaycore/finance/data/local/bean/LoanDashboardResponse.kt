@@ -20,6 +20,8 @@ data class LoanDashboardResponse(
     val togetherLoanSign: Int? = null,
     val canApplyAmount: BigDecimal? = null,
     val allAmount: BigDecimal? = null,
+    val userCashWalletId: Long? = null,
+    val walletAccount: String? = null,
     val bankInfoId: Long? = null,
     val bankNo: String? = null,
     val currency: String? = null,

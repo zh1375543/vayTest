@@ -228,7 +228,7 @@
             android:name=".ui.activities.LoanApplyResultActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
-            android:launchMode="singleTask"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity

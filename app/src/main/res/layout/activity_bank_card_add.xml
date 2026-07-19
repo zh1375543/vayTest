@@ -20,73 +20,16 @@
         app:layout_constraintBottom_toTopOf="@id/tvTips"
         app:layout_constraintTop_toBottomOf="@id/titleBar">
 
-        <com.vaycore.finance.ui.views.StyledLinearLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp_16"
-            android:orientation="vertical"
-            app:radius="@dimen/dp_12"
-            app:solidColor="@color/white">
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_36"
-                android:layout_marginTop="@dimen/dp_10"
-                android:drawableStart="@mipmap/icon_bank_card"
-                android:drawablePadding="@dimen/dp_6"
-                android:gravity="center_vertical"
-                android:paddingHorizontal="@dimen/dp_16"
-                android:text="@string/bank_account"
-                android:textColor="@color/C_374151"
-                android:textSize="@dimen/sp_16"
-                android:textStyle="bold" />
-            <!-- Bank selection -->
-            <com.vaycore.finance.ui.widget.FormItemView
-                android:id="@+id/bankView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:errorText="@string/please_choose_current_info"
-                app:formType="select"
-                app:hintText="@string/please_choose_bank"
-                app:titleText="@string/bank" />
-
-            <!-- Cardholder -->
-            <com.vaycore.finance.ui.widget.FormItemView
-                android:id="@+id/holderView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:errorText="@string/please_enter_holder_name"
-                app:formType="input"
-                app:hintText="@string/please_enter_holder_name"
-                app:inputType="text"
-                app:titleText="@string/cardholder_name" />
-
-            <!-- Bank card number -->
-            <com.vaycore.finance.ui.widget.FormItemView
-                android:id="@+id/bankAccountView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:errorText="@string/please_enter_bank_account"
-                app:formType="input"
-                app:hintText="@string/please_enter_bank_account"
-                app:inputType="number"
-                app:titleText="@string/bank_account" />
-
-            <!-- Confirm bank card -->
-            <com.vaycore.finance.ui.widget.FormItemView
-                android:id="@+id/confirmBankView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:errorText="@string/bank_account_not_match"
-                app:formType="input"
-                app:hintText="@string/please_enter_bank_account"
-                app:inputType="number"
-                app:titleText="@string/bank_account" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_18" />
-        </com.vaycore.finance.ui.views.StyledLinearLayout>
+            <include
+                android:id="@+id/withdrawAccountForm"
+                layout="@layout/view_withdraw_account_form" />
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
     <com.vaycore.finance.ui.views.StyledTextView

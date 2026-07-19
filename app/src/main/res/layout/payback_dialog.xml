@@ -10,8 +10,8 @@
     <com.vaycore.finance.ui.views.StyledConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_18"
-        android:layout_marginEnd="@dimen/dp_18"
+        android:layout_marginStart="@dimen/dp_24"
+        android:layout_marginEnd="@dimen/dp_24"
         app:solidColor="@color/white"
         app:radius="@dimen/dp_12"
         android:layout_gravity="center">

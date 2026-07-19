@@ -19,13 +19,16 @@ class ProductInstallmentAdapter :
         tvAmount.text = item.totalRepayment.formatAmount()
         ivArrow.rotation = 0f
         infoLayout.isVisible = false
-        ivArrow.setOnClickListener {
+        val toggleDetails = {
             infoLayout.isVisible = !infoLayout.isVisible
             ivArrow.rotation = if (!infoLayout.isVisible) 0f else 180f
             if (context is LoanProductActivity) {
                 (context as LoanProductActivity?)?.scrollBottom()
             }
         }
+        tvDueDate.setOnClickListener { toggleDetails() }
+        tvAmount.setOnClickListener { toggleDetails() }
+        ivArrow.setOnClickListener { toggleDetails() }
         tvLoanAmount.text = item.repayActualAmount.formatAmount()
         tvInterest.text = item.repayInterestAmount.formatAmount()
         tvServiceFee.text = item.repayAfterHandleAmount.formatAmount()

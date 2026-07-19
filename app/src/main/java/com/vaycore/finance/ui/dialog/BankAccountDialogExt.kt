@@ -26,7 +26,6 @@ import java.util.Locale
 import kotlin.math.max
 
 fun Context.showBankCardErrorDialog(
-    title: String = "",
     desc: String = getString(R.string.card_error_tips),
     cancel: String = getString(R.string.already_edited),
     ok: String = getString(R.string.revise),
@@ -39,8 +38,6 @@ fun Context.showBankCardErrorDialog(
     ) {
         override fun initView() = with(binding) {
             super.initView()
-            tvTitle.isVisible = title.isNotBlank()
-            tvTitle.text = title
             tvDesc.text = desc
             btnClose.text = cancel
             btnSure.text = ok
@@ -64,33 +61,23 @@ fun Context.chooseAccountsDialog(
     title: String = getString(R.string.choose_account),
     applyAction: (info: BankAccountResponse) -> Unit,
 ) {
-    object :
-        BaseSheetDialog<ChooseAccountsDialogBinding>(
-            this,
-            ChooseAccountsDialogBinding::inflate
-        ) {
+    object : BaseDialog<ChooseAccountsDialogBinding>(this, ChooseAccountsDialogBinding::inflate) {
         override fun initView() = with(binding) {
-            super.initView()
-            fun refreshCardCount(position: Int) {
-                tvCardCount.text = getString(
-                    R.string.bank_card_selected_count,
-                    if (list.isEmpty()) 0 else position + 1,
-                    list.size
-                )
-            }
-
             tvTitle.text = title
             tvAdd.isVisible = !isRepay
-            val index = max(
-                0,
-                list.indexOfFirst { it.bankNo == cardNo })
-            refreshCardCount(index)
+            val currentAccountIndex = list.indexOfFirst { it.bankNo == cardNo }
+            val defaultAccountIndex = list.indexOfFirst { it.isDefault == 1 }
+            val index = max(0, if (currentAccountIndex >= 0) currentAccountIndex else defaultAccountIndex)
+            val itemHeight = resources.getDimensionPixelSize(R.dimen.dp_66)
+            val visibleItemCount = list.size.coerceIn(2, 4)
+            rvCard.layoutParams = rvCard.layoutParams.apply {
+                height = itemHeight * visibleItemCount
+            }
             val adapter =
                 ChooseAccountsDialogAdapter(index).apply {
                     submitItems(list)
                     setOnItemClickListener { _, index ->
                         selectPosition = index
-                        refreshCardCount(index)
                         notifyItemRangeChanged(0, itemCount, 0)
                     }
                 }

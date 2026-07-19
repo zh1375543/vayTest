@@ -23,9 +23,6 @@ import com.vaycore.finance.data.local.location
 import com.vaycore.finance.data.local.loginInfo
 import com.vaycore.finance.data.local.signBackHome
 import com.vaycore.finance.ui.adapters.HomeProductAdapter
-import com.vaycore.finance.ui.showCreditUnderReviewDialog
-import com.vaycore.finance.ui.showPreCreditExpiredDialog
-import com.vaycore.finance.ui.viewmodels.DashboardViewModel
 import com.vaycore.finance.util.AppStackUtil
 import com.vaycore.finance.util.runtime.DeviceHelper
 import com.vaycore.finance.ui.viewmodels.LoanProductViewModel
@@ -35,8 +32,6 @@ import com.vaycore.finance.util.LOAN_GET_NOW_CLICK
 import com.vaycore.finance.util.generateRequestBody
 import com.vaycore.finance.util.getLocalIpAddress
 import com.vaycore.finance.util.isPositive
-import com.vaycore.finance.util.context.openExternalBrowser
-import com.vaycore.finance.util.context.openPlayStore
 import com.vaycore.finance.util.requestRuntimePermissions
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.util.parseJson
@@ -66,6 +61,7 @@ class LoanApplyResultActivity :
             amount: String?,
             productInstallmentMap: String? = null,
             termIdMap: String? = null,
+            payWay: String = "CARD",
         ) {
             context.start<LoanApplyResultActivity> {
                 putExtra("productList", productList)
@@ -75,12 +71,12 @@ class LoanApplyResultActivity :
                 putExtra("productId", productId)
                 putExtra("productInstallmentMap", productInstallmentMap)
                 putExtra("termIdMap", termIdMap)
+                putExtra("payWay", payWay)
             }
         }
     }
 
     private val vm by viewModels<LoanApplyViewModel>()
-    private val dashboardVm by viewModels<DashboardViewModel>()
     private val productVm by viewModels<LoanProductViewModel>()
 
     private val productList by lazy {
@@ -92,6 +88,7 @@ class LoanApplyResultActivity :
     private val amount by lazy { intent.getStringExtra("amount") }
     private val productId by lazy { intent.getStringExtra("productId") }
     private val productInstallmentMap by lazy { intent.getStringExtra("productInstallmentMap") }
+    private val payWay by lazy { intent.getStringExtra("payWay") ?: "CARD" }
     private val resultAdapter by lazy {
         LoanResultAdapter()
     }
@@ -140,59 +137,57 @@ class LoanApplyResultActivity :
 
     private fun handleRecommendedProductClick(item: ProductBean) {
         trackEvent(LOAN_GET_NOW_CLICK)
-        if (!item.canApply) return
-        if (item.creditStatus == 2) {
-            showPreCreditExpiredDialog(item.enableLoanStr ?: "")
-            return
-        }
-        if (item.creditStatus == 0) {
-            showCreditUnderReviewDialog()
-            return
-        }
-        when (item.jumpType) {
-            1 -> item.downloadUrl?.openExternalBrowser()
-            2 -> item.downloadUrl?.openPlayStore()
-            else -> {
-                productVm.getProductDetail(
-                    PageHome,
-                    item.productId.toString(),
-                    item.maxLoanAmount.toString(),
-                    true
-                ) {}
-            }
-        }
+        productVm.getProductDetail(
+            PageHome,
+            item.productId.toString(),
+            item.maxLoanAmount.toString(),
+            true,
+        ) {}
     }
 
     private fun refreshRecommendedProducts() {
         binding.apply {
             cashableProductLayout.isVisible = false
             tvWithdrawal.isVisible = false
+            updateResultsCardVisibility()
         }
         homeAdapter.submitItems(emptyList())
-        dashboardVm.getAuthData(isLoading = true)
+        vm.getTogetherLoan(showLoading = true) {
+            hideRecommendedProducts()
+        }
     }
 
     private fun updateRecommendedProducts(data: LoanDashboardResponse?) {
-        val isCert = data?.userCreditStatus == 0 || data?.userCreditStatus == 2
         val products = data?.showProducts.orEmpty().onEach { product ->
-            product.canApply = if (isCert) {
-                false
-            } else {
-                product.isNormalProduct() || product.isAddInfoProduct()
-            }
+            product.canApply = true
+            product.isTogether = true
+            if (product.currency == null) product.currency = data?.currency
+            if (product.currencySymbol == null) product.currencySymbol = data?.currencySymbol
         }
         homeAdapter.submitItems(products)
         val hasCashableProducts =
-            data?.userCreditAmount.isPositive() &&
+            data?.canApplyAmount.isPositive() &&
                 products.isNotEmpty()
         binding.apply {
             cashableProductLayout.isVisible = hasCashableProducts
             tvWithdrawal.isVisible = hasCashableProducts
+            updateResultsCardVisibility()
         }
+    }
+
+    private fun hideRecommendedProducts() = with(binding) {
+        cashableProductLayout.isVisible = false
+        tvWithdrawal.isVisible = false
+        updateResultsCardVisibility()
+    }
+
+    private fun updateResultsCardVisibility() = with(binding) {
+        resultsCard.isVisible = rvProduct.isVisible || cashableProductLayout.isVisible
     }
 
     private fun handleProductDetail(data: ProductBean?) {
         data ?: return
+        AppStackUtil.finishActivity(LoanProductActivity::class.java)
         start<LoanProductActivity> {
             putExtra("product", data)
         }
@@ -223,9 +218,13 @@ class LoanApplyResultActivity :
         map["mobileType"] = "2"
         map["appCode"] = APPCODE
         map["version"] = BuildConfig.VERSION_NAME
-        map["bankInfoId"] = bankId.toString()
         map["userId"] = loginInfo?.id.toString()
-        map["payWay"] = "CARD"
+        map["payWay"] = payWay
+        if (payWay == "CARD") {
+            map["bankInfoId"] = bankId.toString()
+        } else {
+            map["userCashWalletId"] = bankId.toString()
+        }
         map["ip"] = getLocalIpAddress() ?: ""
         map["imei"] = DeviceHelper.getDeviceId()
         map["coordinate"] =
@@ -313,9 +312,12 @@ class LoanApplyResultActivity :
             loadingLayout.showContent()
             successLayout.isVisible = true
             failLayout.isVisible = false
+            ivSuccess.isVisible = true
+            ivFail.isVisible = false
+            updateResultsCardVisibility()
         }
         signBackHome = false
-    refreshRecommendedProducts()
+        refreshRecommendedProducts()
     }
 
     private fun loanFailed() {
@@ -323,9 +325,12 @@ class LoanApplyResultActivity :
             loadingLayout.showContent()
             successLayout.isVisible = false
             failLayout.isVisible = true
+            ivSuccess.isVisible = false
+            ivFail.isVisible = true
+            updateResultsCardVisibility()
         }
         signBackHome = false
-       refreshRecommendedProducts()
+        refreshRecommendedProducts()
     }
 
     override fun initObserve() {
@@ -345,14 +350,8 @@ class LoanApplyResultActivity :
             binding.rvProduct.isVisible = !it.isNullOrEmpty()
             loanSuccess()
         }
-        dashboardVm.authResult.observe(this@LoanApplyResultActivity) {
+        vm.togetherInfo.observe(this@LoanApplyResultActivity) {
             updateRecommendedProducts(it)
-        }
-        dashboardVm.authFailedResult.observe(this@LoanApplyResultActivity) {
-            binding.apply {
-                cashableProductLayout.isVisible = false
-                tvWithdrawal.isVisible = false
-            }
         }
         productVm.detailResult.observe(this@LoanApplyResultActivity) {
             handleProductDetail(it)

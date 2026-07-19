@@ -1,6 +1,5 @@
 package com.vaycore.finance.ui.activities
 
-import android.os.Build
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
@@ -21,7 +20,6 @@ import com.vaycore.finance.data.ACT_in
 import com.vaycore.finance.data.ACT_userAppBankMyCard
 import com.vaycore.finance.data.local.bean.ProductBean
 import com.vaycore.finance.data.local.loginInfo
-import com.vaycore.finance.ui.adapters.ProductHeaderFeeAdapter
 import com.vaycore.finance.ui.viewmodels.WalletViewModel
 import com.vaycore.finance.util.LoanEventUtil
 import com.vaycore.finance.util.formatAmount
@@ -60,7 +58,6 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
     private lateinit var leaseUrl: String
     private lateinit var pawnUrl: String
     private var isAddCard = false
-    private val headerFeeAdapter by lazy { ProductHeaderFeeAdapter() }
 
     override fun initView() = with(binding) {
         vm.recordEvent(
@@ -121,20 +118,19 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
                 )
             )
             loanEvent.logClickChooseWallet()
-            accountVm.getBankcardList {}
+            accountVm.getLoanAccountList {}
         }
         tvAbout.singleClick {
             WebViewActivity.launch(
                 this@LoanProductActivity, tvAbout.text.toString(), AGREEMENT_ABOUT
             )
         }
-        rvHeaderFee.adapter = headerFeeAdapter
         detailView.isVisible = true
-        ivPlanHint.rotation = 180f
-        ivPlanHint.singleClick {
+        productSummaryView.setExpanded(true)
+        productSummaryView.setOnDetailsClickListener {
             val isPlanVisible = !detailView.isVisible
             detailView.isVisible = isPlanVisible
-            ivPlanHint.rotation = if (isPlanVisible) 180f else 0f
+            productSummaryView.setExpanded(isPlanVisible)
             vm.detailResult.value?.isPlanLayoutVisible = isPlanVisible
         }
 //        ivDetail.rotation = 180f
@@ -191,6 +187,7 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
                             product?.loanAmount?.toString(),
                             if (productInstallmentMap.isEmpty()) null else productInstallmentMap.toJsonString(),
                             if (termIdMap.isEmpty()) null else termIdMap.toJsonString(),
+                            payWay = cardInfo?.payWay ?: "CARD",
                         )
                     } else {
                         LoanApplyResultActivity.launch(
@@ -201,7 +198,8 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
                             null,
                             product?.loanAmount?.toString(),
                             if (productInstallmentMap.isEmpty()) null else productInstallmentMap.toJsonString(),
-                            if (termIdMap.isEmpty()) null else termIdMap.toJsonString()
+                            if (termIdMap.isEmpty()) null else termIdMap.toJsonString(),
+                            payWay = cardInfo?.payWay ?: "CARD",
                         )
                         finish()
                     }
@@ -260,12 +258,12 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
         detailResult.observe(this@LoanProductActivity) {
             binding.apply {
                 it?.let {
-                    tvProductName.text = it.productName
                     bottomLayout.isVisible = true
                     loadingLayout.showContent()
-                    tvAmount.text = it.loanAmount.formatAmount(it.currencySymbol)
-                    tvLoanAmount.text =
-                        String.format(getString(R.string.loan_amount), it.currency)
+                    productSummaryView.bind(
+                        it,
+                        it.loanAmount.formatAmount(it.currencySymbol),
+                    )
                     bindHeaderDetail(it)
                     mergeDetailViewState(it)
 
@@ -290,12 +288,16 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
                         it.isPlanLayoutVisible = true
                     }
                     detailView.isVisible = it.isPlanLayoutVisible ?: true
-                    ivPlanHint.rotation = if (detailView.isVisible) 180f else 0f
+                    productSummaryView.setExpanded(detailView.isVisible)
 
                     detailView.setData(it)
                     if (cardInfo == null) {
-                        cardInfo = BankAccountResponse(id = it.bankInfoId, bankNo = it.bankNo)
-                        tvCard.text = cardInfo?.bankNo.maskSensitive()
+                        cardInfo = BankAccountResponse(
+                            id = it.bankInfoId ?: it.userCashWalletId,
+                            bankNo = it.bankNo ?: it.walletAccount,
+                            payWay = if (it.bankInfoId != null) "CARD" else "WALLET",
+                        )
+                        bindReceivingAccount(cardInfo)
                     }
                     if (it.bankInfoPayOutFailSign && !isShowBankcardError) {
                         lifecycleScope.launch {
@@ -314,14 +316,20 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
                 }
             }
         }
-        accountVm.bankCardListResult.observe(this@LoanProductActivity) {
+        accountVm.loanAccountList.observe(this@LoanProductActivity) {
             it?.let {
                 chooseAccountsDialog(cardInfo?.bankNo, it, false) { card ->
                     cardInfo = card
-                    binding.tvCard.text = card.bankNo.maskSensitive()
+                    bindReceivingAccount(card)
                 }
             }
         }
+    }
+
+    private fun bindReceivingAccount(account: BankAccountResponse?) = with(binding) {
+        tvCard.text = (account?.account ?: account?.bankNo).maskSensitive()
+        tvAccountType.text = account?.payWay?.lowercase().orEmpty()
+        loanTipLayout.isVisible = account?.payWay != "CARD"
     }
 
     fun scrollBottom() {
@@ -340,15 +348,6 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
 
     private fun bindHeaderDetail(plan: ProductBean) = with(binding) {
         val currencySymbol = plan.currencySymbol ?: product?.currencySymbol
-        tvDays.text = getString(R.string.num_days, plan.timeLimit.toString())
-        tvActuallyTitle.text =
-            String.format(getString(R.string.actually_amount), currencySymbol ?: "").replace("()", "")
-        tvActuallyAmount.text = plan.actualAmount.formatAmount(currencySymbol)
-        tvInterestTitle.text = getString(R.string.interest_day, "${plan.interestRate}%")
-        tvInterest.text = plan.interestAmount.formatAmount(currencySymbol)
-        tvDate.text = plan.repayTimeStr
-        tvInstallFee.text = plan.installmentServiceFee.formatAmount(plan.currencySymbol)
-        tvModel.text = "${Build.BRAND} ${Build.MODEL}"
-        headerFeeAdapter.submitItems(plan.appProductHandleFeeConfigDtos)
+        detailView.bindHeaderDetail(plan, currencySymbol)
     }
 }

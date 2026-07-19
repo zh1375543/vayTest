@@ -42,12 +42,18 @@ class WalletViewModel(
         bankId: String?,
         accountUser: String,
         bankNo: String,
+        payWay: String = "CARD",
+        walletId: Int? = null,
+        accountCode: String? = null,
     ) {
         launchData {
             walletRepository.addCard(
                 bankId = bankId,
                 accountUser = accountUser,
                 bankNo = bankNo,
+                payWay = payWay,
+                walletId = walletId,
+                accountCode = accountCode,
             )
         }.showLoading().onSuccess {
             addResult.value = it
@@ -60,6 +66,44 @@ class WalletViewModel(
             walletRepository.fetchBankcardList()
         }.onSuccess {
             bankCardListResult.value = it
+        }.onFailed {
+            errorAction()
+            true
+        }
+    }
+
+    val loanAccountList = MutableLiveData<List<BankAccountResponse>>()
+    fun getLoanAccountList(errorAction: () -> Unit) {
+        launchData {
+            walletRepository.fetchMyWalletList()
+        }.onSuccess { wallets ->
+            loadLoanBankAccounts(wallets.orEmpty(), errorAction)
+        }.onFailed {
+            loadLoanBankAccounts(emptyList(), errorAction)
+            true
+        }
+    }
+
+    private fun loadLoanBankAccounts(
+        wallets: List<WalletResponse>,
+        errorAction: () -> Unit,
+    ) {
+        launchData {
+            walletRepository.fetchBankcardList()
+        }.onSuccess { cards ->
+            val walletAccounts = wallets.map { wallet ->
+                BankAccountResponse(
+                    id = wallet.id.toLong(),
+                    bankNo = wallet.accountCode,
+                    bankName = wallet.walletName.orEmpty(),
+                    isDefault = wallet.defaultSign ?: 0,
+                    payWay = "WALLET",
+                )
+            }
+            val bankAccounts = cards.orEmpty().map { card ->
+                card.copy(payWay = "CARD")
+            }
+            loanAccountList.value = walletAccounts + bankAccounts
         }.onFailed {
             errorAction()
             true

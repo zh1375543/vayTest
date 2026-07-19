@@ -77,10 +77,13 @@ class LoanApplyViewModel(
     }
 
     val togetherInfo = MutableLiveData<LoanDashboardResponse?>()
-    fun getTogetherLoan(errorAction: () -> Unit) {
+    fun getTogetherLoan(
+        showLoading: Boolean = false,
+        errorAction: () -> Unit,
+    ) {
         launchData {
             loanRepository.fetchTogetherLoan()
-        }.onSuccess {
+        }.showLoading(showLoading).onSuccess {
             recordEvent(
                 TrackBean(
                     p = PageHome,

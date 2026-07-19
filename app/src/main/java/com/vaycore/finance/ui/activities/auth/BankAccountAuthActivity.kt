@@ -77,6 +77,7 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
     private var selectedWithdrawMethod: WithdrawMethod? = null
 
     override fun initView() = with(binding) {
+        with(withdrawAccountForm) {
         setupBottomActionKeyboardBehavior()
         vm.recordEvent(TrackBean(p = PageInfoBank, act = ACT_in))
         titleBar.setNavigationAction { handleBack() }
@@ -240,6 +241,7 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
                     }
                 }
                 null -> {
+                    tvWithdrawMethodError.isVisible = true
                     methodSelectionView.performClick()
                     return@singleClick
                 }
@@ -319,8 +321,9 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
         titleBar.updateTitle(
             if (isCert) getString(R.string.contact_info) else getString(R.string.bank_and_contact)
         )
-        if (!isCert) {
-            btNext.resetScale()
+            if (!isCert) {
+                btNext.resetScale()
+            }
         }
     }
 
@@ -342,8 +345,9 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
         binding.bottomActionLayout.isVisible = shouldShowBottomAction && !isKeyboardVisible
     }
 
-    private fun selectWithdrawMethod(method: WithdrawMethod) = with(binding) {
+    private fun selectWithdrawMethod(method: WithdrawMethod) = with(binding.withdrawAccountForm) {
         selectedWithdrawMethod = method
+        tvWithdrawMethodError.isVisible = false
         val iconRes = if (method == WithdrawMethod.BANK) {
             R.mipmap.ic_bank_select_bg
         } else {
@@ -365,8 +369,9 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
         walletFieldsLayout.isVisible = method == WithdrawMethod.WALLET
     }
 
-    private fun clearWithdrawMethodSelection() = with(binding) {
+    private fun clearWithdrawMethodSelection() = with(binding.withdrawAccountForm) {
         selectedWithdrawMethod = null
+        tvWithdrawMethodError.isVisible = false
         val arrowSize = resources.getDimensionPixelSize(R.dimen.dp_24)
         val arrow = AppCompatResources.getDrawable(this@BankAccountAuthActivity, R.mipmap.mine_right)?.apply {
             setBounds(0, 0, arrowSize, arrowSize)
@@ -442,13 +447,13 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
             ApiRequest(
                 bankInfoId = if (isWallet) null else bankBean?.countryId?.toString(),
                 bankId = if (isWallet) null else bankBean?.id?.toString(),
-                accountUser = binding.holderView.getText(),
-                bankNo = if (isWallet) null else binding.bankAccountView.getText(),
+                accountUser = binding.withdrawAccountForm.holderView.getText(),
+                bankNo = if (isWallet) null else binding.withdrawAccountForm.bankAccountView.getText(),
                 bankCode = if (isWallet) null else bankBean?.bankCode,
                 bankName = if (isWallet) null else bankBean?.bankName,
                 payWay = if (isWallet) "WALLET" else "CARD",
                 walletId = if (isWallet) walletBean?.id else null,
-                accountCode = if (isWallet) binding.walletAccountView.getText().trim() else null,
+                accountCode = if (isWallet) binding.withdrawAccountForm.walletAccountView.getText().trim() else null,
                 relativesInfoVOList = contactEntries,
             )
         )
@@ -467,8 +472,8 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
                 channelList
             ) { bean ->
                 selectWithdrawMethod(WithdrawMethod.BANK)
-                binding.bankView.setText(bean.bankName)
-                binding.bankView.hideError()
+                binding.withdrawAccountForm.bankView.setText(bean.bankName)
+                binding.withdrawAccountForm.bankView.hideError()
                 bankBean = bean
             }
         }
@@ -476,8 +481,8 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
             val walletItems = it ?: arrayListOf()
             chooseWalletDialog(walletItems) { wallet ->
                 selectWithdrawMethod(WithdrawMethod.WALLET)
-                binding.walletProviderView.setText(wallet.walletName)
-                binding.walletProviderView.hideError()
+                binding.withdrawAccountForm.walletProviderView.setText(wallet.walletName)
+                binding.withdrawAccountForm.walletProviderView.hideError()
                 walletBean = wallet
                 fillWalletAccountFromLoginPhone()
             }
@@ -495,7 +500,7 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
                     friendView.setText(it.otherRelativesStr)
                     friendNameView.setText(it.otherName)
                     friendPhoneView.setText(it.otherMobile)
-                    holderView.setText(it.accountUser)
+                    withdrawAccountForm.holderView.setText(it.accountUser)
                 }
             }
         }
@@ -503,7 +508,7 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
             homeVm.getUserAuthStatus()
         }
         personalVm.personalResult.observe(this@BankAccountAuthActivity) {
-            binding.holderView.setText(it?.firstName)
+            binding.withdrawAccountForm.holderView.setText(it?.firstName)
         }
         homeVm.userAuthStatusResult.observe(this@BankAccountAuthActivity) {
             it?.routeToNextAuthStep(this@BankAccountAuthActivity)
@@ -512,7 +517,7 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
     }
 
     private fun fillWalletAccountFromLoginPhone() {
-        with(binding) {
+        with(binding.withdrawAccountForm) {
             if (walletAccountView.getText().isNotBlank()) return
             val phone = loginInfo?.phone.orEmpty()
             if (phone.isBlank()) return

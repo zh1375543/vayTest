@@ -15,9 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/Round_8"
-        app:strokeColor="@color/white"
-        app:strokeWidth="@dimen/dp_1" />
+        app:shapeAppearanceOverlay="@style/Round_8" />
 
     <TextView
         android:id="@+id/tvName"

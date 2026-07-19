@@ -18,16 +18,26 @@ class WalletRepository(
         return api.getWalletList(ApiRequest()).dataOrThrow()
     }
 
+    suspend fun fetchMyWalletList(): List<WalletResponse>? {
+        return api.getMyWalletList(ApiRequest()).dataOrThrow()
+    }
+
     suspend fun addCard(
         bankId: String?,
         accountUser: String,
         bankNo: String,
+        payWay: String = "CARD",
+        walletId: Int? = null,
+        accountCode: String? = null,
     ): Any? {
         return api.addCard(
             ApiRequest(
                 bankId = bankId,
                 accountUser = accountUser,
                 bankNo = bankNo,
+                payWay = payWay,
+                walletId = walletId,
+                accountCode = accountCode,
             )
         ).dataOrThrow()
     }

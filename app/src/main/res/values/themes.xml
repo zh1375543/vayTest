@@ -69,6 +69,11 @@
         <item name="cornerSize">@dimen/dp_8</item>
     </style>
 
+    <style name="Round_Circle">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
     <style name="mainBg">
         <item name="gradientStartColor">@color/C_F6F6F6</item>
         <item name="gradientEndColor">@color/C_F6F6F6</item>

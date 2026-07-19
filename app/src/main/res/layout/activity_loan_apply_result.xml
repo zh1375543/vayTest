@@ -9,13 +9,6 @@
     app:gradientOrientation="TR_BL"
     app:gradientStartColor="@color/color_A3B2FF">
 
-
-    <com.vaycore.finance.ui.views.PageHeaderView
-        android:id="@+id/titleBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <com.vaycore.finance.ui.views.ContentStateLayout
         android:id="@+id/loading_layout"
         android:layout_width="match_parent"
@@ -27,16 +20,66 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivFail"
+                android:layout_width="@dimen/dp_112"
+                android:layout_height="@dimen/dp_112"
+                android:layout_marginTop="@dimen/dp_8"
+                android:contentDescription="@null"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/ic_loan_fail"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivSuccess"
+                android:layout_width="@dimen/dp_112"
+                android:layout_height="@dimen/dp_112"
+                android:layout_marginTop="@dimen/dp_8"
+                android:contentDescription="@null"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/ic_loan_success"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/contentTopGuideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="@dimen/dp_140" />
+
+            <com.vaycore.finance.ui.views.StyledConstraintLayout
+                android:id="@+id/contentPanel"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/contentTopGuideline"
+                app:left_top_radius="@dimen/dp_24"
+                app:right_top_radius="@dimen/dp_24"
+                app:solidColor="@color/transparent"
+                app:strokeColor="@color/white"
+                app:strokeWidth="@dimen/dp_1" />
+
             <androidx.core.widget.NestedScrollView
                 android:id="@+id/resultScrollView"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:clipToPadding="false"
                 android:fillViewport="true"
                 android:overScrollMode="never"
-                android:layout_marginBottom="@dimen/dp_16"
+                android:paddingTop="@dimen/dp_20"
+                android:paddingBottom="@dimen/dp_16"
                 app:layout_constraintBottom_toTopOf="@id/tvWithdrawal"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintEnd_toEndOf="@id/contentPanel"
+                app:layout_constraintStart_toStartOf="@id/contentPanel"
+                app:layout_constraintTop_toTopOf="@id/contentPanel">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -44,155 +87,117 @@
 
                     <com.vaycore.finance.ui.views.StyledConstraintLayout
                         android:id="@+id/success_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="visible"
-                        app:layout_constraintTop_toTopOf="parent">
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dp_92"
+                        android:layout_marginHorizontal="@dimen/dp_20"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:radius="@dimen/dp_24"
+                        app:solidColor="@color/white">
 
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/successGroup"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/tvSuccessTitle"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/dp_30"
-                            android:layout_marginTop="@dimen/dp_40"
-                            android:background="@mipmap/ic_success_bg"
-                            android:minHeight="@dimen/dp_250"
-                            android:paddingHorizontal="@dimen/dp_24"
+                            android:gravity="center"
+                            android:text="@string/application_submit"
+                            android:textColor="@color/C_111827"
+                            android:textSize="@dimen/sp_20"
+                            android:textStyle="bold"
+                            android:layout_marginStart="@dimen/dp_10"
+                            app:layout_constraintBottom_toTopOf="@id/tvSuccess"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_chainStyle="packed" />
 
-                            <TextView
-                                android:id="@+id/tvSuccessTitle"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_96"
-                                android:gravity="center"
-                                android:text="@string/application_submit"
-                                android:textColor="@color/color_7CE834"
-                                android:textSize="@dimen/sp_20"
-                                android:textStyle="bold"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <TextView
-                                android:id="@+id/tvSuccess"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="@dimen/dp_10"
-                                android:layout_marginTop="@dimen/dp_6"
-                                android:gravity="center"
-                                android:text="@string/application_submit_desc"
-                                android:textColor="@color/C_6D7280"
-                                android:textSize="@dimen/sp_12"
-                                app:layout_constraintTop_toBottomOf="@id/tvSuccessTitle" />
-
-                            <com.vaycore.finance.ui.views.StyledRecyclerView
-                                android:id="@+id/rvProduct"
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_marginTop="@dimen/dp_22"
-                                android:layout_marginBottom="@dimen/dp_24"
-                                android:orientation="vertical"
-                                android:overScrollMode="never"
-                                android:visibility="visible"
-                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintHeight_default="wrap"
-                                app:layout_constraintHeight_max="@dimen/dp_250"
-                                app:layout_constraintTop_toBottomOf="@id/tvSuccess"
-                                tools:itemCount="4"
-                                tools:listitem="@layout/loan_result_adapter" />
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/ivSuccess"
-                            android:layout_width="@dimen/dp_148"
-                            android:layout_height="@dimen/dp_124"
-                            android:src="@mipmap/ic_loan_success_img"
-                            android:translationX="@dimen/dp_20"
-                            android:translationY="@dimen/dp_m_30"
-                            app:layout_constraintEnd_toEndOf="@id/successGroup"
-                            app:layout_constraintTop_toTopOf="@id/successGroup" />
+                        <TextView
+                            android:id="@+id/tvSuccess"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/dp_16"
+                            android:layout_marginTop="@dimen/dp_8"
+                            android:gravity="center"
+                            android:text="@string/application_submit_desc"
+                            android:textColor="@color/C_9CA3AF"
+                            android:textSize="@dimen/sp_12"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvSuccessTitle" />
 
                     </com.vaycore.finance.ui.views.StyledConstraintLayout>
 
-                    <com.vaycore.finance.ui.views.StyledConstraintLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/fail_layout"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/dp_20"
                         android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
-                        <androidx.constraintlayout.widget.ConstraintLayout
+                        <com.vaycore.finance.ui.views.StyledConstraintLayout
                             android:id="@+id/failGroup"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/dp_30"
-                            android:layout_marginTop="@dimen/dp_110"
-                            android:background="@mipmap/ic_success_bg"
-                            android:minHeight="@dimen/dp_250"
-                            android:paddingHorizontal="@dimen/dp_18"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/dp_92"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:radius="@dimen/dp_24"
+                            app:solidColor="@color/white">
 
                             <TextView
                                 android:id="@+id/tvFailTitle"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_90"
                                 android:gravity="center"
                                 android:text="@string/submit_failed"
-                                android:textColor="@color/C_F62909"
+                                android:textColor="@color/C_111827"
                                 android:textSize="@dimen/sp_20"
                                 android:textStyle="bold"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintBottom_toTopOf="@id/tvFail"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_chainStyle="packed" />
 
                             <TextView
                                 android:id="@+id/tvFail"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="@dimen/dp_8"
-                                android:layout_marginTop="@dimen/dp_6"
+                                android:layout_marginHorizontal="@dimen/dp_16"
+                                android:layout_marginTop="@dimen/dp_8"
                                 android:gravity="center"
                                 android:text="@string/submit_failed_desc"
-                                android:textColor="@color/C_374151"
-                                android:textSize="@dimen/sp_12"
-                                app:layout_constraintTop_toBottomOf="@id/tvFailTitle" />
-
-                            <com.vaycore.finance.ui.views.StyledTextView
-                                android:id="@+id/tvResult"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="@dimen/dp_10"
-                                android:layout_marginTop="@dimen/dp_32"
-                                android:layout_marginBottom="@dimen/dp_24"
-                                android:gravity="center"
-                                android:lineSpacingExtra="@dimen/dp_3"
-                                android:paddingHorizontal="@dimen/dp_16"
-                                android:paddingVertical="@dimen/dp_13"
-                                android:text="@string/loan_result"
-                                android:textColor="@color/C_6D7280"
+                                android:textColor="@color/C_9CA3AF"
                                 android:textSize="@dimen/sp_12"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/tvFail"
-                                app:radius="@dimen/dp_8"
-                                app:solidColor="@color/color_E3E8FF" />
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/tvFailTitle" />
 
-                        </androidx.constraintlayout.widget.ConstraintLayout>
+                        </com.vaycore.finance.ui.views.StyledConstraintLayout>
 
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/ivFail"
-                            android:layout_width="@dimen/dp_150"
-                            android:layout_height="@dimen/dp_120"
-                            android:src="@mipmap/ic_loan_fail_img"
-                            android:translationX="@dimen/dp_45"
-                            android:translationY="@dimen/dp_m_40"
-                            app:layout_constraintEnd_toEndOf="@id/failGroup"
-                            app:layout_constraintTop_toTopOf="@id/failGroup" />
+                        <TextView
+                            android:id="@+id/tvResult"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/dp_8"
+                            android:layout_marginTop="@dimen/dp_20"
+                            android:gravity="center"
+                            android:lineSpacingExtra="@dimen/dp_3"
+                            android:text="@string/loan_result"
+                            android:textColor="@color/C_9CA3AF"
+                            android:textSize="@dimen/sp_12"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/failGroup" />
 
-                    </com.vaycore.finance.ui.views.StyledConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.Barrier
                         android:id="@+id/resultCardBottomBarrier"
@@ -201,61 +206,107 @@
                         app:barrierDirection="bottom"
                         app:constraint_referenced_ids="success_layout,fail_layout" />
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/cashableProductLayout"
-                        android:layout_width="match_parent"
+                    <com.vaycore.finance.ui.views.StyledConstraintLayout
+                        android:id="@+id/resultsCard"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_16"
-                        android:background="@color/transparent"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:paddingHorizontal="@dimen/dp_12"
+                        android:paddingBottom="@dimen/dp_12"
                         android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/resultCardBottomBarrier"
+                        app:radius="@dimen/dp_24"
+                        app:solidColor="@color/C_F6F6F6"
                         tools:visibility="visible">
 
-                        <TextView
-                            android:id="@+id/tvCashableProducts"
-                            android:layout_width="@dimen/dp_0"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/dp_16"
-                            android:layout_marginTop="@dimen/dp_3"
-                            android:gravity="center"
-                            android:text="@string/products"
-                            android:textColor="@color/C_111827"
-                            android:textSize="@dimen/sp_16"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rvCashableProduct"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/dp_16"
+                        <com.vaycore.finance.ui.views.StyledRecyclerView
+                            android:id="@+id/rvProduct"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
                             android:nestedScrollingEnabled="false"
                             android:orientation="vertical"
                             android:overScrollMode="never"
-                            android:paddingBottom="@dimen/dp_12"
+                            android:visibility="gone"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            app:layout_constraintTop_toBottomOf="@id/tvCashableProducts"
-                            tools:itemCount="2"
-                            tools:listitem="@layout/item_home_product" />
+                            app:layout_constraintBottom_toTopOf="@id/cashableProductLayout"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHeight_default="wrap"
+                            app:layout_constraintHeight_max="@dimen/dp_250"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:itemCount="4"
+                            tools:listitem="@layout/loan_result_adapter"
+                            tools:visibility="visible" />
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/cashableProductLayout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/rvProduct"
+                            tools:visibility="visible">
+
+                            <TextView
+                                android:id="@+id/tvCashableProducts"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_12"
+                                android:gravity="start"
+                                android:text="@string/products"
+                                android:textColor="@color/C_111827"
+                                android:textSize="@dimen/sp_16"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rvCashableProduct"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:nestedScrollingEnabled="false"
+                                android:orientation="vertical"
+                                android:overScrollMode="never"
+                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/tvCashableProducts"
+                                tools:itemCount="2"
+                                tools:listitem="@layout/item_home_product" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </com.vaycore.finance.ui.views.StyledConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.core.widget.NestedScrollView>
-
 
             <com.vaycore.finance.ui.views.StyledTextView
                 android:id="@+id/tvWithdrawal"
                 style="@style/mainButton"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_48"
-                android:layout_margin="@dimen/dp_24"
+                android:layout_marginHorizontal="@dimen/dp_24"
                 android:layout_marginBottom="@dimen/dp_25"
                 android:text="@string/withdrawl_all"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.vaycore.finance.ui.views.ContentStateLayout>
+
+    <com.vaycore.finance.ui.views.PageHeaderView
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/dp_8"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </com.vaycore.finance.ui.views.StyledConstraintLayout>

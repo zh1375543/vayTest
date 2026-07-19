@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingBottom="@dimen/dp_20"
+    app:left_bottom_radius="@dimen/dp_20"
     app:left_top_radius="@dimen/dp_20"
+    app:right_bottom_radius="@dimen/dp_20"
     app:right_top_radius="@dimen/dp_20"
     app:solidColor="@color/white">
 

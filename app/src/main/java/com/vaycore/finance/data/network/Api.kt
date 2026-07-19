@@ -97,6 +97,9 @@ interface Api {
     @POST("api/user/app/wallet/list")
     suspend fun getWalletList(@Body param: ApiRequest): ApiResponse<MutableList<WalletResponse>?>
 
+    @POST("api/user/app/userCashWallet/list/my")
+    suspend fun getMyWalletList(@Body param: ApiRequest): ApiResponse<MutableList<WalletResponse>?>
+
     @POST("api/user/app/bank/bind")
     suspend fun bindCard(@Body paramBean: ApiRequest): ApiResponse<Any?>
 

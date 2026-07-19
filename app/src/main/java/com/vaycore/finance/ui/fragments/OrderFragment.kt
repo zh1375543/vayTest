@@ -94,7 +94,7 @@ class OrderFragment : BaseFragment<OrderFragmentBinding>(R.layout.order_fragment
                                 size.toString()
                             ),
                             size.toString(),
-                            root.context.getColor2(R.color.white)
+                            root.context.getColor2(R.color.color_7087F8)
                         )
                         repaymentLayout.isVisible = it.showMultipleRepaySign == 1 && size > 0
                     }

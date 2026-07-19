@@ -1,5 +1,7 @@
 package com.vaycore.finance.ui.extension
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.animation.TypeEvaluator
 import android.animation.ValueAnimator
 import android.view.View
@@ -7,8 +9,13 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.TextView
 import com.vaycore.finance.R
 import java.math.BigDecimal
+import java.text.NumberFormat
+import java.util.Locale
+import java.util.WeakHashMap
 import kotlin.math.cos
 import kotlin.math.sin
+
+private val amountAnimators = WeakHashMap<TextView, ValueAnimator>()
 
 fun View.resetScale() {
     clearAnimation()
@@ -38,23 +45,28 @@ fun TextView.animateAmount(
     prefix: String = "",
 ) {
     val target = targetAmount ?: BigDecimal.ZERO
+    val fractionDigits = target.stripTrailingZeros().scale().coerceIn(0, 2)
+    val formatter = NumberFormat.getNumberInstance(Locale.US).apply {
+        minimumFractionDigits = fractionDigits
+        maximumFractionDigits = fractionDigits
+    }
+
+    amountAnimators.remove(this)?.cancel()
     val animator = ValueAnimator.ofObject(BigDecimalEvaluator(), BigDecimal.ZERO, target).apply {
         this.duration = duration
         addUpdateListener {
             val current = it.animatedValue as BigDecimal
-
-            // check if has decimal part
-            val hasDecimal = current.stripTrailingZeros().scale() > 0
-
-            val formatted = if (hasDecimal) {
-                "%,.2f".format(current)
-            } else {
-                "%,d".format(current.toBigInteger())
-            }
-
-            this@animateAmount.text = "$formatted$prefix"
+            this@animateAmount.text = "${formatter.format(current)}$prefix"
         }
+        addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator) {
+                if (amountAnimators[this@animateAmount] === animation) {
+                    amountAnimators.remove(this@animateAmount)
+                }
+            }
+        })
     }
+    amountAnimators[this] = animator
     animator.start()
 }
 

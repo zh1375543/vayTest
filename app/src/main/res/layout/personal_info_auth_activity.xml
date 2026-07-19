@@ -29,7 +29,7 @@
             <com.vaycore.finance.ui.views.StyledTextView
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dp_36"
-                android:layout_marginStart="@dimen/dp_24"
+                android:layout_marginStart="@dimen/dp_16"
                 android:layout_marginTop="@dimen/dp_9"
                 android:gravity="center_vertical"
                 android:text="@string/personal_info"
@@ -51,7 +51,7 @@
             <com.vaycore.finance.ui.views.StyledLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="@dimen/dp_24"
+                android:layout_marginHorizontal="@dimen/dp_16"
                 android:orientation="vertical"
                 app:radius="@dimen/dp_24"
                 app:solidColor="@color/white">
@@ -218,14 +218,14 @@
         <TextView
             style="@style/AuthDataEncryptedTipText"
             android:layout_gravity="center_horizontal"
-            android:layout_marginHorizontal="@dimen/dp_24"
+            android:layout_marginHorizontal="@dimen/dp_16"
             android:layout_marginBottom="@dimen/dp_10" />
 
         <com.vaycore.finance.ui.widget.ActionButtonView
             android:id="@+id/btNext"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_48"
-            android:layout_marginHorizontal="@dimen/dp_24"
+            android:layout_marginHorizontal="@dimen/dp_16"
             android:text="@string/next"
             app:actionButtonVariant="filled" />
     </LinearLayout>

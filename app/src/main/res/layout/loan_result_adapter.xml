@@ -49,9 +49,9 @@
         android:layout_height="@dimen/dp_24"
         android:layout_marginStart="@dimen/dp_6"
         android:layout_marginTop="@dimen/dp_10"
-        android:src="@mipmap/img_apply_fail"
+        android:src="@mipmap/ic_verify_kyc_fail"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcSelected="@mipmap/img_apply_pass" />
+        app:srcSelected="@mipmap/ic_verify_kyc_success" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

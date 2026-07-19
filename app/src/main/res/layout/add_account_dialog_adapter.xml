@@ -1,38 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="@dimen/dp_197"
-    android:layout_height="@dimen/dp_133"
-    android:layout_marginEnd="@dimen/dp_8">
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_66"
+    android:clipChildren="false"
+    android:clipToPadding="false">
 
-    <com.vaycore.finance.ui.views.SelectableImageView
-        android:id="@+id/ivCard"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@mipmap/ic_bank_normal"
-        app:srcSelected="@mipmap/ic_bank_select" />
+        android:layout_height="@dimen/dp_56"
+        android:layout_gravity="bottom">
 
-    <TextView
-        android:id="@+id/tvCard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dp_20"
-        android:layout_marginTop="@dimen/dp_24"
-        android:text="547857765765"
-        android:textColor="@color/C_374151"
-        android:textSize="@dimen/sp_16"
-        app:layout_constraintTop_toTopOf="parent" />
+        <View
+            android:id="@+id/accountItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_account_selectable" />
 
-    <TextView
-        android:id="@+id/tvBank"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dp_20"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:text="GT BANK"
-        android:textColor="@color/C_374151"
-        android:textSize="@dimen/sp_13"
-        app:layout_constraintTop_toBottomOf="@id/tvCard" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivAccountIcon"
+            android:layout_width="@dimen/dp_32"
+            android:layout_height="@dimen/dp_32"
+            android:layout_marginStart="@dimen/dp_16"
+            android:src="@mipmap/ic_bank_default"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tvCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:text="547857765765"
+            android:textColor="@color/C_374151"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvBank"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_12"
+            android:layout_marginEnd="@dimen/dp_8"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="GT BANK"
+            android:textColor="@color/C_374151"
+            android:textSize="@dimen/sp_13"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tvCard"
+            app:layout_constraintStart_toEndOf="@id/ivAccountIcon"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.vaycore.finance.ui.views.StyledTextView
+        android:id="@+id/ivBankState"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_20"
+        android:layout_gravity="end|top"
+        android:layout_marginEnd="@dimen/dp_8"
+        android:gravity="center"
+        android:paddingHorizontal="@dimen/dp_8"
+        android:text="@string/disbursed_quickly"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_11"
+        app:radius="@dimen/dp_10"
+        app:solidColor="@color/C_FFDD00" />
+
+</FrameLayout>

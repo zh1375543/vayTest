@@ -20,7 +20,7 @@
                 style="@style/NoticeBar"
                 android:layout_width="@dimen/dp_0"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dp_24"
+                android:layout_marginHorizontal="@dimen/dp_16"
                 android:layout_marginTop="@dimen/dp_12"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -36,88 +36,75 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </com.vaycore.finance.ui.views.StyledConstraintLayout>
 
-            <com.vaycore.finance.ui.widget.TicketBackgroundLayout
+            <com.vaycore.finance.ui.views.StyledConstraintLayout
                 android:id="@+id/repayment_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dp_20"
-                android:layout_marginTop="@dimen/dp_14"
-                android:clipChildren="false"
-                android:clipToPadding="false"
-                android:paddingBottom="@dimen/dp_18"
                 android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_14"
                 app:layout_constraintTop_toBottomOf="@id/noticeLayout"
-                app:ticketColor="@color/color_7087F8"
-                app:ticketCornerRadius="@dimen/dp_16"
-                app:ticketSideCutoutCenterFromBottom="@dimen/dp_61"
-                app:ticketSideCutoutRadius="@dimen/dp_16"
-                tools:visibility="gone">
+                app:radius="@dimen/dp_24"
+                app:solidColor="@color/white">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivOrderContentHead"
-                    android:layout_width="@dimen/dp_68"
-                    android:layout_height="@dimen/dp_68"
-                    android:layout_marginTop="@dimen/dp_8"
-                    android:src="@mipmap/ic_order_content_head"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
+                <com.vaycore.finance.ui.views.StyledTextView
                     android:id="@+id/tvOrderNum"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_28"
-                    android:layout_marginTop="@dimen/dp_4"
+                    android:layout_height="@dimen/dp_52"
+                    android:layout_marginHorizontal="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_20"
                     android:gravity="center"
+                    android:paddingHorizontal="@dimen/dp_16"
                     android:text="@string/home_order_num"
-                    android:textColor="@color/white"
+                    android:textColor="@color/C_111827"
                     android:textSize="@dimen/sp_15"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ivOrderContentHead" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:radius="@dimen/dp_20"
+                    app:solidColor="@color/C_F6F6F6" />
 
-                <com.vaycore.finance.ui.views.StyledTextView
+                <TextView
                     android:id="@+id/tvRepaymentTip"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/dp_52"
-                    android:layout_marginHorizontal="@dimen/dp_28"
-                    android:layout_marginTop="@dimen/dp_16"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_14"
                     android:gravity="center"
-                    android:paddingHorizontal="@dimen/dp_16"
                     android:text="@string/batch_repayment_tips"
-                    android:textColor="@color/white"
+                    android:textColor="@color/C_9CA3AF"
                     android:textSize="@dimen/sp_13"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvOrderNum"
-                    app:radius="@dimen/dp_8"
-                    app:solidColor="@color/color_33ffff"
-                    app:strokeColor="@color/white"
-                    app:strokeWidth="@dimen/dp_1" />
+                    app:layout_constraintTop_toBottomOf="@id/tvOrderNum" />
 
                 <com.vaycore.finance.ui.widget.ActionButtonView
                     android:id="@+id/tvRepayment"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="@dimen/dp_48"
-                    android:layout_marginHorizontal="@dimen/dp_36"
-                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginHorizontal="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_12"
+                    android:layout_marginBottom="@dimen/dp_16"
                     android:paddingHorizontal="@dimen/dp_22"
                     android:text="@string/batch_repayment"
                     android:textSize="@dimen/sp_18"
                     android:textStyle="bold"
-                    app:buttonSolidColor="@color/C_89F5C7"
-                    app:buttonTextColor="@color/black"
+                    app:buttonRadius="@dimen/dp_24"
+                    app:buttonSolidColor="@color/color_7087F8"
+                    app:buttonTextColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvRepaymentTip" />
-            </com.vaycore.finance.ui.widget.TicketBackgroundLayout>
+            </com.vaycore.finance.ui.views.StyledConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/order_layout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="@dimen/dp_18"
                 android:visibility="gone"
+                android:layout_marginTop="@dimen/dp_18"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/repayment_layout">
 
@@ -162,7 +149,7 @@
                     android:id="@+id/emptyOrderBg"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_212"
-                    android:layout_marginHorizontal="@dimen/dp_24"
+                    android:layout_marginHorizontal="@dimen/dp_16"
                     android:layout_marginTop="@dimen/dp_14"
                     app:radius="@dimen/dp_24"
                     app:solidColor="@color/white">
@@ -195,7 +182,7 @@
                     android:id="@+id/tvBenefits"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_24"
+                    android:layout_marginHorizontal="@dimen/dp_16"
                     android:layout_marginTop="@dimen/dp_20"
                     android:gravity="center"
                     android:text="@string/benefits_of_paying"
@@ -207,7 +194,7 @@
                     android:id="@+id/tip_layout1"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_80"
-                    android:layout_marginHorizontal="@dimen/dp_24"
+                    android:layout_marginHorizontal="@dimen/dp_16"
                     android:layout_marginTop="@dimen/dp_16"
                     android:paddingHorizontal="@dimen/dp_20"
                     app:radius="@dimen/dp_24"
@@ -255,7 +242,7 @@
                     android:id="@+id/tip_layout2"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_80"
-                    android:layout_marginHorizontal="@dimen/dp_24"
+                    android:layout_marginHorizontal="@dimen/dp_16"
                     android:layout_marginTop="@dimen/dp_12"
                     android:paddingHorizontal="@dimen/dp_20"
                     app:radius="@dimen/dp_24"
@@ -306,7 +293,7 @@
                     android:id="@+id/tip_layout3"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_80"
-                    android:layout_marginHorizontal="@dimen/dp_24"
+                    android:layout_marginHorizontal="@dimen/dp_16"
                     android:layout_marginTop="@dimen/dp_12"
                     android:paddingHorizontal="@dimen/dp_20"
                     app:radius="@dimen/dp_24"

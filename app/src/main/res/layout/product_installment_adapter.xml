@@ -42,85 +42,95 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_0_5"
-        android:layout_marginTop="@dimen/dp_8"
-        android:background="@color/C_D2D5DA"
-        app:layout_constraintTop_toBottomOf="@id/ivArrow" />
-
     <com.vaycore.finance.ui.views.StyledConstraintLayout
         android:id="@+id/info_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_16"
-        android:paddingHorizontal="@dimen/dp_16"
-        android:paddingVertical="@dimen/dp_10"
-        app:layout_constraintTop_toBottomOf="@id/ivArrow"
-        app:radius="@dimen/dp_8"
-        app:solidColor="@color/C_EFEFEF">
+        app:layout_constraintTop_toBottomOf="@id/ivArrow">
 
-        <TextView
-            android:id="@+id/tvLoanAmount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="$10,000"
-            android:textColor="@color/C_111827"
-            android:textSize="@dimen/sp_14"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tvInterest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_6"
-            android:text="21.2"
-            android:textColor="@color/C_111827"
-            android:textSize="@dimen/sp_14"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvLoanAmount" />
-
-        <TextView
-            android:id="@+id/tvServiceFee"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_6"
-            android:text="0"
-            android:textColor="@color/C_111827"
-            android:textSize="@dimen/sp_14"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvInterest" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/l_amount"
-            android:textColor="@color/C_6D7280"
-            android:textSize="@dimen/sp_13"
-            app:layout_constraintBottom_toBottomOf="@id/tvLoanAmount"
+        <com.vaycore.finance.ui.views.StyledConstraintLayout
+            android:id="@+id/loan_amount_card"
+            style="@style/ProductInstallmentInfoCard"
+            android:layout_marginEnd="@dimen/dp_6"
+            app:layout_constraintEnd_toStartOf="@id/interest_card"
+            app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tvLoanAmount" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/interest"
-            android:textColor="@color/C_6D7280"
-            android:textSize="@dimen/sp_13"
-            app:layout_constraintBottom_toBottomOf="@id/tvInterest"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tvInterest" />
+            <TextView
+                android:id="@+id/tvLoanAmount"
+                style="@style/ProductInstallmentInfoValue"
+                android:layout_marginTop="@dimen/dp_14"
+                android:text="$10,000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/service_fee"
-            android:textColor="@color/C_6D7280"
-            android:textSize="@dimen/sp_13"
-            app:layout_constraintBottom_toBottomOf="@id/tvServiceFee"
+            <TextView
+                android:id="@+id/tvLoanAmountTitle"
+                style="@style/ProductInstallmentInfoLabel"
+                android:layout_marginTop="@dimen/dp_6"
+                android:text="@string/l_amount"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvLoanAmount" />
+        </com.vaycore.finance.ui.views.StyledConstraintLayout>
+
+        <com.vaycore.finance.ui.views.StyledConstraintLayout
+            android:id="@+id/interest_card"
+            style="@style/ProductInstallmentInfoCard"
+            android:layout_marginStart="@dimen/dp_6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@id/loan_amount_card"
+            app:layout_constraintTop_toTopOf="@id/loan_amount_card">
+
+            <TextView
+                android:id="@+id/tvInterest"
+                style="@style/ProductInstallmentInfoValue"
+                android:layout_marginTop="@dimen/dp_14"
+                android:text="21.2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvInterestTitle"
+                style="@style/ProductInstallmentInfoLabel"
+                android:layout_marginTop="@dimen/dp_6"
+                android:text="@string/interest"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvInterest" />
+        </com.vaycore.finance.ui.views.StyledConstraintLayout>
+
+        <com.vaycore.finance.ui.views.StyledConstraintLayout
+            android:id="@+id/service_fee_card"
+            style="@style/ProductInstallmentInfoCard"
+            android:layout_marginTop="@dimen/dp_12"
+            app:layout_constraintEnd_toEndOf="@id/loan_amount_card"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tvServiceFee" />
+            app:layout_constraintTop_toBottomOf="@id/loan_amount_card">
+
+            <TextView
+                android:id="@+id/tvServiceFee"
+                style="@style/ProductInstallmentInfoValue"
+                android:layout_marginTop="@dimen/dp_14"
+                android:text="0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvServiceFeeTitle"
+                style="@style/ProductInstallmentInfoLabel"
+                android:layout_marginTop="@dimen/dp_6"
+                android:text="@string/service_fee"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvServiceFee" />
+        </com.vaycore.finance.ui.views.StyledConstraintLayout>
     </com.vaycore.finance.ui.views.StyledConstraintLayout>
 
 

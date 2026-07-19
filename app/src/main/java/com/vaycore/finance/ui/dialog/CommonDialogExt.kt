@@ -42,6 +42,9 @@ fun Context.createLoadingDialog(message: String = getString(R.string.loading)): 
             super.initView()
             tvMessage.text = message
         }
+    }.apply {
+        setCancelable(false)
+        setCanceledOnTouchOutside(false)
     }
 }
 

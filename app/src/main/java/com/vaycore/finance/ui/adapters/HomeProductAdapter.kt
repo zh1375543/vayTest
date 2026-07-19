@@ -17,7 +17,7 @@ class HomeProductAdapter :
         item: ProductBean,
         position: Int,
     ) = with(binding) {
-        ivIcon.loadImage(item.productImageUrl, R.mipmap.ic_order_defalut_img)
+        ivIcon.loadImage(item.productImageUrl, R.mipmap.ic_product_defalut_img)
         tvName.text = item.productName
         tvLoanAmount.text = context.getString(R.string.home_product_loan_amount_title)
         tvAmount.text =

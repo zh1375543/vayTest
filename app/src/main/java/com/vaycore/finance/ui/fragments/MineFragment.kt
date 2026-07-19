@@ -20,6 +20,7 @@ import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.ui.activities.mine.AuthCenterActivity
 import com.vaycore.finance.ui.activities.RepaymentBatchActivity
 import com.vaycore.finance.ui.createPaybackDialog
+import com.vaycore.finance.ui.extension.addStatusBarTopPaddingAndHeight
 import com.vaycore.finance.util.start
 import com.vaycore.finance.util.viewBinding
 
@@ -35,6 +36,7 @@ class MineFragment : BaseFragment<MineFragmentBinding>(
     }
 
     override fun initView() = with(binding) {
+
         tvContactUs.singleClick {
             context?.start<ContactsActivity>()
         }

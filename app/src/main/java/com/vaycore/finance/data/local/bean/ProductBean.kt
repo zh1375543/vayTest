@@ -87,6 +87,8 @@ data class ProductBean(
     val bankInfoPayOutFailSign: Boolean = false,
     val repayInterestAmountRate: BigDecimal? = null,
     val repayActualAmount: BigDecimal? = null,
+    val userCashWalletId: Long? = null,
+    val walletAccount: String? = null,
 ) : Parcelable {
     fun isNormalProduct(): Boolean {
         return showConditionTypeSign == null || showConditionTypeSign == "0"

@@ -46,6 +46,7 @@ class ContractSignActivity : BaseActivity<ActivityContractSignBinding>() {
             productInstallmentMap: String?,
             termIdMap: String?,
             isBackHome: Boolean = false,
+            payWay: String = "CARD",
         ) {
             context.start<ContractSignActivity> {
                 putExtra("isBackHome", isBackHome)
@@ -56,6 +57,7 @@ class ContractSignActivity : BaseActivity<ActivityContractSignBinding>() {
                 putExtra("bankId", cardId)
                 putExtra("productInstallmentMap", productInstallmentMap)
                 putExtra("termIdMap", termIdMap)
+                putExtra("payWay", payWay)
             }
         }
     }
@@ -75,6 +77,7 @@ class ContractSignActivity : BaseActivity<ActivityContractSignBinding>() {
     private val productId by lazy { intent.getStringExtra("productId") }
     private val productInstallmentMap by lazy { intent.getStringExtra("productInstallmentMap") }
     private val termIdMap by lazy { intent.getStringExtra("termIdMap") }
+    private val payWay by lazy { intent.getStringExtra("payWay") ?: "CARD" }
 
     private var isSign = false
 
@@ -163,7 +166,8 @@ class ContractSignActivity : BaseActivity<ActivityContractSignBinding>() {
                     file.absolutePath,
                     amount,
                     productInstallmentMap,
-                    termIdMap
+                    termIdMap,
+                    payWay
                 )
             }
         }

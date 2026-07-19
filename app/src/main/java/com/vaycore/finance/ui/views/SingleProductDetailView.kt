@@ -1,15 +1,19 @@
 package com.vaycore.finance.ui.views
 
 import android.content.Context
+import android.os.Build
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
+import com.vaycore.finance.R
 import com.vaycore.finance.databinding.SingleProductDetailViewBinding
 import com.vaycore.finance.data.local.bean.ProductBean
+import com.vaycore.finance.ui.adapters.ProductHeaderFeeAdapter
 import com.vaycore.finance.ui.adapters.ProductInstallmentAdapter
 import com.vaycore.finance.ui.adapters.ProductRepaymentMenuAdapter
 import com.vaycore.finance.util.LogUtil
+import com.vaycore.finance.util.formatAmount
 
 class SingleProductDetailView @JvmOverloads constructor(
     context: Context,
@@ -21,6 +25,7 @@ class SingleProductDetailView @JvmOverloads constructor(
 
     private val repaymentMenuAdapter by lazy { ProductRepaymentMenuAdapter() }
     private val installAdapter by lazy { ProductInstallmentAdapter() }
+    private val headerFeeAdapter by lazy { ProductHeaderFeeAdapter() }
 
     private var currentProduct: ProductBean? = null
 
@@ -35,12 +40,34 @@ class SingleProductDetailView @JvmOverloads constructor(
     private fun initView() = with(binding) {
         rvPlan.adapter = repaymentMenuAdapter
         rvRepayment.adapter = installAdapter
+        rvHeaderFee.adapter = headerFeeAdapter
+
+        ivMoreDetail.rotation = 180f
+        val toggleDetails = {
+            detailsGroup.isVisible = !detailsGroup.isVisible
+            ivMoreDetail.rotation = if (detailsGroup.isVisible) 180f else 0f
+        }
+        ivMoreDetail.setOnClickListener { toggleDetails() }
+        tvDetailTitle.setOnClickListener { toggleDetails() }
 
         ivMorePlan.rotation = 180f
-        ivMorePlan.setOnClickListener {
-            repaymentGroup.isVisible = !repaymentGroup.isVisible
-            ivMorePlan.rotation = if (repaymentGroup.isVisible) 180f else 0f
+        val togglePlans = {
+            val isPlanVisible = !rvPlan.isVisible
+            rvPlan.isVisible = isPlanVisible
+            repaymentHeaderGroup.isVisible = isPlanVisible
+            repaymentGroup.isVisible = isPlanVisible
+            ivMorePlan.rotation = if (isPlanVisible) 180f else 0f
         }
+        ivMorePlan.setOnClickListener { togglePlans() }
+        tvInstallDetail.setOnClickListener { togglePlans() }
+
+        ivMoreRepayment.rotation = 180f
+        val toggleRepayment = {
+            repaymentGroup.isVisible = !repaymentGroup.isVisible
+            ivMoreRepayment.rotation = if (repaymentGroup.isVisible) 180f else 0f
+        }
+        ivMoreRepayment.setOnClickListener { toggleRepayment() }
+        tvRepaymentDetail.setOnClickListener { toggleRepayment() }
 
         repaymentMenuAdapter.setOnItemClickListener { item, position ->
             if (position == repaymentMenuAdapter.selectPosition) return@setOnItemClickListener
@@ -51,6 +78,19 @@ class SingleProductDetailView @JvmOverloads constructor(
             updateUIByPlan(item)
             repaymentMenuAdapter.notifyItemRangeChanged(0, repaymentMenuAdapter.itemCount, 0)
         }
+    }
+
+    fun bindHeaderDetail(plan: ProductBean, currencySymbol: String?) = with(binding) {
+        tvDays.text = context.getString(R.string.num_days, plan.timeLimit.toString())
+        tvActuallyTitle.text =
+            String.format(context.getString(R.string.actually_amount), currencySymbol ?: "").replace("()", "")
+        tvActuallyAmount.text = plan.actualAmount.formatAmount(currencySymbol)
+        tvInterestTitle.text = context.getString(R.string.interest_day, "${plan.interestRate}%")
+        tvInterest.text = plan.interestAmount.formatAmount(currencySymbol)
+        tvDate.text = plan.repayTimeStr
+        tvInstallFee.text = plan.installmentServiceFee.formatAmount(plan.currencySymbol)
+        tvModel.text = "${Build.BRAND} ${Build.MODEL}"
+        headerFeeAdapter.submitItems(plan.appProductHandleFeeConfigDtos)
     }
 
     fun setData(product: ProductBean) {
@@ -66,6 +106,7 @@ class SingleProductDetailView @JvmOverloads constructor(
             repaymentMenuAdapter.selectPosition = -1
             repaymentMenuAdapter.submitItems(null)
             binding.repaymentGroup.isVisible = false
+            binding.repaymentHeaderGroup.isVisible = false
             binding.ivMorePlan.isVisible = false
             binding.tvInstallDetail.isVisible = false
         }
@@ -128,11 +169,13 @@ class SingleProductDetailView @JvmOverloads constructor(
                 onInstallmentChanged?.invoke(productId, plan.planNums)
 
                 repaymentGroup.isVisible = true
+                repaymentHeaderGroup.isVisible = true
                 ivMorePlan.isVisible = true
                 tvInstallDetail.isVisible = true
             } else {
                 onInstallmentChanged?.invoke(productId, null)
                 repaymentGroup.isVisible = false
+                repaymentHeaderGroup.isVisible = false
                 ivMorePlan.isVisible = false
                 tvInstallDetail.isVisible = false
             }

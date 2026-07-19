@@ -16,6 +16,7 @@ data class BankAccountResponse(
     val payOutFailSign: Boolean = false,
     var bankCode: String = "",
     var bankName: String = "",
+    var payWay: String? = null,
     var cardNo: String = "",
     var status: Int = 0,
     var isSelect: Boolean = false,

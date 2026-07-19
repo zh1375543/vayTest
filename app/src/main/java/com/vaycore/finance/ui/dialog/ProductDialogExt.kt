@@ -7,7 +7,6 @@ import androidx.core.view.isVisible
 import com.vaycore.finance.BuildConfig
 import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseDialog
-import com.vaycore.finance.base.BaseSheetDialog
 import com.vaycore.finance.data.local.LEASE_AGREEMENT
 import com.vaycore.finance.data.local.PAWN_AGREEMENT
 import com.vaycore.finance.data.local.bean.ProductBean
@@ -27,7 +26,7 @@ fun Context.showLoanAgreementDialog(
     applyAction: () -> Unit,
 ) {
     object :
-        BaseSheetDialog<LoanAgreementDialogBinding>(
+        BaseDialog<LoanAgreementDialogBinding>(
             this,
             LoanAgreementDialogBinding::inflate
         ) {

@@ -4,42 +4,208 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingHorizontal="@dimen/dp_12"
-    android:paddingTop="@dimen/dp_16"
-    android:paddingBottom="@dimen/dp_14"
-    app:radius="@dimen/dp_12"
-    app:solidColor="@color/white"
-    tools:background="@color/C_FEF8ED">
+    android:paddingHorizontal="@dimen/dp_24"
+    android:paddingTop="@dimen/dp_20"
+    android:paddingBottom="@dimen/dp_20"
+    app:radius="@dimen/dp_24"
+    app:solidColor="@color/white">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvPlan"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tvDetailTitle"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_28"
+        android:gravity="center_vertical"
+        android:text="@string/product_details"
+        android:textColor="@color/C_111827"
+        android:textSize="@dimen/sp_20"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/ivMoreDetail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivMoreDetail"
+        android:layout_width="@dimen/dp_28"
+        android:layout_height="@dimen/dp_28"
+        android:padding="@dimen/dp_4"
+        android:src="@mipmap/product_bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvDetailTitle" />
+
+    <TextView
+        android:id="@+id/tvDaysTitle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:overScrollMode="never"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/product_repayment_menu_adapter" />
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginEnd="@dimen/dp_12"
+        android:text="@string/loan_period_days"
+        android:textColor="@color/C_9CA3AF"
+        android:textSize="@dimen/sp_15"
+        app:layout_constraintEnd_toStartOf="@id/tvDays"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDetailTitle" />
 
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/planGroup"
+    <TextView
+        android:id="@+id/tvDays"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="rvPlan" />
+        android:gravity="end"
+        android:textColor="@color/C_111827"
+        android:textSize="@dimen/sp_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvDaysTitle"
+        tools:text="91 Days" />
+
+    <TextView
+        android:id="@+id/tvActuallyTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_14"
+        android:layout_marginEnd="@dimen/dp_12"
+        android:text="@string/actually_amount"
+        android:textColor="@color/C_9CA3AF"
+        android:textSize="@dimen/sp_15"
+        app:layout_constraintEnd_toStartOf="@id/tvActuallyAmount"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDaysTitle" />
+
+    <TextView
+        android:id="@+id/tvActuallyAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:textColor="@color/C_111827"
+        android:textSize="@dimen/sp_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvActuallyTitle"
+        tools:text="19,991,000" />
+
+    <TextView
+        android:id="@+id/tvInterestTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_14"
+        android:layout_marginEnd="@dimen/dp_12"
+        android:text="@string/interest_day"
+        android:textColor="@color/C_9CA3AF"
+        android:textSize="@dimen/sp_15"
+        app:layout_constraintEnd_toStartOf="@id/tvInterest"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvActuallyTitle" />
+
+    <TextView
+        android:id="@+id/tvInterest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:textColor="@color/C_111827"
+        android:textSize="@dimen/sp_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvInterestTitle"
+        tools:text="9,000" />
+
+    <TextView
+        android:id="@+id/tvDateTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_14"
+        android:layout_marginEnd="@dimen/dp_12"
+        android:text="@string/due_date"
+        android:textColor="@color/C_9CA3AF"
+        android:textSize="@dimen/sp_15"
+        app:layout_constraintEnd_toStartOf="@id/tvDate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvInterestTitle" />
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:textColor="@color/C_111827"
+        android:textSize="@dimen/sp_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvDateTitle"
+        tools:text="25/12/2025" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvHeaderFee"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:overScrollMode="never"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/tvDateTitle"
+        tools:itemCount="1"
+        tools:listitem="@layout/product_header_fee_adapter" />
+
+    <TextView
+        android:id="@+id/tvInstallFeeTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_14"
+        android:layout_marginEnd="@dimen/dp_12"
+        android:text="@string/install_fee"
+        android:textColor="@color/C_9CA3AF"
+        android:textSize="@dimen/sp_15"
+        app:layout_constraintEnd_toStartOf="@id/tvInstallFee"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rvHeaderFee" />
+
+    <TextView
+        android:id="@+id/tvInstallFee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:textColor="@color/C_111827"
+        android:textSize="@dimen/sp_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvInstallFeeTitle"
+        tools:text="0" />
+
+    <TextView
+        android:id="@+id/tvModelTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_14"
+        android:layout_marginEnd="@dimen/dp_12"
+        android:text="@string/phone_model"
+        android:textColor="@color/C_9CA3AF"
+        android:textSize="@dimen/sp_15"
+        app:layout_constraintEnd_toStartOf="@id/tvModel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvInstallFeeTitle" />
+
+    <TextView
+        android:id="@+id/tvModel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:textColor="@color/C_111827"
+        android:textSize="@dimen/sp_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvModelTitle"
+        tools:text="xiaomi15" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/detailsGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="tvDaysTitle,tvDays,tvActuallyTitle,tvActuallyAmount,tvInterestTitle,tvInterest,tvDateTitle,tvDate,rvHeaderFee,tvInstallFeeTitle,tvInstallFee,tvModelTitle,tvModel" />
 
     <TextView
         android:id="@+id/tvInstallDetail"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_28"
-        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginTop="@dimen/dp_24"
         android:gravity="center_vertical"
-        android:text="@string/installment_details"
+        android:text="@string/choose_repayment_plan"
         android:textColor="@color/C_111827"
-        android:textSize="@dimen/sp_15"
+        android:textSize="@dimen/sp_20"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@id/ivMorePlan"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rvPlan" />
+        app:layout_constraintTop_toBottomOf="@id/tvModel" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivMorePlan"
@@ -50,15 +216,53 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tvInstallDetail" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvPlan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="horizontal"
+        android:overScrollMode="never"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/tvInstallDetail"
+        tools:listitem="@layout/product_repayment_menu_adapter" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/planGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="tvInstallDetail,ivMorePlan,rvPlan" />
+
+    <TextView
+        android:id="@+id/tvRepaymentDetail"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_28"
+        android:layout_marginTop="@dimen/dp_20"
+        android:gravity="center_vertical"
+        android:text="@string/installment_details"
+        android:textColor="@color/C_111827"
+        android:textSize="@dimen/sp_16"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/ivMoreRepayment"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rvPlan" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivMoreRepayment"
+        android:layout_width="@dimen/dp_28"
+        android:layout_height="@dimen/dp_28"
+        android:padding="@dimen/dp_4"
+        android:src="@mipmap/product_bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvRepaymentDetail" />
+
     <com.vaycore.finance.ui.views.StyledTextView
         android:id="@+id/bg"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/dp_m_8"
         app:layout_constraintBottom_toBottomOf="@id/rvRepayment"
-        app:layout_constraintTop_toTopOf="@id/tvDueDateTitle"
-        app:radius="@dimen/dp_8"
-        app:solidColor="@color/C_F8F7F3" />
+        app:layout_constraintTop_toTopOf="@id/tvDueDateTitle" />
 
     <TextView
         android:id="@+id/tvDueDateTitle"
@@ -72,7 +276,7 @@
         app:layout_constraintEnd_toStartOf="@id/tvRepaymentAmountTitle"
         app:layout_constraintHorizontal_weight="2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvInstallDetail" />
+        app:layout_constraintTop_toBottomOf="@id/tvRepaymentDetail" />
 
     <TextView
         android:id="@+id/tvRepaymentAmountTitle"
@@ -105,4 +309,10 @@
         android:layout_height="wrap_content"
         android:visibility="visible"
         app:constraint_referenced_ids="tvDueDateTitle,tvRepaymentAmountTitle,rvRepayment,bg" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/repaymentHeaderGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="tvRepaymentDetail,ivMoreRepayment" />
 </com.vaycore.finance.ui.views.StyledConstraintLayout>

@@ -330,6 +330,7 @@ No personal SMS messages will be accessed, read, or collected.</string>
     <string name="orders">Orders</string>
     <string name="product_name">Product name</string>
     <string name="together_num">Total number of transactions</string>
+    <string name="loan_account_tip">To prevent loan failure, ensure wallet limit is available or change your withdrawal account.</string>
 
     <string name="kyc_certification">KYC Certification</string>
     <string name="personal_info">Personal information</string>
@@ -463,7 +464,7 @@ No personal SMS messages will be accessed, read, or collected.</string>
     <string name="please_enter_zalo">Please enter your Zalo account</string>
 
     <string name="choose_repayment_plan">Choose repayment plan</string>
-    <string name="phase">%s Phase</string>
+    <string name="phase">Phase</string>
     <string name="installment_details">Installment Details</string>
     <string name="installment_select_tip">Click the checkboxes to select multiple statements in order and repay them all at once.</string>
     <string name="installment_select_tip_first">Click the checkboxes</string>
