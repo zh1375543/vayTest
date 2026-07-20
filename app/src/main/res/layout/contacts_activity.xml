@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.vaycore.finance.ui.views.StyledConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/mainBg"
     android:layout_width="match_parent"
+    android:background="@mipmap/ic_page_bg"
     android:layout_height="match_parent">
 
     <com.vaycore.finance.ui.views.PageHeaderView
@@ -50,4 +50,4 @@
         app:layout_constraintTop_toBottomOf="@id/tvDesc"
         tools:itemCount="2"
         tools:listitem="@layout/item_contact_way" />
-</com.vaycore.finance.ui.views.StyledConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

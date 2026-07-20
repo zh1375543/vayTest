@@ -4,7 +4,7 @@ import androidx.core.view.isVisible
 import com.vaycore.finance.base.BaseAdapter
 import com.vaycore.finance.data.local.bean.ProductBean
 import com.vaycore.finance.databinding.ItemComboBinding
-import com.vaycore.finance.util.formatAmount
+import com.vaycore.finance.util.formatAmountWithPrefix
 
 class ComboAdapter : BaseAdapter<ProductBean, ItemComboBinding>(ItemComboBinding::inflate) {
 
@@ -16,7 +16,7 @@ class ComboAdapter : BaseAdapter<ProductBean, ItemComboBinding>(ItemComboBinding
         productSummaryView.bind(
             item,
             if (item.canApply) {
-                item.maxLoanAmount.formatAmount(item.currencySymbol)
+                item.maxLoanAmount.formatAmountWithPrefix(item.currencySymbol)
             } else {
                 item.loanAmountRange.orEmpty()
             },

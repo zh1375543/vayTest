@@ -33,9 +33,9 @@ class AuthSuccessActivity :
                 getColor2(R.color.color_7087F8)
             )
         }, end = {
-            BtnOK.performClick()
+            tvOK.performClick()
         })
-        BtnOK.singleClick {
+        tvOK.singleClick {
             finish()
             MainActivity.launch(this@AuthSuccessActivity, isFromAuth = true)
         }

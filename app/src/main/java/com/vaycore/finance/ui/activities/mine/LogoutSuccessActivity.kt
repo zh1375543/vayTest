@@ -18,6 +18,7 @@ class LogoutSuccessActivity :
     override val binding by viewBinding(LogoutSuccessActivityBinding::inflate)
 
     override fun initView() = with(binding) {
+        applyTopInset(root)
         tvOK.singleClick {
             handleBackPressed()
         }

@@ -72,6 +72,38 @@ class WalletViewModel(
         }
     }
 
+    val accountListResult = MutableLiveData<List<BankAccountResponse>>()
+    fun getAccountList(errorAction: () -> Unit) {
+        launchData {
+            walletRepository.fetchBankcardList()
+        }.onSuccess { cards ->
+            loadWalletAccounts(cards.orEmpty(), errorAction)
+        }.onFailed {
+            errorAction()
+            true
+        }
+    }
+
+    private fun loadWalletAccounts(
+        cards: List<BankAccountResponse>,
+        errorAction: () -> Unit,
+    ) {
+        launchData {
+            walletRepository.fetchMyWalletList()
+        }.onSuccess { wallets ->
+            val bankAccounts = cards.map { card ->
+                card.copy(payWay = "CARD")
+            }
+            val walletAccounts = wallets.orEmpty().map { wallet ->
+                wallet.toBankAccountResponse()
+            }
+            accountListResult.value = bankAccounts + walletAccounts
+        }.onFailed {
+            errorAction()
+            true
+        }
+    }
+
     val loanAccountList = MutableLiveData<List<BankAccountResponse>>()
     fun getLoanAccountList(errorAction: () -> Unit) {
         launchData {
@@ -91,15 +123,7 @@ class WalletViewModel(
         launchData {
             walletRepository.fetchBankcardList()
         }.onSuccess { cards ->
-            val walletAccounts = wallets.map { wallet ->
-                BankAccountResponse(
-                    id = wallet.id.toLong(),
-                    bankNo = wallet.accountCode,
-                    bankName = wallet.walletName.orEmpty(),
-                    isDefault = wallet.defaultSign ?: 0,
-                    payWay = "WALLET",
-                )
-            }
+            val walletAccounts = wallets.map { wallet -> wallet.toBankAccountResponse() }
             val bankAccounts = cards.orEmpty().map { card ->
                 card.copy(payWay = "CARD")
             }
@@ -110,9 +134,9 @@ class WalletViewModel(
         }
     }
 
-    fun unBindCard(id: String, action: () -> Unit) {
+    fun unBindCard(id: String, payWay: String = "CARD", action: () -> Unit) {
         launchData {
-            walletRepository.unbindCard(id)
+            walletRepository.unbindCard(id, payWay)
         }.showLoading().onSuccess {
             action.invoke()
         }.execute()
@@ -125,4 +149,20 @@ class WalletViewModel(
             action.invoke()
         }.execute()
     }
+
+    fun setDefaultWallet(id: Int?, action: () -> Unit) {
+        launchData {
+            walletRepository.setDefaultWallet(id)
+        }.showLoading().onSuccess {
+            action.invoke()
+        }.execute()
+    }
+
+    private fun WalletResponse.toBankAccountResponse() = BankAccountResponse(
+        id = id.toLong(),
+        bankNo = accountCode,
+        bankName = walletName.orEmpty(),
+        isDefault = defaultSign ?: 0,
+        payWay = "WALLET",
+    )
 }

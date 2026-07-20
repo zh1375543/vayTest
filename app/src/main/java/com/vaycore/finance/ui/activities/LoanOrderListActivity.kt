@@ -59,7 +59,7 @@ class LoanOrderListActivity : BaseActivity<ActivityLoanOrderListBinding>() {
             binding.apply {
                 orderAdapter.submitItems(it)
                 if (it.isNullOrEmpty()) {
-                    loadingLayout.showEmpty(R.mipmap.ic_order_list_null, R.string.order_empty)
+                    loadingLayout.showEmpty(R.mipmap.ic_order_null, R.string.order_empty)
                 } else {
                     loadingLayout.showContent()
                 }

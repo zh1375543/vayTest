@@ -16,6 +16,7 @@ class RepaymentSuccessActivity :
 
     override val binding by viewBinding(RepaymentSuccessActivityBinding::inflate)
     override fun initView() = with(binding) {
+        applyTopInset(root)
         onBackAction(null) {
             handleBack()
         }
@@ -23,7 +24,7 @@ class RepaymentSuccessActivity :
         binding.tvTips.setClickableTextWithScale(
             String.format(getString(R.string.back_to_home_tips), "10"),
             "10",
-            getColor2(R.color.C_FA560D)
+            getColor2(R.color.color_7087F8)
         )
         lifecycleScope.countdownTimer(
             10,
@@ -31,7 +32,7 @@ class RepaymentSuccessActivity :
                 binding.tvTips.setClickableTextWithScale(
                     String.format(getString(R.string.back_to_home_tips), seconds.toString()),
                     seconds.toString(),
-                    getColor2(R.color.C_FA560D)
+                    getColor2(R.color.color_7087F8)
                 )
             },
             end = {

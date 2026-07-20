@@ -46,11 +46,20 @@ class WalletRepository(
         return api.fetchBankcardList(ApiRequest()).dataOrThrow()
     }
 
-    suspend fun unbindCard(bankInfoId: String): Any? {
-        return api.unbindCard(ApiRequest(bankInfoId = bankInfoId)).dataOrThrow()
+    suspend fun unbindCard(bankInfoId: String, payWay: String = "CARD"): Any? {
+        return api.unbindCard(
+            ApiRequest(
+                bankInfoId = bankInfoId,
+                payWay = payWay,
+            )
+        ).dataOrThrow()
     }
 
     suspend fun setDefaultCard(bankInfoId: String): Any? {
         return api.fetchCardDefault(ApiRequest(bankInfoId = bankInfoId)).dataOrThrow()
+    }
+
+    suspend fun setDefaultWallet(id: Int?): Any? {
+        return api.setDefaultWallet(ApiRequest(id = id)).dataOrThrow()
     }
 }

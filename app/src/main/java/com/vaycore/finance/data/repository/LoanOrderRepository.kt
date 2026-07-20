@@ -34,7 +34,13 @@ class LoanOrderRepository(
         ).dataOrThrow()
     }
 
-    suspend fun repayAndBorrow(orderId: Long?): Any? {
-        return api.repayAndBorrow(ApiRequest(orderId = orderId)).dataOrThrow()
+    suspend fun repayAndBorrow(orderId: Long?, applyAgainSign: Int?): Any? {
+        return api.repayAndBorrow(
+            ApiRequest(orderId = orderId, applyAgainSign = applyAgainSign)
+        ).dataOrThrow()
+    }
+
+    suspend fun cancelApply(orderId: Long?): Any? {
+        return api.cancelApply(ApiRequest(orderId = orderId)).dataOrThrow()
     }
 }

@@ -205,6 +205,7 @@
     <string name="repay">Repay</string>
     <string name="borrow_and_repay">Repay and borrow again</string>
     <string name="repay_auto_apply">Repay &amp; Auto-Apply</string>
+    <string name="repay_auto_apply_all">Repay &amp; Auto-Apply All</string>
     <string name="repay_auto_apply_agreement">I agree that a new loan may be created after repayment.</string>
     <string name="toast_repay_auto_apply_agreement">Please agree that a new loan may be created after repayment.</string>
     <string name="disbursed_quickly">Disbursed quickly</string>
@@ -274,7 +275,7 @@ No personal SMS messages will be accessed, read, or collected.</string>
 
     <string name="repayment">Repayment</string>
     <string name="repayment_amount">Repayment Amount</string>
-    <string name="choose_repayment_method">Choose repayment method</string>
+    <string name="choose_repayment_method">Choose a bank</string>
     <string name="repayment_voucher">Repayment voucher</string>
     <string name="please_select_repayment_account">Please select your repayment account</string>
     <string name="bank_name">Bank name</string>

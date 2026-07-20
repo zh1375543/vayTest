@@ -33,7 +33,6 @@ import com.vaycore.finance.util.LOAN_GET_NOW_CLICK
 import com.vaycore.finance.ui.extension.animateAmount
 import com.vaycore.finance.util.countdownTimer
 import com.vaycore.finance.util.formatDays
-import com.vaycore.finance.util.formatAmount
 import com.vaycore.finance.util.context.getColor2
 import com.vaycore.finance.util.context.openExternalBrowser
 import com.vaycore.finance.util.context.openPlayStore
@@ -57,6 +56,7 @@ import com.vaycore.finance.ui.extension.stopScaleAnimation
 import kotlinx.coroutines.Job
 import kotlin.toString
 import com.vaycore.finance.ui.createAvailableCreditDialog
+import com.vaycore.finance.util.formatAmountWithPrefix
 import com.vaycore.finance.util.viewBinding
 
 class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
@@ -240,8 +240,8 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
                 data.userCreditAmount,
                 prefix = data.userCreditCurrencySymbol ?: ""
             )
-            tvMaxAmount.text = data.totalCreditAmount.formatAmount(data.userCreditCurrencySymbol)
-            tvUsedAmount.text = data.usedAmount.formatAmount(data.userCreditCurrencySymbol)
+            tvMaxAmount.text = data.totalCreditAmount.formatAmountWithPrefix(data.userCreditCurrencySymbol)
+            tvUsedAmount.text = data.usedAmount.formatAmountWithPrefix(data.userCreditCurrencySymbol)
             tvLoanRateLabel.text = data.recommendText
             tvLoanRateLabel.isVisible = !data.recommendText.isNullOrEmpty()
             unAuthLayout.isVisible = false
@@ -374,7 +374,7 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
             if (creditDialog?.isShowing == true || newProductDialog?.isShowing == true) return false
 
             val amount =data.userCreditAmount
-                .formatAmount(data.userCreditCurrencySymbol ?: data.currencySymbol)
+                .formatAmountWithPrefix(data.userCreditCurrencySymbol ?: data.currencySymbol)
             hasShownCreditDialog = true
             var isNavigatingToLoan = false
             creditDialog = root.context.createAvailableCreditDialog(amount) {

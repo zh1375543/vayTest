@@ -56,9 +56,17 @@ class LoanOrderViewModel(
         }.execute()
     }
 
-    fun repayAndBorrow(id: Long?, block: () -> Unit) {
+    fun repayAndBorrow(id: Long?, applyAgainSign: Int?, block: () -> Unit) {
         launchData {
-            loanOrderRepository.repayAndBorrow(id)
+            loanOrderRepository.repayAndBorrow(id, applyAgainSign)
+        }.showLoading().onSuccess {
+            block()
+        }.execute()
+    }
+
+    fun cancelApply(id: Long?, block: () -> Unit) {
+        launchData {
+            loanOrderRepository.cancelApply(id)
         }.showLoading().onSuccess {
             block()
         }.execute()

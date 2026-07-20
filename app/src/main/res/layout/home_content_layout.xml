@@ -855,7 +855,7 @@
                 android:layout_height="@dimen/dp_147"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/dp_80"
-                android:src="@mipmap/ic_withdraw_null" />
+                android:src="@mipmap/ic_product_null" />
 
             <TextView
                 android:layout_width="match_parent"

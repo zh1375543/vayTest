@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_20"
         android:layout_marginTop="@dimen/dp_108"
-        android:drawableTop="@mipmap/ic_withdraw_null"
+        android:drawableTop="@mipmap/ic_product_null"
         android:drawablePadding="@dimen/dp_10"
         android:gravity="center"
         android:lineSpacingExtra="@dimen/dp_4"

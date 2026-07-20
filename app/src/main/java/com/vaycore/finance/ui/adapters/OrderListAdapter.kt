@@ -5,7 +5,7 @@ import com.vaycore.finance.base.BaseAdapter
 import com.vaycore.finance.data.local.*
 import com.vaycore.finance.data.local.bean.OrderBean
 import com.vaycore.finance.databinding.ItemOrderBinding
-import com.vaycore.finance.util.formatAmount
+import com.vaycore.finance.util.formatAmountWithPrefix
 import com.vaycore.finance.util.context.getColor2
 
 class OrderListAdapter :
@@ -20,11 +20,11 @@ class OrderListAdapter :
             String.format(context.getString(R.string.loan_amount), item.currency)
         tvDays.text =
             String.format(context.getString(R.string.num_days), item.timeLimit.toString())
-        tvAmount.text = item.loanAmount.formatAmount(item.currencySymbol)
+        tvAmount.text = item.loanAmount.formatAmountWithPrefix(item.currencySymbol)
 //                tvDate.text = it
         tvDateTitle.text = context.getString(R.string.apply_date)
         tvDate.text = item.createTime?.split(" ")?.first()
-        tvStatus.setTextColor(context.getColor2(R.color.C_111827))
+        tvStatus.setTextColor(context.getColor2(R.color.color_7087F8))
         tvProductName.text = item.productName
         when (item.status) {
             ORDER_STATUS_SETTLE,
@@ -76,5 +76,6 @@ class OrderListAdapter :
                 tvStatus.text = context.getString(R.string.overdue)
             }
         }
+        ivArrow.imageTintList = tvStatus.textColors
     }
 }

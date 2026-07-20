@@ -5,7 +5,7 @@ import com.vaycore.finance.ui.activities.LoanProductActivity
 import com.vaycore.finance.base.BaseAdapter
 import com.vaycore.finance.data.local.bean.ProductPlanBean
 import com.vaycore.finance.databinding.ProductInstallmentAdapterBinding
-import com.vaycore.finance.util.formatAmount
+import com.vaycore.finance.util.formatAmountWithPrefix
 
 class ProductInstallmentAdapter :
     BaseAdapter<ProductPlanBean, ProductInstallmentAdapterBinding>(ProductInstallmentAdapterBinding::inflate) {
@@ -16,7 +16,7 @@ class ProductInstallmentAdapter :
         position: Int,
     ) = with(binding) {
         tvDueDate.text = item.repayTime?.substringBefore(" ")
-        tvAmount.text = item.totalRepayment.formatAmount()
+        tvAmount.text = item.totalRepayment.formatAmountWithPrefix()
         ivArrow.rotation = 0f
         infoLayout.isVisible = false
         val toggleDetails = {
@@ -29,8 +29,8 @@ class ProductInstallmentAdapter :
         tvDueDate.setOnClickListener { toggleDetails() }
         tvAmount.setOnClickListener { toggleDetails() }
         ivArrow.setOnClickListener { toggleDetails() }
-        tvLoanAmount.text = item.repayActualAmount.formatAmount()
-        tvInterest.text = item.repayInterestAmount.formatAmount()
-        tvServiceFee.text = item.repayAfterHandleAmount.formatAmount()
+        tvLoanAmount.text = item.repayActualAmount.formatAmountWithPrefix()
+        tvInterest.text = item.repayInterestAmount.formatAmountWithPrefix()
+        tvServiceFee.text = item.repayAfterHandleAmount.formatAmountWithPrefix()
     }
 }

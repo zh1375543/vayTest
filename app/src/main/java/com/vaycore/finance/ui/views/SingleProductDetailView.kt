@@ -13,7 +13,7 @@ import com.vaycore.finance.ui.adapters.ProductHeaderFeeAdapter
 import com.vaycore.finance.ui.adapters.ProductInstallmentAdapter
 import com.vaycore.finance.ui.adapters.ProductRepaymentMenuAdapter
 import com.vaycore.finance.util.LogUtil
-import com.vaycore.finance.util.formatAmount
+import com.vaycore.finance.util.formatAmountWithPrefix
 
 class SingleProductDetailView @JvmOverloads constructor(
     context: Context,
@@ -84,11 +84,11 @@ class SingleProductDetailView @JvmOverloads constructor(
         tvDays.text = context.getString(R.string.num_days, plan.timeLimit.toString())
         tvActuallyTitle.text =
             String.format(context.getString(R.string.actually_amount), currencySymbol ?: "").replace("()", "")
-        tvActuallyAmount.text = plan.actualAmount.formatAmount(currencySymbol)
+        tvActuallyAmount.text = plan.actualAmount.formatAmountWithPrefix(currencySymbol)
         tvInterestTitle.text = context.getString(R.string.interest_day, "${plan.interestRate}%")
-        tvInterest.text = plan.interestAmount.formatAmount(currencySymbol)
+        tvInterest.text = plan.interestAmount.formatAmountWithPrefix(currencySymbol)
         tvDate.text = plan.repayTimeStr
-        tvInstallFee.text = plan.installmentServiceFee.formatAmount(plan.currencySymbol)
+        tvInstallFee.text = plan.installmentServiceFee.formatAmountWithPrefix(plan.currencySymbol)
         tvModel.text = "${Build.BRAND} ${Build.MODEL}"
         headerFeeAdapter.submitItems(plan.appProductHandleFeeConfigDtos)
     }

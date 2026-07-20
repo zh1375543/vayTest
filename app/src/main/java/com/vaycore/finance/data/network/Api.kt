@@ -100,6 +100,9 @@ interface Api {
     @POST("api/user/app/userCashWallet/list/my")
     suspend fun getMyWalletList(@Body param: ApiRequest): ApiResponse<MutableList<WalletResponse>?>
 
+    @POST("api/user/app/userCashWallet/set/default")
+    suspend fun setDefaultWallet(@Body param: ApiRequest): ApiResponse<Any?>
+
     @POST("api/user/app/bank/bind")
     suspend fun bindCard(@Body paramBean: ApiRequest): ApiResponse<Any?>
 
@@ -209,6 +212,9 @@ interface Api {
 
     @POST("api/loan/app/apply/again")
     suspend fun repayAndBorrow(@Body paramBean: ApiRequest): ApiResponse<Any?>
+
+    @POST("api/loan/app/apply/again/cancel")
+    suspend fun cancelApply(@Body paramBean: ApiRequest): ApiResponse<Any?>
 
     @POST("api/user/app/kyc/config")
     suspend fun fetchKycConfig(@Body paramBean: ApiRequest): ApiResponse<KycRuleConfigResponse?>

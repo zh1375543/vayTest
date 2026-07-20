@@ -9,70 +9,56 @@
 
     <com.vaycore.finance.ui.views.StyledConstraintLayout
         android:id="@+id/cardLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_50"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        app:gradientEndColor="@color/white"
-        app:gradientOrientation="TOP_BOTTOM"
-        app:gradientCenterColor="@color/white"
-        app:gradientStartColor="#BDC8FF"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_0"
+        android:layout_marginTop="@dimen/dp_45"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:radius="@dimen/dp_20">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvCustomer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_150"
-            android:orientation="vertical"
-            android:overScrollMode="never"
-            android:paddingBottom="@dimen/dp_10"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:itemCount="2"
-            tools:listitem="@layout/contacts_us_dialog_adapter" />
-
-    </com.vaycore.finance.ui.views.StyledConstraintLayout>
+        app:radius="@dimen/dp_24"
+        app:solidColor="@color/white" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivCustomer"
-        android:layout_width="@dimen/dp_152"
-        android:layout_height="@dimen/dp_190"
-        android:layout_marginEnd="@dimen/dp_36"
-        android:importantForAccessibility="no"
+        android:layout_width="@dimen/dp_90"
+        android:layout_height="@dimen/dp_90"
+        android:contentDescription="@null"
         android:scaleType="fitCenter"
-        android:src="@mipmap/ic_contact_customer"
+        android:src="@mipmap/ic_contact_header"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.vaycore.finance.ui.views.StyledTextView
+    <TextView
         android:id="@+id/tvTitle"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/dp_0"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_20"
-        android:layout_marginEnd="@dimen/dp_12"
+        android:layout_marginHorizontal="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_16"
         android:gravity="center"
         android:text="@string/contact_us"
         android:textColor="@color/C_111827"
         android:textSize="@dimen/sp_20"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/ivCustomer"
-        app:layout_constraintEnd_toStartOf="@id/ivCustomer"
+        app:layout_constraintEnd_toEndOf="@id/cardLayout"
         app:layout_constraintStart_toStartOf="@id/cardLayout"
-        app:layout_constraintTop_toTopOf="@id/ivCustomer" />
+        app:layout_constraintTop_toBottomOf="@id/ivCustomer" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivClose"
-        android:layout_width="@dimen/dp_30"
-        android:layout_height="@dimen/dp_30"
-        android:layout_marginTop="@dimen/dp_28"
-        android:importantForAccessibility="no"
-        android:src="@mipmap/ic_dialog_bottom_close"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCustomer"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:orientation="vertical"
+        android:overScrollMode="never"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardLayout" />
+        app:layout_constraintEnd_toEndOf="@id/cardLayout"
+        app:layout_constraintStart_toStartOf="@id/cardLayout"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        tools:itemCount="2"
+        tools:listitem="@layout/contacts_us_dialog_adapter" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

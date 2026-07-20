@@ -6,7 +6,6 @@ import com.vaycore.finance.ui.adapters.BatchRepaymentAdapter
 import com.vaycore.finance.base.BaseActivity
 import com.vaycore.finance.databinding.RepaymentBatchActivityBinding
 import com.vaycore.finance.util.showToastMessage
-import com.vaycore.finance.util.formatAmount
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.ui.viewmodels.RepayViewModel
 import com.vaycore.finance.util.formatAmountWithPrefix
@@ -82,7 +81,7 @@ class RepaymentBatchActivity :
                     tvAmount.text = it.fold(
                         BigDecimal.ZERO
                     ) { acc, order -> acc + (order.actualRepayAmount ?: BigDecimal.ZERO) }
-                        .formatAmount(it[0].currencySymbol)
+                        .formatAmountWithPrefix(it[0].currencySymbol)
                 }
             }
         }

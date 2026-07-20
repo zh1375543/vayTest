@@ -5,7 +5,7 @@ import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseAdapter
 import com.vaycore.finance.databinding.ProductRepaymentMenuAdapterBinding
 import com.vaycore.finance.data.local.bean.ProductBean
-import com.vaycore.finance.util.formatAmount
+import com.vaycore.finance.util.formatAmountWithPrefix
 
 class ProductRepaymentMenuAdapter(var selectPosition: Int = 0) :
     BaseAdapter<ProductBean, ProductRepaymentMenuAdapterBinding>(ProductRepaymentMenuAdapterBinding::inflate) {
@@ -31,7 +31,7 @@ class ProductRepaymentMenuAdapter(var selectPosition: Int = 0) :
         if (isInstall) {
             val list = item.productInstallmentPlanDTOList
             val index = list?.indexOfFirst { it.isDefault == 1 || it.defaultSign == 1 }?.coerceIn(0, list.lastIndex) ?: 0
-            tvAmount1.text = list?.get(index)?.firstRepayment.formatAmount()
+            tvAmount1.text = list?.get(index)?.firstRepayment.formatAmountWithPrefix()
         }
         tvPeriod1.isSelected = selectPosition == position
         tvPeriodDays1.isSelected = selectPosition == position

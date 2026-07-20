@@ -4,9 +4,8 @@ import android.app.Activity
 import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
-import android.view.Gravity
 import android.view.LayoutInflater
-import android.widget.LinearLayout
+import android.widget.FrameLayout
 import androidx.annotation.ColorInt
 import androidx.core.view.isVisible
 import com.vaycore.finance.R
@@ -17,7 +16,7 @@ import com.vaycore.finance.ui.extension.singleClick
 class PageHeaderView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-) : LinearLayout(context, attrs) {
+) : FrameLayout(context, attrs) {
 
     private val binding =
         ViewPageHeaderBinding.inflate(LayoutInflater.from(context), this)
@@ -25,8 +24,6 @@ class PageHeaderView @JvmOverloads constructor(
     private var fitStatusBar = true
 
     init {
-        orientation = HORIZONTAL
-        gravity = Gravity.CENTER_VERTICAL
         applyXmlAttributes(attrs)
         configureDefaultNavigation()
         applyStatusBarSpacingIfNeeded()

@@ -92,7 +92,6 @@ fun Context.showContactUsDialog(homeBean: GuestHomeResponse) {
     ) {
         override fun initView() = with(binding) {
             super.initView()
-            setCanceledOnTouchOutside(false)
             val list = mutableListOf<CustomerContactConfig>()
             homeBean.customerPhone?.let { phone ->
                 list.add(
@@ -119,9 +118,6 @@ fun Context.showContactUsDialog(homeBean: GuestHomeResponse) {
             }
             rvCustomer.adapter = ContactUsDialogAdapter().apply {
                 submitItems(list)
-            }
-            ivClose.singleClick {
-                dismiss()
             }
         }
     }.show()
@@ -153,15 +149,11 @@ fun Context.showPreCreditExpiredDialog(date: String) {
     ) {
         override fun initView() = with(binding) {
             super.initView()
-            setCanceledOnTouchOutside(false)
             tvTips.setSpannableClickableText(
                 String.format(getString(R.string.pre_credit_has_expired_tips), date),
                 date.ifBlank { "XXXXXXXX" },
                 getColor2(R.color.C_111827)
             ) {
-            }
-            ivClose.singleClick {
-                dismiss()
             }
         }
     }.show()
@@ -174,10 +166,6 @@ fun Context.showCreditUnderReviewDialog() {
     ) {
         override fun initView() = with(binding) {
             super.initView()
-            setCanceledOnTouchOutside(false)
-            ivClose.singleClick {
-                dismiss()
-            }
         }
     }.show()
 }

@@ -6,7 +6,7 @@
     android:layout_marginHorizontal="@dimen/dp_20"
     android:gravity="center"
     android:orientation="vertical"
-    app:radius="@dimen/dp_12"
+    app:radius="@dimen/dp_24"
     app:gradientStartColor="@color/white"
     app:gradientEndColor="@color/white"
     app:gradientOrientation="TOP_BOTTOM">
@@ -34,24 +34,15 @@
         android:text="@string/new_version_desc"
         app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivIcon"
-        android:layout_width="@dimen/dp_124"
-        android:layout_height="@dimen/dp_124"
-        android:src="@mipmap/ic_updata_version"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvDesc" />
-
     <com.vaycore.finance.ui.views.StyledTextView
         android:id="@+id/tvOK"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_48"
         android:layout_marginHorizontal="@dimen/dp_34"
-        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginTop="@dimen/dp_10"
         android:layout_marginBottom="@dimen/dp_15"
         style="@style/mainButton"
         android:text="@string/update"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivIcon" />
+        app:layout_constraintTop_toBottomOf="@id/tvDesc" />
 </com.vaycore.finance.ui.views.StyledConstraintLayout>

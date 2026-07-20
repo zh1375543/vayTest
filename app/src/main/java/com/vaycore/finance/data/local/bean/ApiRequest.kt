@@ -69,6 +69,7 @@ data class ApiRequest(
     val imei: String? = null,
     val payWay: String? = null,
     val walletId: Int? = null,
+    val id: Int? = null,
     val accountCode: String? = null,
     val userId: String? = null,
     val auditKey: String? = null,
@@ -87,4 +88,5 @@ data class ApiRequest(
     val firebaseToken: String? = null,
     val recordIdStr: String? = null,
     val bizNo: String? = null,
+    val applyAgainSign: Int? = null,
 )

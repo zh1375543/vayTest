@@ -6,7 +6,7 @@
     android:layout_marginBottom="@dimen/dp_10"
     android:paddingHorizontal="@dimen/dp_14"
     android:paddingVertical="@dimen/dp_16"
-    app:radius="@dimen/dp_12"
+    app:radius="@dimen/dp_24"
     app:solidColor="@color/white">
 
     <TextView
@@ -45,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_10"
-        android:drawableEnd="@mipmap/ic_info_copy"
+        android:drawableEnd="@mipmap/ic_copy_img"
         android:drawablePadding="@dimen/dp_8"
         android:text="@string/bank_branch_name"
         android:textColor="@color/C_111827"

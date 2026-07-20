@@ -10,11 +10,11 @@ import com.vaycore.finance.R
 import com.vaycore.finance.databinding.ProductDetailViewBinding
 import com.vaycore.finance.data.local.bean.ProductBean
 import com.vaycore.finance.util.isPositive
-import com.vaycore.finance.util.formatAmount
 import com.vaycore.finance.ui.adapters.ProductFeeAdapter
 import com.vaycore.finance.ui.adapters.ProductInstallmentAdapter
 import com.vaycore.finance.ui.adapters.ProductRepaymentMenuAdapter
 import com.vaycore.finance.util.LogUtil
+import com.vaycore.finance.util.formatAmountWithPrefix
 
 class ProductDetailView @JvmOverloads constructor(
     context: Context,
@@ -81,7 +81,7 @@ class ProductDetailView @JvmOverloads constructor(
                 context.getString(R.string.interest_day, "${product.interestRate}%")
 
             tvInterest.text =
-                product.interestAmount.formatAmount(product.currencySymbol)
+                product.interestAmount.formatAmountWithPrefix(product.currencySymbol)
 
             tvDays.text =
                 context.getString(R.string.num_days, product.timeLimit.toString())
@@ -92,7 +92,7 @@ class ProductDetailView @JvmOverloads constructor(
                 ).replace("()", "")
 
             tvActuallyAmount.text =
-                product.actualAmount.formatAmount(product.currencySymbol)
+                product.actualAmount.formatAmountWithPrefix(product.currencySymbol)
             tvModel.text = "${Build.BRAND} ${Build.MODEL}"
 
             tvDate.text = product.repayTimeStr
@@ -151,20 +151,20 @@ class ProductDetailView @JvmOverloads constructor(
             tvInterestTitle.text =
                 context.getString(R.string.interest_day, "${item.interestRate}%")
 
-            tvInterest.text = item.interestAmount.formatAmount(currentProduct?.currencySymbol)
+            tvInterest.text = item.interestAmount.formatAmountWithPrefix(currentProduct?.currencySymbol)
 
             tvDays.text =
                 context.getString(R.string.num_days, item.timeLimit.toString())
 
             tvActuallyAmount.text =
-                item.actualAmount.formatAmount(
+                item.actualAmount.formatAmountWithPrefix(
                     item.currencySymbol ?: currentProduct?.currencySymbol
                 )
 
             tvDate.text = item.repayTimeStr
 
             tvInstallFee.text =
-                item.installmentServiceFee.formatAmount(item.currencySymbol)
+                item.installmentServiceFee.formatAmountWithPrefix(item.currencySymbol)
 
             feeAdapter.submitItems(item.appProductHandleFeeConfigDtos)
 

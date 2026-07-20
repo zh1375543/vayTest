@@ -91,7 +91,7 @@ class NoticeListActivity : BaseActivity<ActivityNoticeListBinding>() {
                 messageAdapter.submitItems(it)
                 titleBar.showAction(it.any { it1 -> !it1.readStatus })
                 if (messageAdapter.items.isEmpty()) {
-                    loadingLayout.showEmpty(R.mipmap.ic_msg_null, R.string.empty_message)
+                    loadingLayout.showEmpty(R.mipmap.ic_notice_null, R.string.empty_message)
                 } else {
                     loadingLayout.showContent()
                 }

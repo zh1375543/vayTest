@@ -22,6 +22,7 @@ class BankCardListActivity :
     private val bankAdapter by lazy {
         BankCardListAdapter().apply {
             setOnChildClickListener { view, _, position ->
+                val account = items[position]
                 when (view.id) {
                     R.id.tvDefault -> showConfirmDialog(
                         getString(R.string.set_default_title),
@@ -29,12 +30,17 @@ class BankCardListActivity :
                         getString(R.string.closed),
                         getString(R.string.sure),
                         okAction = {
-                            vm.setDefaultCard(items[position].id.toString()) {
-                                items.forEach { item ->
-                                    item.isDefault = 0
+                            val updateDefaultState = {
+                                items.filter { it.payWay == account.payWay }.forEach {
+                                    it.isDefault = 0
                                 }
-                                items[position].isDefault = 1
+                                account.isDefault = 1
                                 notifyItemRangeChanged(0, itemCount, 0)
+                            }
+                            if (account.payWay == "WALLET") {
+                                vm.setDefaultWallet(account.id?.toInt(), updateDefaultState)
+                            } else {
+                                vm.setDefaultCard(account.id.toString(), updateDefaultState)
                             }
                         },
                         cancelAction = {}
@@ -47,7 +53,8 @@ class BankCardListActivity :
                         getString(R.string.sure),
                         okAction = {
                             vm.unBindCard(
-                                items[position].id.toString()
+                                account.id.toString(),
+                                account.payWay ?: "CARD",
                             ) {
                                 removeItem(position)
                             }
@@ -67,7 +74,7 @@ class BankCardListActivity :
         }
         loadingLayout.setOnRetryClickListener {
             loadingLayout.showLoading()
-            vm.getBankcardList {
+            vm.getAccountList {
                 binding.loadingLayout.showError()
             }
         }
@@ -76,18 +83,18 @@ class BankCardListActivity :
     override fun onResume() {
         super.onResume()
         binding.loadingLayout.showLoading()
-        vm.getBankcardList {
+        vm.getAccountList {
             binding.loadingLayout.showError()
         }
     }
 
     override fun initObserve() =with(vm){
         super.initObserve()
-        bankCardListResult.observe(this@BankCardListActivity) {
+        accountListResult.observe(this@BankCardListActivity) {
             binding.apply {
                 bankAdapter.submitItems(it)
                 if (bankAdapter.items.isEmpty()) {
-                    loadingLayout.showEmpty(R.mipmap.ic_accounts_null, R.string.empty_bankcard)
+                    loadingLayout.showEmpty(R.mipmap.ic_banklist_null, R.string.empty_bankcard)
                 } else {
                     loadingLayout.showContent()
                 }

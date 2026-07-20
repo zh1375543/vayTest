@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.vaycore.finance.ui.views.StyledConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    style="@style/mainBg">
+    android:background="@mipmap/ic_page_bg"
+    android:layout_height="match_parent">
 
     <com.vaycore.finance.ui.views.PageHeaderView
         android:id="@+id/titleBar"
@@ -20,8 +20,8 @@
         android:layout_marginTop="@dimen/dp_10"
         android:layout_height="@dimen/dp_42"
         android:layout_marginHorizontal="@dimen/dp_16"
-        app:radius="@dimen/dp_8"
-        app:solidColor="@color/white"
+        app:radius="@dimen/dp_24"
+        app:solidColor="@color/C_F6F6F6"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingHorizontal="@dimen/dp_20"
@@ -37,7 +37,7 @@
             android:textColor="@color/white"
             android:textSize="@dimen/sp_12"
             android:textStyle="bold"
-            app:radius="@dimen/dp_4"
+            app:radius="@dimen/dp_24"
             app:solidColor="@color/color_7087F8" />
 
         <TextView
@@ -66,6 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginHorizontal="@dimen/dp_16"
                 android:layout_marginBottom="@dimen/dp_10"
                 android:orientation="vertical"
                 android:overScrollMode="never"
@@ -75,4 +76,4 @@
                 tools:listitem="@layout/item_notice" />
         </FrameLayout>
     </com.vaycore.finance.ui.views.ContentStateLayout>
-</com.vaycore.finance.ui.views.StyledConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

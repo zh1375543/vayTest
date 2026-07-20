@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.vaycore.finance.ui.views.StyledConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/mainBg"
+    android:background="@mipmap/ic_page_bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -35,59 +35,84 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <com.vaycore.finance.ui.widget.TicketBackgroundLayout
+                    <com.vaycore.finance.ui.views.StyledConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/dp_124"
+                        android:layout_height="@dimen/dp_160"
                         android:layout_marginHorizontal="@dimen/dp_16"
                         android:layout_marginTop="@dimen/dp_8"
-                        android:paddingHorizontal="@dimen/dp_20"
-                        android:paddingTop="@dimen/dp_14"
-                        android:paddingBottom="@dimen/dp_16"
-                        app:ticketColor="@color/color_7087F8"
-                        app:ticketCornerRadius="@dimen/dp_14"
-                        app:ticketSideCutoutCenterFromBottom="@dimen/dp_61"
-                        app:ticketSideCutoutRadius="@dimen/dp_18">
+                        android:paddingHorizontal="@dimen/dp_14"
+                        android:paddingTop="@dimen/dp_22"
+                        android:paddingBottom="@dimen/dp_14"
+                        app:radius="@dimen/dp_24"
+                        app:solidColor="@color/white">
 
-                        <TextView
-                            android:id="@+id/tvOrderNo"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="start"
-                            android:text="@string/order_no"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/sp_14"
+                        <com.vaycore.finance.ui.views.StyledConstraintLayout
+                            android:id="@+id/orderNumberContainer"
+                            android:layout_width="@dimen/dp_0"
+                            android:layout_height="@dimen/dp_46"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_chainStyle="packed" />
+                            app:radius="@dimen/dp_24"
+                            app:solidColor="@color/C_F6F6F6">
+
+                            <com.vaycore.finance.ui.views.StyledConstraintLayout
+                                android:id="@+id/orderNumberDot"
+                                android:layout_width="@dimen/dp_4"
+                                android:layout_height="@dimen/dp_4"
+                                android:layout_marginEnd="@dimen/dp_10"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@id/tvOrderNo"
+                                app:layout_constraintHorizontal_chainStyle="packed"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:radius="@dimen/dp_2"
+                                app:solidColor="@color/C_374151" />
+
+                            <TextView
+                                android:id="@+id/tvOrderNo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="@string/order_no"
+                                android:textColor="@color/C_374151"
+                                android:textSize="@dimen/sp_14"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@id/orderNumberDot"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </com.vaycore.finance.ui.views.StyledConstraintLayout>
 
                         <TextView
                             android:id="@+id/tvRepayAmount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_10"
+                            android:layout_marginTop="@dimen/dp_14"
                             android:text="@string/repayment_amount"
-                            android:textColor="@color/white"
+                            android:textColor="@color/C_9CA3AF"
                             android:textSize="@dimen/sp_14"
                             android:textStyle="normal"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/tvOrderNo" />
+                            app:layout_constraintTop_toBottomOf="@id/orderNumberContainer" />
 
                         <TextView
                             android:id="@+id/tvAmount"
                             android:layout_width="@dimen/dp_0"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_4"
+                            android:layout_marginTop="@dimen/dp_2"
                             android:gravity="center"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/sp_34"
+                            android:textColor="@color/C_111827"
+                            android:textSize="@dimen/sp_28"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/tvRepayAmount"
                             tools:text="50000" />
 
-                    </com.vaycore.finance.ui.widget.TicketBackgroundLayout>
+                    </com.vaycore.finance.ui.views.StyledConstraintLayout>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -130,7 +155,7 @@
                         android:layout_marginHorizontal="@dimen/dp_16"
                         android:layout_marginTop="@dimen/dp_10"
                         android:paddingBottom="@dimen/dp_20"
-                        app:radius="@dimen/dp_12"
+                        app:radius="@dimen/dp_24"
                         app:solidColor="@color/white">
 
                         <TextView
@@ -145,14 +170,17 @@
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_13"
                             app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
+                        <com.vaycore.finance.ui.views.StyledTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/dp_12"
                             android:text="@string/choose"
-                            android:textColor="@color/color_7087F8"
+                            android:textColor="@color/white"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
                             android:textSize="@dimen/sp_11"
+                            app:radius="@dimen/dp_24"
+                            app:solidColor="@color/color_7087F8"
                             app:layout_constraintBottom_toBottomOf="@id/tvSelect"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@id/tvSelect" />
@@ -198,10 +226,10 @@
                 android:layout_height="@dimen/dp_48"
                 android:layout_marginHorizontal="@dimen/dp_34"
                 android:layout_marginVertical="@dimen/dp_20"
-                android:text="@string/submit"
+                android:text="@string/repay"
                 android:textSize="@dimen/sp_18"
                 android:textStyle="bold" />
 
         </LinearLayout>
     </com.vaycore.finance.ui.views.ContentStateLayout>
-</com.vaycore.finance.ui.views.StyledConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

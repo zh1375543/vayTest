@@ -148,12 +148,25 @@ object DeviceSignalReader {
         }
     }
 
-    fun getBluetoothInfo(): JSONObject = JSONObject().apply {
-        put("mode", getBluetoothMode().toString())
-        put("isEnabled", bluetoothAdapter()?.isEnabled ?: false)
-        put("name", getBluetoothName())
-        put("address", getBluetoothMac())
-        put("state", getBluetoothStateDescription())
+    fun getBluetoothInfo(): JSONObject = runCatching {
+        JSONObject().apply {
+            put("mode", getBluetoothMode().toString())
+            put("isEnabled", isBluetoothEnabled())
+            put("name", getBluetoothName())
+            put("address", getBluetoothMac())
+            put("state", getBluetoothStateDescription())
+        }
+    }.getOrElse {
+        getDefaultBluetoothInfo()
+    }
+
+    /** Keeps the risk payload schema complete when Bluetooth APIs are unavailable. */
+    fun getDefaultBluetoothInfo(): JSONObject = JSONObject().apply {
+        put("mode", "-1")
+        put("isEnabled", false)
+        put("name", "")
+        put("address", "")
+        put("state", "off")
     }
 
     private fun hasPermission(permission: String): Boolean = ActivityCompat.checkSelfPermission(
@@ -235,12 +248,30 @@ object DeviceSignalReader {
         }
     }
 
-    private fun getBluetoothStateDescription(): String = when (bluetoothAdapter()?.state ?: BluetoothAdapter.STATE_OFF) {
-        BluetoothAdapter.STATE_OFF -> "off"
-        BluetoothAdapter.STATE_ON -> "on"
-        BluetoothAdapter.STATE_TURNING_OFF -> "turning_on"
-        BluetoothAdapter.STATE_TURNING_ON -> "turning_off"
-        else -> "unknow"
+    @SuppressLint("MissingPermission")
+    private fun isBluetoothEnabled(): Boolean {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S &&
+            !hasPermission(Manifest.permission.BLUETOOTH_CONNECT)
+        ) {
+            return false
+        }
+        return bluetoothAdapter()?.isEnabled ?: false
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun getBluetoothStateDescription(): String {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S &&
+            !hasPermission(Manifest.permission.BLUETOOTH_CONNECT)
+        ) {
+            return "off"
+        }
+        return when (bluetoothAdapter()?.state ?: BluetoothAdapter.STATE_OFF) {
+            BluetoothAdapter.STATE_OFF -> "off"
+            BluetoothAdapter.STATE_ON -> "on"
+            BluetoothAdapter.STATE_TURNING_OFF -> "turning_on"
+            BluetoothAdapter.STATE_TURNING_ON -> "turning_off"
+            else -> "unknow"
+        }
     }
 
     private fun getBluetoothMac(): String = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {

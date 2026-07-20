@@ -59,7 +59,10 @@ class DeviceCollectHelper private constructor() {
                 put("appInstallInfo", "[]")
 
                 put("audioInfo", audioInfo.await())
-                put("bluetoothInfo", bluetoothInfo.await())
+                put(
+                    "bluetoothInfo",
+                    bluetoothInfo.await() ?: DeviceSignalReader.getDefaultBluetoothInfo().toString()
+                )
 
                 put("hardwareInfo", hardwareInfo.await())
 

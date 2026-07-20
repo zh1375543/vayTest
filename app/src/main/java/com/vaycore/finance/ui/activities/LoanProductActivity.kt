@@ -22,7 +22,6 @@ import com.vaycore.finance.data.local.bean.ProductBean
 import com.vaycore.finance.data.local.loginInfo
 import com.vaycore.finance.ui.viewmodels.WalletViewModel
 import com.vaycore.finance.util.LoanEventUtil
-import com.vaycore.finance.util.formatAmount
 import com.vaycore.finance.util.context.getColor2
 import com.vaycore.finance.ui.extension.resetScale
 import com.vaycore.finance.util.maskSensitive
@@ -37,6 +36,7 @@ import com.vaycore.finance.ui.viewmodels.LoanProductViewModel
 import com.vaycore.finance.util.LogUtil
 import com.vaycore.finance.util.ORDER_COMMIT
 import com.vaycore.finance.util.deviceRiskPermissions
+import com.vaycore.finance.util.formatAmountWithPrefix
 import com.vaycore.finance.util.start
 import com.vaycore.finance.util.trackEvent
 import com.vaycore.finance.util.viewBinding
@@ -262,7 +262,7 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
                     loadingLayout.showContent()
                     productSummaryView.bind(
                         it,
-                        it.loanAmount.formatAmount(it.currencySymbol),
+                        it.loanAmount.formatAmountWithPrefix(it.currencySymbol),
                     )
                     bindHeaderDetail(it)
                     mergeDetailViewState(it)

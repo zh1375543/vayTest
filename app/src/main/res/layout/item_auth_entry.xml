@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rootView"
     app:solidColor="@color/white"
-    app:radius="@dimen/dp_12"
+    app:radius="@dimen/dp_24"
     android:layout_width="match_parent"
     android:layout_height="@dimen/dp_81"
     android:layout_marginTop="@dimen/dp_12"
@@ -14,7 +14,6 @@
         android:layout_width="@dimen/dp_60"
         android:layout_height="@dimen/dp_60"
         android:layout_marginStart="@dimen/dp_16"
-        android:src="@mipmap/ic_cert_kyc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -40,7 +39,7 @@
         android:layout_width="@dimen/dp_24"
         android:layout_height="@dimen/dp_24"
         android:layout_marginEnd="@dimen/dp_12"
-        android:src="@mipmap/ic_mine_arrow"
+        android:src="@mipmap/mine_right"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

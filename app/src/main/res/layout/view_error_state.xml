@@ -4,17 +4,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tvEmpty"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_136"
-        android:layout_marginHorizontal="@dimen/dp_30"
-        android:drawableTop="@mipmap/ic_network_null"
-        android:drawablePadding="@dimen/dp_10"
-        android:gravity="center"
-        android:textColor="@color/C_9CA3AF"
-        android:text="@string/net_error"
-        android:textSize="@dimen/sp_12"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivErrorState"
+        android:layout_width="@dimen/dp_197"
+        android:layout_height="@dimen/dp_197"
+        android:layout_marginTop="@dimen/dp_56"
+        android:contentDescription="@null"
+        android:scaleType="fitCenter"
+        android:src="@mipmap/ic_network_fail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.vaycore.finance.ui.views.StyledTextView
+        android:id="@+id/tvEmpty"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_10"
+        android:gravity="center"
+        android:lineSpacingExtra="@dimen/dp_4"
+        android:minHeight="@dimen/dp_78"
+        android:paddingHorizontal="@dimen/dp_16"
+        android:paddingVertical="@dimen/dp_16"
+        android:text="@string/net_error"
+        android:textColor="@color/C_9CA3AF"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivErrorState"
+        app:radius="@dimen/dp_24"
+        app:solidColor="@color/white" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

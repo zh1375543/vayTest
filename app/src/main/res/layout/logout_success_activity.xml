@@ -1,60 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.vaycore.finance.ui.views.StyledConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:gradientCenterColor="@color/C_F6F6F6"
-    app:gradientEndColor="@color/C_F6F6F6"
-    app:gradientOrientation="TOP_BOTTOM"
-    app:gradientStartColor="@color/color_A3B2FF">
+    style="@style/SuccessPageRoot">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivSuccess"
-        android:layout_width="@dimen/dp_184"
-        android:layout_height="@dimen/dp_184"
-        android:src="@mipmap/ic_logout_success"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="@dimen/dp_100"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        style="@style/SuccessPageImage"
+        android:src="@mipmap/ic_account_del_success" />
 
-    <com.vaycore.finance.ui.views.StyledTextView
-        android:id="@+id/tvTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_40"
-        android:layout_marginHorizontal="@dimen/dp_16"
-        android:paddingVertical="@dimen/dp_23"
-        android:paddingHorizontal="@dimen/dp_40"
-        android:gravity="center"
-        android:text="@string/data_has_deleted"
-        android:textColor="@color/C_111827"
-        android:textSize="@dimen/sp_20"
-        android:textStyle="bold"
-        app:solidColor="@color/transparent"
-        app:radius="@dimen/dp_12"
-        app:layout_constraintTop_toBottomOf="@id/ivSuccess" />
+    <com.vaycore.finance.ui.views.StyledConstraintLayout
+        android:id="@+id/contentPanel"
+        style="@style/SuccessPageContentPanel">
 
-    <TextView
-        android:id="@+id/tvTips"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dp_16"
-        android:layout_marginBottom="@dimen/dp_7"
-        android:gravity="center"
-        android:text="@string/back_to_home_tips"
-        android:textColor="@color/C_374151"
-        android:textSize="@dimen/sp_13"
-        app:layout_constraintBottom_toTopOf="@id/tvOK" />
+        <com.vaycore.finance.ui.views.StyledConstraintLayout
+            android:id="@+id/successCard"
+            style="@style/SuccessPageCard">
 
-    <com.vaycore.finance.ui.views.StyledTextView
-        android:id="@+id/tvOK"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_48"
-        android:layout_margin="@dimen/dp_24"
-        android:layout_marginBottom="@dimen/dp_25"
-        style="@style/mainButton"
-        android:text="@string/complete"
-        app:layout_constraintBottom_toBottomOf="parent" />
+            <TextView
+                android:id="@+id/tvTitle"
+                style="@style/SuccessPageSingleLineTitle"
+                android:text="@string/data_has_deleted" />
+
+        </com.vaycore.finance.ui.views.StyledConstraintLayout>
+
+    </com.vaycore.finance.ui.views.StyledConstraintLayout>
+
+    <com.vaycore.finance.ui.views.StyledConstraintLayout
+        android:id="@+id/bottomActionPanel"
+        style="@style/SuccessPageBottomActionPanel">
+
+        <TextView
+            android:id="@+id/tvTips"
+            style="@style/SuccessPageCountdownText"
+            android:text="@string/back_to_home_tips" />
+
+        <com.vaycore.finance.ui.widget.ActionButtonView
+            android:id="@+id/tvOK"
+            style="@style/SuccessPageActionButton"
+            android:text="@string/complete" />
+
+    </com.vaycore.finance.ui.views.StyledConstraintLayout>
 
 </com.vaycore.finance.ui.views.StyledConstraintLayout>

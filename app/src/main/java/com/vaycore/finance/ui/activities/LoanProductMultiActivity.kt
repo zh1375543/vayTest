@@ -29,7 +29,7 @@ import com.vaycore.finance.util.LoanEventUtil
 import com.vaycore.finance.util.ORDER_COMMIT
 import com.vaycore.finance.util.context.getColor2
 import com.vaycore.finance.util.deviceRiskPermissions
-import com.vaycore.finance.util.formatAmount
+import com.vaycore.finance.util.formatAmountWithPrefix
 import com.vaycore.finance.util.maskSensitive
 import com.vaycore.finance.util.requestRuntimePermissions
 import com.vaycore.finance.util.toJsonString
@@ -213,7 +213,7 @@ class LoanProductMultiActivity : BaseActivity<ActivityLoanProductMultiBinding>()
             bindReceivingAccount(cardInfo)
 
             binding.tvNum.text = products.size.toString()
-            binding.tvAmount.text = loan.canApplyAmount.formatAmount(loan.currencySymbol)
+            binding.tvAmount.text = loan.canApplyAmount.formatAmountWithPrefix(loan.currencySymbol)
             binding.bottomLayout.isVisible = true
             binding.loadingLayout.showContent()
         }

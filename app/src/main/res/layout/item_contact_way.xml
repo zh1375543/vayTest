@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/dp_82"
     android:layout_marginTop="@dimen/dp_10"
-    app:radius="@dimen/dp_8"
+    app:radius="@dimen/dp_24"
     app:solidColor="@color/white">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -12,7 +12,7 @@
         android:layout_width="@dimen/dp_24"
         android:layout_height="@dimen/dp_24"
         android:layout_marginStart="@dimen/dp_20"
-        android:src="@mipmap/ic_contact_email"
+        android:src="@mipmap/ic_contact_call"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

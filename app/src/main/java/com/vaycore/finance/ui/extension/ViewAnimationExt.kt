@@ -56,7 +56,7 @@ fun TextView.animateAmount(
         this.duration = duration
         addUpdateListener {
             val current = it.animatedValue as BigDecimal
-            this@animateAmount.text = "${formatter.format(current)}$prefix"
+            this@animateAmount.text = "$prefix${formatter.format(current)}"
         }
         addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {

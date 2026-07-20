@@ -114,7 +114,7 @@
             android:maxLines="1"
             android:text="200,000,000đ"
             android:textColor="@color/C_111827"
-            android:textSize="@dimen/sp_24"
+            android:textSize="@dimen/sp_16"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -194,7 +194,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableTop="@mipmap/icon_home_unlock"
+            android:drawableTop="@mipmap/ic_loan_unlocked"
             android:drawablePadding="@dimen/dp_14"
             android:text="@string/unlocked"
             android:textColor="@color/white"

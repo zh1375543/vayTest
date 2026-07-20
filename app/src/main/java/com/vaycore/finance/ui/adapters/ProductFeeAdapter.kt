@@ -3,7 +3,7 @@ package com.vaycore.finance.ui.adapters
 import com.vaycore.finance.base.BaseAdapter
 import com.vaycore.finance.data.local.bean.ProductFeeBean
 import com.vaycore.finance.databinding.ItemProductFeeBinding
-import com.vaycore.finance.util.formatAmount
+import com.vaycore.finance.util.formatAmountWithPrefix
 
 class ProductFeeAdapter :
     BaseAdapter<ProductFeeBean, ItemProductFeeBinding>(ItemProductFeeBinding::inflate) {
@@ -13,7 +13,7 @@ class ProductFeeAdapter :
         item: ProductFeeBean,
         position: Int,
     ) = with(binding) {
-        tvFee.text = item.amount.formatAmount()
+        tvFee.text = item.amount.formatAmountWithPrefix()
         tvTitle.text = item.getFeeName()
     }
 }

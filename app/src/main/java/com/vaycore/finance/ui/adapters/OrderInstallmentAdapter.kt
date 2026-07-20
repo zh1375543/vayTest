@@ -35,8 +35,8 @@ class OrderInstallmentAdapter :
             item.isExpend = detailLayout.isVisible
         }
         ivCheck.setImageResource(
-            if (item.isSelect) (if (item.isProcess()) R.mipmap.ic_privacy_check_select else R.mipmap.ic_privacy_check_select)
-            else R.mipmap.ic_privacy_check_normal
+            if (item.isSelect) (if (item.isProcess()) R.mipmap.ic_due_select else R.mipmap.ic_due_select)
+            else R.mipmap.ic_due_normal
         )
         val isSelect =
             if (position == items.size - 1) item.isSelect else (items[position + 1].isSelect)

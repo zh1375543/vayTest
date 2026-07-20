@@ -1,6 +1,7 @@
 package com.vaycore.finance.ui.adapters
 
 import androidx.core.view.isVisible
+import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseAdapter
 import com.vaycore.finance.data.local.bean.BankAccountResponse
 import com.vaycore.finance.databinding.ItemBankCardBinding
@@ -13,8 +14,13 @@ class BankCardListAdapter :
         item: BankAccountResponse,
         position: Int,
     ) = with(binding) {
-        menuGroup.isVisible = item.isDefault != 1
-        ivIcon.isVisible = item.isDefault == 1
+        val isWallet = item.payWay == "WALLET"
+        val isDefault = item.isDefault == 1
+        menuGroup.isVisible = !isDefault
+        compactBottomSpace.isVisible = isDefault
+        ivAccountIcon.setImageResource(
+            if (isWallet) R.mipmap.ic_wallet_defalut else R.mipmap.ic_bank_default
+        )
         tvBankName.text = item.bankName
         tvBankCard.text = item.bankNo
     }

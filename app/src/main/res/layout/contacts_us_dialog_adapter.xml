@@ -9,7 +9,7 @@
         android:layout_width="@dimen/dp_24"
         android:layout_height="@dimen/dp_24"
         android:layout_marginStart="@dimen/dp_20"
-        android:src="@mipmap/ic_contact_cc"
+        android:src="@mipmap/ic_contact_tg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

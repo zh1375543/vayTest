@@ -3,21 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivBack"
-        android:layout_width="@dimen/dp_34"
-        android:layout_height="@dimen/dp_34"
-        android:layout_marginStart="@dimen/dp_16"
-        android:background="@drawable/bg_header_back"
-        android:contentDescription="@null"
-        android:padding="@dimen/dp_6"
-        android:src="@mipmap/ic_page_left" />
-
     <TextView
         android:id="@+id/tvBarTitle"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/dp_44"
-        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="@dimen/dp_60"
         android:autoSizeMaxTextSize="@dimen/sp_16"
         android:autoSizeMinTextSize="@dimen/sp_12"
         android:autoSizeTextType="uniform"
@@ -29,10 +20,22 @@
         android:textStyle="bold"
         tools:text="Title" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivBack"
+        android:layout_width="@dimen/dp_34"
+        android:layout_height="@dimen/dp_34"
+        android:layout_gravity="start|center_vertical"
+        android:layout_marginStart="@dimen/dp_16"
+        android:background="@drawable/bg_header_back"
+        android:contentDescription="@null"
+        android:padding="@dimen/dp_6"
+        android:src="@mipmap/ic_page_left" />
+
     <TextView
         android:id="@+id/tvBarRight"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/dp_44"
+        android:layout_gravity="end|center_vertical"
         android:layout_marginEnd="@dimen/dp_16"
         android:gravity="center_vertical"
         android:textColor="@color/C_111827"

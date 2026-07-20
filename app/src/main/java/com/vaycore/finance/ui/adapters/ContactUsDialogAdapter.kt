@@ -25,9 +25,9 @@ class ContactUsDialogAdapter :
             if (language == "vi") item.vernacularTitle else item.enTitle
         ivTelegram.setImageResource(
             when (tvTelegramTitle.text.toString()) {
-                context.getString(R.string.phone_number) -> R.mipmap.ic_contact_phone
-                context.getString(R.string.email) -> R.mipmap.ic_contact_email
-                else -> R.mipmap.ic_contact_cc
+                context.getString(R.string.phone_number) -> R.mipmap.ic_contact_call
+                context.getString(R.string.email) -> R.mipmap.ic_contact_ems
+                else -> R.mipmap.ic_contact_tg
             }
         )
         tvCopyTelegram.singleClick { _ ->

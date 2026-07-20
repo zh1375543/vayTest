@@ -3,13 +3,13 @@ package com.vaycore.finance.ui.activities
 import android.os.Build
 import android.view.View
 import androidx.activity.viewModels
-import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.isVisible
 import com.vaycore.finance.R
 import com.vaycore.finance.ui.adapters.OrderFeeAdapter
 import com.vaycore.finance.ui.adapters.OrderInstallmentAdapter
 import com.vaycore.finance.base.BaseActivity
 import com.vaycore.finance.data.local.*
+import com.vaycore.finance.data.local.bean.ClickablePart
 import com.vaycore.finance.data.local.bean.LoanOrderDetailResponse
 import com.vaycore.finance.data.local.bean.TrackBean
 import com.vaycore.finance.databinding.ActivityLoanOrderDetailBinding
@@ -18,15 +18,15 @@ import com.vaycore.finance.data.ACT_inRepaymentLink
 import com.vaycore.finance.data.PageOrderDetail
 import com.vaycore.finance.data.PageRepaymentLink
 import com.vaycore.finance.util.LOAN_ORDER_CONFIRMATION_PAGE
-import com.vaycore.finance.util.formatAmount
-import com.vaycore.finance.util.formatAmountWithPrefix
 import com.vaycore.finance.util.context.getColor2
 import com.vaycore.finance.util.showToastMessage
+import com.vaycore.finance.ui.extension.setSpannableClickableTexts
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.util.trackEvent
 import com.vaycore.finance.ui.viewmodels.LoanOrderViewModel
 import com.vaycore.finance.ui.widget.ActionButtonView
 import com.vaycore.finance.ui.showRepayAndReapplyDialog
+import com.vaycore.finance.util.formatAmountWithPrefix
 import com.vaycore.finance.util.isPositive
 import com.vaycore.finance.util.start
 import com.vaycore.finance.util.viewBinding
@@ -41,13 +41,8 @@ class LoanOrderDetailActivity :
     private val vm by viewModels<LoanOrderViewModel>()
 
     private val orderId by lazy { intent.getLongExtra("orderId", 0L) }
-    private var showInstallmentTip = false
-
-    // bottom button area server state (reloanButtonSign): "1"/"3", others (incl. null) fall back to state 2
+    // Server state reloanButtonSign supports "0"-"4"; null/unknown values fall back to state 2.
     private var currentButtonSign: String? = null
-    private val bottomStateSet1 = ConstraintSet()
-    private val bottomStateSet2 = ConstraintSet()
-    private val bottomStateSet3 = ConstraintSet()
     private val feeAdapter by lazy {
         OrderFeeAdapter()
     }
@@ -88,9 +83,6 @@ class LoanOrderDetailActivity :
 
     override fun initView() = with(binding) {
         trackEvent(LOAN_ORDER_CONFIRMATION_PAGE)
-        bottomStateSet1.clone(this@LoanOrderDetailActivity, R.layout.bottom_action_state1)
-        bottomStateSet2.clone(this@LoanOrderDetailActivity, R.layout.bottom_action_state2)
-        bottomStateSet3.clone(this@LoanOrderDetailActivity, R.layout.bottom_action_state3)
         loadingLayout.setOnRetryClickListener {
             loadingLayout.showLoading()
             vm.getOrderDetail(orderId) {
@@ -98,17 +90,31 @@ class LoanOrderDetailActivity :
             }
         }
         rvFee.adapter = feeAdapter
-        tvLeaseContract.singleClick {
-            openContract(getString(R.string.lease_contract), LEASE_AGREEMENT)
-        }
-        tvMortgageContract.singleClick {
-            openContract(getString(R.string.mortgage_contract), PAWN_AGREEMENT)
-        }
+        contractLayout.setSpannableClickableTexts(
+            String.format(
+                getString(R.string.product_detail_agreement),
+                getString(R.string.lease_contract),
+                getString(R.string.mortgage_contract),
+            ),
+            listOf(
+                ClickablePart(
+                    getString(R.string.lease_contract),
+                    getColor2(R.color.color_7087F8),
+                ) {
+                    openContract(getString(R.string.lease_contract), LEASE_AGREEMENT)
+                },
+                ClickablePart(
+                    getString(R.string.mortgage_contract),
+                    getColor2(R.color.color_7087F8),
+                ) {
+                    openContract(getString(R.string.mortgage_contract), PAWN_AGREEMENT)
+                },
+            ),
+        )
         rvPlan.adapter = installAdapter
         tvInstallment.singleClick {
             val expanded = !installmentContentGroup.isVisible
             installmentContentGroup.isVisible = expanded
-            installmentTipLayout.isVisible = expanded && showInstallmentTip
         }
         tvApply.singleClick {
             val payGoUrl = orderDetail?.appOrderRepayDto?.payGoUrl
@@ -132,20 +138,16 @@ class LoanOrderDetailActivity :
             }
         }
         tvRepay.singleClick {
-            // tvRepay is plain Repay, not affected by agreement checkbox (blocking only applies to tvBorrow's Repay & Auto-Apply)
             if (installLayout.isVisible && installAdapter.items.none { it1 -> !it1.isSettle() && it1.isSelect }) {
                 getString(R.string.toast_repayment_select).showToastMessage()
                 return@singleClick
             }
-            if (installLayout.isVisible) {
-                vm.installmentRepay(
-                    orderNo = orderDetail?.appOrderInfoDto?.orderNo,
-                    planNumberList = installAdapter.items
-                        .filter { it1 -> !it1.isSettle() && it1.isSelect }
-                        .map { it.planPart }
-                )
+            if (currentButtonSign == "2" || currentButtonSign == "3") {
+                vm.cancelApply(orderId) {
+                    continueRepayment()
+                }
             } else {
-                tvApply.performClick()
+                continueRepayment()
             }
         }
         tvBorrow.singleClick {
@@ -157,41 +159,74 @@ class LoanOrderDetailActivity :
                 getString(R.string.toast_repayment_select).showToastMessage()
                 return@singleClick
             }
-            if (tvBorrow.text.toString() == getString(R.string.repay)) {
+            if (currentButtonSign == "1") {
+                vm.repayAndBorrow(orderId, 1) {
+                    tvApply.performClick()
+                }
+            } else if (tvBorrow.text.toString() == getString(R.string.repay)) {
                 tvRepay.performClick()
             } else {
                 showRepayAndReapplyDialog(
+                    isDue = tvBorrow.isSelected,
                     closeAction = {
-                        if (currentButtonSign == "3") {
-                            cbAutoApply.isSelected = false
-                            refreshBorrowTextForState3()
-                        }
+                        cbAutoApply.isSelected = false
+                        refreshAutoApplyButtons()
                     },
                     confirmAction = {
-                        vm.repayAndBorrow(orderId) {
+                        vm.repayAndBorrow(orderId, 1) {
                             tvApply.performClick()
                         }
                     }
                 )
             }
         }
+        tvBorrowAll.singleClick {
+            showRepayAndReapplyDialog(
+                isDue = tvBorrow.isSelected,
+                isApplyAll = true,
+                closeAction = {
+                    cbAutoApply.isSelected = false
+                    refreshAutoApplyButtons()
+                },
+                confirmAction = {
+                    vm.repayAndBorrow(orderId, 2) {
+                        tvApply.performClick()
+                    }
+                },
+            )
+        }
         cbAutoApply.setOnClickListener {
             cbAutoApply.isSelected = !cbAutoApply.isSelected
-            refreshBorrowTextForState3()
+            refreshAutoApplyButtons()
         }
         tvPrivacy.setOnClickListener {
             cbAutoApply.isSelected = !cbAutoApply.isSelected
-            refreshBorrowTextForState3()
+            refreshAutoApplyButtons()
         }
     }
 
- /** State 3: checkbox toggles tvBorrow text (checked: Repay & Auto-Apply / unchecked: Repay). */
-    private fun refreshBorrowTextForState3() = with(binding) {
-        if (currentButtonSign == "3") {
+    private fun continueRepayment() = with(binding) {
+        if (installLayout.isVisible) {
+            vm.installmentRepay(
+                orderNo = orderDetail?.appOrderInfoDto?.orderNo,
+                planNumberList = installAdapter.items
+                    .filter { item -> !item.isSettle() && item.isSelect }
+                    .map { it.planPart },
+            )
+        } else {
+            tvApply.performClick()
+        }
+    }
+
+    /** States 3/4 switch between plain repayment and auto-apply actions via the checkbox. */
+    private fun refreshAutoApplyButtons() = with(binding) {
+        if (currentButtonSign == "3" || currentButtonSign == "4") {
             tvBorrow.text = getString(
                 if (cbAutoApply.isSelected) R.string.repay_auto_apply else R.string.repay
             )
-            tvBorrowTip.isVisible = cbAutoApply.isSelected
+            tvBorrowAll.isVisible = currentButtonSign == "4" && cbAutoApply.isSelected
+            tvBorrowTip.isVisible = currentButtonSign == "3" && cbAutoApply.isSelected
+            tvBorrowAllTip.isVisible = currentButtonSign == "4" && cbAutoApply.isSelected
         }
     }
 
@@ -237,9 +272,9 @@ class LoanOrderDetailActivity :
                     })
                     val hasInstallments = !it.installmentRepaymentPlanDTOList.isNullOrEmpty()
                     detailLayout.isVisible = hasInstallments
+                    installmentTipLayout.isVisible = hasInstallments
                     installLayout.isVisible = hasInstallments
                     installmentContentGroup.isVisible = hasInstallments
-                    installmentTipLayout.isVisible = false
                     it.appOrderInfoDto?.let { order ->
                         tvLoanAmount.text =
                             String.format(getString(R.string.loan_amount), order.currency)
@@ -332,7 +367,7 @@ class LoanOrderDetailActivity :
                         tvActuallyAmount.text =
                             it.actualAmount.formatAmountWithPrefix(order.currencySymbol)
                         tvInstallFee.text =
-                            it.totalInstallmentServiceFee.formatAmount(order.currencySymbol)
+                            it.totalInstallmentServiceFee.formatAmountWithPrefix(order.currencySymbol)
                         installGroup.isVisible = it.totalInstallmentServiceFee.isPositive()
                         tvAccount.text = it.bankNo
                         feeAdapter.currencySymbol = order.currencySymbol
@@ -349,7 +384,7 @@ class LoanOrderDetailActivity :
                         tvDueFee.isVisible = isDue
                         tvDueFeeTitle.isVisible = isDue
                         tvDueFee.text =
-                            it.appOrderRepayDto?.penaltyAmount.formatAmount(
+                            it.appOrderRepayDto?.penaltyAmount.formatAmountWithPrefix(
                                 null
                             )
                         tvTotalRepay.isSelected = isDue
@@ -359,7 +394,6 @@ class LoanOrderDetailActivity :
                         tvRepay.isSelected = isDue
                         updateBottomActionColors(isDue)
                         hideBottomActionPanel()
-                        showInstallmentTip = false
                         when (order.status) {
                             ORDER_STATUS_PAYMENT_PENDING,
                             ORDER_STATUS_IN_RENEWAL,
@@ -367,9 +401,6 @@ class LoanOrderDetailActivity :
                             ORDER_STATUS_OVERDUE,
                             ORDER_STATUS_BAD_DEBTS,
                                 -> {
-                                showInstallmentTip = installLayout.isVisible
-                                installmentTipLayout.isVisible =
-                                    installmentContentGroup.isVisible && showInstallmentTip
                                 if (!isFromBatch) {
                                     val selectedAmount =
                                         if (installLayout.isVisible) {
@@ -438,37 +469,25 @@ class LoanOrderDetailActivity :
         bottomActionLayout.isVisible = true
         cbAutoApply.isSelected = true
         tvSelectAmount.text = selectedAmount
-        // apply default layout (state 2) first; buttonResult observer will switch after server responds
+        // Show state 2 while waiting for the server response.
         applyButtonState(null)
     }
 
-    /**
-     * Switch bottom layout by server button state (reloanButtonSign):
-     * "1" two buttons side-by-side, no checkbox, no badge; "3" single button + checkbox toggles text;
-     * others (incl. null) fall back to state 2.
-     * Only re-arranges View position/visibility; does not change repay/borrow/color business logic.
-     */
+    /** Applies state 0-4 to the fixed bottom layout without rearranging constraints. */
     private fun applyButtonState(sign: String?) = with(binding) {
-        currentButtonSign = sign
-        val set = when (sign) {
-            "1" -> bottomStateSet1
-            "3" -> bottomStateSet3
-            else -> bottomStateSet2
+        val normalizedSign = when (sign) {
+            "0", "1", "2", "3", "4" -> sign
+            else -> "2"
         }
-        set.applyTo(bottomActionLayout)
-        syncBottomVisibility(sign)
-        // badge floats at top-right of button (applyTo resets translationY, need to re-apply)
-        tvBorrowTip.translationY = -resources.getDimension(R.dimen.dp_10)
-        when (sign) {
+        currentButtonSign = normalizedSign
+        syncBottomVisibility(normalizedSign)
+        when (normalizedSign) {
+            "0" -> tvRepay.text = getString(R.string.repay)
             "1" -> {
                 tvRepay.text = getString(R.string.repay)
                 tvBorrow.text = getString(R.string.repay_auto_apply)
             }
-            "3" -> tvBorrow.text = getString(
-                if (cbAutoApply.isSelected) R.string.repay_auto_apply else R.string.repay
-            ).also {
-                tvBorrowTip.isVisible = cbAutoApply.isSelected
-            }
+            "3", "4" -> refreshAutoApplyButtons()
             else -> {
                 tvRepay.text = getString(R.string.repay)
                 tvBorrow.text = getString(R.string.repay_auto_apply)
@@ -476,28 +495,26 @@ class LoanOrderDetailActivity :
         }
     }
 
-    /**
-     * Visibility is controlled by code (overrides ConstraintSet), strictly per spec:
-     * tvSelect/tvSelectAmount always visible in all 3 states; tvRepay only in state 1/2;
-     * checkbox and badge only in state 2/3.
-     * Independent of whether installments exist (overall bottom visibility is controlled by show/hideBottomActionPanel).
-     */
     private fun syncBottomVisibility(sign: String?) = with(binding) {
+        val isState0 = sign == "0"
         val isState1 = sign == "1"
         val isState3 = sign == "3"
-        val isState2 = !isState1 && !isState3
+        val isState4 = sign == "4"
+        val isState2 = !isState0 && !isState1 && !isState3 && !isState4
         tvSelect.isVisible = true
         tvSelectAmount.isVisible = true
-        tvRepay.isVisible = isState1 || isState2
-        cbAutoApply.isVisible = isState2 || isState3
-        tvPrivacy.isVisible = isState2 || isState3
-        tvBorrow.isVisible = true
-        tvBorrowTip.isVisible = isState2 || isState3
+        tvRepay.isVisible = isState0 || isState1 || isState2
+        cbAutoApply.isVisible = isState2 || isState3 || isState4
+        tvPrivacy.isVisible = isState2 || isState3 || isState4
+        tvBorrow.isVisible = !isState0
+        tvBorrowAll.isVisible = isState4 && cbAutoApply.isSelected
+        tvBorrowTip.isVisible = isState2 || (isState3 && cbAutoApply.isSelected)
+        tvBorrowAllTip.isVisible = isState4 && cbAutoApply.isSelected
     }
 
-    // agreement block: only in state 2 (neither "1" nor "3") when checkbox is visible and unchecked, block Repay & Auto-Apply
+    // Only state 2 blocks Auto-Apply while the agreement is unchecked.
     private fun shouldBlockUncheckedAgreement(): Boolean =
-        currentButtonSign != "1" && currentButtonSign != "3" &&
+        currentButtonSign != "1" && currentButtonSign != "3" && currentButtonSign != "4" &&
             binding.cbAutoApply.isVisible && !binding.cbAutoApply.isSelected
 
     private fun updateBottomActionColors(isDue: Boolean) = with(binding) {

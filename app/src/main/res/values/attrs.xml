@@ -142,14 +142,4 @@
         <attr name="buttonDisabledAlpha" format="float" />
     </declare-styleable>
 
-    <declare-styleable name="TicketBackgroundLayout">
-        <attr name="ticketColor" format="color|reference" />
-        <attr name="ticketCornerRadius" format="dimension" />
-        <attr name="ticketSideCutoutRadius" format="dimension" />
-        <attr name="ticketSideCutoutCenterPercent" format="float" />
-        <attr name="ticketSideCutoutCenterFromBottom" format="dimension" />
-        <attr name="ticketSideCutoutAnchor" format="reference" />
-        <attr name="ticketSideCutoutAnchorVerticalBias" format="float" />
-        <attr name="ticketSideCutoutAnchorOffsetY" format="dimension" />
-    </declare-styleable>
 </resources>

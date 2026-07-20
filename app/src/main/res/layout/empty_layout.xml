@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_30"
         android:layout_marginTop="@dimen/dp_100"
-        android:drawableTop="@mipmap/ic_order_list_null"
+        android:drawableTop="@mipmap/ic_order_null"
         android:drawablePadding="@dimen/dp_10"
         android:gravity="center"
         android:lineSpacingExtra="@dimen/dp_4"

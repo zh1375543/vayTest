@@ -1,81 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.vaycore.finance.ui.views.StyledConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:gradientCenterColor="@color/C_F6F6F6"
-    app:gradientEndColor="@color/C_F6F6F6"
-    app:gradientOrientation="TR_BL"
-    app:gradientStartColor="@color/color_A3B2FF">
+    style="@style/SuccessPageRoot">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivSuccess"
-        android:layout_width="@dimen/dp_112"
-        android:layout_height="@dimen/dp_112"
-        android:layout_marginTop="@dimen/dp_56"
-        android:contentDescription="@null"
-        android:scaleType="fitCenter"
-        android:src="@mipmap/ic_verify_success"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        style="@style/SuccessPageImage"
+        android:src="@mipmap/ic_verify_success" />
 
     <com.vaycore.finance.ui.views.StyledConstraintLayout
         android:id="@+id/contentPanel"
-        android:layout_width="@dimen/dp_0"
-        android:layout_height="@dimen/dp_0"
-        android:layout_marginTop="@dimen/dp_20"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivSuccess"
-        app:left_top_radius="@dimen/dp_24"
-        app:right_top_radius="@dimen/dp_24"
-        app:strokeColor="@color/white"
-        app:solidColor="@color/C_F6F6F6"
-        app:strokeWidth="@dimen/dp_1">
+        style="@style/SuccessPageContentPanel">
 
         <com.vaycore.finance.ui.views.StyledConstraintLayout
             android:id="@+id/successCard"
-            android:layout_width="@dimen/dp_0"
-            android:layout_height="@dimen/dp_92"
-            android:layout_marginHorizontal="@dimen/dp_20"
-            android:layout_marginTop="@dimen/dp_20"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:radius="@dimen/dp_24"
-            app:solidColor="@color/white">
+            style="@style/SuccessPageCard">
 
             <TextView
                 android:id="@+id/tvTitle"
-                android:layout_width="@dimen/dp_0"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/submit_success"
-                android:textColor="@color/C_111827"
-                android:textSize="@dimen/sp_20"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/tvSubtitle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="packed" />
+                style="@style/SuccessPageTwoLineTitle"
+                android:text="@string/submit_success" />
 
             <TextView
                 android:id="@+id/tvSubtitle"
-                android:layout_width="@dimen/dp_0"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dp_16"
-                android:layout_marginTop="@dimen/dp_8"
-                android:gravity="center"
-                android:text="@string/you_can_borrow"
-                android:textColor="@color/C_6D7280"
-                android:textSize="@dimen/sp_12"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+                style="@style/SuccessPageSubtitle"
+                android:text="@string/you_can_borrow" />
 
         </com.vaycore.finance.ui.views.StyledConstraintLayout>
 
@@ -83,42 +31,17 @@
 
     <com.vaycore.finance.ui.views.StyledConstraintLayout
         android:id="@+id/bottomActionPanel"
-        android:layout_width="@dimen/dp_0"
-        android:paddingTop="@dimen/dp_20"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:left_top_radius="@dimen/dp_24"
-        app:right_top_radius="@dimen/dp_24"
-        app:solidColor="@color/white">
+        style="@style/SuccessPageBottomActionPanel">
 
         <TextView
             android:id="@+id/tvTips"
-            android:layout_width="@dimen/dp_0"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dp_16"
-            android:layout_marginBottom="@dimen/dp_12"
-            android:gravity="center"
-            android:text="@string/back_to_home_tips"
-            android:textColor="@color/C_374151"
-            android:textSize="@dimen/sp_13"
-            app:layout_constraintBottom_toTopOf="@id/BtnOK"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            style="@style/SuccessPageCountdownText"
+            android:text="@string/back_to_home_tips" />
 
         <com.vaycore.finance.ui.widget.ActionButtonView
-            android:id="@+id/BtnOK"
-            android:layout_width="@dimen/dp_0"
-            android:layout_height="@dimen/dp_48"
-            android:layout_marginHorizontal="@dimen/dp_16"
-            android:layout_marginBottom="@dimen/dp_24"
-            android:text="@string/back_to_home"
-            app:actionButtonVariant="filled"
-            app:buttonRadius="@dimen/dp_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:id="@+id/tvOK"
+            style="@style/SuccessPageActionButton"
+            android:text="@string/back_to_home" />
 
     </com.vaycore.finance.ui.views.StyledConstraintLayout>
 

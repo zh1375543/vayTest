@@ -17,7 +17,7 @@ data class BankAccountResponse(
     var bankCode: String = "",
     var bankName: String = "",
     var payWay: String? = null,
-    var cardNo: String = "",
+    var cardNo: String? = null,
     var status: Int = 0,
     var isSelect: Boolean = false,
     val type: Int? = null,

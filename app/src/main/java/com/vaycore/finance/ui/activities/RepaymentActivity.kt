@@ -56,7 +56,7 @@ class RepaymentActivity :
         tvOrderNo.setSpannableClickableText(
             getString(R.string.order_no) + ":" + orderNo,
             orderNo ?: "",
-            getColor2(R.color.white)
+            getColor2(R.color.C_374151)
         ) {
             orderNo?.copyToClipboard()
             getString(R.string.copy_success).showToastMessage()
