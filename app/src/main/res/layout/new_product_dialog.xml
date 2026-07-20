@@ -7,124 +7,116 @@
     android:clipChildren="false"
     android:clipToPadding="false">
 
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dp_8"
-        android:gravity="center"
-        android:includeFontPadding="false"
-        android:maxLines="2"
-        android:text="@string/home_product_num"
-        android:textColor="#F5FF00"
-        android:textSize="@dimen/sp_28"
-        android:textStyle="bold"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivProductNew"
+        android:layout_width="@dimen/dp_230"
+        android:layout_height="@dimen/dp_230"
+        android:importantForAccessibility="no"
+        android:scaleType="fitCenter"
+        android:src="@mipmap/ic_dialog_product_new"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.vaycore.finance.ui.views.StyledConstraintLayout
-        android:id="@+id/cardLayout"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/contentLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_118"
+        android:layout_marginTop="@dimen/dp_150"
         android:clipChildren="false"
         android:clipToPadding="false"
-        android:orientation="vertical"
-        app:gradientCenterColor="#FFFFFF"
-        app:gradientEndColor="#FFFFFF"
-        app:gradientOrientation="TOP_BOTTOM"
-        app:gradientStartColor="#FCFFC7"
-        app:layout_constraintTop_toBottomOf="@id/tvTitle"
-        app:radius="@dimen/dp_28">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <com.vaycore.finance.ui.views.StyledConstraintLayout
-            android:id="@+id/contentLayout"
-            android:layout_width="match_parent"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivProductBg"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:importantForAccessibility="no"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_dialog_product_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_110"
+            android:layout_marginHorizontal="@dimen/dp_48"
+            android:layout_marginTop="@dimen/dp_30"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:maxLines="2"
+            android:text="@string/home_product_num"
+            android:textColor="#7D210C"
+            android:textSize="@dimen/sp_20"
+            android:textStyle="bold|italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:radius="@dimen/dp_28"
-            app:solidColor="@color/white"
-            app:strokeColor="#F6C94D"
-            app:strokeWidth="@dimen/dp_1">
+            tools:text="Congratulations on getting 2 new products!" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvProduct"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dp_10"
-                android:layout_marginTop="@dimen/dp_32"
-                android:orientation="vertical"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintHeight_max="@dimen/dp_250"
-                app:layout_constraintTop_toTopOf="parent"
-                app:spanCount="2"
-                tools:itemCount="2"
-                tools:listitem="@layout/item_product_card" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvProduct"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_12"
+            android:nestedScrollingEnabled="false"
+            android:orientation="vertical"
+            android:overScrollMode="never"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_max="@dimen/dp_180"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            tools:itemCount="2"
+            tools:listitem="@layout/item_product_card" />
 
-            <com.vaycore.finance.ui.views.StyledTextView
-                android:id="@+id/tvLoan"
-                style="@style/mainButton"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/dp_54"
-                android:layout_marginHorizontal="@dimen/dp_60"
-                android:layout_marginTop="@dimen/dp_20"
-                android:layout_marginBottom="@dimen/dp_32"
-                android:text="@string/withdraw_now"
-                android:textSize="@dimen/sp_20"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rvProduct"
-                app:solidColor="@color/color_7087F8" />
-        </com.vaycore.finance.ui.views.StyledConstraintLayout>
-    </com.vaycore.finance.ui.views.StyledConstraintLayout>
+        <TextView
+            android:id="@+id/tvLoan"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_58"
+            android:layout_marginHorizontal="@dimen/dp_52"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginBottom="@dimen/dp_44"
+            android:background="@mipmap/ic_dialog_button_bg"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/immediate_loan"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_20"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rvProduct" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivLeft"
-        android:layout_width="@dimen/dp_112"
-        android:layout_height="@dimen/dp_160"
-        android:importantForAccessibility="no"
-        android:scaleType="fitCenter"
-        android:src="@mipmap/ic_dialog_new_product_left"
-        android:translationY="-64dp"
-        app:layout_constraintStart_toStartOf="@id/cardLayout"
-        app:layout_constraintTop_toTopOf="@id/cardLayout" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivProductClick"
+            android:layout_width="@dimen/dp_64"
+            android:layout_height="@dimen/dp_64"
+            android:importantForAccessibility="no"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/ic_dialog_product_click"
+            android:translationX="@dimen/dp_20"
+            android:translationY="@dimen/dp_20"
+            app:layout_constraintBottom_toBottomOf="@id/tvLoan"
+            app:layout_constraintEnd_toEndOf="@id/tvLoan" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivRight"
-        android:layout_width="@dimen/dp_90"
-        android:layout_height="@dimen/dp_180"
-        android:importantForAccessibility="no"
-        android:scaleType="fitCenter"
-        android:src="@mipmap/ic_dialog_new_product_right"
-        android:translationY="-72dp"
-        app:layout_constraintEnd_toEndOf="@id/cardLayout"
-        app:layout_constraintTop_toTopOf="@id/cardLayout" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivCenter"
-        android:layout_width="@dimen/dp_230"
-        android:layout_height="@dimen/dp_210"
-        android:elevation="@dimen/dp_2"
-        android:importantForAccessibility="no"
-        android:scaleType="fitCenter"
-        android:src="@mipmap/ic_dialog_new_product_center"
-        android:translationY="-100dp"
-        app:layout_constraintEnd_toEndOf="@id/cardLayout"
-        app:layout_constraintStart_toStartOf="@id/cardLayout"
-        app:layout_constraintTop_toTopOf="@id/cardLayout" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivClose"
         android:layout_width="@dimen/dp_30"
         android:layout_height="@dimen/dp_30"
-        android:layout_marginTop="@dimen/dp_28"
+        android:layout_marginTop="@dimen/dp_20"
         android:importantForAccessibility="no"
         android:src="@mipmap/ic_dialog_bottom_close"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardLayout" />
+        app:layout_constraintTop_toBottomOf="@id/contentLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

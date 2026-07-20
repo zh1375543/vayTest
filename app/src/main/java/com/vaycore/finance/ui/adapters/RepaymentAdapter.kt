@@ -16,7 +16,7 @@ class RepaymentAdapter :
         item: BankAccountResponse,
         position: Int,
     ) = with(binding) {
-        tvBankName.text = item.bankName
+        tvBankName.text = item.bankName ?:"-"
         tvBranchName.text = item.branchName ?: "-"
         tvAccount.text = item.bankAccount
         tvAccount.singleClick {

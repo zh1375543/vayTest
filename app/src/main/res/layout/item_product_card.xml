@@ -7,8 +7,9 @@
     android:layout_marginTop="@dimen/dp_8"
     android:gravity="center"
     android:orientation="vertical"
-    app:radius="@dimen/dp_8"
-    app:solidColor="@color/color_E3E8FF"
+    app:radius="@dimen/dp_12"
+    app:gradientStartColor="@color/color_FF8000"
+    app:gradientEndColor="@color/C_F62909"
     app:gradientOrientation="TL_BR">
 
     <TextView
@@ -16,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Loan A"
-        android:textColor="@color/color_FF8000"
+        android:textColor="@color/white"
         android:textSize="@dimen/sp_14"
         android:textStyle="normal"
         android:layout_marginEnd="@dimen/dp_10"
@@ -29,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="200,000,000₫"
-        android:textColor="@color/C_111827"
+        android:textColor="@color/white"
         android:textSize="@dimen/sp_18"
         android:textStyle="bold"
         android:layout_marginStart="@dimen/dp_10"
@@ -41,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/loan_amount"
-        android:textColor="@color/C_111827"
+        android:textColor="@color/white"
         android:textSize="@dimen/sp_13"
         android:layout_marginStart="@dimen/dp_10"
         android:layout_marginTop="@dimen/dp_10"

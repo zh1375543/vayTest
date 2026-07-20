@@ -18,6 +18,7 @@
 
             <include
                 android:id="@+id/calm_layout"
+                android:visibility="gone"
                 layout="@layout/home_calm_layout" />
 
             <include

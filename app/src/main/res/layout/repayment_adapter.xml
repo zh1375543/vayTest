@@ -47,6 +47,8 @@
         android:layout_marginTop="@dimen/dp_10"
         android:drawableEnd="@mipmap/ic_copy_img"
         android:drawablePadding="@dimen/dp_8"
+        android:gravity="center_vertical"
+        android:includeFontPadding="false"
         android:text="@string/bank_branch_name"
         android:textColor="@color/C_111827"
         android:textSize="@dimen/sp_14"

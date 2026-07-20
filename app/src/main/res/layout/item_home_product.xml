@@ -17,7 +17,7 @@
         android:layout_marginStart="@dimen/dp_24"
         android:layout_marginTop="@dimen/dp_24"
         android:scaleType="centerCrop"
-        android:src="@mipmap/ic_order_defalut_img"
+        android:src="@mipmap/ic_product_defalut_img"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/Round_Circle" />

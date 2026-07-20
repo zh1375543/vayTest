@@ -2,7 +2,6 @@ package com.vaycore.finance.ui
 
 import android.app.Dialog
 import android.content.Context
-import androidx.core.graphics.toColorInt
 import androidx.core.view.isVisible
 import com.vaycore.finance.BuildConfig
 import com.vaycore.finance.R
@@ -16,7 +15,6 @@ import com.vaycore.finance.databinding.LoanAgreementDialogBinding
 import com.vaycore.finance.databinding.NewProductDialogBinding
 import com.vaycore.finance.ui.activities.WebViewActivity
 import com.vaycore.finance.ui.adapters.ProductCardAdapter
-import com.vaycore.finance.ui.extension.setClickableTextWithScale
 import com.vaycore.finance.ui.extension.singleClick
 
 fun Context.showLoanAgreementDialog(
@@ -75,11 +73,7 @@ fun Context.createNewProductDialog(
             setCanceledOnTouchOutside(false)
             var shouldTrackClose = true
             val fullText = String.format(getString(R.string.home_product_num), list.size)
-            tvTitle.setClickableTextWithScale(
-                fullText,
-                list.size.toString(),
-                "#89F5C7".toColorInt()
-            )
+            tvTitle.text = fullText
             rvProduct.adapter = ProductCardAdapter().apply {
                 submitItems(list)
             }

@@ -682,7 +682,9 @@
                 android:paddingTop="@dimen/dp_14"
                 android:paddingBottom="@dimen/dp_18"
                 android:visibility="gone"
+                app:left_top_radius="@dimen/dp_24"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:right_top_radius="@dimen/dp_24"
                 app:solidColor="@color/white"
                 tools:visibility="visible">
 
@@ -698,14 +700,21 @@
 
                 <TextView
                     android:id="@+id/tvSelectAmount"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_8"
+                    android:gravity="end"
                     android:singleLine="true"
                     android:textColor="@color/C_111827"
                     android:textSize="@dimen/sp_20"
                     android:textStyle="bold"
-                    app:layout_constraintBaseline_toBaselineOf="@id/tvSelect"
+                    app:autoSizeMaxTextSize="@dimen/sp_20"
+                    app:autoSizeMinTextSize="@dimen/sp_12"
+                    app:autoSizeStepGranularity="@dimen/sp_1"
+                    app:autoSizeTextType="uniform"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tvSelect"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:text="₱500,000,000" />
 
                 <com.vaycore.finance.ui.widget.ActionButtonView
@@ -722,7 +731,7 @@
                     app:buttonTextColor="@color/color_7087F8"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvSelect" />
+                    app:layout_constraintTop_toBottomOf="@id/tvSelectAmount" />
 
                 <com.vaycore.finance.ui.views.SelectableImageView
                     android:id="@+id/cbAutoApply"

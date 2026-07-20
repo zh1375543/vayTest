@@ -236,7 +236,7 @@
         <item name="android:textColor">@color/C_374151</item>
         <item name="android:textSize">@dimen/sp_13</item>
         <item name="android:textStyle">bold</item>
-        <item name="drawableEndCompat">@mipmap/ic_mine_arrow</item>
+        <item name="drawableEndCompat">@mipmap/mine_right</item>
     </style>
 
     <style name="SettingsMenuItem">

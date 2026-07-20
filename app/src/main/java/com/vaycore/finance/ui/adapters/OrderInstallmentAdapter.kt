@@ -42,12 +42,10 @@ class OrderInstallmentAdapter :
             if (position == items.size - 1) item.isSelect else (items[position + 1].isSelect)
         tvStatus.setTextColor(context.getColor2(R.color.C_374151))
         line.isVisible = position != items.size - 1
-        tvDueFee.isVisible = false
-        tvDueFeeTitle.isVisible = false
+        dueFeeItem.isVisible = false
         when (item.planStatus) {
             34, 35 -> {
-                tvDueFee.isVisible = true
-                tvDueFeeTitle.isVisible = true
+                dueFeeItem.isVisible = true
                 tvStatus.text = context.getString(R.string.overdue)
                 tvStatus.setTextColor(context.getColor2(R.color.C_F62909))
             }

@@ -13,21 +13,9 @@
         app:radius="@dimen/dp_8"
         app:solidColor="@color/p50_000000">
 
-        <!--        <com.papa.vay.ui.views.CloudLoadingView-->
-        <!--            android:layout_width="@dimen/dp_40"-->
-        <!--            android:layout_height="@dimen/dp_40"-->
-        <!--            app:cl_barColor="@color/white"-->
-        <!--            app:cl_barCount="5"-->
-        <!--            app:cl_barSpacing="@dimen/dp_6"-->
-        <!--            app:cl_barWidth="@dimen/dp_3"-->
-        <!--            app:cl_duration="900"-->
-        <!--            app:cl_maxHeightRatio="0.9"-->
-        <!--            app:cl_minHeightRatio="0.25"-->
-        <!--            app:cl_radius="@dimen/dp_2" />-->
-        <com.vaycore.finance.ui.views.RotateImageView
-            android:layout_width="@dimen/dp_50"
-            android:layout_height="@dimen/dp_50"
-            android:src="@mipmap/ic_loading" />
+        <com.vaycore.finance.ui.views.ParticleLoadingView
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="@dimen/dp_60" />
 
         <TextView
             android:id="@+id/tvMessage"
