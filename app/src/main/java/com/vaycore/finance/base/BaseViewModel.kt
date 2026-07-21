@@ -72,6 +72,10 @@ abstract class BaseViewModel : ViewModel() {
 
         val api: Api by lazy { createService(Api::class.java, BuildConfig.HTTP_HOST) }
 
+        val sidePageApi: SidePageApi by lazy {
+            createService(SidePageApi::class.java, BuildConfig.HTTP_HOST)
+        }
+
         val trackApi: ApiTrack by lazy { createService(ApiTrack::class.java, BuildConfig.TRACK_HOST) }
 
         private fun <T> createService(

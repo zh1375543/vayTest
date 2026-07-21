@@ -2,11 +2,13 @@ package com.vaycore.finance.ui.views
 
 import android.content.ClipboardManager
 import android.content.Context
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputConnection
 import androidx.annotation.DrawableRes
+import androidx.annotation.ColorInt
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatEditText
 import com.vaycore.finance.R
@@ -21,7 +23,7 @@ class StyledEditTextView @JvmOverloads constructor(
     defStyleAttr: Int = android.R.attr.editTextStyle,
 ) : AppCompatEditText(context, attrs, defStyleAttr) {
 
-    private val shapeAttributes = ShapeAttributeReader(context).read(attrs)
+    private var shapeAttributes = ShapeAttributeReader(context).read(attrs)
     private val backgroundController = ShapeBackgroundController(this)
     private var textStateController: TextStateController? = null
     private val validationSuccessDrawableResId: Int
@@ -85,6 +87,18 @@ class StyledEditTextView @JvmOverloads constructor(
     }
 
     var onPasteListener: ((String) -> Unit)? = null
+
+    /** Updates the shape fill while retaining its corners and state-specific strokes. */
+    fun setSolidColor(@ColorInt color: Int) {
+        shapeAttributes = shapeAttributes.copy(
+            appearance = shapeAttributes.appearance.copy(
+                normal = shapeAttributes.appearance.normal.copy(fillColor = color),
+                focused = shapeAttributes.appearance.focused.copy(fillColor = color),
+            ),
+        )
+        backgroundController.apply(shapeAttributes.appearance)
+        backgroundController.updateBounds(width, height)
+    }
 
     override fun onTextContextMenuItem(id: Int): Boolean {
         return when (id) {

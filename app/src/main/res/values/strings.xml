@@ -35,6 +35,7 @@
 
     <string name="home">Home</string>
     <string name="order">Order</string>
+    <string name="stats">Stats</string>
     <string name="mine">Mine</string>
     <string name="again_exit">Press again to exit the app.</string>
 
@@ -369,6 +370,7 @@ No personal SMS messages will be accessed, read, or collected.</string>
     <string name="gender">Gender</string>
     <string name="please_choose_gender">Please choose gender</string>
     <string name="please_choose">please choose</string>
+    <string name="please_enter">Please enter</string>
     <string name="please_enter_name">Please enter the name</string>
     <string name="please_enter_last_name">Please enter your last name</string>
     <string name="please_enter_first_name">Please enter your first name</string>
@@ -544,4 +546,46 @@ No personal SMS messages will be accessed, read, or collected.</string>
     <string name="phone_collect_title">Notice Regarding Phone Number Collection</string>
     <string name="phone_collect_desc">%s collects, transmits, synchronizes, processes, and stores your phone number information to support SMS verification code login during user authentication.</string>
     <string name="otp">OTP</string>
+    <string name="portal_overview_title">Never give up</string>
+    <string name="portal_records_title">My Plans</string>
+    <string name="portal_insights_title">My Savings Report</string>
+    <string name="portal_loan_amount">Loan amount</string>
+    <string name="portal_saved_this_month">Saved this month :</string>
+    <string name="portal_add_savings_plan">Add Savings Plan now</string>
+    <string name="portal_my_plan">My Plan</string>
+    <string name="portal_no_plan_yet">No plan yet</string>
+    <string name="portal_login_to_view_plan">Log in to view plan</string>
+    <string name="portal_login_now">Log in now</string>
+    <string name="portal_masked_amount">₱*****</string>
+    <string name="portal_masked_saved_amount">₱****</string>
+    <string name="portal_plan_saved">Saved: %1$s</string>
+    <string name="portal_next_save_date">Next saving date: %1$s</string>
+    <string name="portal_save_money">Save Money</string>
+    <string name="portal_saved">Saved</string>
+    <string name="portal_goal">Goal</string>
+    <string name="portal_days_left">%1$d days left</string>
+    <string name="portal_next_planned_saving_time">Next planned saving time:</string>
+    <string name="portal_add_plan_title">Add Plan</string>
+    <string name="portal_first_savings_plan_title">Start Your First Savings Plan</string>
+    <string name="portal_plan_name_plain">Plan Name</string>
+    <string name="portal_plan_name"><font color="#F62909">*</font>Plan Name</string>
+    <string name="portal_target_amount"><font color="#F62909">*</font>How much would you like to save?</string>
+    <string name="portal_saving_frequency"><font color="#F62909">*</font>How often can you save?</string>
+    <string name="portal_each_saving_amount"><font color="#F62909">*</font>How much can you save each time?</string>
+    <string name="portal_plan_icon">Plan Icon</string>
+    <string name="portal_choose_image_source">Choose image source</string>
+    <string name="portal_choose_from_gallery">Gallery</string>
+    <string name="portal_take_photo">Take Photo</string>
+    <string name="portal_start_savings_plan">Start Savings Plan</string>
+    <string name="portal_please_enter_plan_name">Please enter a plan name</string>
+    <string name="portal_please_enter_target_amount">Please enter your savings target</string>
+    <string name="portal_please_choose_frequency">Please choose how often you can save</string>
+    <string name="portal_please_enter_each_amount">Please enter how much you can save each time</string>
+    <string name="portal_amount_must_be_greater_than_zero">Amount must be greater than 0</string>
+    <string name="portal_each_amount_exceeds_target">The amount saved each time cannot be greater than the total amount</string>
+    <string name="portal_frequency_daily">Daily</string>
+    <string name="portal_frequency_weekly">Weekly</string>
+    <string name="portal_frequency_monthly">Monthly</string>
+    <string name="portal_frequency_yearly">Yearly</string>
+    <string name="portal_plan_created_successfully">Savings plan created successfully</string>
 </resources>

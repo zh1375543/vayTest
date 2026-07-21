@@ -1,7 +1,10 @@
 package com.vaycore.finance.ui.activities
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.location.LocationManager
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.widget.doAfterTextChanged
 import androidx.core.widget.doOnTextChanged
@@ -22,7 +25,10 @@ import com.vaycore.finance.data.ACT_InputPhonenumberStart
 import com.vaycore.finance.data.ACT_clickLoginOTP
 import com.vaycore.finance.data.ACT_clickOTPLogin
 import com.vaycore.finance.data.ACT_clickVerifyCode
+import com.vaycore.finance.data.ACT_exit
 import com.vaycore.finance.data.ACT_in
+import com.vaycore.finance.data.PageExit
+import com.vaycore.finance.data.PageHome
 import com.vaycore.finance.data.local.agreePhonePrivacy
 import com.vaycore.finance.data.local.location
 import com.vaycore.finance.ui.viewmodels.DashboardViewModel
@@ -33,11 +39,14 @@ import com.vaycore.finance.util.isPhoneNumberValid
 import com.vaycore.finance.ui.extension.setSpannableClickableTexts
 import com.vaycore.finance.util.showToastMessage
 import com.vaycore.finance.ui.extension.singleClick
+import com.vaycore.finance.ui.navigation.MainNavigator
+import com.vaycore.finance.ui.navigation.MainDestination
+import com.vaycore.finance.ui.sidepage.act.FirstSavingsPlanActivity
 import com.vaycore.finance.util.trackEvent
 import com.vaycore.finance.ui.viewmodels.SessionViewModel
 import com.vaycore.finance.ui.showConfirmDialog
-import com.vaycore.finance.ui.showContactUsDialog
 import com.vaycore.finance.util.SmsAutoFillHelper
+import com.vaycore.finance.util.SPUtil
 import com.vaycore.finance.util.viewBinding
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -58,6 +67,15 @@ class LoginActivity : BaseActivity<LoginActivityBinding>() {
     private var debounceJob: Job? = null
     private val debounceTime = 500L  // treat as input finished after 500ms idle
 
+    private var canNavigateBack = false
+    private var lastBackPressTime = 0L
+
+    private val firstSavingsPlanLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult(),
+    ) {
+        MainNavigator.launch(this@LoginActivity, clearTask = true)
+    }
+
     private val smsHelper by lazy {
         SmsAutoFillHelper { code ->
             binding.etOtp.setText(code)
@@ -67,6 +85,8 @@ class LoginActivity : BaseActivity<LoginActivityBinding>() {
 
     @SuppressLint("MissingPermission")
     override fun initView() = with(binding) {
+        titleBar.showNavigation(false)
+        titleBar.setNavigationAction { handleLoginBack() }
         tvOtpLogin.text=getString(
             R.string.welcome_to_app,
             getString(R.string.app_name)
@@ -78,10 +98,12 @@ class LoginActivity : BaseActivity<LoginActivityBinding>() {
                 act = ACT_in
             )
         )
-        onBackAction(vm) {
-            MainActivity.launch(this@LoginActivity)
-            finish()
-        }
+        onBackPressedDispatcher.addCallback(
+            this@LoginActivity,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() = handleLoginBack()
+            },
+        )
         tvOtpLogin.singleClick {
             vm.recordEvent(
                 TrackBean(
@@ -211,6 +233,7 @@ class LoginActivity : BaseActivity<LoginActivityBinding>() {
                 location = it.longitude to it.latitude
             }
         }
+        homeVm.getUnAuthData()
     }
 
     override fun initObserve() = with(vm) {
@@ -234,14 +257,56 @@ class LoginActivity : BaseActivity<LoginActivityBinding>() {
             it?.let {
                 App.appViewModel.postRiskInfo(PageLogin) {}
                 vm.postDeviceInfo()
-                MainActivity.launch(this@LoginActivity)
-                finish()
+                launchPostLoginDestination()
             }
         }
         homeVm.unAuthResult.observe(this@LoginActivity) {
-            it?.let { homeBean -> showContactUsDialog(homeBean) }
+            canNavigateBack = it?.showBackButton?.trim() == "1"
+            binding.titleBar.showNavigation(canNavigateBack)
         }
     }
+
+    private fun handleLoginBack() {
+        if (canNavigateBack) {
+            MainActivity.launch(this)
+            finish()
+            return
+        }
+
+        val currentTime = System.currentTimeMillis()
+        if (currentTime - lastBackPressTime < EXIT_INTERVAL) {
+            vm.recordEvent(
+                TrackBean(
+                    act = ACT_exit,
+                    result = PageHome,
+                    p = PageExit,
+                )
+            )
+            finishAffinity()
+        } else {
+            lastBackPressTime = currentTime
+            getString(R.string.again_exit).showToastMessage()
+        }
+    }
+
+    private fun launchPostLoginDestination() {
+        val isFirstLogin = !hasHandledFirstLogin()
+        if (isFirstLogin) {
+            SPUtil.newInstance().save(FirstSavingsPlanActivity.KEY_FIRST_LOGIN_HANDLED, true)
+        }
+
+        if (!isFirstLogin || MainNavigator.resolveDestination() != MainDestination.PORTAL) {
+            MainNavigator.launch(this, clearTask = true)
+            return
+        }
+
+        firstSavingsPlanLauncher.launch(Intent(this, FirstSavingsPlanActivity::class.java))
+    }
+
+    private fun hasHandledFirstLogin(): Boolean = SPUtil.newInstance().get(
+        FirstSavingsPlanActivity.KEY_FIRST_LOGIN_HANDLED,
+        false,
+    )
 
     private fun sendCode() {
         if (!binding.etPhone.text.toString().isPhoneNumberValid()) {
@@ -266,5 +331,9 @@ class LoginActivity : BaseActivity<LoginActivityBinding>() {
     override fun onDestroy() {
         super.onDestroy()
         smsHelper.unregister()
+    }
+
+    private companion object {
+        const val EXIT_INTERVAL = 2_000L
     }
 }

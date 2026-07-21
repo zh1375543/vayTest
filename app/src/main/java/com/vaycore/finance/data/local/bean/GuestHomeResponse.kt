@@ -11,7 +11,8 @@ data class GuestHomeResponse(
     val currencySymbol: String? = null,
     val currency: String? = null,
     val appApplyJumpPage: String? = null,
-    val recommendText:String?=null,
+    val recommendText: String? = null,
+    val showBackButton: String? = null,
     val customerConfigs: List<CustomerContactConfig>? = null,
 )
 

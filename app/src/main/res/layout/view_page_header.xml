@@ -31,15 +31,18 @@
         android:padding="@dimen/dp_6"
         android:src="@mipmap/ic_page_left" />
 
-    <TextView
+    <com.vaycore.finance.ui.views.StyledTextView
         android:id="@+id/tvBarRight"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/dp_44"
+        android:layout_height="wrap_content"
         android:layout_gravity="end|center_vertical"
         android:layout_marginEnd="@dimen/dp_16"
         android:gravity="center_vertical"
-        android:textColor="@color/C_111827"
-        android:textSize="@dimen/sp_16"
+        android:textColor="@color/color_7087F8"
+        android:textSize="@dimen/sp_12"
+        android:paddingVertical="@dimen/dp_5"
+        android:paddingHorizontal="@dimen/dp_12"
+        app:radius="@dimen/dp_24"
         android:textStyle="bold"
-        android:visibility="gone" />
+        android:visibility="gone"/>
 </merge>

@@ -11,6 +11,7 @@ import com.vaycore.finance.data.PageCreatePassword
 import com.vaycore.finance.data.PageLogin
 import com.vaycore.finance.data.local.bean.LoginSessionResponse
 import com.vaycore.finance.data.local.bean.TrackBean
+import com.vaycore.finance.data.local.activityUrl
 import com.vaycore.finance.data.local.loginInfo
 import com.vaycore.finance.data.repository.SessionRepository
 import com.vaycore.finance.data.local.token
@@ -69,6 +70,7 @@ class SessionViewModel(
                     )
                 )
                 token = it.token
+                activityUrl = it.activityUrl.orEmpty()
                 loginInfo = it
                 loginResult.value = it
             }

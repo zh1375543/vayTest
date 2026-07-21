@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
+import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.core.view.isVisible
 import com.vaycore.finance.databinding.FormItemViewBinding
@@ -39,6 +40,7 @@ class FormItemView @JvmOverloads constructor(
         binding.etInput.hint = attributes.hint
         binding.tvError.text = attributes.errorText
         binding.ivEndIcon.isVisible = attributes.showContactIcon
+        attributes.inputBackgroundColor?.let(binding.etInput::setSolidColor)
 
         modeController.apply(attributes)
         validationController.bindTextChange()
@@ -54,6 +56,11 @@ class FormItemView @JvmOverloads constructor(
     }
 
     fun showError() {
+        validationController.showError()
+    }
+
+    fun showError(message: CharSequence) {
+        binding.tvError.text = message
         validationController.showError()
     }
 
@@ -81,6 +88,10 @@ class FormItemView @JvmOverloads constructor(
     }
 
     fun getEditText(): StyledEditTextView = binding.etInput
+
+    fun setInputBackgroundColor(@ColorInt color: Int) {
+        binding.etInput.setSolidColor(color)
+    }
 
     fun setDrawableTint(@ColorRes color: Int) {
         modeController.setDrawableTint(color)

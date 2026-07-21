@@ -8,6 +8,7 @@ internal data class FormItemAttributes(
     val inputType: FormInputType,
     val maxLength: Int,
     val showContactIcon: Boolean,
+    val inputBackgroundColor: Int?,
 )
 
 internal enum class FormMode {

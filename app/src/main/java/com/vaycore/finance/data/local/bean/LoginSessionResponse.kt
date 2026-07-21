@@ -7,4 +7,5 @@ data class LoginSessionResponse(
     val appId: Long?,
     val channelId: Long?,
     val passwdSign: Int,
+    val activityUrl: String? = null,
 )

@@ -86,4 +86,8 @@ class PageHeaderView @JvmOverloads constructor(
     fun showAction(visible: Boolean) {
         binding.tvBarRight.isVisible = visible
     }
+
+    fun showNavigation(visible: Boolean) {
+        binding.ivBack.isVisible = visible
+    }
 }

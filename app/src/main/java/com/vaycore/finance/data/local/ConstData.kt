@@ -31,6 +31,13 @@ var token: String
 val isLogin: Boolean
     get() = token.isNotBlank()
 
+/** Login response flag used to restore the A/B home destination on the next launch. */
+var activityUrl: String
+    get() = SPUtil.getInstance().get("ACTIVITY_URL_KEY", "")
+    set(value) {
+        SPUtil.getInstance().save("ACTIVITY_URL_KEY", value)
+    }
+
 var agreePrivacy: Boolean
     get() = SPUtil.newInstance().get("AGREE_PRIVACY_KEY", false)
     set(value) {

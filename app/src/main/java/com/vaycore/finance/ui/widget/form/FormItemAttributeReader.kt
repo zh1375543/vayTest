@@ -1,6 +1,7 @@
 package com.vaycore.finance.ui.widget.form
 
 import android.content.Context
+import android.graphics.Color
 import android.util.AttributeSet
 import androidx.core.content.withStyledAttributes
 import com.vaycore.finance.R
@@ -20,6 +21,11 @@ internal class FormItemAttributeReader(
                 inputType = getInt(R.styleable.FormItemView_inputType, 0).toFormInputType(),
                 maxLength = getInt(R.styleable.FormItemView_editMaxLength, -1),
                 showContactIcon = getBoolean(R.styleable.FormItemView_showContactIcon, false),
+                inputBackgroundColor = if (hasValue(R.styleable.FormItemView_inputBackgroundColor)) {
+                    getColor(R.styleable.FormItemView_inputBackgroundColor, Color.TRANSPARENT)
+                } else {
+                    null
+                },
             )
         }
         return result

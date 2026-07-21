@@ -116,6 +116,7 @@
         <!-- Additional attributes -->
         <attr name="editMaxLength" format="integer" />
         <attr name="showContactIcon" format="boolean" />
+        <attr name="inputBackgroundColor" format="color" />
     </declare-styleable>
     <declare-styleable name="PageHeaderView">
         <attr name="centerText" format="string" />

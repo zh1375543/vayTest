@@ -10,11 +10,11 @@ import com.vaycore.finance.base.BaseActivity
 import com.vaycore.finance.data.ACT_inApp
 import com.vaycore.finance.data.local.EnterTime
 import com.vaycore.finance.data.local.bean.TrackBean
+import com.vaycore.finance.data.local.isLogin
 import com.vaycore.finance.data.local.pCount
 import com.vaycore.finance.databinding.SplashActivityBinding
 import com.vaycore.finance.data.PageHome
-import com.vaycore.finance.data.local.agreePrivacy
-import com.vaycore.finance.util.start
+import com.vaycore.finance.ui.navigation.MainNavigator
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -65,8 +65,15 @@ class SplashActivity :
     private fun jumpNext() {
         if (hasJump) return
         hasJump = true
-        MainActivity.launch(this@SplashActivity)
-        finish()
+        if (isLogin) {
+            MainNavigator.launch(this@SplashActivity, clearTask = true)
+        } else {
+            startActivity(
+                Intent(this@SplashActivity, LoginActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                }
+            )
+        }
 
     }
 
