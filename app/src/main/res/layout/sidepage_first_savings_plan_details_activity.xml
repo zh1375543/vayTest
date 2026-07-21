@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/ic_page_bg">
+
+    <com.vaycore.finance.ui.views.PageHeaderView
+        android:id="@+id/titleBar"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_44"
+        app:fitStatusBar="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:rightText="@string/skip" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:background="@color/p40_FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleBar" />
+
+    <com.vaycore.finance.ui.widget.FormItemView
+        android:id="@+id/targetAmountView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginEnd="@dimen/dp_16"
+        app:editMaxLength="12"
+        app:errorText="@string/portal_please_enter_target_amount"
+        app:formType="input"
+        app:hintText="@string/please_enter"
+        app:inputBackgroundColor="@color/white"
+        app:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider"
+        app:titleText="@string/portal_target_amount" />
+
+    <com.vaycore.finance.ui.widget.FormItemView
+        android:id="@+id/frequencyView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginEnd="@dimen/dp_16"
+        app:errorText="@string/portal_please_choose_frequency"
+        app:formType="select"
+        app:hintText="@string/please_choose"
+        app:inputBackgroundColor="@color/white"
+        app:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/targetAmountView"
+        app:titleText="@string/portal_saving_frequency" />
+
+    <com.vaycore.finance.ui.widget.FormItemView
+        android:id="@+id/eachAmountView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginEnd="@dimen/dp_16"
+        app:editMaxLength="12"
+        app:errorText="@string/portal_please_enter_each_amount"
+        app:formType="input"
+        app:hintText="@string/please_enter"
+        app:inputBackgroundColor="@color/white"
+        app:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/frequencyView"
+        app:titleText="@string/portal_each_saving_amount" />
+
+    <com.vaycore.finance.ui.views.StyledConstraintLayout
+        android:id="@+id/bottomAction"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/dp_24"
+        android:paddingTop="@dimen/dp_16"
+        android:paddingEnd="@dimen/dp_24"
+        android:paddingBottom="@dimen/dp_16"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:left_top_radius="@dimen/dp_30"
+        app:right_top_radius="@dimen/dp_30"
+        app:solidColor="@color/white">
+
+        <com.vaycore.finance.ui.widget.ActionButtonView
+            android:id="@+id/btSubmit"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_52"
+            android:enabled="false"
+            android:text="@string/submit"
+            app:buttonDisabledAlpha="0.6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </com.vaycore.finance.ui.views.StyledConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

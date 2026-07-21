@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipeRefreshLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.vaycore.finance.ui.views.ContentStateLayout
+        android:id="@+id/loadingLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:overScrollMode="never"
+            android:paddingStart="@dimen/dp_16"
+            android:paddingEnd="@dimen/dp_16"
+            android:paddingBottom="@dimen/dp_24">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <com.vaycore.finance.ui.views.StyledConstraintLayout
+            android:id="@+id/summaryCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/dp_220"
+            android:padding="@dimen/dp_20"
+            app:radius="@dimen/dp_24"
+            app:solidColor="@color/white">
+
+            <TextView
+                android:id="@+id/tvLoanAmountTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/portal_loan_amount"
+                android:textColor="@color/C_374151"
+                android:textSize="@dimen/sp_14"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvLoanAmount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_18"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/C_111827"
+                android:textSize="@dimen/sp_24"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/ivMoney"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvLoanAmountTitle"
+                tools:text="0₫" />
+
+            <ImageView
+                android:id="@+id/ivMoney"
+                android:layout_width="@dimen/dp_49"
+                android:layout_height="@dimen/dp_57"
+                android:contentDescription="@null"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_home_money_img"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvSavedTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_24"
+                android:text="@string/portal_saved_this_month"
+                android:textColor="@color/C_6D7280"
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvLoanAmount" />
+
+            <TextView
+                android:id="@+id/tvSavedAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:textColor="@color/C_374151"
+                android:textSize="@dimen/sp_12"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@id/tvSavedTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="0₫" />
+
+            <com.vaycore.finance.ui.widget.ActionButtonView
+                android:id="@+id/tvAddPlan"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_48"
+                android:layout_marginTop="@dimen/dp_24"
+                android:gravity="center"
+                android:text="@string/portal_add_savings_plan"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvSavedTitle"
+                app:radius="@dimen/dp_26" />
+
+        </com.vaycore.finance.ui.views.StyledConstraintLayout>
+
+        <!-- Keep the title, artwork, and state content as one reusable plan section. -->
+        <com.vaycore.finance.ui.views.StyledConstraintLayout
+            android:id="@+id/planSection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_18"
+            android:paddingBottom="@dimen/dp_8">
+
+            <TextView
+                android:id="@+id/tvPlanTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/portal_my_plan"
+                android:textColor="@color/C_111827"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivPlanState"
+                android:layout_width="@dimen/dp_190"
+                android:layout_height="@dimen/dp_137"
+                android:layout_marginTop="@dimen/dp_18"
+                android:adjustViewBounds="true"
+                android:contentDescription="@null"
+                android:scaleType="fitCenter"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvPlanTitle"
+                tools:src="@mipmap/ic_at_no_login" />
+
+            <com.vaycore.finance.ui.views.StyledConstraintLayout
+                android:id="@+id/emptyPlanCard"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_100"
+                android:layout_marginTop="@dimen/dp_10"
+                android:paddingStart="@dimen/dp_16"
+                android:paddingEnd="@dimen/dp_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivPlanState"
+                app:radius="@dimen/dp_16"
+                app:solidColor="@color/white">
+
+                <TextView
+                    android:id="@+id/tvEmptyPlanMessage"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/C_9CA3AF"
+                    android:textSize="@dimen/sp_12"
+                    app:layout_constraintBottom_toTopOf="@id/tvLogin"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    tools:text="Log in to view plan" />
+
+                <com.vaycore.finance.ui.widget.ActionButtonView
+                    android:id="@+id/tvLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dp_36"
+                    android:layout_marginTop="@dimen/dp_6"
+                    android:gravity="center"
+                    android:minWidth="@dimen/dp_100"
+                    android:paddingStart="@dimen/dp_16"
+                    android:paddingEnd="@dimen/dp_16"
+                    android:text="@string/portal_login_now"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_12"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvEmptyPlanMessage"
+                    app:radius="@dimen/dp_18" />
+
+            </com.vaycore.finance.ui.views.StyledConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvPlan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                android:clipToPadding="false"
+                android:nestedScrollingEnabled="false"
+                android:overScrollMode="never"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvPlanTitle"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_sidepage_plan"
+                tools:visibility="visible" />
+
+        </com.vaycore.finance.ui.views.StyledConstraintLayout>
+
+        </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </com.vaycore.finance.ui.views.ContentStateLayout>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

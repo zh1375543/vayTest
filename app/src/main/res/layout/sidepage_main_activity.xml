@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/ic_page_bg">
+
+    <TextView
+        android:id="@+id/tvAppName"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_56"
+        android:gravity="center"
+        android:paddingStart="@dimen/dp_24"
+        android:paddingEnd="@dimen/dp_24"
+        android:text="@string/portal_overview_title"
+        android:textColor="@color/C_111827"
+        android:textSize="@dimen/sp_20"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vpMain"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toTopOf="@id/vBottomNavigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvAppName" />
+
+    <View
+        android:id="@+id/vBottomNavigation"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_56"
+        android:background="@drawable/bg_portal_bottom_navigation"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/vHome"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/vBottomNavigation"
+        app:layout_constraintEnd_toStartOf="@id/vOrder"
+        app:layout_constraintStart_toStartOf="@id/vBottomNavigation"
+        app:layout_constraintTop_toTopOf="@id/vBottomNavigation" />
+
+    <View
+        android:id="@+id/vOrder"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/vBottomNavigation"
+        app:layout_constraintEnd_toStartOf="@id/vStats"
+        app:layout_constraintStart_toEndOf="@id/vHome"
+        app:layout_constraintTop_toTopOf="@id/vBottomNavigation" />
+
+    <View
+        android:id="@+id/vStats"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/vBottomNavigation"
+        app:layout_constraintEnd_toStartOf="@id/vMine"
+        app:layout_constraintStart_toEndOf="@id/vOrder"
+        app:layout_constraintTop_toTopOf="@id/vBottomNavigation" />
+
+    <View
+        android:id="@+id/vMine"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/vBottomNavigation"
+        app:layout_constraintEnd_toEndOf="@id/vBottomNavigation"
+        app:layout_constraintStart_toEndOf="@id/vStats"
+        app:layout_constraintTop_toTopOf="@id/vBottomNavigation" />
+
+    <com.vaycore.finance.ui.views.StyledTextView
+        android:id="@+id/tvHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@mipmap/tab_home_normal"
+        android:gravity="center"
+        android:text="@string/home"
+        android:textColor="@color/C_9CA3AF"
+        android:textSize="@dimen/sp_12"
+        app:drawableTopSelected="@mipmap/tab_home_select"
+        app:layout_constraintBottom_toBottomOf="@id/vHome"
+        app:layout_constraintEnd_toEndOf="@id/vHome"
+        app:layout_constraintStart_toStartOf="@id/vHome"
+        app:layout_constraintTop_toTopOf="@id/vHome"
+        app:textColorSelected="@color/C_111827" />
+
+    <com.vaycore.finance.ui.views.StyledTextView
+        android:id="@+id/tvOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@mipmap/tab_order_normal"
+        android:gravity="center"
+        android:text="@string/order"
+        android:textColor="@color/C_9CA3AF"
+        android:textSize="@dimen/sp_12"
+        app:drawableTopSelected="@mipmap/tab_order_select"
+        app:layout_constraintBottom_toBottomOf="@id/vOrder"
+        app:layout_constraintEnd_toEndOf="@id/vOrder"
+        app:layout_constraintStart_toStartOf="@id/vOrder"
+        app:layout_constraintTop_toTopOf="@id/vOrder"
+        app:textColorSelected="@color/C_111827" />
+
+    <com.vaycore.finance.ui.views.StyledTextView
+        android:id="@+id/tvStats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@mipmap/ic_stats_normal"
+        android:gravity="center"
+        android:text="@string/stats"
+        android:textColor="@color/C_9CA3AF"
+        android:textSize="@dimen/sp_12"
+        app:drawableTopSelected="@mipmap/tab_stats_select"
+        app:layout_constraintBottom_toBottomOf="@id/vStats"
+        app:layout_constraintEnd_toEndOf="@id/vStats"
+        app:layout_constraintStart_toStartOf="@id/vStats"
+        app:layout_constraintTop_toTopOf="@id/vStats"
+        app:textColorSelected="@color/C_111827" />
+
+    <com.vaycore.finance.ui.views.StyledTextView
+        android:id="@+id/tvMine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@mipmap/tab_mine_normal"
+        android:gravity="center"
+        android:text="@string/mine"
+        android:textColor="@color/C_9CA3AF"
+        android:textSize="@dimen/sp_12"
+        app:drawableTopSelected="@mipmap/tab_mine_select"
+        app:layout_constraintBottom_toBottomOf="@id/vMine"
+        app:layout_constraintEnd_toEndOf="@id/vMine"
+        app:layout_constraintStart_toStartOf="@id/vMine"
+        app:layout_constraintTop_toTopOf="@id/vMine"
+        app:textColorSelected="@color/C_111827" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
