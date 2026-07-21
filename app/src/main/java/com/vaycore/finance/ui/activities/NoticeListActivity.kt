@@ -22,21 +22,18 @@ class NoticeListActivity : BaseActivity<ActivityNoticeListBinding>() {
 
     private val messageAdapter by lazy {
         NoticeAdapter().apply {
-            setOnItemClickListener { _, position ->
+            setOnItemClickListener { item, _ ->
                 start<NoticeDetailActivity> {
-                    putExtra("msg", items[position])
+                    putExtra("msg", item)
                 }
-                vm.updateReadStatus(
-                    arrayListOf(items[position].id ?: 0)
-                ) {
-                    items[position].readStatus = true
-                    notifyItemRangeChanged(position, 1, 0)
-                }
+                vm.markAsRead(item)
             }
         }
     }
 
     override fun initView() = with(binding) {
+        rvMessage.adapter = messageAdapter
+        viewModel = vm
         loadingLayout.showLoading()
         loadingLayout.setOnRetryClickListener {
             loadingLayout.showLoading()
@@ -60,20 +57,9 @@ class NoticeListActivity : BaseActivity<ActivityNoticeListBinding>() {
         }
         titleBar.setAction {
             showConfirmDialog(title = getString(R.string.read_msg_title), desc = "") {
-                val unReadIds = messageAdapter.items.filter { !it.readStatus }
-                    .map { it.id ?: 0 }
-                if (unReadIds.isEmpty()) return@showConfirmDialog
-                vm.updateReadStatus(
-                    ArrayList(unReadIds)
-                ) {
-                    messageAdapter.items.onEach {
-                        it.readStatus = true
-                    }
-                    messageAdapter.notifyItemRangeChanged(0, messageAdapter.itemCount, 0)
-                }
+                vm.markAllAsRead()
             }
         }
-        rvMessage.adapter = messageAdapter
     }
 
     override fun onResume() {
@@ -88,9 +74,8 @@ class NoticeListActivity : BaseActivity<ActivityNoticeListBinding>() {
         super.initObserve()
         msgResult.observe(this@NoticeListActivity) {
             binding.apply {
-                messageAdapter.submitItems(it)
                 titleBar.showAction(it.any { it1 -> !it1.readStatus })
-                if (messageAdapter.items.isEmpty()) {
+                if (it.isNullOrEmpty()) {
                     loadingLayout.showEmpty(R.mipmap.ic_notice_null, R.string.empty_message)
                 } else {
                     loadingLayout.showContent()

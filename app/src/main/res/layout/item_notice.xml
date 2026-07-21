@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.vaycore.finance.ui.views.StyledConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    app:radius="@dimen/dp_24"
-    android:layout_marginBottom="@dimen/dp_10"
-    app:solidColor="@color/white"
-    android:layout_height="@dimen/dp_72">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="item"
+            type="com.vaycore.finance.data.local.bean.MessageRecord" />
+    </data>
+
+    <com.vaycore.finance.ui.views.StyledConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_72"
+        android:layout_marginBottom="@dimen/dp_10"
+        app:radius="@dimen/dp_24"
+        app:solidColor="@color/white">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivIcon"
@@ -22,6 +34,7 @@
         android:id="@+id/tvDot"
         android:layout_width="@dimen/dp_12"
         android:layout_height="@dimen/dp_12"
+        android:visibility="@{item.readStatus ? View.GONE : View.VISIBLE}"
         app:layout_constraintEnd_toEndOf="@id/ivIcon"
         app:layout_constraintTop_toTopOf="@id/ivIcon"
         app:radius="@dimen/dp_6"
@@ -32,12 +45,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/dp_16"
-        android:text="12/12/2024 12:00"
+        android:text="@{item.time}"
         android:textColor="@color/C_9CA3AF"
         android:textSize="@dimen/sp_12"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="12/12/2024 12:00" />
 
     <TextView
         android:id="@+id/tvTitle"
@@ -46,12 +60,13 @@
         android:layout_marginHorizontal="@dimen/dp_10"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="Message Title"
+        android:text="@{item.theme}"
         android:textColor="@color/C_111827"
         android:textSize="@dimen/sp_14"
         app:layout_constraintEnd_toStartOf="@id/tvDate"
         app:layout_constraintStart_toEndOf="@id/ivIcon"
-        app:layout_constraintTop_toTopOf="@id/ivIcon" />
+        app:layout_constraintTop_toTopOf="@id/ivIcon"
+        tools:text="Message Title" />
 
     <TextView
         android:id="@+id/tvDesc"
@@ -59,11 +74,13 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="dasjkdashkfjn"
+        android:text="@{item.content}"
         android:textColor="@color/C_9CA3AF"
         android:textSize="@dimen/sp_12"
         app:layout_constraintBottom_toBottomOf="@id/ivIcon"
         app:layout_constraintEnd_toEndOf="@id/tvTitle"
-        app:layout_constraintStart_toStartOf="@id/tvTitle" />
+        app:layout_constraintStart_toStartOf="@id/tvTitle"
+        tools:text="Message content" />
 
-</com.vaycore.finance.ui.views.StyledConstraintLayout>
+    </com.vaycore.finance.ui.views.StyledConstraintLayout>
+</layout>

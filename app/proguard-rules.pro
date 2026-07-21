@@ -133,16 +133,6 @@
 -dontwarn okhttp3.**
 -dontwarn okio.**
 
-# Media3
--keep class androidx.media3.** { *; }
-
-# Tencent Sonic
--keep class com.tencent.sonic.** { *; }
--dontwarn com.tencent.sonic.**
-
-# Jsoup
--keep class org.jsoup.** { *; }
--dontwarn org.jsoup.**
 
 # AppsFlyer
 -keep class com.appsflyer.** { *; }
@@ -160,15 +150,6 @@
 -keep class com.dfsdk.** { *; }
 -dontwarn com.dfsdk.**
 -keep class com.liveness.dflivenesslibrary.** { *; }
-
-# Moat / IAB
--keep class com.moat.** { *; }
--dontwarn com.moat.**
--keep class com.iab.** { *; }
--dontwarn com.iab.**
-
-# Apache Commons Compress
--keep class org.apache.commons.compress.archivers.zip.** { *; }
 
 # Project data classes
 -keep class com.vaycore.finance.data.local.bean.** { *; }

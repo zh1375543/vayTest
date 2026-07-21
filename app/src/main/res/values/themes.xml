@@ -73,11 +73,7 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
-
-    <style name="mainBg">
-        <item name="gradientStartColor">@color/C_F6F6F6</item>
-        <item name="gradientEndColor">@color/C_F6F6F6</item>
-    </style>
+    
 
     <style name="Round_Bottom_12">
         <item name="cornerFamily">rounded</item>
@@ -107,14 +103,4 @@
     </style>
 
 
-<!--    <style name="mainGradientButton">-->
-<!--        <item name="gradientStartColor">@color/C_FBD247</item>-->
-<!--        <item name="gradientEndColor">@color/C_FFE382</item>-->
-<!--        <item name="gradientOrientation">LEFT_RIGHT</item>-->
-<!--        <item name="radius">@dimen/dp_6</item>-->
-<!--        <item name="android:gravity">center</item>-->
-<!--        <item name="android:textSize">@dimen/sp_18</item>-->
-<!--        <item name="android:textStyle">bold</item>-->
-<!--        <item name="android:textColor">@color/C_492E0D</item>-->
-<!--    </style>-->
 </resources>

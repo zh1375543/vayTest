@@ -16,6 +16,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import com.vaycore.finance.App
@@ -50,11 +51,17 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setSystemBar(darkMode = true, adjustForIme = adjustForImeInsets)
         AppStackUtil.addActivity(this)
+        setupDataBindingLifecycle()
         initView()
         initObserve()
         observeGlobalViewModel()
         setupPasteListener(findViewById(android.R.id.content))
         setupClipboardListener()
+    }
+
+    /** Connects LiveData in migrated Data Binding layouts to this Activity lifecycle. */
+    private fun setupDataBindingLifecycle() {
+        (binding as? ViewDataBinding)?.lifecycleOwner = this
     }
 
     private fun showLoading() {
