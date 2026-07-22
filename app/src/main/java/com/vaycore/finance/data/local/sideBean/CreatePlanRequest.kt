@@ -1,4 +1,4 @@
-package com.vaycore.finance.data.local.bean
+package com.vaycore.finance.data.local.sideBean
 
 import com.vaycore.finance.data.local.APPCODE
 

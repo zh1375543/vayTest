@@ -19,8 +19,6 @@ data class PlanItem(
     val progressPercent: BigDecimal? = null,
     val nextSaveDateText: String? = null,
     val suggestSaveAmount: BigDecimal? = null,
-    @SerializedName(value = "planIcon", alternate = ["planIconUrl", "iconUrl"])
     val planIcon: String? = null,
-    @SerializedName(value = "remainingDays", alternate = ["remainDays", "daysLeft"])
     val remainingDays: Int? = null,
 )

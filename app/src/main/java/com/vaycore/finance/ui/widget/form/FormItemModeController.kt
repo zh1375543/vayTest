@@ -14,12 +14,14 @@ internal class FormItemModeController(
 ) {
 
     private var mode = FormMode.INPUT
+    private var usesExternalEndIcon = false
 
     val isSelectMode: Boolean
         get() = mode == FormMode.SELECT
 
     fun apply(attributes: FormItemAttributes) {
         mode = attributes.mode
+        usesExternalEndIcon = attributes.showContactIcon || attributes.endIconRes != null
         input.inputType = attributes.inputType.toAndroidInputType()
 
         if (attributes.maxLength > -1) {
@@ -31,8 +33,7 @@ internal class FormItemModeController(
             input.isClickable = true
             input.isCursorVisible = false
             input.keyListener = null
-            // Keep the original initialization behavior: only install the arrow here.
-            showSelectIndicator()
+            updateSelectIndicator()
         }
     }
 
@@ -41,12 +42,16 @@ internal class FormItemModeController(
         if (!enabled) {
             clearEndDrawable()
         } else if (isSelectMode) {
-            setDrawableTint(R.color.C_9CA3AF)
+            updateSelectIndicator()
         }
     }
 
     fun onValidationStateChanged(hasError: Boolean) {
         if (!isSelectMode) return
+        if (usesExternalEndIcon) {
+            clearEndDrawable()
+            return
+        }
 
         if (hasError) {
             showSelectIndicator()
@@ -58,9 +63,13 @@ internal class FormItemModeController(
 
     fun restoreSelectIndicatorIfNeeded() {
         if (isSelectMode && input.isEnabled) {
-            showSelectIndicator()
-            setDrawableTint(R.color.C_9CA3AF)
+            updateSelectIndicator()
         }
+    }
+
+    fun setUsesExternalEndIcon(usesExternalEndIcon: Boolean) {
+        this.usesExternalEndIcon = usesExternalEndIcon
+        if (isSelectMode && input.isEnabled) updateSelectIndicator()
     }
 
     fun setDrawableTint(@ColorRes color: Int) {
@@ -73,6 +82,15 @@ internal class FormItemModeController(
     private fun showSelectIndicator() {
         val drawableEnd = ContextCompat.getDrawable(input.context, R.mipmap.personal_bottom)
         input.setCompoundDrawablesWithIntrinsicBounds(null, null, drawableEnd, null)
+    }
+
+    private fun updateSelectIndicator() {
+        if (usesExternalEndIcon) {
+            clearEndDrawable()
+        } else {
+            showSelectIndicator()
+            setDrawableTint(R.color.C_9CA3AF)
+        }
     }
 
     private fun clearEndDrawable() {

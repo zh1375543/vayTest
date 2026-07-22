@@ -4,8 +4,14 @@ import android.net.Uri
 import com.vaycore.finance.BuildConfig
 import com.vaycore.finance.data.local.APPCODE
 import com.vaycore.finance.data.local.bean.ApiRequest
-import com.vaycore.finance.data.local.bean.CreatePlanRequest
+import com.vaycore.finance.data.local.sideBean.CreatePlanRequest
+import com.vaycore.finance.data.local.sideBean.PlanCalendarRequest
+import com.vaycore.finance.data.local.sideBean.PlanCalendarResponse
+import com.vaycore.finance.data.local.sideBean.PlanDetailRequest
+import com.vaycore.finance.data.local.sideBean.PlanDetailResponse
 import com.vaycore.finance.data.local.sideBean.PlanHomeResponse
+import com.vaycore.finance.data.local.sideBean.SavePlanRequest
+import com.vaycore.finance.data.local.sideBean.SavePlanResponse
 import com.vaycore.finance.data.local.sideBean.UploadPlanImageResponse
 import com.vaycore.finance.data.network.SidePageApi
 import com.vaycore.finance.util.generateRequestBody
@@ -19,8 +25,25 @@ class SideHomeRepository(
         return api.getPlanHomeData(ApiRequest()).dataOrThrow()
     }
 
+    suspend fun getPlanDetail(planId: Int): PlanDetailResponse? {
+        return api.getPlanDetail(PlanDetailRequest(id = planId.toString())).dataOrThrow()
+    }
+
+    suspend fun getPlanCalendar(year: Int, month: Int): PlanCalendarResponse? {
+        return api.getPlanCalendar(
+            PlanCalendarRequest(
+                year = year,
+                month = month,
+            ),
+        ).dataOrThrow()
+    }
+
     suspend fun addPlan(createPlanRequest: CreatePlanRequest): PlanHomeResponse? {
         return api.addPlan(createPlanRequest).dataOrThrow()
+    }
+
+    suspend fun savePlan(request: SavePlanRequest): SavePlanResponse? {
+        return api.savePlan(request).dataOrThrow()
     }
 
     suspend fun uploadPlanImage(imageUri: Uri): UploadPlanImageResponse? {

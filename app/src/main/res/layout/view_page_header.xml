@@ -45,4 +45,17 @@
         app:radius="@dimen/dp_24"
         android:textStyle="bold"
         android:visibility="gone"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivRightCoin"
+        android:layout_width="@dimen/dp_34"
+        android:layout_height="@dimen/dp_34"
+        android:layout_gravity="end|center_vertical"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:contentDescription="@null"
+        android:scaleType="centerInside"
+        android:src="@mipmap/ic_at_date"
+        android:visibility="gone">
+
+    </androidx.appcompat.widget.AppCompatImageView>
 </merge>

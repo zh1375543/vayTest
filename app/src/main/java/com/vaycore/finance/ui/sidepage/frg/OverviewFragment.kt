@@ -10,6 +10,7 @@ import com.vaycore.finance.databinding.SidepageHomeFragmentBinding
 import com.vaycore.finance.ui.activities.LoginActivity
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.ui.sidepage.act.AddPlanActivity
+import com.vaycore.finance.ui.sidepage.act.PlanDetailsActivity
 import com.vaycore.finance.ui.sidepage.adapter.PlanAdapter
 import com.vaycore.finance.ui.viewmodels.SideHomeViewModel
 import com.vaycore.finance.util.formatAmountWithPrefix
@@ -26,6 +27,13 @@ class OverviewFragment : BaseFragment<SidepageHomeFragmentBinding>(
 
     override fun initView() = with(binding) {
         rvPlan.adapter = planAdapter
+        planAdapter.setOnItemClickListener { plan, _ ->
+            plan.id?.let { planId ->
+                context?.start<PlanDetailsActivity> {
+                    putExtra(PlanDetailsActivity.EXTRA_PLAN_ID, planId)
+                }
+            }
+        }
         tvAddPlan.singleClick {
             openLoginIfNeeded()
         }

@@ -116,11 +116,14 @@
         <!-- Additional attributes -->
         <attr name="editMaxLength" format="integer" />
         <attr name="showContactIcon" format="boolean" />
+        <attr name="formEndIcon" format="reference" />
         <attr name="inputBackgroundColor" format="color" />
     </declare-styleable>
     <declare-styleable name="PageHeaderView">
         <attr name="centerText" format="string" />
         <attr name="rightText" format="string" />
+        <attr name="rightImage" format="reference" />
+        <attr name="showRightImage" format="boolean" />
         <attr name="tintColor" format="color"/>
         <attr name="fitStatusBar" format="boolean" />
     </declare-styleable>

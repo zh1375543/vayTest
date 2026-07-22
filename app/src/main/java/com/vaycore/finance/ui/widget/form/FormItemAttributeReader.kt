@@ -21,6 +21,8 @@ internal class FormItemAttributeReader(
                 inputType = getInt(R.styleable.FormItemView_inputType, 0).toFormInputType(),
                 maxLength = getInt(R.styleable.FormItemView_editMaxLength, -1),
                 showContactIcon = getBoolean(R.styleable.FormItemView_showContactIcon, false),
+                endIconRes = getResourceId(R.styleable.FormItemView_formEndIcon, 0)
+                    .takeIf { it != 0 },
                 inputBackgroundColor = if (hasValue(R.styleable.FormItemView_inputBackgroundColor)) {
                     getColor(R.styleable.FormItemView_inputBackgroundColor, Color.TRANSPARENT)
                 } else {

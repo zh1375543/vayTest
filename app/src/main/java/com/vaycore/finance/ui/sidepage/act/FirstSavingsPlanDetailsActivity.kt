@@ -5,7 +5,7 @@ import androidx.activity.viewModels
 import androidx.core.widget.doAfterTextChanged
 import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseActivity
-import com.vaycore.finance.data.local.bean.CreatePlanRequest
+import com.vaycore.finance.data.local.sideBean.CreatePlanRequest
 import com.vaycore.finance.data.local.bean.SelectionOption
 import com.vaycore.finance.databinding.SidepageFirstSavingsPlanDetailsActivityBinding
 import com.vaycore.finance.ui.extension.singleClick

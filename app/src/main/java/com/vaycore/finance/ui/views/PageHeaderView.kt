@@ -3,10 +3,12 @@ package com.vaycore.finance.ui.views
 import android.app.Activity
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.annotation.ColorInt
+import androidx.annotation.DrawableRes
 import androidx.core.view.isVisible
 import com.vaycore.finance.R
 import com.vaycore.finance.databinding.ViewPageHeaderBinding
@@ -34,6 +36,11 @@ class PageHeaderView @JvmOverloads constructor(
             try {
                 updateTitle(getString(R.styleable.PageHeaderView_centerText))
                 setAction(getString(R.styleable.PageHeaderView_rightText))
+                val rightImage = getDrawable(R.styleable.PageHeaderView_rightImage)
+                setRightImage(rightImage)
+                showRightImage(
+                    getBoolean(R.styleable.PageHeaderView_showRightImage, rightImage != null),
+                )
                 if (hasValue(R.styleable.PageHeaderView_tintColor)) {
                     updateContentColor(getColor(R.styleable.PageHeaderView_tintColor, 0))
                 }
@@ -85,6 +92,29 @@ class PageHeaderView @JvmOverloads constructor(
 
     fun showAction(visible: Boolean) {
         binding.tvBarRight.isVisible = visible
+    }
+
+    /** Sets the image displayed at the right side of the header. */
+    fun setRightImage(image: Drawable?) {
+        binding.ivRightCoin.setImageDrawable(image)
+        binding.ivRightCoin.isVisible = image != null
+    }
+
+    /** Sets the image displayed at the right side of the header from a drawable resource. */
+    fun setRightImage(@DrawableRes imageRes: Int) {
+        binding.ivRightCoin.setImageResource(imageRes)
+        binding.ivRightCoin.isVisible = true
+    }
+
+    fun setRightImageAction(action: (() -> Unit)?) {
+        binding.ivRightCoin.setOnClickListener(null)
+        action?.let { clickAction ->
+            binding.ivRightCoin.singleClick { clickAction() }
+        }
+    }
+
+    fun showRightImage(visible: Boolean) {
+        binding.ivRightCoin.isVisible = visible
     }
 
     fun showNavigation(visible: Boolean) {

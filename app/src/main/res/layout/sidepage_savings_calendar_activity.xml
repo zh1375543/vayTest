@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/ic_page_bg">
+
+    <com.vaycore.finance.ui.views.PageHeaderView
+        android:id="@+id/titleBar"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_56"
+        app:centerText="@string/portal_savings_calendar"
+        app:fitStatusBar="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.vaycore.finance.ui.views.ContentStateLayout
+        android:id="@+id/loadingLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleBar">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:overScrollMode="never"
+            android:paddingStart="@dimen/dp_16"
+            android:paddingTop="@dimen/dp_12"
+            android:paddingEnd="@dimen/dp_16"
+            android:paddingBottom="@dimen/dp_24">
+
+            <com.vaycore.finance.ui.views.StyledLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/dp_720"
+                android:orientation="vertical"
+                android:padding="@dimen/dp_24"
+                app:radius="@dimen/dp_24"
+                app:solidColor="@color/white">
+
+                <com.vaycore.finance.ui.views.StyledConstraintLayout
+                    android:id="@+id/monthSelector"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_56"
+                    app:radius="@dimen/dp_28"
+                    app:solidColor="@color/C_F6F6F6">
+
+                    <TextView
+                        android:id="@+id/tvMonth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/C_374151"
+                        android:textSize="@dimen/sp_18"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/ivSelectDate"
+                        app:layout_constraintHorizontal_chainStyle="packed"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/ivSelectDate"
+                        android:layout_width="@dimen/dp_24"
+                        android:layout_height="@dimen/dp_24"
+                        android:layout_marginStart="@dimen/dp_8"
+                        android:contentDescription="@null"
+                        android:src="@mipmap/ic_select_date"
+                        app:layout_constraintBottom_toBottomOf="@id/tvMonth"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tvMonth"
+                        app:layout_constraintTop_toTopOf="@id/tvMonth" />
+
+                </com.vaycore.finance.ui.views.StyledConstraintLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_48"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView style="@style/SavingsCalendarWeekLabel" android:text="@string/calendar_sunday_short" />
+                    <TextView style="@style/SavingsCalendarWeekLabel" android:text="@string/calendar_monday_short" />
+                    <TextView style="@style/SavingsCalendarWeekLabel" android:text="@string/calendar_tuesday_short" />
+                    <TextView style="@style/SavingsCalendarWeekLabel" android:text="@string/calendar_wednesday_short" />
+                    <TextView style="@style/SavingsCalendarWeekLabel" android:text="@string/calendar_thursday_short" />
+                    <TextView style="@style/SavingsCalendarWeekLabel" android:text="@string/calendar_friday_short" />
+                    <TextView style="@style/SavingsCalendarWeekLabel" android:text="@string/calendar_saturday_short" />
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvCalendar"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_264"
+                    android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvTransactions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never" />
+
+                <TextView
+                    android:id="@+id/tvNoTransactions"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_80"
+                    android:gravity="center"
+                    android:text="@string/portal_no_month_transactions"
+                    android:textColor="@color/C_9CA3AF"
+                    android:textSize="@dimen/sp_14"
+                    android:visibility="gone" />
+
+            </com.vaycore.finance.ui.views.StyledLinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </com.vaycore.finance.ui.views.ContentStateLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

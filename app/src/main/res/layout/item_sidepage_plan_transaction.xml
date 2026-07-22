@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.vaycore.finance.ui.views.StyledConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dp_16"
+    android:minHeight="@dimen/dp_128"
+    android:padding="@dimen/dp_20"
+    app:radius="@dimen/dp_24"
+    app:solidColor="@color/C_F6F6F6">
+
+    <ImageView
+        android:id="@+id/ivTransactionType"
+        android:layout_width="@dimen/dp_40"
+        android:layout_height="@dimen/dp_40"
+        android:contentDescription="@null"
+        android:src="@mipmap/ic_save_img"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTransactionTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_14"
+        android:textColor="@color/C_9CA3AF"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintEnd_toStartOf="@id/tvTransactionDate"
+        app:layout_constraintStart_toEndOf="@id/ivTransactionType"
+        app:layout_constraintTop_toTopOf="@id/ivTransactionType" />
+
+    <TextView
+        android:id="@+id/tvTransactionDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/C_9CA3AF"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ivTransactionType" />
+
+    <TextView
+        android:id="@+id/tvTransactionAmount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_14"
+        android:layout_marginTop="@dimen/dp_4"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivTransactionType"
+        app:layout_constraintTop_toBottomOf="@id/tvTransactionTitle" />
+
+    <ImageView
+        android:id="@+id/ivAddress"
+        android:layout_width="@dimen/dp_20"
+        android:layout_height="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_18"
+        android:contentDescription="@null"
+        android:src="@mipmap/ic_at_address"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivTransactionType" />
+
+    <TextView
+        android:id="@+id/tvTransactionAddress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_12"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/C_6D7280"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintBottom_toBottomOf="@id/ivAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivAddress"
+        app:layout_constraintTop_toTopOf="@id/ivAddress" />
+
+</com.vaycore.finance.ui.views.StyledConstraintLayout>

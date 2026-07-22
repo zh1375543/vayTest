@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.widget.LinearLayout
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import androidx.core.view.isVisible
 import com.vaycore.finance.databinding.FormItemViewBinding
 import com.vaycore.finance.ui.views.StyledEditTextView
@@ -39,7 +40,8 @@ class FormItemView @JvmOverloads constructor(
         binding.tvTitle.text = attributes.title
         binding.etInput.hint = attributes.hint
         binding.tvError.text = attributes.errorText
-        binding.ivEndIcon.isVisible = attributes.showContactIcon
+        binding.ivEndIcon.isVisible = attributes.showContactIcon || attributes.endIconRes != null
+        attributes.endIconRes?.let(binding.ivEndIcon::setImageResource)
         attributes.inputBackgroundColor?.let(binding.etInput::setSolidColor)
 
         modeController.apply(attributes)
@@ -81,6 +83,17 @@ class FormItemView @JvmOverloads constructor(
 
     fun setContactVisible(isVisible: Boolean) {
         binding.ivEndIcon.isVisible = isVisible
+        modeController.setUsesExternalEndIcon(isVisible)
+    }
+
+    fun setEndIcon(@DrawableRes imageRes: Int?) {
+        binding.ivEndIcon.isVisible = imageRes != null
+        imageRes?.let(binding.ivEndIcon::setImageResource)
+        modeController.setUsesExternalEndIcon(imageRes != null)
+    }
+
+    fun setEndIconClick(block: () -> Unit) {
+        binding.ivEndIcon.singleClick { block() }
     }
 
     fun setOnClick(block: () -> Unit) {

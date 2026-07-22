@@ -14,7 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import com.hjq.permissions.permission.PermissionLists
 import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseActivity
-import com.vaycore.finance.data.local.bean.CreatePlanRequest
+import com.vaycore.finance.data.local.sideBean.CreatePlanRequest
 import com.vaycore.finance.data.local.bean.SelectionOption
 import com.vaycore.finance.databinding.SidepageAddPlanActivityBinding
 import com.vaycore.finance.ui.extension.loadImage

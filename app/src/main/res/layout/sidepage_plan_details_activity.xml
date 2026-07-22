@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/ic_page_bg">
+
+    <com.vaycore.finance.ui.views.PageHeaderView
+        android:id="@+id/titleBar"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_56"
+        app:centerText="@string/portal_plan_details"
+        app:fitStatusBar="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.vaycore.finance.ui.views.ContentStateLayout
+        android:id="@+id/loadingLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleBar">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:overScrollMode="never"
+            android:paddingStart="@dimen/dp_16"
+            android:paddingTop="@dimen/dp_12"
+            android:paddingEnd="@dimen/dp_16"
+            android:paddingBottom="@dimen/dp_24">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.vaycore.finance.ui.views.StyledConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp_24"
+                    app:radius="@dimen/dp_24"
+                    app:solidColor="@color/white">
+
+                    <com.vaycore.finance.ui.views.StyledConstraintLayout
+                        android:id="@+id/planNameContainer"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dp_60"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:radius="@dimen/dp_30"
+                        app:solidColor="@color/C_F6F6F6">
+
+                        <TextView
+                            android:id="@+id/tvPlanName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/portal_plan_name_value"
+                            android:textColor="@color/C_374151"
+                            android:textSize="@dimen/sp_18"
+                            android:textStyle="bold"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            app:layout_constraintEnd_toStartOf="@id/ivUpdatePlan"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/ivUpdatePlan"
+                            android:layout_width="@dimen/dp_20"
+                            android:layout_height="@dimen/dp_20"
+                            android:layout_marginStart="@dimen/dp_8"
+                            android:contentDescription="@null"
+                            android:src="@mipmap/ic_at_update"
+                            app:layout_constraintBottom_toBottomOf="@id/tvPlanName"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tvPlanName"
+                            app:layout_constraintTop_toTopOf="@id/tvPlanName" />
+
+                    </com.vaycore.finance.ui.views.StyledConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/tvSavingsGoalLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_18"
+                        android:text="@string/portal_savings_goal"
+                        android:textColor="@color/C_9CA3AF"
+                        android:textSize="@dimen/sp_14"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/planNameContainer" />
+
+                    <TextView
+                        android:id="@+id/tvSavingsGoalAmount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_4"
+                        android:text="@string/portal_preview_amount"
+                        android:textColor="@color/C_111827"
+                        android:textSize="@dimen/sp_18"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvSavingsGoalLabel" />
+
+                    <com.vaycore.finance.ui.widget.ActionButtonView
+                        android:id="@+id/btWithdraw"
+                        android:layout_width="@dimen/dp_112"
+                        android:layout_height="@dimen/dp_42"
+                        android:text="@string/portal_withdraw"
+                        android:textSize="@dimen/sp_13"
+                        app:buttonSolidColor="@color/C_FA560D"
+                        app:layout_constraintBottom_toBottomOf="@id/tvSavingsGoalAmount"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <ProgressBar
+                        android:id="@+id/progressPlan"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dp_12"
+                        android:layout_marginTop="@dimen/dp_18"
+                        android:max="100"
+                        android:progress="35"
+                        android:progressDrawable="@drawable/bg_sidepage_plan_progress"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvSavingsGoalAmount" />
+
+                    <TextView
+                        android:id="@+id/tvSavedLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_14"
+                        android:text="@string/portal_saved"
+                        android:textColor="@color/C_9CA3AF"
+                        android:textSize="@dimen/sp_12"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/progressPlan" />
+
+                    <TextView
+                        android:id="@+id/tvRemainingLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:text="@string/portal_remaining"
+                        android:textColor="@color/C_9CA3AF"
+                        android:textSize="@dimen/sp_12"
+                        app:layout_constraintBaseline_toBaselineOf="@id/tvSavedLabel"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvSavedAmount"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_4"
+                        android:text="@string/portal_preview_amount"
+                        android:textColor="@color/color_7087F8"
+                        android:textSize="@dimen/sp_16"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toStartOf="@id/tvRemainingAmount"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvSavedLabel" />
+
+                    <TextView
+                        android:id="@+id/tvRemainingAmount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/portal_preview_amount"
+                        android:textColor="@color/C_374151"
+                        android:textSize="@dimen/sp_16"
+                        android:textStyle="bold"
+                        app:layout_constraintBaseline_toBaselineOf="@id/tvSavedAmount"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvPlanStartDate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_24"
+                        android:text=""
+                        android:textColor="@color/C_9CA3AF"
+                        android:textSize="@dimen/sp_12"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvSavedAmount" />
+
+                    <TextView
+                        android:id="@+id/tvPlanEndDate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_18"
+                        android:text=""
+                        android:textColor="@color/C_9CA3AF"
+                        android:textSize="@dimen/sp_12"
+                        app:layout_constraintEnd_toStartOf="@id/tvRemainingDays"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvPlanStartDate" />
+
+                    <TextView
+                        android:id="@+id/tvRemainingDays"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/dp_4"
+                        android:text="@string/portal_remaining_with_colon"
+                        android:textColor="@color/C_374151"
+                        android:textSize="@dimen/sp_12"
+                        app:layout_constraintBaseline_toBaselineOf="@id/tvPlanEndDate"
+                        app:layout_constraintEnd_toStartOf="@id/tvRemainingDaysValue" />
+
+                    <TextView
+                        android:id="@+id/tvRemainingDaysValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/color_7087F8"
+                        android:textSize="@dimen/sp_14"
+                        android:textStyle="bold"
+                        app:layout_constraintBaseline_toBaselineOf="@id/tvRemainingDays"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvNextSavingTime"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_18"
+                        android:text=""
+                        android:textColor="@color/C_9CA3AF"
+                        android:textSize="@dimen/sp_12"
+                        app:layout_constraintEnd_toStartOf="@id/tvNextSavingDays"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvPlanEndDate" />
+
+                    <TextView
+                        android:id="@+id/tvNextSavingDays"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/dp_4"
+                        android:text="@string/portal_remaining_with_colon"
+                        android:textColor="@color/C_374151"
+                        android:textSize="@dimen/sp_12"
+                        app:layout_constraintBaseline_toBaselineOf="@id/tvNextSavingTime"
+                        app:layout_constraintEnd_toStartOf="@id/tvNextSavingDaysValue" />
+
+                    <TextView
+                        android:id="@+id/tvNextSavingDaysValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/color_7087F8"
+                        android:textSize="@dimen/sp_14"
+                        android:textStyle="bold"
+                        app:layout_constraintBaseline_toBaselineOf="@id/tvNextSavingDays"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <com.vaycore.finance.ui.widget.ActionButtonView
+                        android:id="@+id/btSaveMoney"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dp_48"
+                        android:layout_marginTop="@dimen/dp_30"
+                        android:text="@string/portal_save_money"
+                        android:textSize="@dimen/sp_20"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvNextSavingTime" />
+
+                </com.vaycore.finance.ui.views.StyledConstraintLayout>
+
+                <TextView
+                    android:id="@+id/tvTransactionDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_28"
+                    android:layout_marginBottom="@dimen/dp_16"
+                    android:text="@string/portal_transaction_details"
+                    android:textColor="@color/C_374151"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold" />
+
+                <com.vaycore.finance.ui.views.StyledConstraintLayout
+                    android:id="@+id/transactionListContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp_16"
+                    app:radius="@dimen/dp_24"
+                    app:solidColor="@color/white">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvTransactions"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clipToPadding="false"
+                        android:nestedScrollingEnabled="false"
+                        android:overScrollMode="never"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </com.vaycore.finance.ui.views.StyledConstraintLayout>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </com.vaycore.finance.ui.views.ContentStateLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
