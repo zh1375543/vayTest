@@ -23,8 +23,10 @@ import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseActivity
 import com.vaycore.finance.base.BaseDialog
 import com.vaycore.finance.data.local.sideBean.PlanDetail
+import com.vaycore.finance.data.local.sideBean.PlanItem
 import com.vaycore.finance.data.local.sideBean.SavePlanRequest
 import com.vaycore.finance.databinding.DialogRecordPhotoBinding
+import com.vaycore.finance.databinding.DialogWithdrawPlanConfirmBinding
 import com.vaycore.finance.databinding.SidepageSavingsRecordActivityBinding
 import com.vaycore.finance.ui.extension.loadImage
 import com.vaycore.finance.ui.extension.singleClick
@@ -41,6 +43,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File
+import java.math.BigDecimal
 import java.util.ArrayDeque
 import java.util.Locale
 
@@ -51,6 +54,12 @@ class SavingsRecordActivity : BaseActivity<SidepageSavingsRecordActivityBinding>
 
     private val viewModel by viewModels<SideHomeViewModel>()
     private val planId by lazy { intent.getIntExtra(EXTRA_PLAN_ID, INVALID_PLAN_ID) }
+    private val recordMode by lazy {
+        RecordMode.from(intent.getStringExtra(EXTRA_RECORD_MODE))
+    }
+    private val availableAmount by lazy {
+        intent.getStringExtra(EXTRA_AVAILABLE_AMOUNT)?.toBigDecimalOrNull()
+    }
     private val selectedPhotos = mutableListOf<Uri>()
     private val uploadedPhotoUrls = mutableMapOf<Uri, String>()
     private val photoUploadQueue = ArrayDeque<Uri>()
@@ -87,6 +96,7 @@ class SavingsRecordActivity : BaseActivity<SidepageSavingsRecordActivityBinding>
         applyBottomInset(bottomActionLayout)
         setupBottomActionKeyboardBehavior()
         bindPlanSummary()
+        bindRecordMode()
 
         rvRecordPhotos.apply {
             layoutManager = GridLayoutManager(this@SavingsRecordActivity, MAX_PHOTO_COUNT)
@@ -110,11 +120,23 @@ class SavingsRecordActivity : BaseActivity<SidepageSavingsRecordActivityBinding>
 
         val planIcon = intent.getStringExtra(EXTRA_PLAN_ICON)
         if (planIcon.isNullOrBlank()) {
-            ivPlanIcon.setImageResource(R.mipmap.ic_as_defalut)
+            ivPlanIcon.setImageResource(R.mipmap.ic_product_defalut_img)
         } else {
-            ivPlanIcon.loadImage(planIcon, R.mipmap.ic_as_defalut)
+            ivPlanIcon.loadImage(planIcon, R.mipmap.ic_product_defalut_img)
         }
         loadingLayout.showContent()
+    }
+
+    private fun bindRecordMode() = with(binding) {
+        if (recordMode == RecordMode.SAVE) return@with
+
+        titleBar.updateTitle(getString(R.string.portal_withdraw_record))
+        tvPlannedSavingsLabel.setText(R.string.portal_saved_amount)
+        savingAmountView.setTitle(getText(R.string.portal_withdraw_amount))
+        locationView.setTitle(getString(R.string.portal_withdraw_location))
+        tvRecordPhotoLabel.setText(R.string.portal_withdraw_photo)
+        tvNotesLabel.setText(R.string.portal_withdraw_reason)
+        btSubmitRecord.setText(R.string.portal_withdraw)
     }
 
     private fun setupBottomActionKeyboardBehavior() {
@@ -168,10 +190,10 @@ class SavingsRecordActivity : BaseActivity<SidepageSavingsRecordActivityBinding>
             uploadNextRecordPhoto()
         }
         viewModel.savePlanResult.observe(this) { event ->
-            if (event.getContentIfNotHandled() != null) {
-                setResult(RESULT_OK)
-                finish()
-            }
+            event.getContentIfNotHandled()?.let { finishWithResult() }
+        }
+        viewModel.withdrawPlanResult.observe(this) { event ->
+            event.getContentIfNotHandled()?.let { finishWithResult() }
         }
     }
 
@@ -201,32 +223,71 @@ class SavingsRecordActivity : BaseActivity<SidepageSavingsRecordActivityBinding>
 
     private fun submitRecord() = with(binding) {
         val amountText = savingAmountView.getText().trim().replace(",", "")
-        val amount = amountText.toDoubleOrNull()
+        val amount = amountText.toBigDecimalOrNull()
         when {
             amountText.isBlank() -> {
-                savingAmountView.showError()
+                savingAmountView.showError(
+                    getString(
+                        if (recordMode == RecordMode.WITHDRAW) {
+                            R.string.portal_please_enter_withdraw_amount
+                        } else {
+                            R.string.portal_please_enter_saving_amount
+                        },
+                    ),
+                )
                 return@with
             }
 
-            amount == null || amount <= 0 -> {
+            amount == null || amount <= BigDecimal.ZERO -> {
                 savingAmountView.showError(getString(R.string.portal_amount_must_be_greater_than_zero))
+                return@with
+            }
+
+            recordMode == RecordMode.WITHDRAW &&
+                availableAmount != null && amount > availableAmount -> {
+                savingAmountView.showError(getString(R.string.portal_withdraw_amount_exceeds_saved))
                 return@with
             }
         }
 
-        viewModel.savePlan(
-            SavePlanRequest(
-                id = planId.toLong(),
-                amount = amount,
-                remark = etNotes.text?.toString()?.trim()?.takeIf(String::isNotBlank),
-                imageUrls = selectedPhotos
-                    .mapNotNull(uploadedPhotoUrls::get)
-                    .joinToString(",")
-                    .takeIf(String::isNotBlank),
-                latitude = currentLatitude,
-                longitude = currentLongitude,
-            ),
+        val request = SavePlanRequest(
+            id = planId.toLong(),
+            amount = amount.toDouble(),
+            remark = etNotes.text?.toString()?.trim()?.takeIf(String::isNotBlank),
+            imageUrls = selectedPhotos
+                .mapNotNull(uploadedPhotoUrls::get)
+                .joinToString(",")
+                .takeIf(String::isNotBlank),
+            locationText = locationView.getText().trim().takeIf(String::isNotBlank),
+            latitude = currentLatitude,
+            longitude = currentLongitude,
         )
+        if (recordMode == RecordMode.WITHDRAW) {
+            showWithdrawConfirmDialog(request)
+        } else {
+            viewModel.savePlan(request)
+        }
+    }
+
+    private fun showWithdrawConfirmDialog(request: SavePlanRequest) {
+        object : BaseDialog<DialogWithdrawPlanConfirmBinding>(
+            this,
+            DialogWithdrawPlanConfirmBinding::inflate,
+        ) {
+            override fun initView() = with(binding) {
+                super.initView()
+                btCancel.singleClick { dismiss() }
+                btConfirm.singleClick {
+                    dismiss()
+                    viewModel.withdrawPlan(request)
+                }
+            }
+        }.show()
+    }
+
+    private fun finishWithResult() {
+        setResult(RESULT_OK)
+        finish()
     }
 
     private fun requestLocationPermission() {
@@ -356,21 +417,79 @@ class SavingsRecordActivity : BaseActivity<SidepageSavingsRecordActivityBinding>
         private const val EXTRA_PLAN_NAME = "extra_plan_name"
         private const val EXTRA_PLAN_ICON = "extra_plan_icon"
         private const val EXTRA_PLANNED_SAVINGS = "extra_planned_savings"
+        private const val EXTRA_RECORD_MODE = "extra_record_mode"
+        private const val EXTRA_AVAILABLE_AMOUNT = "extra_available_amount"
         private const val INVALID_PLAN_ID = -1
         private const val LOCATION_LOG_TAG = "SavingsRecordLocation"
         private const val MAX_PHOTO_COUNT = 3
 
-        fun createIntent(context: Context, plan: PlanDetail, fallbackPlanId: Int): Intent {
-            val plannedSavings = plan.targetAmount ?: plan.savedAmount
+        fun createIntent(
+            context: Context,
+            plan: PlanDetail,
+            fallbackPlanId: Int,
+            recordMode: RecordMode = RecordMode.SAVE,
+        ): Intent {
+            return createIntent(
+                context = context,
+                planId = plan.id ?: fallbackPlanId,
+                planName = plan.planName,
+                planIcon = plan.planIcon,
+                targetAmount = plan.targetAmount,
+                savedAmount = plan.savedAmount,
+                recordMode = recordMode,
+            )
+        }
+
+        fun createIntent(
+            context: Context,
+            plan: PlanItem,
+            recordMode: RecordMode = RecordMode.SAVE,
+        ): Intent {
+            return createIntent(
+                context = context,
+                planId = plan.id ?: INVALID_PLAN_ID,
+                planName = plan.planName,
+                planIcon = plan.planIcon,
+                targetAmount = plan.targetAmount,
+                savedAmount = plan.savedAmount,
+                recordMode = recordMode,
+            )
+        }
+
+        private fun createIntent(
+            context: Context,
+            planId: Int,
+            planName: String?,
+            planIcon: String?,
+            targetAmount: BigDecimal?,
+            savedAmount: BigDecimal?,
+            recordMode: RecordMode,
+        ): Intent {
+            val plannedSavings = if (recordMode == RecordMode.WITHDRAW) {
+                savedAmount
+            } else {
+                targetAmount ?: savedAmount
+            }
             return Intent(context, SavingsRecordActivity::class.java).apply {
-                putExtra(EXTRA_PLAN_ID, plan.id ?: fallbackPlanId)
-                putExtra(EXTRA_PLAN_NAME, plan.planName)
-                putExtra(EXTRA_PLAN_ICON, plan.planIcon)
+                putExtra(EXTRA_PLAN_ID, planId)
+                putExtra(EXTRA_PLAN_NAME, planName)
+                putExtra(EXTRA_PLAN_ICON, planIcon)
                 putExtra(
                     EXTRA_PLANNED_SAVINGS,
                     plannedSavings?.formatAmountWithPrefix().orEmpty(),
                 )
+                putExtra(EXTRA_RECORD_MODE, recordMode.name)
+                putExtra(EXTRA_AVAILABLE_AMOUNT, savedAmount?.toPlainString())
             }
+        }
+    }
+
+    enum class RecordMode {
+        SAVE,
+        WITHDRAW;
+
+        companion object {
+            fun from(value: String?): RecordMode = entries.firstOrNull { it.name == value } ?: SAVE
         }
     }
 }

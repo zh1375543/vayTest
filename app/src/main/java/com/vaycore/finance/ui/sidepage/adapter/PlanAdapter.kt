@@ -50,14 +50,23 @@ class PlanAdapter :
 
     private fun PlanItem.progressValue(): Int {
         progressPercent?.let {
-            return it.toInt().coerceIn(0, 100)
+            return it.multiply(PROGRESS_SCALE)
+                .setScale(0, RoundingMode.DOWN)
+                .toInt()
+                .coerceIn(0, PROGRESS_MAX)
         }
         val goal = targetAmount ?: return 0
         if (goal <= BigDecimal.ZERO) return 0
         return (savedAmount ?: BigDecimal.ZERO)
             .multiply(BigDecimal(100))
+            .multiply(PROGRESS_SCALE)
             .divide(goal, 0, RoundingMode.DOWN)
             .toInt()
-            .coerceIn(0, 100)
+            .coerceIn(0, PROGRESS_MAX)
+    }
+
+    companion object {
+        private const val PROGRESS_MAX = 10000
+        private val PROGRESS_SCALE = BigDecimal(100)
     }
 }

@@ -2,14 +2,20 @@ package com.vaycore.finance.data.network
 
 import com.vaycore.finance.data.local.bean.ApiRequest
 import com.vaycore.finance.data.local.bean.ApiResponse
+import com.vaycore.finance.data.local.sideBean.CancelPlanRequest
 import com.vaycore.finance.data.local.sideBean.CreatePlanRequest
 import com.vaycore.finance.data.local.sideBean.PlanCalendarRequest
 import com.vaycore.finance.data.local.sideBean.PlanCalendarResponse
 import com.vaycore.finance.data.local.sideBean.PlanDetailRequest
 import com.vaycore.finance.data.local.sideBean.PlanDetailResponse
 import com.vaycore.finance.data.local.sideBean.PlanHomeResponse
+import com.vaycore.finance.data.local.sideBean.PlanListRequest
+import com.vaycore.finance.data.local.sideBean.PlanListResponse
 import com.vaycore.finance.data.local.sideBean.SavePlanRequest
 import com.vaycore.finance.data.local.sideBean.SavePlanResponse
+import com.vaycore.finance.data.local.sideBean.SavingsReportResponse
+import com.vaycore.finance.data.local.sideBean.UpdatePlanRequest
+import com.vaycore.finance.data.local.sideBean.UpdatePlanResponse
 import com.vaycore.finance.data.local.sideBean.UploadPlanImageResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -28,6 +34,9 @@ interface SidePageApi {
     @POST("api/user/app/saving/plan/create")
     suspend fun addPlan(@Body param: CreatePlanRequest): ApiResponse<PlanHomeResponse?>
 
+    @POST("api/user/app/saving/plan/cancel")
+    suspend fun cancelPlan(@Body param: CancelPlanRequest): ApiResponse<Any?>
+
     @Multipart
     @POST("api/user/attachment/upload")
     suspend fun uploadPlanImage(
@@ -44,5 +53,17 @@ interface SidePageApi {
 
     @POST("api/user/app/saving/plan/save")
     suspend fun  savePlan(@Body param: SavePlanRequest): ApiResponse<SavePlanResponse?>
+
+    @POST("api/user/app/saving/plan/withdraw")
+    suspend fun  withdrawPlan(@Body param: SavePlanRequest): ApiResponse<SavePlanResponse?>
+
+    @POST("api/user/app/saving/plan/update")
+    suspend fun  updatePlan(@Body param: UpdatePlanRequest): ApiResponse<Any?>
+
+    @POST("api/user/app/saving/report/query")
+    suspend fun saveReport(@Body param: ApiRequest): ApiResponse<SavingsReportResponse?>
+
+    @POST("api/user/app/saving/plan/list")
+    suspend fun getPlanList(@Body param: PlanListRequest): ApiResponse<PlanListResponse?>
 
 }

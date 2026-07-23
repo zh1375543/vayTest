@@ -70,7 +70,7 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/dp_12"
             android:layout_marginTop="@dimen/dp_18"
-            android:max="100"
+            android:max="10000"
             android:progress="0"
             android:progressDrawable="@drawable/bg_sidepage_plan_progress"
             app:layout_constraintEnd_toEndOf="parent"

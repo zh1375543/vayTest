@@ -70,6 +70,7 @@ class SplashActivity :
         } else {
             startActivity(
                 Intent(this@SplashActivity, LoginActivity::class.java).apply {
+                    putExtra(LoginActivity.EXTRA_RETURN_TO_PORTAL, true)
                     flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 }
             )

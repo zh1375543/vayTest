@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/dp_16">
+
+    <com.vaycore.finance.ui.views.StyledConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_24"
+        app:radius="@dimen/dp_24"
+        app:solidColor="@color/white">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivPlanIcon"
+            android:layout_width="@dimen/dp_36"
+            android:layout_height="@dimen/dp_36"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_product_defalut_img"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/Round_Circle" />
+
+        <TextView
+            android:id="@+id/tvPlanName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_14"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/C_111827"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivPlanIcon"
+            app:layout_constraintTop_toTopOf="@id/ivPlanIcon"
+            tools:text="XXXX Savings Plan" />
+
+        <TextView
+            android:id="@+id/tvCancelledTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_14"
+            android:layout_marginTop="@dimen/dp_4"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/C_9CA3AF"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivPlanIcon"
+            app:layout_constraintTop_toBottomOf="@id/tvPlanName"
+            tools:text="Cancelled Time : 2025-01-01" />
+
+        <com.vaycore.finance.ui.views.StyledConstraintLayout
+            android:id="@+id/amountContainer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:padding="@dimen/dp_20"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivPlanIcon"
+            app:radius="@dimen/dp_20"
+            app:solidColor="@color/C_F6F6F6">
+
+            <TextView
+                android:id="@+id/tvSavedLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/portal_amount_saved_plain"
+                android:textColor="@color/C_9CA3AF"
+                android:textSize="@dimen/sp_14"
+                app:layout_constraintBottom_toTopOf="@id/tvGoalLabel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <TextView
+                android:id="@+id/tvSavedAmount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="end"
+                android:maxLines="1"
+                android:textColor="@color/color_7087F8"
+                android:textSize="@dimen/sp_18"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@id/tvSavedLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvSavedLabel"
+                tools:text="20,000,000₫" />
+
+            <TextView
+                android:id="@+id/tvGoalLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_14"
+                android:text="@string/portal_goal"
+                android:textColor="@color/C_9CA3AF"
+                android:textSize="@dimen/sp_14"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvSavedLabel" />
+
+            <TextView
+                android:id="@+id/tvGoalAmount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="end"
+                android:maxLines="1"
+                android:textColor="@color/C_374151"
+                android:textSize="@dimen/sp_18"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@id/tvGoalLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvGoalLabel"
+                tools:text="20,000,000₫" />
+
+        </com.vaycore.finance.ui.views.StyledConstraintLayout>
+
+        <com.vaycore.finance.ui.widget.ActionButtonView
+            android:id="@+id/btViewDetails"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_46"
+            android:layout_marginTop="@dimen/dp_20"
+            android:text="@string/portal_view_plan_details"
+            android:textSize="@dimen/sp_16"
+            app:actionButtonVariant="outline"
+            app:buttonRadius="@dimen/dp_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/amountContainer" />
+
+    </com.vaycore.finance.ui.views.StyledConstraintLayout>
+
+</FrameLayout>

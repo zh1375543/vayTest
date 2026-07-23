@@ -5,12 +5,15 @@ import androidx.fragment.app.viewModels
 import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseFragment
 import com.vaycore.finance.data.local.isLogin
+import com.vaycore.finance.data.local.sideBean.PlanDetail
 import com.vaycore.finance.data.local.sideBean.PlanHomeResponse
+import com.vaycore.finance.data.local.sideBean.PlanItem
 import com.vaycore.finance.databinding.SidepageHomeFragmentBinding
 import com.vaycore.finance.ui.activities.LoginActivity
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.ui.sidepage.act.AddPlanActivity
 import com.vaycore.finance.ui.sidepage.act.PlanDetailsActivity
+import com.vaycore.finance.ui.sidepage.act.SavingsRecordActivity
 import com.vaycore.finance.ui.sidepage.adapter.PlanAdapter
 import com.vaycore.finance.ui.viewmodels.SideHomeViewModel
 import com.vaycore.finance.util.formatAmountWithPrefix
@@ -33,6 +36,9 @@ class OverviewFragment : BaseFragment<SidepageHomeFragmentBinding>(
                     putExtra(PlanDetailsActivity.EXTRA_PLAN_ID, planId)
                 }
             }
+        }
+        planAdapter.onSaveMoney = { plan ->
+            openSavingsRecord(plan)
         }
         tvAddPlan.singleClick {
             openLoginIfNeeded()
@@ -103,8 +109,31 @@ class OverviewFragment : BaseFragment<SidepageHomeFragmentBinding>(
         if (isLogin) {
             context?.start<AddPlanActivity>()
         } else {
-            context?.start<LoginActivity>()
+            context?.let(LoginActivity::launchForPortal)
         }
+    }
+
+    private fun openSavingsRecord(plan: PlanItem) {
+        val planId = plan.id ?: return
+        val context = context ?: return
+        startActivity(
+            SavingsRecordActivity.createIntent(
+                context,
+                plan.toPlanDetail(),
+                planId,
+                SavingsRecordActivity.RecordMode.SAVE,
+            ),
+        )
+    }
+
+    private fun PlanItem.toPlanDetail(): PlanDetail {
+        return PlanDetail(
+            id = id,
+            planName = planName,
+            planIcon = planIcon,
+            targetAmount = targetAmount,
+            savedAmount = savedAmount,
+        )
     }
 
     override fun initObserve() {

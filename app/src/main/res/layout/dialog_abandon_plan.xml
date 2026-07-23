@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.vaycore.finance.ui.views.StyledConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginHorizontal="@dimen/dp_20"
+    android:paddingStart="@dimen/dp_20"
+    android:paddingTop="@dimen/dp_36"
+    android:paddingEnd="@dimen/dp_20"
+    android:paddingBottom="@dimen/dp_30"
+    app:radius="@dimen/dp_12"
+    app:solidColor="@color/white">
+
+    <TextView
+        android:id="@+id/tvDesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:lineSpacingExtra="@dimen/dp_4"
+        android:text="@string/portal_abandon_plan_desc"
+        android:textColor="@color/C_111827"
+        android:textSize="@dimen/sp_15"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.vaycore.finance.ui.widget.ActionButtonView
+        android:id="@+id/btConfirmAbandon"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_44"
+        android:layout_marginTop="@dimen/dp_36"
+        android:layout_marginEnd="@dimen/dp_18"
+        android:text="@string/portal_confirm_abandon"
+        android:textSize="@dimen/sp_12"
+        app:actionButtonVariant="outline"
+        app:buttonRadius="@dimen/dp_4"
+        app:buttonStrokeColor="@color/color_7087F8"
+        app:buttonTextColor="@color/color_7087F8"
+        app:layout_constraintEnd_toStartOf="@id/btThinkAgain"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDesc" />
+
+    <com.vaycore.finance.ui.widget.ActionButtonView
+        android:id="@+id/btThinkAgain"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_44"
+        android:layout_marginStart="@dimen/dp_18"
+        android:text="@string/portal_think_again"
+        android:textSize="@dimen/sp_12"
+        app:buttonRadius="@dimen/dp_4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btConfirmAbandon"
+        app:layout_constraintTop_toTopOf="@id/btConfirmAbandon" />
+
+</com.vaycore.finance.ui.views.StyledConstraintLayout>

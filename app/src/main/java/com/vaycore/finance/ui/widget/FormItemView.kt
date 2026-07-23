@@ -57,6 +57,10 @@ class FormItemView @JvmOverloads constructor(
         modeController.restoreSelectIndicatorIfNeeded()
     }
 
+    fun setTitle(text: CharSequence?) {
+        binding.tvTitle.text = text ?: ""
+    }
+
     fun showError() {
         validationController.showError()
     }

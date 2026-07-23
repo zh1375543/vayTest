@@ -57,4 +57,6 @@ data class PlanRecord(
     val locationText: String? = null,
     val latitude: Double? = null,
     val longitude: Double? = null,
+    val remark: String? = null,
+    val imageUrls: String? = null,
 )

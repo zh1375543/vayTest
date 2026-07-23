@@ -41,6 +41,7 @@ import com.vaycore.finance.util.showToastMessage
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.ui.navigation.MainNavigator
 import com.vaycore.finance.ui.navigation.MainDestination
+import com.vaycore.finance.ui.sidepage.PortalActivity
 import com.vaycore.finance.ui.sidepage.act.FirstSavingsPlanActivity
 import com.vaycore.finance.util.trackEvent
 import com.vaycore.finance.ui.viewmodels.SessionViewModel
@@ -69,6 +70,9 @@ class LoginActivity : BaseActivity<LoginActivityBinding>() {
 
     private var canNavigateBack = false
     private var lastBackPressTime = 0L
+    private val returnToPortal by lazy {
+        intent.getBooleanExtra(EXTRA_RETURN_TO_PORTAL, false)
+    }
 
     private val firstSavingsPlanLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult(),
@@ -268,7 +272,11 @@ class LoginActivity : BaseActivity<LoginActivityBinding>() {
 
     private fun handleLoginBack() {
         if (canNavigateBack) {
-            MainActivity.launch(this)
+            if (returnToPortal) {
+                PortalActivity.launch(this)
+            } else {
+                MainActivity.launch(this)
+            }
             finish()
             return
         }
@@ -333,7 +341,16 @@ class LoginActivity : BaseActivity<LoginActivityBinding>() {
         smsHelper.unregister()
     }
 
-    private companion object {
+    companion object {
+        const val EXTRA_RETURN_TO_PORTAL = "return_to_portal"
+
+        fun launchForPortal(context: android.content.Context) {
+            context.startActivity(
+                Intent(context, LoginActivity::class.java)
+                    .putExtra(EXTRA_RETURN_TO_PORTAL, true),
+            )
+        }
+
         const val EXIT_INTERVAL = 2_000L
     }
 }

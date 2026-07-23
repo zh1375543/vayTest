@@ -1,15 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/order"
-        android:textColor="@color/C_111827"
-        android:textSize="@dimen/sp_20"
-        android:textStyle="bold" />
+    <com.vaycore.finance.ui.views.StyledLinearLayout
+        android:id="@+id/planStatusTabs"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_48"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp_4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:radius="@dimen/dp_24"
+        app:solidColor="@color/white">
 
-</FrameLayout>
+        <com.vaycore.finance.ui.views.StyledTextView
+            android:id="@+id/tvActive"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/portal_plan_status_active"
+            android:textColor="@color/C_9CA3AF"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold"
+            app:radius="@dimen/dp_20"
+            app:selectedColor="@color/color_7087F8"
+            app:textColorSelected="@color/white" />
+
+        <com.vaycore.finance.ui.views.StyledTextView
+            android:id="@+id/tvCompleted"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/portal_plan_status_completed"
+            android:textColor="@color/C_9CA3AF"
+            android:textSize="@dimen/sp_16"
+            app:radius="@dimen/dp_20"
+            app:selectedColor="@color/color_7087F8"
+            app:textColorSelected="@color/white" />
+
+        <com.vaycore.finance.ui.views.StyledTextView
+            android:id="@+id/tvCancelled"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/portal_plan_status_cancelled"
+            android:textColor="@color/C_9CA3AF"
+            android:textSize="@dimen/sp_16"
+            app:radius="@dimen/dp_20"
+            app:selectedColor="@color/color_7087F8"
+            app:textColorSelected="@color/white" />
+
+    </com.vaycore.finance.ui.views.StyledLinearLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vpPlans"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/dp_16"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/planStatusTabs" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

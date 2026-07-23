@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/ic_page_bg">
@@ -10,7 +9,6 @@
         android:id="@+id/titleBar"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_56"
-        app:centerText="@string/portal_savings_record"
         app:fitStatusBar="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,13 +18,12 @@
         android:id="@+id/loadingLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/bottomActionLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleBar">
 
         <androidx.core.widget.NestedScrollView
-            android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
@@ -35,7 +32,7 @@
             android:paddingStart="@dimen/dp_16"
             android:paddingTop="@dimen/dp_12"
             android:paddingEnd="@dimen/dp_16"
-            android:paddingBottom="@dimen/dp_20">
+            android:paddingBottom="@dimen/dp_24">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -73,11 +70,10 @@
                         app:layout_constraintBottom_toBottomOf="@id/ivPlanIcon"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/ivPlanIcon"
-                        app:layout_constraintTop_toTopOf="@id/ivPlanIcon"
-                        tools:text="Savings Plan" />
+                        app:layout_constraintTop_toTopOf="@id/ivPlanIcon" />
 
                     <com.vaycore.finance.ui.views.StyledConstraintLayout
-                        android:id="@+id/plannedSavingsContainer"
+                        android:id="@+id/amountContainer"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/dp_48"
                         android:layout_marginTop="@dimen/dp_16"
@@ -90,29 +86,47 @@
                         app:solidColor="@color/C_F6F6F6">
 
                         <TextView
-                            android:id="@+id/tvPlannedSavingsLabel"
+                            android:id="@+id/tvAmountLabel"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="@string/portal_planned_savings"
                             android:textColor="@color/C_9CA3AF"
                             android:textSize="@dimen/sp_12"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/tvPlannedSavingsAmount"
+                            app:layout_constraintEnd_toStartOf="@id/tvAmount"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
-                            android:id="@+id/tvPlannedSavingsAmount"
+                            android:id="@+id/tvAmount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/C_374151"
-                            android:textSize="@dimen/sp_14"
+                            android:textSize="@dimen/sp_16"
                             android:textStyle="bold"
-                            app:layout_constraintBaseline_toBaselineOf="@id/tvPlannedSavingsLabel"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            tools:text="₫20,000,000" />
+                            app:layout_constraintBaseline_toBaselineOf="@id/tvAmountLabel"
+                            app:layout_constraintEnd_toEndOf="parent" />
 
                     </com.vaycore.finance.ui.views.StyledConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/tvRecordTimeLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_18"
+                        android:textColor="@color/C_9CA3AF"
+                        android:textSize="@dimen/sp_12"
+                        app:layout_constraintEnd_toStartOf="@id/tvRecordTime"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/amountContainer" />
+
+                    <TextView
+                        android:id="@+id/tvRecordTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_7087F8"
+                        android:textSize="@dimen/sp_12"
+                        app:layout_constraintBaseline_toBaselineOf="@id/tvRecordTimeLabel"
+                        app:layout_constraintEnd_toEndOf="parent" />
 
                 </com.vaycore.finance.ui.views.StyledConstraintLayout>
 
@@ -122,7 +136,7 @@
                     android:layout_marginTop="@dimen/dp_16"
                     android:orientation="vertical"
                     android:paddingStart="@dimen/dp_10"
-                    android:paddingTop="@dimen/dp_20"
+                    android:paddingTop="@dimen/dp_16"
                     android:paddingEnd="@dimen/dp_10"
                     android:paddingBottom="@dimen/dp_24"
                     app:radius="@dimen/dp_24"
@@ -132,8 +146,6 @@
                         android:id="@+id/savingAmountView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:editMaxLength="12"
-                        app:errorText="@string/portal_please_enter_saving_amount"
                         app:formType="input"
                         app:hintText="@string/please_enter"
                         app:inputBackgroundColor="@color/C_F6F6F6"
@@ -157,113 +169,38 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dp_16"
-                        android:layout_marginTop="@dimen/dp_16"
+                        android:layout_marginTop="@dimen/dp_12"
+                        android:layout_marginEnd="@dimen/dp_16"
                         android:text="@string/portal_record_photo"
                         android:textColor="@color/C_374151"
-                        android:textSize="@dimen/sp_14" />
+                        android:textSize="@dimen/sp_14"
+                        android:textStyle="bold" />
 
-                    <LinearLayout
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvRecordPhotos"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_88"
-                        android:layout_marginTop="@dimen/dp_10"
                         android:layout_marginStart="@dimen/dp_16"
-                        android:orientation="horizontal">
+                        android:layout_marginEnd="@dimen/dp_16"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:nestedScrollingEnabled="false"
+                        android:overScrollMode="never" />
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rvRecordPhotos"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:nestedScrollingEnabled="false"
-                            android:overScrollMode="never"
-                            android:visibility="gone" />
-
-                        <com.vaycore.finance.ui.views.StyledConstraintLayout
-                            android:id="@+id/photoUploadView"
-                            android:layout_width="@dimen/dp_88"
-                            android:layout_height="@dimen/dp_88"
-                            android:layout_marginStart="@dimen/dp_8"
-                            app:autoFillPressedColor="true"
-                            app:radius="@dimen/dp_18"
-                            app:solidColor="@color/C_F6F6F6">
-
-                            <ImageView
-                                android:layout_width="0dp"
-                                android:layout_height="0dp"
-                                android:contentDescription="@string/portal_record_photo"
-                                android:padding="@dimen/dp_30"
-                                android:scaleType="centerCrop"
-                                android:src="@mipmap/ic_at_upload"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                        </com.vaycore.finance.ui.views.StyledConstraintLayout>
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/tvNotesLabel"
+                    <com.vaycore.finance.ui.widget.FormItemView
+                        android:id="@+id/notesView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_16"
-                        android:text="@string/portal_notes"
-                        android:textColor="@color/C_374151"
-                        android:textSize="@dimen/sp_14" />
-
-                    <com.vaycore.finance.ui.views.StyledConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/dp_48"
-                        android:layout_marginTop="@dimen/dp_10"
-                        app:radius="@dimen/dp_24"
-                        app:solidColor="@color/C_F6F6F6">
-
-                        <androidx.appcompat.widget.AppCompatEditText
-                            android:id="@+id/etNotes"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:background="@null"
-                            android:hint="@string/please_enter"
-                            android:inputType="textCapSentences"
-                            android:maxLines="1"
-                            android:paddingStart="@dimen/dp_14"
-                            android:paddingEnd="@dimen/dp_14"
-                            android:textColor="@color/C_374151"
-                            android:textColorHint="@color/C_9CA3AF"
-                            android:textSize="@dimen/sp_13"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </com.vaycore.finance.ui.views.StyledConstraintLayout>
+                        android:layout_marginTop="@dimen/dp_12"
+                        app:formType="input"
+                        app:hintText="@string/please_enter"
+                        app:inputBackgroundColor="@color/C_F6F6F6"
+                        app:inputType="text"
+                        app:titleText="@string/portal_notes" />
 
                 </com.vaycore.finance.ui.views.StyledLinearLayout>
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </com.vaycore.finance.ui.views.ContentStateLayout>
-
-    <LinearLayout
-        android:id="@+id/bottomActionLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingStart="@dimen/dp_24"
-        android:paddingTop="@dimen/dp_12"
-        android:paddingEnd="@dimen/dp_24"
-        android:paddingBottom="@dimen/dp_16"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <com.vaycore.finance.ui.widget.ActionButtonView
-            android:id="@+id/btSubmitRecord"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_52"
-            android:text="@string/portal_save_money" />
-
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

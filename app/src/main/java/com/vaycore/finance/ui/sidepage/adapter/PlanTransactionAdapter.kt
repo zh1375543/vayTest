@@ -11,6 +11,8 @@ data class PlanTransactionItem(
     val amount: String,
     val date: String,
     val address: String? = null,
+    val remark: String? = null,
+    val imageUrls: String? = null,
     val isSaving: Boolean,
 )
 

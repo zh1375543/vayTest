@@ -119,9 +119,7 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
                 selectPage(2)
             }
         }
-        ivCustomer.singleClick {
-            vm.getUnAuthData(true)
-        }
+      
         ivMsg.singleClick {
             ifLoginAction {
                 start<NoticeListActivity>()

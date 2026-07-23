@@ -9,7 +9,9 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseActivity
+import com.vaycore.finance.data.local.isLogin
 import com.vaycore.finance.databinding.SidepageMainActivityBinding
+import com.vaycore.finance.ui.activities.LoginActivity
 import com.vaycore.finance.ui.sidepage.frg.AccountFragment
 import com.vaycore.finance.ui.sidepage.frg.InsightsFragment
 import com.vaycore.finance.ui.sidepage.frg.OverviewFragment
@@ -56,9 +58,9 @@ class PortalActivity : BaseActivity<SidepageMainActivityBinding>() {
         }
 
         vHome.setOnClickListener { selectPage(OVERVIEW_PAGE) }
-        vOrder.setOnClickListener { selectPage(RECORDS_PAGE) }
-        vStats.setOnClickListener { selectPage(INSIGHTS_PAGE) }
-        vMine.setOnClickListener { selectPage(ACCOUNT_PAGE) }
+        vOrder.setOnClickListener { openAuthenticatedPage(RECORDS_PAGE) }
+        vStats.setOnClickListener { openAuthenticatedPage(INSIGHTS_PAGE) }
+        vMine.setOnClickListener { openAuthenticatedPage(ACCOUNT_PAGE) }
 
         selectPage(initialPage)
     }
@@ -67,6 +69,14 @@ class PortalActivity : BaseActivity<SidepageMainActivityBinding>() {
         val targetPage = page.coerceIn(OVERVIEW_PAGE, ACCOUNT_PAGE)
         updatePageUi(targetPage)
         binding.vpMain.setCurrentItem(targetPage, false)
+    }
+
+    private fun openAuthenticatedPage(page: Int) {
+        if (isLogin) {
+            selectPage(page)
+        } else {
+            LoginActivity.launchForPortal(this)
+        }
     }
 
     private fun updatePageUi(page: Int) = with(binding) {
