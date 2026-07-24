@@ -19,6 +19,10 @@ class InsightsFragment : BaseFragment<SidepageStatsFragmentBinding>(
 
     override fun initView() {
         bindStaticReport()
+    }
+
+    override fun onResume() {
+        super.onResume()
         viewModel.saveReport()
     }
 

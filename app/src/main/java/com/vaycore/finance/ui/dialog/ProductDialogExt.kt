@@ -71,6 +71,7 @@ fun Context.createNewProductDialog(
         override fun initView() = with(binding) {
             super.initView()
             setCanceledOnTouchOutside(false)
+            window?.decorView?.setPadding(0, 0, 0, 0)
             var shouldTrackClose = true
             val fullText = String.format(getString(R.string.home_product_num), list.size)
             tvTitle.text = fullText
@@ -102,6 +103,8 @@ fun Context.createAvailableCreditDialog(
     ) {
         override fun initView() = with(binding) {
             super.initView()
+            setCanceledOnTouchOutside(false)
+            window?.decorView?.setPadding(0, 0, 0, 0)
             tvAmount.text = amount
             tvLater.singleClick { dismiss() }
             btnWithdraw.singleClick {

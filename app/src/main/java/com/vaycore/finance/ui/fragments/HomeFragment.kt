@@ -263,8 +263,8 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
                     }
                 }
             }
-
-            if (!data.repayProducts.isNullOrEmpty() && isFirstEnter) {
+            val navigateToOrder = !data.repayProducts.isNullOrEmpty() && isFirstEnter
+            if (navigateToOrder) {
                 isFirstEnter = false
                 (activity as MainActivity?)?.selectPage(1)
             }
@@ -328,15 +328,14 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
                 data.enableLoanStr ?: "-",
                 binding.root.context.getColor2(R.color.C_374151)
             )
-
-            val newProducts = data.showProducts.orEmpty().filter { it.newSign == 1 }
-            val creditDialogShown = showCreditDialogIfNeeded(data, productList) {
-                showNewProductDialogIfNeeded(newProducts)
+            if (!navigateToOrder) {
+                val newProducts = data.showProducts.orEmpty().filter { it.newSign == 1 }
+                if (newProducts.isNotEmpty()) {
+                    showNewProductDialogIfNeeded(newProducts)
+                } else {
+                    showCreditDialogIfNeeded(data, productList) {}
+                }
             }
-            if (!creditDialogShown) {
-                showNewProductDialogIfNeeded(newProducts)
-            }
-
             if (isCert) {
                 authLayout.isVisible = false
                 unAuthLayout.isVisible = false

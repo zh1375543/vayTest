@@ -121,7 +121,7 @@ class LoanApplyResultActivity :
             requestRuntimePermissions(deviceRiskPermissions) {
                 val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
                 locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)?.let {
-                    location = it.latitude to it.longitude
+                    location = it.longitude to it.latitude
                 }
             }
         }

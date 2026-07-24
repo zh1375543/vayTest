@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clipChildren="false"
-    android:clipToPadding="false">
+    android:clipToPadding="false"
+    android:paddingStart="@dimen/dp_20"
+    android:paddingEnd="@dimen/dp_20">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivProductNew"
@@ -57,6 +59,17 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Congratulations on getting 2 new products!" />
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivLeftRate"
+            android:layout_width="@dimen/dp_28"
+            android:layout_height="@dimen/dp_28"
+            android:layout_marginStart="@dimen/dp_m_20"
+            android:importantForAccessibility="no"
+            android:src="@mipmap/ic_dialog_rate"
+            app:layout_constraintBottom_toBottomOf="@id/tvTitle"
+            app:layout_constraintStart_toStartOf="@id/ivProductBg"
+            app:layout_constraintTop_toTopOf="@id/tvTitle" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvProduct"
             android:layout_width="0dp"
@@ -73,6 +86,39 @@
             app:layout_constraintTop_toBottomOf="@id/tvTitle"
             tools:itemCount="2"
             tools:listitem="@layout/item_product_card" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivRightRate"
+            android:layout_width="@dimen/dp_28"
+            android:layout_height="@dimen/dp_28"
+            android:layout_marginEnd="@dimen/dp_m_20"
+            android:layout_marginTop="@dimen/dp_8"
+            android:importantForAccessibility="no"
+            android:src="@mipmap/ic_dialog_rate"
+            app:layout_constraintEnd_toEndOf="@id/ivProductBg"
+            app:layout_constraintTop_toTopOf="@id/rvProduct" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivRightTopCoin"
+            android:layout_width="@dimen/dp_34"
+            android:layout_height="@dimen/dp_34"
+            android:layout_marginEnd="@dimen/dp_m_20"
+            android:layout_marginTop="@dimen/dp_8"
+            android:importantForAccessibility="no"
+            android:src="@mipmap/ic_dialog_fs_right"
+            app:layout_constraintEnd_toEndOf="@id/ivProductBg"
+            app:layout_constraintTop_toTopOf="@id/tvTitle" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivLeftCoin"
+            android:layout_width="@dimen/dp_28"
+            android:layout_height="@dimen/dp_28"
+            android:layout_marginStart="@dimen/dp_m_20"
+            android:layout_marginTop="@dimen/dp_16"
+            android:importantForAccessibility="no"
+            android:src="@mipmap/ic_dialog_fs_left"
+            app:layout_constraintStart_toStartOf="@id/ivProductBg"
+            app:layout_constraintTop_toTopOf="@id/rvProduct" />
 
         <TextView
             android:id="@+id/tvLoan"
@@ -94,6 +140,17 @@
             app:layout_constraintTop_toBottomOf="@id/rvProduct" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivRightBottomCoin"
+            android:layout_width="@dimen/dp_34"
+            android:layout_height="@dimen/dp_34"
+            android:layout_marginEnd="@dimen/dp_m_20"
+            android:layout_marginTop="@dimen/dp_m_8"
+            android:importantForAccessibility="no"
+            android:src="@mipmap/ic_dialog_fs_right"
+            app:layout_constraintEnd_toEndOf="@id/ivProductBg"
+            app:layout_constraintTop_toTopOf="@id/tvLoan" />
+
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivProductClick"
             android:layout_width="@dimen/dp_64"
             android:layout_height="@dimen/dp_64"
@@ -113,7 +170,7 @@
         android:layout_height="@dimen/dp_30"
         android:layout_marginTop="@dimen/dp_20"
         android:importantForAccessibility="no"
-        android:src="@mipmap/ic_dialog_bottom_close"
+        android:src="@mipmap/ic_dialog_credit_close"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -3,6 +3,7 @@ package com.vaycore.finance.ui.viewmodels
 import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import com.vaycore.finance.base.BaseViewModel
+import com.vaycore.finance.data.local.isLogin
 import com.vaycore.finance.data.local.sideBean.CancelPlanRequest
 import com.vaycore.finance.data.local.sideBean.CreatePlanRequest
 import com.vaycore.finance.data.local.bean.Event
@@ -77,6 +78,7 @@ class SideHomeViewModel(
     }
 
     fun saveReport() {
+        if (!isLogin) return
         savingsReportJob?.cancel()
         savingsReportJob = launchData {
             repository.saveReport()

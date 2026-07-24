@@ -142,7 +142,7 @@ class LoanOrderDetailActivity :
                 getString(R.string.toast_repayment_select).showToastMessage()
                 return@singleClick
             }
-            if (currentButtonSign == "2" || currentButtonSign == "3") {
+            if (currentButtonSign == "2" || currentButtonSign == "3"|| currentButtonSign == "4") {
                 vm.cancelApply(orderId) {
                     continueRepayment()
                 }
@@ -161,7 +161,7 @@ class LoanOrderDetailActivity :
             }
             if (currentButtonSign == "1") {
                 vm.repayAndBorrow(orderId, 1) {
-                    tvApply.performClick()
+                    continueRepayment()
                 }
             } else if (tvBorrow.text.toString() == getString(R.string.repay)) {
                 tvRepay.performClick()
@@ -174,7 +174,7 @@ class LoanOrderDetailActivity :
                     },
                     confirmAction = {
                         vm.repayAndBorrow(orderId, 1) {
-                            tvApply.performClick()
+                            continueRepayment()
                         }
                     }
                 )
@@ -190,7 +190,7 @@ class LoanOrderDetailActivity :
                 },
                 confirmAction = {
                     vm.repayAndBorrow(orderId, 2) {
-                        tvApply.performClick()
+                        continueRepayment()
                     }
                 },
             )

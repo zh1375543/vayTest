@@ -6,40 +6,43 @@
     android:layout_height="match_parent">
 
     <View
+        android:id="@+id/vBottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_56"
-        android:background="@color/white"
+        android:background="@drawable/bg_portal_bottom_navigation"
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <View
         android:id="@+id/vHome"
         android:layout_width="0dp"
-        android:layout_height="@dimen/dp_56"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/vBottomNavigation"
         app:layout_constraintEnd_toStartOf="@id/vOrder"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@id/vBottomNavigation"
+        app:layout_constraintTop_toTopOf="@id/vBottomNavigation" />
 
     <View
         android:id="@+id/vOrder"
         android:layout_width="0dp"
-        android:layout_height="@dimen/dp_56"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/vBottomNavigation"
         app:layout_constraintEnd_toStartOf="@id/vMine"
         app:layout_constraintStart_toEndOf="@id/vHome"
-        app:layout_constraintTop_toTopOf="@id/vHome" />
+        app:layout_constraintTop_toTopOf="@id/vBottomNavigation" />
 
     <View
         android:id="@+id/vMine"
         android:layout_width="0dp"
-        android:layout_height="@dimen/dp_56"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/vBottomNavigation"
+        app:layout_constraintEnd_toEndOf="@id/vBottomNavigation"
         app:layout_constraintStart_toEndOf="@id/vOrder"
-        app:layout_constraintTop_toTopOf="@id/vHome" />
+        app:layout_constraintTop_toTopOf="@id/vBottomNavigation" />
 
     <com.vaycore.finance.ui.views.StyledTextView
         android:id="@+id/tvHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white"
         android:drawableTop="@mipmap/tab_home_normal"
         android:text="@string/home"
         android:gravity="center"
@@ -135,7 +138,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:overScrollMode="never"
-        app:layout_constraintBottom_toTopOf="@id/vHome"
+        app:layout_constraintBottom_toTopOf="@id/vBottomNavigation"
         app:layout_constraintTop_toBottomOf="@id/ivCustomer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
