@@ -9,8 +9,8 @@ import android.os.Build
 import android.provider.Settings
 import android.util.DisplayMetrics
 import android.view.WindowManager
-import com.vaycore.finance.App
-import com.vaycore.finance.data.local.gaId
+import com.vaycore.finance.app.App
+import com.vaycore.finance.data.gaId
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONArray

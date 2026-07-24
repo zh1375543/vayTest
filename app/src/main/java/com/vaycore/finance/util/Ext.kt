@@ -10,7 +10,7 @@ import android.net.ConnectivityManager
 import android.net.Uri
 import android.provider.ContactsContract
 import androidx.lifecycle.LifecycleCoroutineScope
-import com.vaycore.finance.App
+import com.vaycore.finance.app.App
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay

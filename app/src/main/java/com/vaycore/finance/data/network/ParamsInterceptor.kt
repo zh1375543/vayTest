@@ -1,7 +1,7 @@
 package com.vaycore.finance.data.network
 
 import com.vaycore.finance.BuildConfig
-import com.vaycore.finance.data.local.APPCODE
+import com.vaycore.finance.data.APPCODE
 import okhttp3.FormBody
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType

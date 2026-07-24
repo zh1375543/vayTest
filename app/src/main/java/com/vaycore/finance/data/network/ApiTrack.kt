@@ -1,7 +1,7 @@
 package com.vaycore.finance.data.network
 
-import com.vaycore.finance.data.local.bean.ApiResponse
-import com.vaycore.finance.data.local.bean.TrackParamBean
+import com.vaycore.finance.data.bean.ApiResponse
+import com.vaycore.finance.data.bean.TrackParamBean
 import retrofit2.http.Body
 import retrofit2.http.POST
 

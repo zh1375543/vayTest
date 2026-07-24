@@ -9,7 +9,7 @@
 
         <variable
             name="item"
-            type="com.vaycore.finance.data.local.bean.MessageRecord" />
+            type="com.vaycore.finance.model.message.MessageRecord" />
     </data>
 
     <com.vaycore.finance.ui.views.StyledConstraintLayout

@@ -4,7 +4,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.provider.Telephony
 import androidx.core.content.ContextCompat
-import com.vaycore.finance.App
+import com.vaycore.finance.app.App
 import org.json.JSONArray
 import org.json.JSONObject
 

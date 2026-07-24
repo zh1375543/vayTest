@@ -5,7 +5,7 @@
     android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.HomeFragment">
+    tools:context=".home.HomeFragment">
 
     <com.vaycore.finance.ui.views.ContentStateLayout
         android:id="@+id/loading_layout"

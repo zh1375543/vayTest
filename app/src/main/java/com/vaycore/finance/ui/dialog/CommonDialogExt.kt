@@ -11,9 +11,9 @@ import com.google.android.play.core.review.ReviewManagerFactory
 import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseDialog
 import com.vaycore.finance.base.BaseSheetDialog
-import com.vaycore.finance.data.local.bean.CustomerContactConfig
-import com.vaycore.finance.data.local.bean.GuestHomeResponse
-import com.vaycore.finance.data.local.rateApp
+import com.vaycore.finance.model.home.CustomerContactConfig
+import com.vaycore.finance.model.home.GuestHomeResponse
+import com.vaycore.finance.data.rateApp
 import com.vaycore.finance.databinding.ConfirmDialogBinding
 import com.vaycore.finance.databinding.ContactUsDialogBinding
 import com.vaycore.finance.databinding.FeedDialogBinding
@@ -22,7 +22,7 @@ import com.vaycore.finance.databinding.HomeRefuseDialogBinding
 import com.vaycore.finance.databinding.LoadingDialogBinding
 import com.vaycore.finance.databinding.RateDialogBinding
 import com.vaycore.finance.databinding.VersionUpdateDialogBinding
-import com.vaycore.finance.ui.adapters.ContactUsDialogAdapter
+import com.vaycore.finance.mine.adapter.ContactUsDialogAdapter
 import com.vaycore.finance.ui.extension.hideKeyboard
 import com.vaycore.finance.ui.extension.setSpannableClickableText
 import com.vaycore.finance.ui.extension.singleClick

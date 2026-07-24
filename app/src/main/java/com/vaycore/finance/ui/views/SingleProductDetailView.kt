@@ -8,10 +8,10 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import com.vaycore.finance.R
 import com.vaycore.finance.databinding.SingleProductDetailViewBinding
-import com.vaycore.finance.data.local.bean.ProductBean
-import com.vaycore.finance.ui.adapters.ProductHeaderFeeAdapter
-import com.vaycore.finance.ui.adapters.ProductInstallmentAdapter
-import com.vaycore.finance.ui.adapters.ProductRepaymentMenuAdapter
+import com.vaycore.finance.model.loan.ProductBean
+import com.vaycore.finance.loan.adapter.ProductHeaderFeeAdapter
+import com.vaycore.finance.loan.adapter.ProductInstallmentAdapter
+import com.vaycore.finance.loan.adapter.ProductRepaymentMenuAdapter
 import com.vaycore.finance.util.LogUtil
 import com.vaycore.finance.util.formatAmountWithPrefix
 

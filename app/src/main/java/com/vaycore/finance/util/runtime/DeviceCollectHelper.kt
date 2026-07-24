@@ -6,9 +6,9 @@ import android.os.Build
 import android.provider.CallLog
 import androidx.core.app.ActivityCompat
 import com.vaycore.finance.BuildConfig
-import com.vaycore.finance.App
-import com.vaycore.finance.data.local.APPCODE
-import com.vaycore.finance.data.local.gaId
+import com.vaycore.finance.app.App
+import com.vaycore.finance.data.APPCODE
+import com.vaycore.finance.data.gaId
 import com.vaycore.finance.util.encodeBase64
 import com.vaycore.finance.util.formatDateString
 import kotlinx.coroutines.*

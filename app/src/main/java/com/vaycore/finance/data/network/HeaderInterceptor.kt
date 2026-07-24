@@ -1,7 +1,7 @@
 package com.vaycore.finance.data.network
 
-import com.vaycore.finance.data.local.appCheckToken
-import com.vaycore.finance.data.local.token
+import com.vaycore.finance.data.appCheckToken
+import com.vaycore.finance.data.token
 import okhttp3.Interceptor
 import okhttp3.Response
 

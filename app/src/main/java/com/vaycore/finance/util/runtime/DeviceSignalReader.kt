@@ -19,7 +19,7 @@ import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
 import android.text.format.Formatter
 import androidx.core.app.ActivityCompat
-import com.vaycore.finance.App
+import com.vaycore.finance.app.App
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONArray

@@ -12,8 +12,8 @@ import android.text.Spanned
 import android.util.Base64
 import android.widget.Toast
 import com.vaycore.finance.R
-import com.vaycore.finance.App
-import com.vaycore.finance.data.local.bean.TrackBean
+import com.vaycore.finance.app.App
+import com.vaycore.finance.data.bean.TrackBean
 import java.security.MessageDigest
 import androidx.core.net.toUri
 import com.vaycore.finance.data.ACT_copy

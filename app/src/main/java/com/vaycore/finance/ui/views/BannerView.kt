@@ -12,10 +12,10 @@ import androidx.viewpager2.widget.ViewPager2
 import com.vaycore.finance.R
 import com.vaycore.finance.base.createAdapter
 import com.vaycore.finance.databinding.BannerAdapterBinding
-import com.vaycore.finance.data.local.bean.CampaignBannerResponse
+import com.vaycore.finance.model.home.CampaignBannerResponse
 import com.vaycore.finance.util.context.getColor2
 import com.vaycore.finance.ui.extension.setRoundedRectangleBackground
-import com.vaycore.finance.ui.activities.WebViewActivity
+import com.vaycore.finance.web.WebViewActivity
 import com.vaycore.finance.ui.extension.loadImage
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay

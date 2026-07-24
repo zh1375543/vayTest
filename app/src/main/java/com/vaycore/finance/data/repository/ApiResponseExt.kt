@@ -1,6 +1,6 @@
 package com.vaycore.finance.data.repository
 
-import com.vaycore.finance.data.local.bean.ApiResponse
+import com.vaycore.finance.data.bean.ApiResponse
 
 class ApiResponseException(
     val response: ApiResponse<*>,

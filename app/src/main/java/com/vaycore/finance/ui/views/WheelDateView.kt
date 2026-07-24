@@ -4,7 +4,7 @@ package com.vaycore.finance.ui.views
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.LinearLayout
-import com.vaycore.finance.data.local.bean.SelectionOption
+import com.vaycore.finance.data.bean.SelectionOption
 import java.util.Calendar
 import java.util.Locale
 

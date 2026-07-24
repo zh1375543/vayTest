@@ -55,7 +55,7 @@
         tools:node="remove" />
 
     <application
-        android:name=".App"
+        android:name=".app.App"
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -88,7 +88,7 @@
         </service>
 
         <activity
-            android:name=".ui.activities.SplashActivity"
+            android:name=".app.SplashActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -99,262 +99,262 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activities.MainActivity"
+            android:name=".app.MainActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".ui.sidepage.PortalActivity"
+            android:name="com.vaycore.finance.sidepage.PortalActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".ui.sidepage.act.AccountSettingsActivity"
+            android:name="com.vaycore.finance.sidepage.act.AccountSettingsActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".ui.sidepage.act.AccountDeletionActivity"
+            android:name="com.vaycore.finance.sidepage.act.AccountDeletionActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".ui.sidepage.act.HelpCenterActivity"
+            android:name="com.vaycore.finance.sidepage.act.HelpCenterActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".ui.sidepage.act.AddPlanActivity"
+            android:name="com.vaycore.finance.sidepage.act.AddPlanActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".ui.sidepage.act.PlanDetailsActivity"
+            android:name="com.vaycore.finance.sidepage.act.PlanDetailsActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".ui.sidepage.act.EditPlanActivity"
+            android:name="com.vaycore.finance.sidepage.act.EditPlanActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".ui.sidepage.act.SavingsCalendarActivity"
+            android:name="com.vaycore.finance.sidepage.act.SavingsCalendarActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".ui.sidepage.act.SavingsRecordActivity"
+            android:name="com.vaycore.finance.sidepage.act.SavingsRecordActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".ui.sidepage.act.PlanRecordDetailActivity"
+            android:name="com.vaycore.finance.sidepage.act.PlanRecordDetailActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".ui.sidepage.act.FirstSavingsPlanActivity"
+            android:name="com.vaycore.finance.sidepage.act.FirstSavingsPlanActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".ui.sidepage.act.FirstSavingsPlanDetailsActivity"
+            android:name="com.vaycore.finance.sidepage.act.FirstSavingsPlanDetailsActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".ui.activities.WebViewActivity"
+            android:name=".web.WebViewActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".ui.activities.LoginActivity"
+            android:name=".identity.LoginActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing|stateAlwaysHidden" />
         <activity
-            android:name=".ui.activities.mine.ContactsActivity"
+            android:name=".mine.ContactsActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".ui.activities.mine.AboutActivity"
+            android:name=".mine.AboutActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".ui.activities.mine.SetActivity"
+            android:name=".mine.SetActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".ui.activities.mine.LogoutActivity"
+            android:name=".mine.LogoutActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".ui.activities.mine.LogoutSuccessActivity"
+            android:name=".mine.LogoutSuccessActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".ui.activities.mine.FeedActivity"
+            android:name=".mine.FeedActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".ui.activities.NoticeListActivity"
+            android:name=".message.NoticeListActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".ui.activities.NoticeDetailActivity"
+            android:name=".message.NoticeDetailActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".ui.activities.BankCardListActivity"
+            android:name=".wallet.BankCardListActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".ui.activities.LoanOrderListActivity"
+            android:name=".order.LoanOrderListActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".ui.activities.LoanOrderDetailActivity"
+            android:name=".order.LoanOrderDetailActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".ui.activities.RepaymentActivity"
+            android:name=".repayment.RepaymentActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".ui.activities.RepaymentSuccessActivity"
+            android:name=".repayment.RepaymentSuccessActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".ui.activities.LoanProductMultiActivity"
+            android:name=".loan.LoanProductMultiActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".ui.activities.ContractSignActivity"
+            android:name=".loan.ContractSignActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".ui.activities.LoanApplyResultActivity"
+            android:name=".loan.LoanApplyResultActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".ui.activities.LoanProductActivity"
+            android:name=".loan.LoanProductActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".ui.activities.auth.KycAuthActivity"
+            android:name=".identity.KycAuthActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".ui.activities.auth.PersonalInfoAuthActivity"
+            android:name=".identity.PersonalInfoAuthActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".ui.activities.auth.BankAccountAuthActivity"
+            android:name=".identity.BankAccountAuthActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".ui.activities.auth.AuthSuccessActivity"
+            android:name=".identity.AuthSuccessActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".ui.activities.RepaymentBatchActivity"
+            android:name=".repayment.RepaymentBatchActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".ui.activities.BankCardAddActivity"
+            android:name=".wallet.BankCardAddActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".ui.activities.mine.AuthCenterActivity"
+            android:name=".mine.AuthCenterActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:launchMode="singleTask"

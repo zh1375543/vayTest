@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import com.vaycore.finance.R
-import com.vaycore.finance.data.local.bean.ProductBean
+import com.vaycore.finance.model.loan.ProductBean
 import com.vaycore.finance.databinding.LoanProductSummaryViewBinding
 import com.vaycore.finance.ui.extension.loadImage
 

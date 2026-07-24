@@ -3,23 +3,23 @@ package com.vaycore.finance.base
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hjq.permissions.XXPermissions
-import com.vaycore.finance.App
+import com.vaycore.finance.app.App
 import com.vaycore.finance.data.ACT_UserAppUserDevice
 import com.vaycore.finance.data.ACT_UserAppUserDeviceHasDevice
-import com.vaycore.finance.data.local.bean.ApiResponse
-import com.vaycore.finance.data.local.bean.Event
-import com.vaycore.finance.data.local.bean.TrackBean
-import com.vaycore.finance.data.local.isLogin
-import com.vaycore.finance.data.local.isPostDeviceInfo
-import com.vaycore.finance.data.local.st
-import com.vaycore.finance.data.repository.AppConfigRepository
+import com.vaycore.finance.data.bean.ApiResponse
+import com.vaycore.finance.data.bean.Event
+import com.vaycore.finance.data.bean.TrackBean
+import com.vaycore.finance.data.isLogin
+import com.vaycore.finance.data.isPostDeviceInfo
+import com.vaycore.finance.data.st
+import com.vaycore.finance.app.AppConfigRepository
 import com.vaycore.finance.util.runtime.DeviceCollectHelper
 import com.vaycore.finance.util.deviceRiskPermissions
 import com.vaycore.finance.util.toJsonString
 import kotlinx.coroutines.launch
 
 class AppViewModel(
-    private val appConfigRepository: AppConfigRepository = AppConfigRepository(BaseViewModel.api),
+    private val appConfigRepository: AppConfigRepository = AppConfigRepository(api),
 ) : BaseViewModel() {
     val errorResponse = MutableLiveData<Event<ApiResponse<*>?>>()
     val isShowLoading = MutableLiveData<Boolean>()

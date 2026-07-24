@@ -4,7 +4,7 @@ import android.database.Cursor
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
-import com.vaycore.finance.App
+import com.vaycore.finance.app.App
 import org.json.JSONArray
 import org.json.JSONObject
 

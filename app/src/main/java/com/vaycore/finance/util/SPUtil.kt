@@ -3,7 +3,7 @@ package com.vaycore.finance.util
 import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
-import com.vaycore.finance.App
+import com.vaycore.finance.app.App
 import androidx.core.content.edit
 
 object SPUtil {

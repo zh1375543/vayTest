@@ -3,11 +3,11 @@ package com.vaycore.finance.base
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vaycore.finance.BuildConfig
-import com.vaycore.finance.data.local.EnterTime
-import com.vaycore.finance.data.local.bean.SurveyBean
-import com.vaycore.finance.data.local.bean.TrackBean
-import com.vaycore.finance.data.local.bean.TrackParamBean
-import com.vaycore.finance.data.local.pCount
+import com.vaycore.finance.data.EnterTime
+import com.vaycore.finance.data.bean.SurveyBean
+import com.vaycore.finance.data.bean.TrackBean
+import com.vaycore.finance.data.bean.TrackParamBean
+import com.vaycore.finance.data.pCount
 import com.vaycore.finance.data.network.*
 import com.vaycore.finance.data.repository.dataOrThrow
 import com.vaycore.finance.util.DataNetworkRequest

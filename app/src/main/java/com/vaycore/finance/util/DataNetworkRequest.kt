@@ -1,9 +1,9 @@
 package com.vaycore.finance.util
 
 import com.google.gson.JsonSyntaxException
-import com.vaycore.finance.App
-import com.vaycore.finance.data.local.bean.ApiResponse
-import com.vaycore.finance.data.local.bean.Event
+import com.vaycore.finance.app.App
+import com.vaycore.finance.data.bean.ApiResponse
+import com.vaycore.finance.data.bean.Event
 import com.vaycore.finance.data.repository.ApiResponseException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

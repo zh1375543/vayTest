@@ -21,8 +21,8 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import com.google.android.gms.ads.identifier.AdvertisingIdClient
 import com.vaycore.finance.R
-import com.vaycore.finance.data.local.isLogin
-import com.vaycore.finance.ui.activities.LoginActivity
+import com.vaycore.finance.data.isLogin
+import com.vaycore.finance.identity.LoginActivity
 import com.vaycore.finance.util.context.getColor2
 import java.io.ByteArrayOutputStream
 import java.io.File

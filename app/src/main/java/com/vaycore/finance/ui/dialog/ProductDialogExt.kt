@@ -6,15 +6,15 @@ import androidx.core.view.isVisible
 import com.vaycore.finance.BuildConfig
 import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseDialog
-import com.vaycore.finance.data.local.LEASE_AGREEMENT
-import com.vaycore.finance.data.local.PAWN_AGREEMENT
-import com.vaycore.finance.data.local.bean.ProductBean
-import com.vaycore.finance.data.local.loginInfo
+import com.vaycore.finance.data.LEASE_AGREEMENT
+import com.vaycore.finance.data.PAWN_AGREEMENT
+import com.vaycore.finance.model.loan.ProductBean
+import com.vaycore.finance.data.loginInfo
 import com.vaycore.finance.databinding.CreditDialogBinding
 import com.vaycore.finance.databinding.LoanAgreementDialogBinding
 import com.vaycore.finance.databinding.NewProductDialogBinding
-import com.vaycore.finance.ui.activities.WebViewActivity
-import com.vaycore.finance.ui.adapters.ProductCardAdapter
+import com.vaycore.finance.web.WebViewActivity
+import com.vaycore.finance.loan.adapter.ProductCardAdapter
 import com.vaycore.finance.ui.extension.singleClick
 
 fun Context.showLoanAgreementDialog(

@@ -19,7 +19,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
-import com.vaycore.finance.data.local.bean.ClickablePart
+import com.vaycore.finance.data.bean.ClickablePart
 
 fun TextView.setSpannableClickableText(
     fullText: String,

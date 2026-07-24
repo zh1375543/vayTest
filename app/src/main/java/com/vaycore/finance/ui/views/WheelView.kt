@@ -10,7 +10,7 @@ import android.view.View
 import android.widget.OverScroller
 import androidx.core.content.ContextCompat
 import com.vaycore.finance.R
-import com.vaycore.finance.data.local.bean.SelectionOption
+import com.vaycore.finance.data.bean.SelectionOption
 import kotlin.math.abs
 import kotlin.math.roundToInt
 

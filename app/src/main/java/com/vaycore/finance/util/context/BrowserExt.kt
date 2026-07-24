@@ -2,7 +2,7 @@ package com.vaycore.finance.util.context
 
 import android.content.Intent
 import androidx.core.net.toUri
-import com.vaycore.finance.App
+import com.vaycore.finance.app.App
 import com.vaycore.finance.util.LogUtil
 
 fun String.openExternalBrowser() {

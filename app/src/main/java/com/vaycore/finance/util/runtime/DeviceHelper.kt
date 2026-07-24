@@ -21,7 +21,7 @@ import android.telephony.TelephonyManager
 import android.text.TextUtils
 import android.view.WindowManager
 import androidx.core.app.ActivityCompat
-import com.vaycore.finance.App
+import com.vaycore.finance.app.App
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileReader

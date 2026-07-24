@@ -4,7 +4,7 @@ import android.os.Bundle
 import com.appsflyer.AppsFlyerLib
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.vaycore.finance.BuildConfig
-import com.vaycore.finance.App
+import com.vaycore.finance.app.App
 
 const val LOGIN_VIA_OTP = "Login_Via_OTP" // on login button click
 const val APP_UPGRADE = "App_Upgrade" // on version update button click

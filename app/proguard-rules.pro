@@ -152,7 +152,8 @@
 -keep class com.liveness.dflivenesslibrary.** { *; }
 
 # Project data classes
--keep class com.vaycore.finance.data.local.bean.** { *; }
+-keep class com.vaycore.finance.model.** { *; }
+-keep class com.vaycore.finance.data.bean.** { *; }
 -keep class com.vaycore.finance.data.network.** { *; }
 
 # AlertDialog (accessed through reflection)

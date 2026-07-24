@@ -5,8 +5,8 @@ import android.os.HandlerThread
 import android.os.Message
 import android.os.SystemClock
 import android.text.TextUtils
-import com.vaycore.finance.App
-import com.vaycore.finance.data.local.loginInfo
+import com.vaycore.finance.app.App
+import com.vaycore.finance.data.loginInfo
 import java.io.File
 import java.io.FileWriter
 import java.io.IOException

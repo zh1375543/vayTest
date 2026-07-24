@@ -7,7 +7,7 @@
     android:clipToPadding="false"
     android:fillViewport="true"
     android:overScrollMode="never"
-    tools:context=".ui.fragments.MineFragment">
+    tools:context=".mine.MineFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

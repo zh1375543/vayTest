@@ -1,9 +1,9 @@
 package com.vaycore.finance.data.network
 
 import com.vaycore.finance.BuildConfig
-import com.vaycore.finance.data.local.APPCODE
-import com.vaycore.finance.data.local.bean.ApiRequest
-import com.vaycore.finance.data.local.st
+import com.vaycore.finance.data.APPCODE
+import com.vaycore.finance.data.bean.ApiRequest
+import com.vaycore.finance.data.st
 import com.vaycore.finance.util.LogUtil
 import com.vaycore.finance.util.toJsonString
 import com.vaycore.finance.util.toMd5

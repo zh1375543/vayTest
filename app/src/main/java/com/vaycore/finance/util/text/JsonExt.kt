@@ -4,7 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonSyntaxException
 import com.google.gson.reflect.TypeToken
-import com.vaycore.finance.App
+import com.vaycore.finance.app.App
 import java.io.File
 
 private val jsonGson = GsonBuilder().disableHtmlEscaping().create()

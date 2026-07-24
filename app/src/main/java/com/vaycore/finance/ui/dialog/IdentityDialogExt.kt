@@ -3,14 +3,14 @@ package com.vaycore.finance.ui
 import android.content.Context
 import com.vaycore.finance.base.BaseDialog
 import com.vaycore.finance.base.BaseSheetDialog
-import com.vaycore.finance.data.local.bean.SelectionOption
+import com.vaycore.finance.data.bean.SelectionOption
 import com.vaycore.finance.databinding.AddressDialogBinding
 import com.vaycore.finance.databinding.DatePickDialogBinding
 import com.vaycore.finance.databinding.KycCardExampleDialogBinding
 import com.vaycore.finance.databinding.KycSelfExampleDialogBinding
 import com.vaycore.finance.databinding.PickDialogBinding
 import com.vaycore.finance.ui.extension.singleClick
-import com.vaycore.finance.ui.viewmodels.PersonalInfoViewModel
+import com.vaycore.finance.identity.PersonalInfoViewModel
 
 fun Context.showKycCardExampleDialog(
 ) {
