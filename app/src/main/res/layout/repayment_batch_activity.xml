@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.vaycore.finance.repayment.RepayViewModel" />
+            type="com.vaycore.finance.payback.RepayViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

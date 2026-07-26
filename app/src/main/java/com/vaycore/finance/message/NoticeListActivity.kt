@@ -29,9 +29,18 @@ class NoticeListActivity : BaseActivity<ActivityNoticeListBinding>() {
         }
     }
 
-    override fun initView() = with(binding) {
+    override fun initView() {
+        setupMessageList()
+        setupLoadingActions()
+        setupToolbarActions()
+    }
+
+    private fun setupMessageList() = with(binding) {
         rvMessage.adapter = messageAdapter
         viewModel = vm
+    }
+
+    private fun setupLoadingActions() = with(binding) {
         loadingLayout.showLoading()
         loadingLayout.setOnRetryClickListener {
             loadingLayout.showLoading()
@@ -42,15 +51,21 @@ class NoticeListActivity : BaseActivity<ActivityNoticeListBinding>() {
         vm.getMessageList {
             loadingLayout.showError()
         }
+    }
+
+    private fun setupToolbarActions() = with(binding) {
         tvOpen.singleClick {
             requestRuntimePermissions(
                 arrayOf(PermissionLists.getPostNotificationsPermission()),
-                refuseAction = { it, p ->
-                    if (it) {
-                        XXPermissions.startPermissionActivity(this@NoticeListActivity, p)
+                refuseAction = { isPermanentlyDenied, deniedPermissions ->
+                    if (isPermanentlyDenied) {
+                        XXPermissions.startPermissionActivity(
+                            this@NoticeListActivity,
+                            deniedPermissions,
+                        )
                     }
                 },
-                isShowGuide = false
+                isShowGuide = false,
             ) {}
         }
         titleBar.setAction {
@@ -68,12 +83,12 @@ class NoticeListActivity : BaseActivity<ActivityNoticeListBinding>() {
         )
     }
 
-    override fun initObserve() =with(vm){
+    override fun initObserve() = with(vm) {
         super.initObserve()
-        msgResult.observe(this@NoticeListActivity) {
+        msgResult.observe(this@NoticeListActivity) { messages ->
             binding.apply {
-                titleBar.showAction(it.any { it1 -> !it1.readStatus })
-                if (it.isNullOrEmpty()) {
+                titleBar.showAction(messages.any { !it.readStatus })
+                if (messages.isNullOrEmpty()) {
                     loadingLayout.showEmpty(R.mipmap.ic_notice_null, R.string.empty_message)
                 } else {
                     loadingLayout.showContent()

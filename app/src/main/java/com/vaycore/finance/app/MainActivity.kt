@@ -71,7 +71,14 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
     private var lastBackPressTime = 0L
     private val EXIT_INTERVAL = 2000
 
-    override fun initView() = with(binding) {
+    override fun initView() {
+        setupPager()
+        setupClickListeners()
+        setupBackPressHandler()
+        postDeviceInfo()
+    }
+
+    private fun setupPager() = with(binding) {
         vm.recordEvent(
             TrackBean(
                 p = PageHome, act = ACT_in
@@ -106,6 +113,9 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
                 }
             })
         }
+    }
+
+    private fun setupClickListeners() = with(binding) {
         vHome.singleClick {
             selectPage(0)
         }
@@ -119,14 +129,16 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
                 selectPage(2)
             }
         }
-      
         ivMsg.singleClick {
             ifLoginAction {
                 start<NoticeListActivity>()
             }
         }
+    }
+
+    private fun setupBackPressHandler() {
         onBackPressedDispatcher.addCallback(
-            this@MainActivity, object : OnBackPressedCallback(true) {
+            this, object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
                     val currentTime = System.currentTimeMillis()
                     if (currentTime - lastBackPressTime < EXIT_INTERVAL) {
@@ -143,7 +155,6 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
                     }
                 }
             })
-        postDeviceInfo()
     }
 
     private fun postDeviceInfo() {

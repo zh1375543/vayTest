@@ -82,7 +82,12 @@ class ContractSignActivity : BaseActivity<ActivityContractSignBinding>() {
 
     private var isSign = false
 
-    override fun initView() = with(binding) {
+    override fun initView() {
+        renderSignatureWorkspace()
+        connectSigningCommands()
+    }
+
+    private fun renderSignatureWorkspace() = with(binding) {
         setSystemBar(darkMode = true)
         vm.recordEvent(TrackBean(p = PageSign, act = ACT_in))
         if (isShowBackHome) {
@@ -91,14 +96,6 @@ class ContractSignActivity : BaseActivity<ActivityContractSignBinding>() {
         tvBack.visibility = if (isShowBackHome) View.VISIBLE else View.INVISIBLE
         tvSign.visibility = tvBack.visibility
         tvSign2.visibility = if (!isShowBackHome) View.VISIBLE else View.GONE
-        titleBar.setNavigationAction { handleBack() }
-        tvBack.singleClick {
-            MainActivity.Companion.launch(this@ContractSignActivity)
-            handleBack()
-        }
-        onBackAction(vm) {
-            handleBack()
-        }
         signView.setOnSignatureListener(object : SignatureView.OnSignatureListener {
             override fun onStartSigning() {
                 tvHint.isVisible = false
@@ -111,6 +108,17 @@ class ContractSignActivity : BaseActivity<ActivityContractSignBinding>() {
             }
 
         })
+    }
+
+    private fun connectSigningCommands() = with(binding) {
+        titleBar.setNavigationAction { handleBack() }
+        tvBack.singleClick {
+            MainActivity.Companion.launch(this@ContractSignActivity)
+            handleBack()
+        }
+        onBackAction(vm) {
+            handleBack()
+        }
 //            if (CacheManager.signFile.exists() && CacheManager.signFile.length() > 0) {
 //                setResult(
 //                    RESULT_OK, Intent()

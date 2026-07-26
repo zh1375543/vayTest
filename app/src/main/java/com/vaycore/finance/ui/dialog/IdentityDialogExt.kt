@@ -78,112 +78,125 @@ fun Context.showAddressPickerDialog(
     vm: PersonalInfoViewModel,
     action: (address: String, provinceId: Long?, cityId: Long?, areaId: Long?) -> Unit,
 ) {
-    object : BaseSheetDialog<AddressDialogBinding>(this, AddressDialogBinding::inflate) {
-        override fun initView() = with(binding) {
-            super.initView()
-            var provinceId: Long? = null
-            var cityId: Long? = null
-            var areaId: Long? = null
+    AddressPickerDialog(this, vm, action).show()
+}
 
-            // Currently active tab: 0=province, 1=city, 2=area
-            var activeTab: Int
+private class AddressPickerDialog(
+    context: Context,
+    private val viewModel: PersonalInfoViewModel,
+    private val onAddressSelected: (
+        address: String,
+        provinceId: Long?,
+        cityId: Long?,
+        areaId: Long?,
+    ) -> Unit,
+) : BaseSheetDialog<AddressDialogBinding>(context, AddressDialogBinding::inflate) {
 
-            fun loadProvinceWheel() {
-                activeTab = 0
-                wheelView.setOnSelectListener(null) //  Clear old listener first
-                vm.getAddressList { provinceList ->
-                    if (activeTab != 0) return@getAddressList //  Prevent stale async callback
-                    wheelView.setData(provinceList)
-                    wheelView.setOnSelectListener { _, item ->
+    private enum class AddressLevel {
+        PROVINCE,
+        CITY,
+        AREA,
+    }
+
+    private var provinceId: Long? = null
+    private var cityId: Long? = null
+    private var areaId: Long? = null
+    private var activeTab = AddressLevel.PROVINCE
+
+    override fun initView() {
+        super.initView()
+        bindLevelSelection()
+        bindConfirmAction()
+        setOnShowListener { loadAddressLevel(AddressLevel.PROVINCE) }
+    }
+
+    private fun loadAddressLevel(level: AddressLevel) = with(binding) {
+        activeTab = level
+        wheelView.setOnSelectListener(null)
+
+        val parentId = when (level) {
+            AddressLevel.PROVINCE -> null
+            AddressLevel.CITY -> provinceId.toString()
+            AddressLevel.AREA -> cityId.toString()
+        }
+        viewModel.getAddressList(parentId) { addressList ->
+            if (activeTab != level) return@getAddressList
+
+            val applySelection: (SelectionOption) -> Unit = { item ->
+                when (level) {
+                    AddressLevel.PROVINCE -> {
                         tvProvince.text = item.info
                         provinceId = item.id.toLong()
                     }
-                    if (provinceList.isNotEmpty()) {
-                        tvProvince.text = provinceList[0].info
-                        provinceId = provinceList[0].id.toLong()
-                        wheelView.setDefaultSelected(0)
-                    }
-                }
-            }
 
-            fun loadCityWheel() {
-                activeTab = 1
-                wheelView.setOnSelectListener(null) //  Clear old listener first
-                vm.getAddressList(provinceId.toString()) { cityList ->
-                    if (activeTab != 1) return@getAddressList //  Prevent stale async callback
-                    wheelView.setData(cityList)
-                    wheelView.setOnSelectListener { _, item ->
+                    AddressLevel.CITY -> {
                         tvCity.text = item.info
                         cityId = item.id.toLong()
                     }
-                    if (cityList.isNotEmpty()) {
-                        wheelView.setDefaultSelected(0)
-                        tvCity.text = cityList[0].info
-                        cityId = cityList[0].id.toLong()
-                    }
-                }
-            }
 
-            fun loadAreaWheel() {
-                activeTab = 2
-                wheelView.setOnSelectListener(null) //  Clear old listener first
-                vm.getAddressList(cityId.toString()) { areaList ->
-                    if (activeTab != 2) return@getAddressList //  Prevent stale async callback
-                    wheelView.setData(areaList)
-                    wheelView.setOnSelectListener { _, item ->
+                    AddressLevel.AREA -> {
                         tvArea.text = item.info
                         areaId = item.id.toLong()
                     }
-                    if (areaList.isNotEmpty()) {
-                        wheelView.setDefaultSelected(0)
-                        tvArea.text = areaList[0].info
-                        areaId = areaList[0].id.toLong()
-                    }
                 }
             }
-
-            setOnShowListener { loadProvinceWheel() }
-
-            tvProvince.singleClick {
-                tvProvince.text = ""
-                provinceId = null
-                tvCity.text = ""
-                cityId = null
-                tvArea.text = ""
-                areaId = null
-                loadProvinceWheel()
-            }
-
-            tvCity.singleClick {
-                tvCity.text = ""
-                cityId = null
-                tvArea.text = ""
-                areaId = null
-                loadCityWheel()
-            }
-
-            tvArea.singleClick {
-                tvArea.text = ""
-                areaId = null
-                loadAreaWheel()
-            }
-
-            tvOk.singleClick {
-                if (tvProvince.text.isNullOrBlank() || provinceId == null) {
-                    loadProvinceWheel(); return@singleClick
-                }
-                if (tvCity.text.isNullOrBlank() || cityId == null) {
-                    loadCityWheel(); return@singleClick
-                }
-                if (tvArea.text.isNullOrBlank() || areaId == null) {
-                    loadAreaWheel(); return@singleClick
-                }
-                dismiss()
-                action(
-                    "${tvProvince.text}/${tvCity.text}/${tvArea.text}",
-                    provinceId, cityId, areaId
-                )
+            wheelView.setData(addressList)
+            wheelView.setOnSelectListener { _, item -> applySelection(item) }
+            addressList.firstOrNull()?.let { defaultItem ->
+                applySelection(defaultItem)
+                wheelView.setDefaultSelected(0)
             }
         }
-    }.show()
+    }
+
+    private fun bindLevelSelection() = with(binding) {
+        tvProvince.singleClick {
+            tvProvince.text = ""
+            provinceId = null
+            tvCity.text = ""
+            cityId = null
+            tvArea.text = ""
+            areaId = null
+            loadAddressLevel(AddressLevel.PROVINCE)
+        }
+
+        tvCity.singleClick {
+            tvCity.text = ""
+            cityId = null
+            tvArea.text = ""
+            areaId = null
+            loadAddressLevel(AddressLevel.CITY)
+        }
+
+        tvArea.singleClick {
+            tvArea.text = ""
+            areaId = null
+            loadAddressLevel(AddressLevel.AREA)
+        }
+    }
+
+    private fun bindConfirmAction() = with(binding) {
+        tvOk.singleClick {
+            if (tvProvince.text.isNullOrBlank() || provinceId == null) {
+                loadAddressLevel(AddressLevel.PROVINCE)
+                return@singleClick
+            }
+            if (tvCity.text.isNullOrBlank() || cityId == null) {
+                loadAddressLevel(AddressLevel.CITY)
+                return@singleClick
+            }
+            if (tvArea.text.isNullOrBlank() || areaId == null) {
+                loadAddressLevel(AddressLevel.AREA)
+                return@singleClick
+            }
+
+            dismiss()
+            onAddressSelected(
+                "${tvProvince.text}/${tvCity.text}/${tvArea.text}",
+                provinceId,
+                cityId,
+                areaId,
+            )
+        }
+    }
 }

@@ -164,7 +164,13 @@ class KycAuthActivity : BaseActivity<KycAuthActivityBinding>() {
     private var frontUri: Uri? = null
     private var backUri: Uri? = null
 
-    override fun initView() = with(binding) {
+    override fun initView() {
+        renderKycEntryState()
+        routeMediaRequests()
+        connectKycCompletion()
+    }
+
+    private fun renderKycEntryState() = with(binding) {
         viewModel = vm
         isCertified = isCert
         trackEvent(KYC_INFO_PAGE)
@@ -188,6 +194,9 @@ class KycAuthActivity : BaseActivity<KycAuthActivityBinding>() {
         tvExample2.singleClick {
             showKycSelfieExampleDialog()
         }
+    }
+
+    private fun routeMediaRequests() = with(binding) {
         ivCardFront.singleClick {
             vm.recordEvent(
                 TrackBean(
@@ -271,6 +280,9 @@ class KycAuthActivity : BaseActivity<KycAuthActivityBinding>() {
                 backLauncher.launch(intent)
             }
         }
+    }
+
+    private fun connectKycCompletion() = with(binding) {
         btNext.singleClick {
             if (frontLayout.isVisible) {
                 if (frontUri == null && vm.frontImageSource.value == null) {

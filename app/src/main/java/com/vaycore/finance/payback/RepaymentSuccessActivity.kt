@@ -1,4 +1,4 @@
-package com.vaycore.finance.repayment
+package com.vaycore.finance.payback
 
 import androidx.lifecycle.lifecycleScope
 import com.vaycore.finance.R

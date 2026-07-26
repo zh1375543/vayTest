@@ -11,8 +11,8 @@ import com.vaycore.finance.data.loginInfo
 import com.vaycore.finance.databinding.MineFragmentBinding
 import com.vaycore.finance.loan.DashboardViewModel
 import com.vaycore.finance.order.LoanOrderListActivity
-import com.vaycore.finance.repayment.RepaymentBatchActivity
-import com.vaycore.finance.repayment.createPaybackDialog
+import com.vaycore.finance.payback.RepaymentBatchActivity
+import com.vaycore.finance.payback.createPaybackDialog
 import com.vaycore.finance.web.WebViewActivity
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.util.start

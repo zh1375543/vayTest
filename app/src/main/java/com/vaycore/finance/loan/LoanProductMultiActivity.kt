@@ -48,13 +48,21 @@ class LoanProductMultiActivity : BaseActivity<ActivityLoanProductMultiBinding>()
     private var leaseUrl = LEASE_AGREEMENT
     private var pawnUrl = PAWN_AGREEMENT
 
-    override fun initView() = with(binding) {
+    override fun initView() {
+        prepareBundleScreen()
+        connectBundleUtilities()
+        connectBundleApplication()
+    }
+
+    private fun prepareBundleScreen() = with(binding) {
         loanEvent.initEventFileUniqueSuffix((loginInfo?.id ?: 111).toString())
 
         titleBar.setNavigationAction { finish() }
         onBackAction(vm) { finish() }
         rvProduct.adapter = togetherAdapter
+    }
 
+    private fun connectBundleUtilities() = with(binding) {
         tvAbout.singleClick {
             WebViewActivity.Companion.launch(
                 this@LoanProductMultiActivity,
@@ -108,6 +116,16 @@ class LoanProductMultiActivity : BaseActivity<ActivityLoanProductMultiBinding>()
             accountVm.getLoanAccountList { }
         }
 
+        loadingLayout.setOnRetryClickListener {
+            loadingLayout.showLoading()
+            bottomLayout.isVisible = false
+            vm.getTogetherLoan {
+                loadingLayout.showError()
+            }
+        }
+    }
+
+    private fun connectBundleApplication() = with(binding) {
         btnApply.resetScale()
         btnApply.singleClick {
             vm.recordEvent(
@@ -150,14 +168,6 @@ class LoanProductMultiActivity : BaseActivity<ActivityLoanProductMultiBinding>()
                     )
                     finish()
                 }
-            }
-        }
-
-        loadingLayout.setOnRetryClickListener {
-            loadingLayout.showLoading()
-            bottomLayout.isVisible = false
-            vm.getTogetherLoan {
-                loadingLayout.showError()
             }
         }
     }

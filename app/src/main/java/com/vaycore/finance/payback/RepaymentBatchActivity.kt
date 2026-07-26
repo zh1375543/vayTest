@@ -1,11 +1,11 @@
-package com.vaycore.finance.repayment
+package com.vaycore.finance.payback
 
 import androidx.activity.viewModels
 import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseActivity
 import com.vaycore.finance.databinding.RepaymentBatchActivityBinding
 import com.vaycore.finance.order.LoanOrderDetailActivity
-import com.vaycore.finance.repayment.adapter.BatchRepaymentAdapter
+import com.vaycore.finance.payback.adapter.BatchRepaymentAdapter
 import com.vaycore.finance.util.showToastMessage
 import com.vaycore.finance.util.start
 import com.vaycore.finance.ui.extension.singleClick
@@ -45,7 +45,9 @@ class RepaymentBatchActivity :
                 return@singleClick
             }
             vm.togetherRepayment(
-                orderAdapter.items.map { it.orderNo ?: "" }
+                orderAdapter.items
+                    .filter { it.isCheck }
+                    .mapNotNull { it.orderNo }
             )
         }
         loadingLayout.setOnRetryClickListener {

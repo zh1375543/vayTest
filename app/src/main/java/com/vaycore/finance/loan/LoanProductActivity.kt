@@ -58,7 +58,13 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
     private lateinit var pawnUrl: String
     private var isAddCard = false
 
-    override fun initView() = with(binding) {
+    override fun initView() {
+        prepareProductExperience()
+        connectProductExploration()
+        connectLoanApplication()
+    }
+
+    private fun prepareProductExperience() = with(binding) {
         vm.recordEvent(
             TrackBean(
                 p = PageProductDetail,
@@ -75,6 +81,19 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
         onBackAction(vm) {
             handleBack()
         }
+        loadingLayout.setOnRetryClickListener {
+            loadingLayout.showLoading()
+            vm.getProductDetail(
+                PageProductDetail,
+                product?.id.toString(), product?.maxLoanAmount.toString()
+            ) {
+                loadingLayout.showError()
+                binding.product = null
+            }
+        }
+    }
+
+    private fun connectProductExploration() = with(binding) {
         tvPrivacy.setSpannableClickableTexts(
             String.format(
                 getString(R.string.product_detail_agreement),
@@ -99,16 +118,6 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
                     }),
             )
         )
-        loadingLayout.setOnRetryClickListener {
-            loadingLayout.showLoading()
-            vm.getProductDetail(
-                PageProductDetail,
-                product?.id.toString(), product?.maxLoanAmount.toString()
-            ) {
-                loadingLayout.showError()
-                binding.product = null
-            }
-        }
         tvChange.singleClick {
             vm.recordEvent(
                 TrackBean(
@@ -153,6 +162,9 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
                 bindHeaderDetail(selectedPlan)
             }
         }
+    }
+
+    private fun connectLoanApplication() = with(binding) {
         btnApply.resetScale()
         btnApply.singleClick {
             vm.recordEvent(

@@ -1,4 +1,4 @@
-package com.vaycore.finance.repayment
+package com.vaycore.finance.payback
 
 import android.content.Intent
 import android.net.Uri
@@ -9,7 +9,7 @@ import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseActivity
 import com.vaycore.finance.model.wallet.BankAccountResponse
 import com.vaycore.finance.databinding.RepaymentActivityBinding
-import com.vaycore.finance.repayment.adapter.RepaymentAdapter
+import com.vaycore.finance.payback.adapter.RepaymentAdapter
 import com.vaycore.finance.util.compressImage
 import com.vaycore.finance.util.copyToClipboard
 import com.vaycore.finance.util.context.getColor2
@@ -51,7 +51,13 @@ class RepaymentActivity :
         }
     }
 
-    override fun initView() = with(binding) {
+    override fun initView() {
+        primeRepaymentScreen()
+        connectRepaymentInputs()
+        connectRepaymentSubmission()
+    }
+
+    private fun primeRepaymentScreen() = with(binding) {
         tvOrderNo.setSpannableClickableText(
             getString(R.string.order_no) + ":" + orderNo,
             orderNo ?: "",
@@ -72,6 +78,9 @@ class RepaymentActivity :
                 loadingLayout.showError()
             }
         }
+    }
+
+    private fun connectRepaymentInputs() = with(binding) {
         tvSelect.singleClick {
             vm.getRepayCardList()
         }
@@ -80,6 +89,9 @@ class RepaymentActivity :
             intent.type = "image/*"
             photoLauncher.launch(intent)
         }
+    }
+
+    private fun connectRepaymentSubmission() = with(binding) {
         btnSubmit.isEnabled = true
         btnSubmit.singleClick {
             if (cardInfo == null) {

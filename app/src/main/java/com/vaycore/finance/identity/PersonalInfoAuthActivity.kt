@@ -84,7 +84,13 @@ class PersonalInfoAuthActivity :
     private var startIDTime: Long = 0L
     private var idJob: Job? = null
 
-    override fun initView() = with(binding) {
+    override fun initView() {
+        initializePersonalScreen()
+        wirePersonalForm()
+        wirePersonalActions()
+    }
+
+    private fun initializePersonalScreen() = with(binding) {
         isCertified = isCert
         shouldShowBottomAction = !isCert
         setupBottomActionKeyboardBehavior()
@@ -102,6 +108,13 @@ class PersonalInfoAuthActivity :
         titleBar.setAction(
             "${authConfigList.indexOf("ID") + 1}/${authConfigList.size}"
         )
+        loadingLayout.showLoading()
+        vm.getPersonalInfo {
+            loadingLayout.showError()
+        }
+    }
+
+    private fun wirePersonalForm() = with(binding) {
         lastNameView.getEditText().doOnTextChanged { _, _, _, _ ->
             val now = System.currentTimeMillis()
             // 1. first input → record start time
@@ -422,6 +435,9 @@ class PersonalInfoAuthActivity :
                 )
             }
         }
+    }
+
+    private fun wirePersonalActions() = with(binding) {
         titleBar.showAction(!isCert)
         if (!isCert) {
             btNext.resetScale()
@@ -550,10 +566,6 @@ class PersonalInfoAuthActivity :
             vm.getPersonalInfo {
                 loadingLayout.showError()
             }
-        }
-        loadingLayout.showLoading()
-        vm.getPersonalInfo {
-            loadingLayout.showError()
         }
     }
 

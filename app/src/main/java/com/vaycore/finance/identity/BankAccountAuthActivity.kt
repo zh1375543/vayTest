@@ -74,64 +74,71 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
     private var isKeyboardVisible = false
     private var selectedWithdrawMethod: WithdrawMethod? = null
 
-    override fun initView() = with(binding) {
+    override fun initView() {
+        renderBankEntryState()
+        connectWithdrawalInputs()
+        connectBankPageActions()
+    }
+
+    /** Render the page mode, title and bottom action area for the current auth step. */
+    private fun renderBankEntryState() = with(binding) {
         isCertified = isCert
         showBankFields = false
         showWalletFields = false
-        with(withdrawAccountForm) {
         setupBottomActionKeyboardBehavior()
         vm.recordEvent(TrackBean(p = PageInfoBank, act = ACT_in))
-        titleBar.setNavigationAction { handleBack() }
-        onBackAction(vm) {
-            handleBack()
-        }
         titleBar.setAction("${authConfigList.indexOf("BANK") + 1}/${authConfigList.size}")
         clearWithdrawMethodSelection()
-        methodSelectionView.setOnClickListener {
-            showWithdrawMethodDialog(
-                walletAction = {
-                    accountVm.getWalletList()
-                },
-                bankAction = {
-                    accountVm.getPayChannelList()
-                },
-            )
-        }
         setBottomActionVisible(false)
-        bankView.setOnClick {
-            accountVm.getPayChannelList()
+        titleBar.showAction(!isCert)
+        titleBar.updateTitle(
+            if (isCert) getString(R.string.contact_info) else getString(R.string.bank_and_contact),
+        )
+        if (!isCert) {
+            btNext.resetScale()
         }
-        walletProviderView.setOnClick {
-            accountVm.getWalletList()
-        }
-        bankAccountView.getEditText().doAfterTextChanged {
-            bankAccountView.hideError()
-            if (it.toString() == confirmBankView.getText()) {
-                confirmBankView.hideError()
+    }
+
+    /** Connect bank, wallet and contact field interactions. */
+    private fun connectWithdrawalInputs() = with(binding) {
+        with(withdrawAccountForm) {
+            methodSelectionView.setOnClickListener {
+                showWithdrawMethodDialog(
+                    walletAction = { accountVm.getWalletList() },
+                    bankAction = { accountVm.getPayChannelList() },
+                )
             }
-        }
-        confirmBankView.getEditText().doAfterTextChanged {
-            if (it.toString() == bankAccountView.getText()) {
-                confirmBankView.hideError()
+            bankView.setOnClick { accountVm.getPayChannelList() }
+            walletProviderView.setOnClick { accountVm.getWalletList() }
+            bankAccountView.getEditText().doAfterTextChanged {
+                bankAccountView.hideError()
+                if (it.toString() == confirmBankView.getText()) {
+                    confirmBankView.hideError()
+                }
             }
-        }
-        walletAccountView.getEditText().doAfterTextChanged {
-            walletAccountView.hideError()
-            if (it.toString() == confirmWalletAccountView.getText()) {
-                confirmWalletAccountView.hideError()
+            confirmBankView.getEditText().doAfterTextChanged {
+                if (it.toString() == bankAccountView.getText()) {
+                    confirmBankView.hideError()
+                }
             }
-        }
-        confirmWalletAccountView.getEditText().doAfterTextChanged {
-            if (it.toString() == walletAccountView.getText()) {
-                confirmWalletAccountView.hideError()
+            walletAccountView.getEditText().doAfterTextChanged {
+                walletAccountView.hideError()
+                if (it.toString() == confirmWalletAccountView.getText()) {
+                    confirmWalletAccountView.hideError()
+                }
+            }
+            confirmWalletAccountView.getEditText().doAfterTextChanged {
+                if (it.toString() == walletAccountView.getText()) {
+                    confirmWalletAccountView.hideError()
+                }
             }
         }
         relativesView.setOnClick {
             vm.getContactEnum {
                 val relativesList = it.relatives ?: arrayListOf()
                 showOptionPickerDialog(
-                    relativesList.indexOfFirst { it1 -> relativesView.getText() == it1.info },
-                    relativesList
+                    relativesList.indexOfFirst { item -> relativesView.getText() == item.info },
+                    relativesList,
                 ) { index ->
                     relativesView.setText(relativesList[index].info)
                     relativesView.hideError()
@@ -143,8 +150,8 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
             vm.getContactEnum {
                 val relativesList = it.otherRelatives ?: arrayListOf()
                 showOptionPickerDialog(
-                    relativesList.indexOfFirst { it1 -> friendView.getText() == it1.info },
-                    relativesList
+                    relativesList.indexOfFirst { item -> friendView.getText() == item.info },
+                    relativesList,
                 ) { index ->
                     friendView.setText(relativesList[index].info)
                     friendView.hideError()
@@ -168,113 +175,22 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
             }
         }
         relativesPhoneView.setContactClick {
-            vm.recordEvent(
-                TrackBean(
-                    p = PageInfoBank,
-                    act = ACT_selectContactName1Start,
-                    result = System.currentTimeMillis().toString()
-                )
-            )
-            contactPickTarget = ContactPickTarget.PRIMARY
-            pickContact()
+            recordContactPickStart(ACT_selectContactName1Start, ContactPickTarget.PRIMARY)
         }
         friendPhoneView.setContactClick {
-            vm.recordEvent(
-                TrackBean(
-                    p = PageInfoBank,
-                    act = ACT_selectContactName2Start,
-                    result = System.currentTimeMillis().toString()
-                )
-            )
-            contactPickTarget = ContactPickTarget.SECONDARY
-            pickContact()
+            recordContactPickStart(ACT_selectContactName2Start, ContactPickTarget.SECONDARY)
         }
         additionalContactPhoneView.setContactClick {
-            vm.recordEvent(
-                TrackBean(
-                    p = PageInfoBank,
-                    act = ACT_selectContactName3Start,
-                    result = System.currentTimeMillis().toString(),
-                ),
-            )
-            contactPickTarget = ContactPickTarget.ADDITIONAL
-            pickContact()
+            recordContactPickStart(ACT_selectContactName3Start, ContactPickTarget.ADDITIONAL)
         }
+    }
+
+    /** Connect navigation, validation, permission-gated submission and initial data loading. */
+    private fun connectBankPageActions() = with(binding) {
+        titleBar.setNavigationAction { handleBack() }
+        onBackAction(vm) { handleBack() }
         btNext.singleClick {
-            when (selectedWithdrawMethod) {
-                WithdrawMethod.BANK -> {
-                    if (bankView.getText().isBlank()) {
-                        bankView.showError()
-                        scrollView.scrollTo(0, bankView.top)
-                        return@singleClick
-                    }
-                    if (holderView.getText().isBlank()) {
-                        holderView.showError()
-                        scrollView.scrollTo(0, holderView.top)
-                        return@singleClick
-                    }
-                    if (bankAccountView.getText().isBlank()) {
-                        bankAccountView.showError()
-                        scrollView.scrollTo(0, bankAccountView.top)
-                        return@singleClick
-                    }
-                    if (confirmBankView.getText() != bankAccountView.getText()) {
-                        confirmBankView.showError()
-                        scrollView.scrollTo(0, confirmBankView.top)
-                        return@singleClick
-                    }
-                }
-                WithdrawMethod.WALLET -> {
-                    if (walletProviderView.getText().isBlank()) {
-                        walletProviderView.showError()
-                        scrollView.scrollTo(0, walletProviderView.top)
-                        return@singleClick
-                    }
-                    if (walletAccountView.getText().isBlank()) {
-                        walletAccountView.showError()
-                        scrollView.scrollTo(0, walletAccountView.top)
-                        return@singleClick
-                    }
-                    if (confirmWalletAccountView.getText() != walletAccountView.getText()) {
-                        confirmWalletAccountView.showError()
-                        scrollView.scrollTo(0, confirmWalletAccountView.top)
-                        return@singleClick
-                    }
-                }
-                null -> {
-                    tvWithdrawMethodError.isVisible = true
-                    methodSelectionView.performClick()
-                    return@singleClick
-                }
-            }
-            if (relativesView.getText().isBlank()) {
-                relativesView.showError()
-                scrollView.scrollTo(0, relativesView.top)
-                return@singleClick
-            }
-            if (relativesNameView.getText().isBlank()) {
-                relativesNameView.showError()
-                scrollView.scrollTo(0, relativesNameView.top)
-                return@singleClick
-            }
-            if (relativesPhoneView.getText().isBlank()) {
-                relativesPhoneView.showError()
-                scrollView.scrollTo(0, relativesPhoneView.top)
-                return@singleClick
-            }
-            if (friendView.getText().isBlank()) {
-                friendView.showError()
-                scrollView.scrollTo(0, friendView.top)
-                return@singleClick
-            }
-            if (friendNameView.getText().isBlank()) {
-                friendNameView.showError()
-                scrollView.scrollTo(0, friendNameView.top)
-                return@singleClick
-            }
-            if (friendPhoneView.getText().isBlank()) {
-                friendPhoneView.showError()
-                scrollView.scrollTo(0, friendPhoneView.top)
+            if (!validateBankPage()) {
                 return@singleClick
             }
             requestRuntimePermissions(deviceRiskPermissions) {
@@ -294,23 +210,105 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
         loadingLayout.setOnRetryClickListener {
             setBottomActionVisible(false)
             loadingLayout.showLoading()
-            vm.getContactsInfo {
-                loadingLayout.showError()
-            }
+            vm.getContactsInfo { loadingLayout.showError() }
         }
         loadingLayout.showLoading()
-        vm.getContactsInfo {
-            loadingLayout.showError()
-        }
+        vm.getContactsInfo { loadingLayout.showError() }
         personalVm.getPersonalInfo {}
-        titleBar.showAction(!isCert)
-        titleBar.updateTitle(
-            if (isCert) getString(R.string.contact_info) else getString(R.string.bank_and_contact)
-        )
-            if (!isCert) {
-                btNext.resetScale()
+    }
+
+    private fun validateBankPage(): Boolean = with(binding) {
+        with(withdrawAccountForm) {
+            when (selectedWithdrawMethod) {
+                WithdrawMethod.BANK -> {
+                    if (bankView.getText().isBlank()) {
+                        bankView.showError()
+                        scrollView.scrollTo(0, bankView.top)
+                        return false
+                    }
+                    if (holderView.getText().isBlank()) {
+                        holderView.showError()
+                        scrollView.scrollTo(0, holderView.top)
+                        return false
+                    }
+                    if (bankAccountView.getText().isBlank()) {
+                        bankAccountView.showError()
+                        scrollView.scrollTo(0, bankAccountView.top)
+                        return false
+                    }
+                    if (confirmBankView.getText() != bankAccountView.getText()) {
+                        confirmBankView.showError()
+                        scrollView.scrollTo(0, confirmBankView.top)
+                        return false
+                    }
+                }
+                WithdrawMethod.WALLET -> {
+                    if (walletProviderView.getText().isBlank()) {
+                        walletProviderView.showError()
+                        scrollView.scrollTo(0, walletProviderView.top)
+                        return false
+                    }
+                    if (walletAccountView.getText().isBlank()) {
+                        walletAccountView.showError()
+                        scrollView.scrollTo(0, walletAccountView.top)
+                        return false
+                    }
+                    if (confirmWalletAccountView.getText() != walletAccountView.getText()) {
+                        confirmWalletAccountView.showError()
+                        scrollView.scrollTo(0, confirmWalletAccountView.top)
+                        return false
+                    }
+                }
+                null -> {
+                    tvWithdrawMethodError.isVisible = true
+                    methodSelectionView.performClick()
+                    return false
+                }
             }
         }
+        if (relativesView.getText().isBlank()) {
+            relativesView.showError()
+            scrollView.scrollTo(0, relativesView.top)
+            return false
+        }
+        if (relativesNameView.getText().isBlank()) {
+            relativesNameView.showError()
+            scrollView.scrollTo(0, relativesNameView.top)
+            return false
+        }
+        if (relativesPhoneView.getText().isBlank()) {
+            relativesPhoneView.showError()
+            scrollView.scrollTo(0, relativesPhoneView.top)
+            return false
+        }
+        if (friendView.getText().isBlank()) {
+            friendView.showError()
+            scrollView.scrollTo(0, friendView.top)
+            return false
+        }
+        if (friendNameView.getText().isBlank()) {
+            friendNameView.showError()
+            scrollView.scrollTo(0, friendNameView.top)
+            return false
+        }
+        if (friendPhoneView.getText().isBlank()) {
+            friendPhoneView.showError()
+            scrollView.scrollTo(0, friendPhoneView.top)
+            return false
+        }
+        return true
+    }
+
+    private fun recordContactPickStart(event: String, target: ContactPickTarget) {
+        vm.recordEvent(
+            TrackBean(
+                p = PageInfoBank,
+                act = event,
+                result = System.currentTimeMillis().toString(),
+            ),
+        )
+        contactPickTarget = target
+        pickContact()
     }
 
     private fun setupBottomActionKeyboardBehavior() {

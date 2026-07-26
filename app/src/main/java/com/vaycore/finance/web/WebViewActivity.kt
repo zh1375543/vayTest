@@ -47,57 +47,71 @@ class WebViewActivity : BaseActivity<WebActivityBinding>() {
 
     override fun initView() = with(binding) {
         LogUtil.e("url：$webUrl")
+        setupNavigation()
+        configureWebView()
+        attachWebCallbacks()
+        titleBar.updateTitle(webTitle)
+        webView.loadUrl(webUrl)
+    }
+
+    private fun setupNavigation() = with(binding) {
         onBackAction(null) {
             handleBack()
         }
         titleBar.setNavigationAction { handleBack() }
+    }
+
+    private fun configureWebView() = with(binding.webView) {
         CookieManager.getInstance().setAcceptCookie(true)
-        CookieManager.getInstance().setAcceptThirdPartyCookies(webView, true)
-        webView.apply {
-            // Basic settings
-            settings.javaScriptEnabled = true                 // Enable JS
-            settings.domStorageEnabled = true                 // DOM storage
-            settings.databaseEnabled = true                   // DB cache
-            settings.setSupportZoom(false)                    // Disable zoom
-            settings.displayZoomControls = false              // Hide controls
-            settings.builtInZoomControls = false
+        CookieManager.getInstance().setAcceptThirdPartyCookies(this, true)
 
-            // Screen fitting
-            settings.useWideViewPort = true
-            settings.loadWithOverviewMode = true
+        // Basic settings
+        settings.javaScriptEnabled = true                 // Enable JS
+        settings.domStorageEnabled = true                 // DOM storage
+        settings.databaseEnabled = true                   // DB cache
+        settings.setSupportZoom(false)                    // Disable zoom
+        settings.displayZoomControls = false              // Hide controls
+        settings.builtInZoomControls = false
 
-            // Cache
-            settings.cacheMode = WebSettings.LOAD_DEFAULT
+        // Screen fitting
+        settings.useWideViewPort = true
+        settings.loadWithOverviewMode = true
 
-            // File access
-            settings.allowFileAccess = true
-            settings.allowContentAccess = true
-            settings.allowFileAccessFromFileURLs = true
-            settings.allowUniversalAccessFromFileURLs = true
+        // Cache
+        settings.cacheMode = WebSettings.LOAD_DEFAULT
 
-            // Mixed content
-            settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
-            settings.defaultTextEncodingName = "utf-8"
-            settings.mediaPlaybackRequiresUserGesture = true
+        // File access
+        settings.allowFileAccess = true
+        settings.allowContentAccess = true
+        settings.allowFileAccessFromFileURLs = true
+        settings.allowUniversalAccessFromFileURLs = true
 
-            addJavascriptInterface(this@WebViewActivity, "AndroidBridge")
+        // Mixed content
+        settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+        settings.defaultTextEncodingName = "utf-8"
+        settings.mediaPlaybackRequiresUserGesture = true
 
-            webViewClient = object : WebViewClient() {
-                @Deprecated("Deprecated in Java")
-                override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
-                    // Keep links inside this WebView.
-                    return false
-                }
+        addJavascriptInterface(this@WebViewActivity, "AndroidBridge")
+    }
 
-                override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
-                    super.onPageStarted(view, url, favicon)
-                    if (url?.contains(kycRedirectUrl) == true && isKyc) {
-                        setResult(RESULT_OK)
-                        finish()
-                    }
+    private fun attachWebCallbacks() = with(binding) {
+        webView.webViewClient = object : WebViewClient() {
+            @Deprecated("Deprecated in Java")
+            override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
+                // Keep links inside this WebView.
+                return false
+            }
+
+            override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+                super.onPageStarted(view, url, favicon)
+                if (url?.contains(kycRedirectUrl) == true && isKyc) {
+                    setResult(RESULT_OK)
+                    finish()
                 }
             }
-        }.webChromeClient = object : WebChromeClient() {
+        }
+
+        webView.webChromeClient = object : WebChromeClient() {
             override fun onProgressChanged(view: WebView?, newProgress: Int) {
                 super.onProgressChanged(view, newProgress)
                 progressBar.visibility = if (newProgress >= 100) View.GONE else View.VISIBLE
@@ -116,8 +130,6 @@ class WebViewActivity : BaseActivity<WebActivityBinding>() {
                 }
             }
         }
-        titleBar.updateTitle(webTitle)
-        webView.loadUrl(webUrl)
     }
 
     private fun handleBack() {

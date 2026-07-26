@@ -101,36 +101,45 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
     private var creditDialog: Dialog? = null
     private var hasShownCreditDialog = false
 
-    override fun initView() = with(binding) {
-        contentLayout.apply {
-            rvProduct.adapter = homeAdapter
-            tvModifyCard.singleClick {
-                vm.recordEvent(
-                    TrackBean(
-                        p = PageHome,
-                        act = ACT_userAppBankMyCard
-                    )
-                )
-                it.context.start<BankCardListActivity>()
-            }
-            tvRefresh.singleClick {
-                refreshData()
-            }
-            tvBorrowNow.singleClick {
-                it.context.ifLoginAction {
-                    isGoAuth = true
-                    vm.getUserAuthStatus()
-                }
+    override fun initView() {
+        setupProductList()
+        setupBusinessActions()
+        setupRefreshTriggers()
+    }
 
+    private fun setupProductList() {
+        binding.contentLayout.rvProduct.adapter = homeAdapter
+    }
+
+    private fun setupBusinessActions() = with(binding.contentLayout) {
+        tvModifyCard.singleClick {
+            vm.recordEvent(
+                TrackBean(
+                    p = PageHome,
+                    act = ACT_userAppBankMyCard
+                )
+            )
+            it.context.start<BankCardListActivity>()
+        }
+        tvBorrowNow.singleClick {
+            it.context.ifLoginAction {
+                isGoAuth = true
+                vm.getUserAuthStatus()
             }
-            tvLoan.singleClick {
-                it.context.ifLoginAction {
-                    context?.start<LoanProductMultiActivity>()
-                }
+        }
+        tvLoan.singleClick {
+            it.context.ifLoginAction {
+                context?.start<LoanProductMultiActivity>()
             }
-            ivCloseBank.singleClick {
-                bankErrorLayout.isVisible = false
-            }
+        }
+        ivCloseBank.singleClick {
+            bankErrorLayout.isVisible = false
+        }
+    }
+
+    private fun setupRefreshTriggers() = with(binding) {
+        contentLayout.tvRefresh.singleClick {
+            refreshData()
         }
         loadingLayout.setOnRetryClickListener {
             refreshData()

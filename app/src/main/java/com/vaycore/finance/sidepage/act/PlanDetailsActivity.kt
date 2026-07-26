@@ -45,13 +45,23 @@ class PlanDetailsActivity : BaseActivity<SidepagePlanDetailsActivityBinding>() {
         }
     }
 
-    override fun initView() = with(binding) {
+    override fun initView() {
+        setupHeaderActions()
+        setupPlanOperations()
+        setupTransactionList()
+        loadPlanDetail()
+    }
+
+    private fun setupHeaderActions() = with(binding) {
         applyTopInset(root)
         titleBar.setNavigationAction(::finish)
         titleBar.setRightImage(R.mipmap.ic_at_date)
         titleBar.setRightImageAction {
             startActivity(Intent(this@PlanDetailsActivity, SavingsCalendarActivity::class.java))
         }
+    }
+
+    private fun setupPlanOperations() = with(binding) {
         planNameContainer.singleClick {
             currentPlan?.let { plan ->
                 editPlanLauncher.launch(
@@ -85,7 +95,9 @@ class PlanDetailsActivity : BaseActivity<SidepagePlanDetailsActivityBinding>() {
                 )
             }
         }
+    }
 
+    private fun setupTransactionList() = with(binding) {
         rvTransactions.apply {
             layoutManager = LinearLayoutManager(this@PlanDetailsActivity)
             adapter = transactionAdapter
@@ -101,7 +113,6 @@ class PlanDetailsActivity : BaseActivity<SidepagePlanDetailsActivityBinding>() {
             )
         }
         loadingLayout.setOnRetryClickListener { loadPlanDetail() }
-        loadPlanDetail()
     }
 
     override fun initObserve() = with(viewModel) {

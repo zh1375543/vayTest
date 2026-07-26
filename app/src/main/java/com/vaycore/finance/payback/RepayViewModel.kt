@@ -1,4 +1,4 @@
-package com.vaycore.finance.repayment
+package com.vaycore.finance.payback
 
 import android.net.Uri
 import androidx.lifecycle.MutableLiveData

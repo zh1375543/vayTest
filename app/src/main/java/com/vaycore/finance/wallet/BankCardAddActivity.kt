@@ -32,8 +32,13 @@ class BankCardAddActivity : BaseActivity<ActivityBankCardAddBinding>() {
     private var bankBean: BankChannelResponse? = null
     private var walletBean: WalletResponse? = null
 
-    override fun initView() = with(binding) {
-        with(withdrawAccountForm) {
+    override fun initView() {
+        setupWithdrawMethodSelection()
+        setupAccountValidation()
+        setupPageActions()
+    }
+
+    private fun setupWithdrawMethodSelection() = with(binding.withdrawAccountForm) {
         clearWithdrawMethodSelection()
 
         methodSelectionView.singleClick {
@@ -44,7 +49,9 @@ class BankCardAddActivity : BaseActivity<ActivityBankCardAddBinding>() {
         }
         bankView.setOnClick { vm.getPayChannelList() }
         walletProviderView.setOnClick { vm.getWalletList() }
+    }
 
+    private fun setupAccountValidation() = with(binding.withdrawAccountForm) {
         bankAccountView.getEditText().doAfterTextChanged {
             bankAccountView.hideError()
             if (it.toString() == confirmBankView.getText()) confirmBankView.hideError()
@@ -67,7 +74,9 @@ class BankCardAddActivity : BaseActivity<ActivityBankCardAddBinding>() {
                 confirmWalletAccountView.hideError()
             }
         }
+    }
 
+    private fun setupPageActions() = with(binding) {
         window.decorView.observeKeyboardVisibility { isShow, _ ->
             if (isShow) {
                 tvTips.isVisible = false
@@ -82,14 +91,13 @@ class BankCardAddActivity : BaseActivity<ActivityBankCardAddBinding>() {
                 WithdrawMethod.BANK -> submitBankAccount()
                 WithdrawMethod.WALLET -> submitWalletAccount()
                 null -> {
-                    tvWithdrawMethodError.isVisible = true
-                    methodSelectionView.performClick()
+                    withdrawAccountForm.tvWithdrawMethodError.isVisible = true
+                    withdrawAccountForm.methodSelectionView.performClick()
                 }
             }
         }
 
-            personalVm.getPersonalInfo {}
-        }
+        personalVm.getPersonalInfo {}
     }
 
     private fun submitBankAccount() {

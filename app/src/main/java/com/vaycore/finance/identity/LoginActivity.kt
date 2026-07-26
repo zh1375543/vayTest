@@ -88,11 +88,16 @@ class LoginActivity : BaseActivity<LoginActivityBinding>() {
         }
     }
 
-    @SuppressLint("MissingPermission")
-    override fun initView() = with(binding) {
+    override fun initView() {
+        primeLoginSurface()
+        observeCredentialEditing()
+        connectLoginCommands()
+    }
+
+    private fun primeLoginSurface() = with(binding) {
         titleBar.showNavigation(false)
         titleBar.setNavigationAction { handleLoginBack() }
-        tvOtpLogin.text=getString(
+        tvOtpLogin.text = getString(
             R.string.welcome_to_app,
             getString(R.string.app_name)
         )
@@ -109,14 +114,10 @@ class LoginActivity : BaseActivity<LoginActivityBinding>() {
                 override fun handleOnBackPressed() = handleLoginBack()
             },
         )
-        tvOtpLogin.singleClick {
-            vm.recordEvent(
-                TrackBean(
-                    p = PageLogin,
-                    act = ACT_clickOTPLogin,
-                )
-            )
-        }
+        homeVm.getUnAuthData()
+    }
+
+    private fun observeCredentialEditing() = with(binding) {
         etPhone.doOnTextChanged { _, _, _, _ ->
             val now = System.currentTimeMillis()
 
@@ -158,6 +159,18 @@ class LoginActivity : BaseActivity<LoginActivityBinding>() {
                 else -> etPhone.showValidationError()
             }
             updateLoginButtonState()
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun connectLoginCommands() = with(binding) {
+        tvOtpLogin.singleClick {
+            vm.recordEvent(
+                TrackBean(
+                    p = PageLogin,
+                    act = ACT_clickOTPLogin,
+                )
+            )
         }
         tvAccept.setSpannableClickableTexts(
             String.format(
@@ -238,7 +251,6 @@ class LoginActivity : BaseActivity<LoginActivityBinding>() {
                 location = it.longitude to it.latitude
             }
         }
-        homeVm.getUnAuthData()
     }
 
     override fun initObserve() = with(vm) {

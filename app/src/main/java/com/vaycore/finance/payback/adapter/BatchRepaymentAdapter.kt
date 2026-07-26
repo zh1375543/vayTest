@@ -1,4 +1,4 @@
-package com.vaycore.finance.repayment.adapter
+package com.vaycore.finance.payback.adapter
 
 import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseAdapter

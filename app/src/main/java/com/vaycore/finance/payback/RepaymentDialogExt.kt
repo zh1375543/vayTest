@@ -1,4 +1,4 @@
-package com.vaycore.finance.repayment
+package com.vaycore.finance.payback
 
 import android.app.Dialog
 import android.content.Context

@@ -45,10 +45,10 @@ import com.vaycore.finance.util.showToastMessage
 import com.vaycore.finance.ui.extension.setSpannableClickableTexts
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.util.trackEvent
-import com.vaycore.finance.repayment.RepaymentActivity
+import com.vaycore.finance.payback.RepaymentActivity
 import com.vaycore.finance.web.WebViewActivity
 import com.vaycore.finance.ui.widget.ActionButtonView
-import com.vaycore.finance.repayment.showRepayAndReapplyDialog
+import com.vaycore.finance.payback.showRepayAndReapplyDialog
 import com.vaycore.finance.util.formatAmountWithPrefix
 import com.vaycore.finance.util.isPositive
 import com.vaycore.finance.util.start
@@ -104,7 +104,13 @@ class LoanOrderDetailActivity :
         }
     }
 
-    override fun initView() = with(binding) {
+    override fun initView() {
+        primeOrderDetailSurface()
+        connectPaymentEntry()
+        connectRenewalControls()
+    }
+
+    private fun primeOrderDetailSurface() = with(binding) {
         trackEvent(LOAN_ORDER_CONFIRMATION_PAGE)
         loadingLayout.setOnRetryClickListener {
             loadingLayout.showLoading()
@@ -139,6 +145,9 @@ class LoanOrderDetailActivity :
             val expanded = !installmentContentGroup.isVisible
             installmentContentGroup.isVisible = expanded
         }
+    }
+
+    private fun connectPaymentEntry() = with(binding) {
         tvApply.singleClick {
             val payGoUrl = orderDetail?.appOrderRepayDto?.payGoUrl
             if (payGoUrl.isNullOrBlank()) {
@@ -160,6 +169,9 @@ class LoanOrderDetailActivity :
                 )
             }
         }
+    }
+
+    private fun connectRenewalControls() = with(binding) {
         tvRepay.singleClick {
             if (installLayout.isVisible && installAdapter.items.none { it1 -> !it1.isSettle() && it1.isSelect }) {
                 getString(R.string.toast_repayment_select).showToastMessage()
