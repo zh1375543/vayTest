@@ -1,9 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isCertified"
+            type="Boolean" />
+
+        <variable
+            name="showBankFields"
+            type="Boolean" />
+
+        <variable
+            name="showWalletFields"
+            type="Boolean" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"
@@ -61,7 +81,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="@{showBankFields ? View.VISIBLE : View.GONE}">
 
             <com.vaycore.finance.ui.widget.FormItemView
                 android:id="@+id/bankView"
@@ -112,7 +132,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="@{showWalletFields ? View.VISIBLE : View.GONE}">
 
             <com.vaycore.finance.ui.widget.FormItemView
                 android:id="@+id/walletProviderView"
@@ -148,4 +168,5 @@
                 android:layout_height="@dimen/dp_18" />
         </LinearLayout>
     </com.vaycore.finance.ui.views.StyledLinearLayout>
-</LinearLayout>
+    </LinearLayout>
+</layout>

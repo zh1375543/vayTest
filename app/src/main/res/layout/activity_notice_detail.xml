@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:background="@mipmap/ic_page_bg"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="message"
+            type="com.vaycore.finance.model.message.MessageRecord" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/ic_page_bg">
 
     <com.vaycore.finance.ui.views.PageHeaderView
         android:id="@+id/titleBar"
@@ -33,6 +42,7 @@
                 android:textColor="@color/C_111827"
                 android:textSize="@dimen/sp_14"
                 android:textStyle="bold"
+                android:text="@{message.theme}"
                 tools:text="Message" />
 
             <TextView
@@ -44,7 +54,8 @@
                 android:textColor="@color/C_6D7280"
                 android:textSize="@dimen/sp_12"
                 android:textStyle="normal"
-                tools:text="Message" />
+                android:text="@{message.getTime()}"
+                tools:text="12/12/2024 12:00" />
 
             <com.vaycore.finance.ui.views.StyledTextView
                 android:id="@+id/tvContent"
@@ -54,6 +65,7 @@
                 android:layout_marginTop="@dimen/dp_10"
                 android:minHeight="@dimen/dp_226"
                 android:padding="@dimen/dp_16"
+                android:text="@{message.content}"
                 android:textColor="@color/C_111827"
                 android:textSize="@dimen/sp_13"
                 app:radius="@dimen/dp_24"
@@ -61,4 +73,5 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -12,6 +12,7 @@ import com.vaycore.finance.data.bean.TrackBean
 import com.vaycore.finance.model.identity.KycDocumentResponse
 import com.vaycore.finance.model.identity.KycRuleConfigResponse
 import com.vaycore.finance.model.identity.LivenessWebSessionResponse
+import com.vaycore.finance.model.ui.UiImageSource
 import com.vaycore.finance.util.toJsonString
 import java.io.File
 
@@ -21,9 +22,21 @@ class KycUploadViewModel(
 ) : BaseViewModel() {
 
     val kycResult = MutableLiveData<KycDocumentResponse?>()
+    val frontImageSource = MutableLiveData<UiImageSource?>()
+    val backImageSource = MutableLiveData<UiImageSource?>()
+    val selfImageSource = MutableLiveData<UiImageSource?>()
+    val frontUploadSuccess = MutableLiveData(false)
+    val backUploadSuccess = MutableLiveData(false)
+    val selfUploadSuccess = MutableLiveData(false)
+
     fun getKycInfo(errorAction: () -> Unit) {
         launchData { verificationRepository.fetchKycDocument() }
-            .onSuccess { kycResult.value = it }
+            .onSuccess {
+                kycResult.value = it
+                frontImageSource.value = it?.frontImageUrl.toRemoteImageSource()
+                backImageSource.value = it?.backImageUrl.toRemoteImageSource()
+                selfImageSource.value = it?.liveImageUrl.toRemoteImageSource()
+            }
             .onFailed {
                 errorAction()
                 false
@@ -45,7 +58,11 @@ class KycUploadViewModel(
     fun getH5LiveResult() {
         launchData { verificationRepository.fetchLivenessResult(h5Live.value?.bizNo) }
             .showLoading()
-            .onSuccess { h5Result.value = it?.faceUrl }
+            .onSuccess {
+                h5Result.value = it?.faceUrl
+                selfImageSource.value = it?.faceUrl.toRemoteImageSource()
+                selfUploadSuccess.value = !it?.faceUrl.isNullOrBlank()
+            }
             .execute()
     }
 
@@ -62,6 +79,8 @@ class KycUploadViewModel(
                     )
                 )
                 submitFrontResult.value = frontUri
+                frontImageSource.value = UiImageSource.LocalUri(frontUri)
+                frontUploadSuccess.value = true
             }
             .onFailed {
                 recordEvent(
@@ -88,6 +107,8 @@ class KycUploadViewModel(
                     )
                 )
                 submitBackResult.value = backUri
+                backImageSource.value = UiImageSource.LocalUri(backUri)
+                backUploadSuccess.value = true
             }
             .onFailed {
                 recordEvent(
@@ -135,6 +156,8 @@ class KycUploadViewModel(
                     )
                 )
                 submitSelfResult.value = uri
+                selfImageSource.value = UiImageSource.LocalUri(uri)
+                selfUploadSuccess.value = true
             }
             .onFailed {
                 recordEvent(
@@ -147,4 +170,7 @@ class KycUploadViewModel(
                 false
             }
     }
+
+    private fun String?.toRemoteImageSource(): UiImageSource? =
+        takeUnless(String?::isNullOrBlank)?.let(UiImageSource::RemoteUrl)
 }

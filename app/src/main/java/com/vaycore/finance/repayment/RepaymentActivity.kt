@@ -9,6 +9,7 @@ import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseActivity
 import com.vaycore.finance.model.wallet.BankAccountResponse
 import com.vaycore.finance.databinding.RepaymentActivityBinding
+import com.vaycore.finance.repayment.adapter.RepaymentAdapter
 import com.vaycore.finance.util.compressImage
 import com.vaycore.finance.util.copyToClipboard
 import com.vaycore.finance.util.context.getColor2

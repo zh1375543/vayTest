@@ -75,6 +75,9 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
     private var selectedWithdrawMethod: WithdrawMethod? = null
 
     override fun initView() = with(binding) {
+        isCertified = isCert
+        showBankFields = false
+        showWalletFields = false
         with(withdrawAccountForm) {
         setupBottomActionKeyboardBehavior()
         vm.recordEvent(TrackBean(p = PageInfoBank, act = ACT_in))
@@ -300,22 +303,7 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
             loadingLayout.showError()
         }
         personalVm.getPersonalInfo {}
-        tvContactTips.isVisible = !isCert
         titleBar.showAction(!isCert)
-        relativesView.setEnableEdit(!isCert)
-        relativesNameView.setEnableEdit(!isCert)
-        relativesPhoneView.setEnableEdit(!isCert)
-        friendView.setEnableEdit(!isCert)
-        friendNameView.setEnableEdit(!isCert)
-        friendPhoneView.setEnableEdit(!isCert)
-        additionalContactRelationshipView.setEnableEdit(!isCert)
-        additionalContactNameView.setEnableEdit(!isCert)
-        additionalContactPhoneView.setEnableEdit(!isCert)
-        relativesPhoneView.setContactVisible(!isCert)
-        friendPhoneView.setContactVisible(!isCert)
-        additionalContactPhoneView.setContactVisible(!isCert)
-        additionalContactContainer.isVisible = !isCert
-        confirmLayout.isVisible = !isCert
         titleBar.updateTitle(
             if (isCert) getString(R.string.contact_info) else getString(R.string.bank_and_contact)
         )
@@ -363,8 +351,8 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
         methodSelectionView.text = getString(
             if (method == WithdrawMethod.BANK) R.string.bank else R.string.e_wallet,
         )
-        bankFieldsLayout.isVisible = method == WithdrawMethod.BANK
-        walletFieldsLayout.isVisible = method == WithdrawMethod.WALLET
+        binding.showBankFields = method == WithdrawMethod.BANK
+        binding.showWalletFields = method == WithdrawMethod.WALLET
     }
 
     private fun clearWithdrawMethodSelection() = with(binding.withdrawAccountForm) {
@@ -376,8 +364,8 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
         }
         methodSelectionView.setCompoundDrawablesRelative(null, null, arrow, null)
         methodSelectionView.text = getString(R.string.please_select)
-        bankFieldsLayout.isVisible = false
-        walletFieldsLayout.isVisible = false
+        binding.showBankFields = false
+        binding.showWalletFields = false
     }
 
     private fun handleBack() {

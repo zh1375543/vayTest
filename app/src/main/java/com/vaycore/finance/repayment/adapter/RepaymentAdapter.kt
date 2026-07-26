@@ -1,12 +1,12 @@
-package com.vaycore.finance.repayment
+package com.vaycore.finance.repayment.adapter
 
 import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseAdapter
-import com.vaycore.finance.model.wallet.BankAccountResponse
 import com.vaycore.finance.databinding.RepaymentAdapterBinding
+import com.vaycore.finance.model.wallet.BankAccountResponse
+import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.util.copyToClipboard
 import com.vaycore.finance.util.showToastMessage
-import com.vaycore.finance.ui.extension.singleClick
 
 class RepaymentAdapter :
     BaseAdapter<BankAccountResponse, RepaymentAdapterBinding>(RepaymentAdapterBinding::inflate) {

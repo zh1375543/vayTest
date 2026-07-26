@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:background="@mipmap/ic_page_bg"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.vaycore.finance.repayment.RepayViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/ic_page_bg">
 
     <com.vaycore.finance.ui.views.PageHeaderView
         android:id="@+id/titleBar"
@@ -34,6 +43,7 @@
                 android:layout_marginBottom="@dimen/dp_12"
                 android:paddingHorizontal="@dimen/dp_16"
                 android:paddingTop="@dimen/dp_10"
+                app:items="@{viewModel.orderListResult}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toTopOf="@id/bottom_layout"
                 app:layout_constraintTop_toTopOf="parent"
@@ -78,6 +88,7 @@
                     android:textColor="@color/color_7087F8"
                     android:textSize="@dimen/sp_14"
                     android:textStyle="bold"
+                    android:text="@{viewModel.selectedOrderAmount}"
                     app:layout_constraintBaseline_toBaselineOf="@id/tvAmountTitle"
                     app:layout_constraintEnd_toEndOf="parent"
                     tools:text="500,000,000đ" />
@@ -107,6 +118,7 @@
                     android:textColor="@color/C_111827"
                     android:textSize="@dimen/sp_14"
                     android:textStyle="bold"
+                    android:text="@{viewModel.selectedOrderCount}"
                     app:layout_constraintBaseline_toBaselineOf="@id/tvNumTitle"
                     app:layout_constraintEnd_toEndOf="parent"
                     tools:text="3" />
@@ -128,5 +140,6 @@
                     app:layout_constraintTop_toBottomOf="@id/tvNumTitle" />
             </com.vaycore.finance.ui.views.StyledConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.vaycore.finance.ui.views.ContentStateLayout>
-</androidx.constraintlayout.widget.ConstraintLayout >
+        </com.vaycore.finance.ui.views.ContentStateLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

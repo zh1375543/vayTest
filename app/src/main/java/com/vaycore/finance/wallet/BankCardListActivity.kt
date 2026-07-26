@@ -66,6 +66,7 @@ class BankCardListActivity :
     }
 
     override fun initView() = with(binding) {
+        viewModel = vm
         trackEvent(WALLET_INFO_PAGE)
         rvAccounts.adapter = bankAdapter
         addLayout.singleClick {
@@ -91,8 +92,7 @@ class BankCardListActivity :
         super.initObserve()
         accountListResult.observe(this@BankCardListActivity) {
             binding.apply {
-                bankAdapter.submitItems(it)
-                if (bankAdapter.items.isEmpty()) {
+                if (it.isNullOrEmpty()) {
                     loadingLayout.showEmpty(R.mipmap.ic_banklist_null, R.string.empty_bankcard)
                 } else {
                     loadingLayout.showContent()

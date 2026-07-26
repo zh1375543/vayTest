@@ -85,6 +85,8 @@ class PersonalInfoAuthActivity :
     private var idJob: Job? = null
 
     override fun initView() = with(binding) {
+        isCertified = isCert
+        shouldShowBottomAction = !isCert
         setupBottomActionKeyboardBehavior()
         trackEvent(PERSON_INFO_PAGE)
         vm.recordEvent(
@@ -420,22 +422,8 @@ class PersonalInfoAuthActivity :
                 )
             }
         }
-        lastNameView.setEnableEdit(!isCert)
-        firstNameView.setEnableEdit(!isCert)
-        genderView.setEnableEdit(!isCert)
-        birthView.setEnableEdit(!isCert)
-        idCardView.setEnableEdit(!isCert)
-        educationView.setEnableEdit(!isCert)
-        industryView.setEnableEdit(!isCert)
-        professionView.setEnableEdit(!isCert)
-        workTimeView.setEnableEdit(!isCert)
-        reasonView.setEnableEdit(!isCert)
-        marryView.setEnableEdit(!isCert)
-        provinceView.setEnableEdit(!isCert)
-        addressView.setEnableEdit(!isCert)
         titleBar.showAction(!isCert)
-        setBottomActionVisible(!isCert)
-        if (bottomActionLayout.isVisible) {
+        if (!isCert) {
             btNext.resetScale()
         }
         btNext.singleClick {
@@ -679,11 +667,6 @@ class PersonalInfoAuthActivity :
             insets
         }
         ViewCompat.requestApplyInsets(binding.bottomActionLayout)
-    }
-
-    private fun setBottomActionVisible(visible: Boolean) {
-        shouldShowBottomAction = visible
-        updateBottomActionVisibility()
     }
 
     private fun updateBottomActionVisibility() {

@@ -28,8 +28,6 @@ import com.vaycore.finance.util.LoanEventUtil
 import com.vaycore.finance.util.ORDER_COMMIT
 import com.vaycore.finance.util.context.getColor2
 import com.vaycore.finance.util.deviceRiskPermissions
-import com.vaycore.finance.util.formatAmountWithPrefix
-import com.vaycore.finance.util.maskSensitive
 import com.vaycore.finance.util.requestRuntimePermissions
 import com.vaycore.finance.util.toJsonString
 import com.vaycore.finance.util.trackEvent
@@ -210,10 +208,8 @@ class LoanProductMultiActivity : BaseActivity<ActivityLoanProductMultiBinding>()
                     payWay = if (loan.userCashWalletId != null) "WALLET" else "CARD",
                 )
             }
-            bindReceivingAccount(cardInfo)
-
-            binding.tvNum.text = products.size.toString()
-            binding.tvAmount.text = loan.canApplyAmount.formatAmountWithPrefix(loan.currencySymbol)
+            binding.togetherInfo = loan
+            binding.account = cardInfo
             binding.bottomLayout.isVisible = true
             binding.loadingLayout.showContent()
         }
@@ -222,7 +218,7 @@ class LoanProductMultiActivity : BaseActivity<ActivityLoanProductMultiBinding>()
             accounts ?: return@observe
             chooseAccountsDialog(cardInfo?.bankNo, accounts, false) { card ->
                 cardInfo = card
-                bindReceivingAccount(card)
+                binding.account = card
             }
         }
     }
@@ -231,12 +227,6 @@ class LoanProductMultiActivity : BaseActivity<ActivityLoanProductMultiBinding>()
         super.onStop()
         loanEvent.logViewQuitLoan()
         loanEvent.writeLog2File()
-    }
-
-    private fun bindReceivingAccount(account: BankAccountResponse?) = with(binding) {
-        tvCard.text = (account?.account ?: account?.bankNo).maskSensitive()
-        tvAccountType.text = account?.payWay?.lowercase().orEmpty()
-        loanTipLayout.isVisible = account?.payWay != "CARD"
     }
 
     private fun productIdsForTrack(): String = togetherAdapter.items.joinToString(",") { product ->

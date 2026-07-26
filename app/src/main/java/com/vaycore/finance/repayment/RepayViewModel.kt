@@ -6,6 +6,8 @@ import com.vaycore.finance.base.BaseViewModel
 import com.vaycore.finance.model.wallet.BankAccountResponse
 import com.vaycore.finance.model.loan.ProductBean
 import com.vaycore.finance.model.repayment.RepaymentActionResponse
+import com.vaycore.finance.util.formatAmountWithPrefix
+import java.math.BigDecimal
 
 class RepayViewModel(
     private val repaymentRepository: RepaymentRepository = RepaymentRepository(BaseViewModel.api),
@@ -52,14 +54,31 @@ class RepayViewModel(
     }
 
     val orderListResult = MutableLiveData<List<ProductBean>?>()
+    val selectedOrderCount = MutableLiveData("0")
+    val selectedOrderAmount = MutableLiveData("0")
+
     fun getOrderList(errorAction: () -> Unit) {
         launchData {
             repaymentRepository.fetchBatchRepaymentOrders()
         }.onSuccess {
-            orderListResult.value = it
+            val orders = it.orEmpty().onEach { order -> order.isCheck = true }
+            updateBatchSelection(orders)
+            orderListResult.value = orders
         }.onFailed {
             errorAction()
             true
+        }
+    }
+
+    fun updateBatchSelection(orders: List<ProductBean>) {
+        val selectedOrders = orders.filter(ProductBean::isCheck)
+        selectedOrderCount.value = selectedOrders.size.toString()
+        selectedOrderAmount.value = if (orders.isEmpty()) {
+            "0"
+        } else {
+            selectedOrders.fold(BigDecimal.ZERO) { total, order ->
+                total + (order.actualRepayAmount ?: BigDecimal.ZERO)
+            }.formatAmountWithPrefix((selectedOrders.firstOrNull() ?: orders.first()).currencySymbol)
         }
     }
 

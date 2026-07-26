@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.pp.vay.vnavi",
+  "applicationId": "com.eta.gaan.tc.puhunan",
   "variantName": "devRelease",
   "elements": [
     {
@@ -13,7 +13,7 @@
       "attributes": [],
       "versionCode": 100,
       "versionName": "1.0.0",
-      "outputFile": "Vay_dev_1.0.0(100)_release_2026-07-13_14-11-01.apk"
+      "outputFile": "VayBee_dev_1.0.0(100)_release_2026-07-24_18-21-26.apk"
     }
   ],
   "elementType": "File",
@@ -22,14 +22,14 @@
       "minApi": 28,
       "maxApi": 30,
       "baselineProfiles": [
-        "baselineProfiles/1/Vay_dev_1.0.0(100)_release_2026-07-13_14-11-01.dm"
+        "baselineProfiles/1/VayBee_dev_1.0.0(100)_release_2026-07-24_18-21-26.dm"
       ]
     },
     {
       "minApi": 31,
       "maxApi": 2147483647,
       "baselineProfiles": [
-        "baselineProfiles/0/Vay_dev_1.0.0(100)_release_2026-07-13_14-11-01.dm"
+        "baselineProfiles/0/VayBee_dev_1.0.0(100)_release_2026-07-24_18-21-26.dm"
       ]
     }
   ],

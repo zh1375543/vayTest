@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.vaycore.finance.ui.views.StyledConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/dp_12"
-    android:paddingHorizontal="@dimen/dp_16"
-    android:paddingTop="@dimen/dp_20"
-    android:paddingBottom="@dimen/dp_20"
-    app:radius="@dimen/dp_24"
-    app:solidColor="@color/white">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.vaycore.finance.model.order.OrderBean" />
+    </data>
+
+    <com.vaycore.finance.ui.views.StyledConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_12"
+        android:paddingHorizontal="@dimen/dp_16"
+        android:paddingTop="@dimen/dp_20"
+        android:paddingBottom="@dimen/dp_20"
+        app:radius="@dimen/dp_24"
+        app:solidColor="@color/white">
 
     <TextView
         android:id="@+id/tvProductName"
@@ -18,10 +27,10 @@
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
-        android:text="@string/product_name"
         android:textColor="@color/C_111827"
         android:textSize="@dimen/sp_16"
         android:textStyle="bold"
+        android:text="@{item.productName}"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -173,4 +182,5 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-</com.vaycore.finance.ui.views.StyledConstraintLayout>
+    </com.vaycore.finance.ui.views.StyledConstraintLayout>
+</layout>

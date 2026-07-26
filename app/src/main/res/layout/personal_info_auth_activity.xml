@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:background="@mipmap/ic_page_bg"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="isCertified"
+            type="Boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/ic_page_bg">
 
     <com.vaycore.finance.ui.views.PageHeaderView
         android:id="@+id/titleBar"
@@ -67,6 +76,7 @@
                     app:formType="input"
                     app:hintText="@string/please_enter_name"
                     app:inputType="text"
+                    app:editable="@{!isCertified}"
                     app:titleText="@string/last_name" />
 
                 <com.vaycore.finance.ui.widget.FormItemView
@@ -77,6 +87,7 @@
                     app:formType="input"
                     app:hintText="@string/please_enter_name"
                     app:inputType="text"
+                    app:editable="@{!isCertified}"
                     app:titleText="@string/first_name" />
 
                 <com.vaycore.finance.ui.widget.FormItemView
@@ -87,6 +98,7 @@
                     app:formType="select"
                     app:hintText="@string/please_choose"
                     app:inputType="text"
+                    app:editable="@{!isCertified}"
                     app:titleText="@string/gender" />
 
                 <com.vaycore.finance.ui.widget.FormItemView
@@ -97,6 +109,7 @@
                     app:formType="select"
                     app:hintText="@string/please_choose"
                     app:inputType="text"
+                    app:editable="@{!isCertified}"
                     app:titleText="@string/date_of_birth" />
 
                 <com.vaycore.finance.ui.widget.FormItemView
@@ -108,6 +121,7 @@
                     app:formType="input"
                     app:hintText="@string/please_enter_id_card"
                     app:inputType="number"
+                    app:editable="@{!isCertified}"
                     app:titleText="@string/id_card_number" />
 
                 <com.vaycore.finance.ui.widget.FormItemView
@@ -117,6 +131,7 @@
                     app:errorText="@string/please_choose_education"
                     app:formType="select"
                     app:hintText="@string/please_choose"
+                    app:editable="@{!isCertified}"
                     app:titleText="@string/education" />
 
                 <com.vaycore.finance.ui.widget.FormItemView
@@ -126,6 +141,7 @@
                     app:errorText="@string/please_choose_industry"
                     app:formType="select"
                     app:hintText="@string/please_choose"
+                    app:editable="@{!isCertified}"
                     app:titleText="@string/industry" />
 
                 <com.vaycore.finance.ui.widget.FormItemView
@@ -135,6 +151,7 @@
                     app:errorText="@string/please_choose_profession"
                     app:formType="select"
                     app:hintText="@string/please_choose"
+                    app:editable="@{!isCertified}"
                     app:titleText="@string/profession" />
 
                 <com.vaycore.finance.ui.widget.FormItemView
@@ -144,6 +161,7 @@
                     app:errorText="@string/please_choose_work_time"
                     app:formType="select"
                     app:hintText="@string/please_choose"
+                    app:editable="@{!isCertified}"
                     app:titleText="@string/work_time" />
 
                 <com.vaycore.finance.ui.widget.FormItemView
@@ -153,6 +171,7 @@
                     app:errorText="@string/please_choose_loan_purpose"
                     app:formType="select"
                     app:hintText="@string/please_choose"
+                    app:editable="@{!isCertified}"
                     app:titleText="@string/loan_purpose" />
 
                 <com.vaycore.finance.ui.widget.FormItemView
@@ -163,6 +182,7 @@
                     app:formType="input"
                     app:hintText="@string/please_enter_monthly"
                     app:inputType="number"
+                    app:editable="@{!isCertified}"
                     app:titleText="@string/monthly_salary" />
 
                 <!-- Marital status -->
@@ -173,6 +193,7 @@
                     app:errorText="@string/please_choose_marital_status"
                     app:formType="select"
                     app:hintText="@string/please_choose"
+                    app:editable="@{!isCertified}"
                     app:titleText="@string/marry_status" />
 
                 <!-- Province / city -->
@@ -183,6 +204,7 @@
                     app:errorText="@string/please_choose_province_city_town"
                     app:formType="select"
                     app:hintText="@string/please_choose"
+                    app:editable="@{!isCertified}"
                     app:titleText="@string/province_city_town" />
 
                 <!-- Address -->
@@ -194,6 +216,7 @@
                     app:formType="input"
                     app:hintText="@string/residential_address_hint"
                     app:inputType="text"
+                    app:editable="@{!isCertified}"
                     app:titleText="@string/detail_address" />
 
                 <Space
@@ -229,4 +252,5 @@
             android:text="@string/next"
             app:actionButtonVariant="filled" />
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

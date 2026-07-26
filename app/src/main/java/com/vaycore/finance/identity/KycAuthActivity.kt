@@ -45,7 +45,6 @@ import com.vaycore.finance.ui.showConfirmDialog
 import com.vaycore.finance.ui.showKycCardExampleDialog
 import com.vaycore.finance.ui.showKycSelfieExampleDialog
 import com.vaycore.finance.loan.DashboardViewModel
-import com.vaycore.finance.ui.extension.loadImage
 import com.vaycore.finance.util.viewBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -75,7 +74,6 @@ class KycAuthActivity : BaseActivity<KycAuthActivityBinding>() {
                         result = System.currentTimeMillis().toString()
                     )
                 )
-//                binding.ivCardFront.load(frontUri)
                 frontUri?.let { vm.submitKycFront(it) }
             }
         }
@@ -89,7 +87,6 @@ class KycAuthActivity : BaseActivity<KycAuthActivityBinding>() {
                 backUri = withContext(Dispatchers.IO) {
                     compressImage(photoUri)
                 }
-//                binding.ivCardBack.load(backUri)
                 vm.recordEvent(
                     TrackBean(
                         p = PageInfoKyc,
@@ -127,9 +124,14 @@ class KycAuthActivity : BaseActivity<KycAuthActivityBinding>() {
         if (result.resultCode == RESULT_OK) {
             App.instance.result?.let {
                 if (it.livenessImageResults.isNullOrEmpty()) return@let
-                lifecycleScope.launch(Dispatchers.IO) {
-                    val file = saveBytesToCacheJpg(it.livenessImageResults[0].detectImage)
-                    selfUri = compressImage(getUri(file))
+                lifecycleScope.launch {
+                    val (compressedUri, encryptedFile) = withContext(Dispatchers.IO) {
+                        val imageFile = saveBytesToCacheJpg(it.livenessImageResults[0].detectImage)
+                        val imageUri = compressImage(getUri(imageFile))
+                        val liveFile = saveBytesToCacheJpg(it.livenessEncryptResult)
+                        imageUri to liveFile
+                    }
+                    selfUri = compressedUri
                     vm.recordEvent(
                         TrackBean(
                             p = PageInfoKyc,
@@ -140,7 +142,7 @@ class KycAuthActivity : BaseActivity<KycAuthActivityBinding>() {
                     selfUri?.let { it1 ->
                         vm.submitKycSelf(
                             it1,
-                            saveBytesToCacheJpg(it.livenessEncryptResult)
+                            encryptedFile
                         )
                     }
                 }
@@ -163,6 +165,8 @@ class KycAuthActivity : BaseActivity<KycAuthActivityBinding>() {
     private var backUri: Uri? = null
 
     override fun initView() = with(binding) {
+        viewModel = vm
+        isCertified = isCert
         trackEvent(KYC_INFO_PAGE)
         vm.recordEvent(
             TrackBean(
@@ -267,22 +271,21 @@ class KycAuthActivity : BaseActivity<KycAuthActivityBinding>() {
                 backLauncher.launch(intent)
             }
         }
-        bottomActionLayout.isVisible = false
         btNext.singleClick {
             if (frontLayout.isVisible) {
-                if (frontUri == null && frontImageUrl.isNullOrBlank()) {
+                if (frontUri == null && vm.frontImageSource.value == null) {
                     getString(R.string.please_upload_nic_card_front).showToastMessage()
                     return@singleClick
                 }
             }
             if (backLayout.isVisible) {
-                if (backUri == null && backImageUrl.isNullOrBlank()) {
+                if (backUri == null && vm.backImageSource.value == null) {
                     getString(R.string.please_upload_nic_card_back).showToastMessage()
                     return@singleClick
                 }
             }
             if (selfGroup.isVisible) {
-                if (selfUri == null && liveImageUrl.isNullOrBlank() && vm.h5Result.value == null) {
+                if (selfUri == null && vm.selfImageSource.value == null) {
                     getString(R.string.please_upload_self_photo).showToastMessage()
                     return@singleClick
                 }
@@ -296,17 +299,6 @@ class KycAuthActivity : BaseActivity<KycAuthActivityBinding>() {
             trackEvent(KYC_INFO_COMMIT)
             vm.compareFace()
         }
-        binding.frontUp.isVisible = false
-        binding.backUp.isVisible = false
-        binding.selfUp.isVisible = false
-        binding.bottomActionLayout.isVisible = !isCert
-        binding.tvSelfDesc.isVisible = !isCert
-        binding.tvExample1.isVisible = !isCert
-        binding.tvExample2.isVisible = !isCert
-        binding.ivCardFront.isEnabled = !isCert
-        binding.ivCardBack.isEnabled = !isCert
-        binding.ivSelf.isEnabled = !isCert
-        binding.bottomActionLayout.isVisible = !isCert
         if (!isCert) {
             btNext.resetScale()
         }
@@ -320,26 +312,11 @@ class KycAuthActivity : BaseActivity<KycAuthActivityBinding>() {
 
     private var isCompare = false
     private var kycType: Int = 1
-    private var frontImageUrl: String? = null
-    private var backImageUrl: String? = null
-    private var liveImageUrl: String? = null
     override fun initObserve() =with(vm){
         super.initObserve()
         kycResult.observe(this@KycAuthActivity) {
             it?.let {
                 binding.loadingLayout.showContent()
-                frontImageUrl = it.frontImageUrl
-                backImageUrl = it.backImageUrl
-                liveImageUrl = it.liveImageUrl
-                if (!it.frontImageUrl.isNullOrBlank()) {
-                    binding.ivCardFront.loadImage(it.frontImageUrl)
-                }
-                if (!it.backImageUrl.isNullOrBlank()) {
-                    binding.ivCardBack.loadImage(it.backImageUrl)
-                }
-                if (!it.liveImageUrl.isNullOrBlank()) {
-                    binding.ivSelf.loadImage(it.liveImageUrl)
-                }
             }
         }
         compareResult.observe(this@KycAuthActivity) {
@@ -350,29 +327,11 @@ class KycAuthActivity : BaseActivity<KycAuthActivityBinding>() {
             finish()
         }
         configResult.observe(this@KycAuthActivity) {
-            binding.apply {
-                frontLayout.isVisible = it?.KYC_FRONT != 0
-                backLayout.isVisible = it?.KYC_BACK != 0
-                selfGroup.isVisible = it?.FACE != 0
-                isCompare = it?.FACE_COMPARE == 1
-                kycType = it?.FACE ?: 1
-                idLayout.isVisible = frontLayout.isVisible ||backLayout.isVisible
-            }
+            isCompare = it?.FACE_COMPARE == 1
+            kycType = it?.FACE ?: 1
             vm.getKycInfo {
                 binding.loadingLayout.showError()
             }
-        }
-        submitFrontResult.observe(this@KycAuthActivity) {
-            binding.ivCardFront.loadImage(it)
-            binding.frontUp.isVisible = true
-        }
-        submitBackResult.observe(this@KycAuthActivity) {
-            binding.ivCardBack.loadImage(it)
-            binding.backUp.isVisible = true
-        }
-        submitSelfResult.observe(this@KycAuthActivity) {
-            binding.ivSelf.loadImage(it)
-            binding.selfUp.isVisible = true
         }
         h5Live.observe(this@KycAuthActivity) {
             if (it.verifyUrl == null) {
@@ -391,12 +350,6 @@ class KycAuthActivity : BaseActivity<KycAuthActivityBinding>() {
             h5Launcher.launch(
                 WebViewActivity.getIntent(this@KycAuthActivity, it.verifyUrl)
             )
-        }
-        h5Result.observe(this@KycAuthActivity) {
-            it?.let {
-                binding.ivSelf.loadImage(it)
-                binding.selfUp.isVisible = true
-            }
         }
     }
 

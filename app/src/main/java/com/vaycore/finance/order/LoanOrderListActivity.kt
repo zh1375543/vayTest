@@ -28,6 +28,7 @@ class LoanOrderListActivity : BaseActivity<ActivityLoanOrderListBinding>() {
     }
 
     override fun initView() = with(binding) {
+        viewModel = vm
         vm.recordEvent(
             TrackBean(
                 p = PageHistory,
@@ -56,7 +57,6 @@ class LoanOrderListActivity : BaseActivity<ActivityLoanOrderListBinding>() {
         super.initObserve()
         orderListResult.observe(this@LoanOrderListActivity) {
             binding.apply {
-                orderAdapter.submitItems(it)
                 if (it.isNullOrEmpty()) {
                     loadingLayout.showEmpty(R.mipmap.ic_order_null, R.string.order_empty)
                 } else {

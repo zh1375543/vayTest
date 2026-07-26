@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@mipmap/ic_page_bg">
+    >
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="togetherInfo"
+            type="com.vaycore.finance.model.loan.LoanDashboardResponse" />
+
+        <variable
+            name="account"
+            type="com.vaycore.finance.model.wallet.BankAccountResponse" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/ic_page_bg">
 
     <com.vaycore.finance.ui.views.PageHeaderView
         android:id="@+id/titleBar"
@@ -127,6 +143,7 @@
                 android:textColor="@color/C_111827"
                 android:textSize="@dimen/sp_12"
                 android:textStyle="bold"
+                app:accountType="@{account.payWay}"
                 tools:text="card" />
 
             <TextView
@@ -137,6 +154,7 @@
                 android:textColor="@color/C_111827"
                 android:textSize="@dimen/sp_16"
                 android:textStyle="bold"
+                app:maskedAccount="@{account.account != null ? account.account : account.bankNo}"
                 tools:text="111111" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -165,6 +183,7 @@
             android:layout_marginTop="@dimen/dp_16"
             android:paddingHorizontal="@dimen/dp_16"
             android:paddingVertical="@dimen/dp_14"
+            android:visibility="@{account == null || account.payWay != `CARD` ? View.VISIBLE : View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvAccountTitle"
@@ -226,6 +245,8 @@
                 android:textColor="@color/color_7087F8"
                 android:textSize="@dimen/sp_18"
                 android:textStyle="bold"
+                app:amountWithCurrency="@{togetherInfo.canApplyAmount}"
+                app:amountCurrencySymbol="@{togetherInfo.currencySymbol}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="500,000,000₫" />
@@ -250,6 +271,7 @@
                 android:textColor="@color/C_111827"
                 android:textSize="@dimen/sp_18"
                 android:textStyle="bold"
+                android:text="@{String.valueOf(togetherInfo.showProducts != null ? togetherInfo.showProducts.size() : 0)}"
                 app:layout_constraintBottom_toBottomOf="@id/tvTransactionTitle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/tvTransactionTitle"
@@ -277,4 +299,5 @@
         app:constraint_referenced_ids="tvPrivacy,bottomCard"
         tools:visibility="visible" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

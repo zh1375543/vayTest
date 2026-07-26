@@ -1,13 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.vaycore.finance.ui.views.StyledConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rootView"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/dp_10"
-    app:radius="@dimen/dp_24"
-    app:solidColor="@color/color_7087F8">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.vaycore.finance.R" />
+
+        <variable
+            name="item"
+            type="com.vaycore.finance.model.wallet.BankAccountResponse" />
+    </data>
+
+    <com.vaycore.finance.ui.views.StyledConstraintLayout
+        android:id="@+id/rootView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_10"
+        app:radius="@dimen/dp_24"
+        app:solidColor="@color/color_7087F8">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivAccountIcon"
@@ -17,6 +30,7 @@
         android:layout_marginTop="@dimen/dp_20"
         android:contentDescription="@null"
         android:scaleType="fitCenter"
+        android:src="@{item.payWay == `WALLET` ? R.mipmap.ic_wallet_defalut : R.mipmap.ic_bank_default}"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@mipmap/ic_bank_default" />
@@ -29,6 +43,7 @@
         android:layout_marginEnd="@dimen/dp_8"
         android:ellipsize="end"
         android:maxLines="1"
+        android:text="@{item.bankName}"
         android:textColor="@color/white"
         android:textSize="@dimen/sp_14"
         app:layout_constraintBottom_toBottomOf="@id/ivAccountIcon"
@@ -47,6 +62,7 @@
         android:textColor="@color/white"
         android:textSize="@dimen/sp_18"
         android:textStyle="bold"
+        android:text="@{item.bankNo}"
         app:layout_constraintBottom_toBottomOf="@id/ivAccountIcon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/ivAccountIcon"
@@ -94,17 +110,18 @@
         android:id="@+id/menuGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="@{item.isDefault == 1 ? View.GONE : View.VISIBLE}"
         app:constraint_referenced_ids="tvDefault,tvDelete" />
 
     <View
         android:id="@+id/compactBottomSpace"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_20"
-        android:visibility="gone"
+        android:visibility="@{item.isDefault == 1 ? View.VISIBLE : View.GONE}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ivAccountIcon" />
 
-</com.vaycore.finance.ui.views.StyledConstraintLayout>
+    </com.vaycore.finance.ui.views.StyledConstraintLayout>
+</layout>

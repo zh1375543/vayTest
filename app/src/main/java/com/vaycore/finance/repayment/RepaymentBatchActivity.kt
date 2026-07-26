@@ -4,12 +4,13 @@ import androidx.activity.viewModels
 import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseActivity
 import com.vaycore.finance.databinding.RepaymentBatchActivityBinding
+import com.vaycore.finance.order.LoanOrderDetailActivity
+import com.vaycore.finance.repayment.adapter.BatchRepaymentAdapter
 import com.vaycore.finance.util.showToastMessage
+import com.vaycore.finance.util.start
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.web.WebViewActivity
-import com.vaycore.finance.util.formatAmountWithPrefix
 import com.vaycore.finance.util.viewBinding
-import java.math.BigDecimal
 
 class RepaymentBatchActivity :
     BaseActivity<RepaymentBatchActivityBinding>() {
@@ -22,17 +23,21 @@ class RepaymentBatchActivity :
             setOnItemClickListener { item, position ->
                 item.isCheck = !item.isCheck
                 notifyItemRangeChanged(position, 1, 0)
-                val selectList = items.filter { it1 -> it1.isCheck }
-                binding.tvNum.text = selectList.size.toString()
-                binding.tvAmount.text = selectList.fold(
-                    BigDecimal.ZERO
-                ) { acc, order -> acc + (order.actualRepayAmount ?: BigDecimal.ZERO) }
-                    .formatAmountWithPrefix(item.currencySymbol)
+                vm.updateBatchSelection(items)
+            }
+            setOnChildClickListener { view, item, _ ->
+                if (view.id == R.id.tvProductDetail) {
+                    start<LoanOrderDetailActivity> {
+                        putExtra("orderId", item.orderId)
+                        putExtra("isFromBatch", true)
+                    }
+                }
             }
         }
     }
 
     override fun initView() = with(binding) {
+        viewModel = vm
         rvOrder.adapter = orderAdapter
         tvApply.singleClick {
             if (orderAdapter.items.none { it1 -> it1.isCheck }) {
@@ -64,24 +69,6 @@ class RepaymentBatchActivity :
         orderListResult.observe(this@RepaymentBatchActivity) {
             binding.apply {
                 loadingLayout.showContent()
-                orderAdapter.submitItems(it?.onEach { it1 ->
-                    it1.isCheck = true
-//                        filter { it1 ->
-//                            it1.orderStatus == ORDER_STATUS_PAYMENT_PENDING
-//                                    || it1.orderStatus == ORDER_STATUS_IN_RENEWAL
-//                                    || it1.orderStatus == ORDER_STATUS_IN_RENEWAL_PROCESS
-//                        }
-                })
-                if (it.isNullOrEmpty()) {
-                    tvNum.text = "0"
-                    tvAmount.text = "0"
-                } else {
-                    tvNum.text = it.size.toString()
-                    tvAmount.text = it.fold(
-                        BigDecimal.ZERO
-                    ) { acc, order -> acc + (order.actualRepayAmount ?: BigDecimal.ZERO) }
-                        .formatAmountWithPrefix(it[0].currencySymbol)
-                }
             }
         }
         togetherRepayResult.observe(this@RepaymentBatchActivity) {

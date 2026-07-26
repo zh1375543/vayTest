@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@mipmap/ic_page_bg"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isCertified"
+            type="Boolean" />
+
+        <variable
+            name="showBankFields"
+            type="Boolean" />
+
+        <variable
+            name="showWalletFields"
+            type="Boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/ic_page_bg">
 
     <com.vaycore.finance.ui.views.PageHeaderView
         android:id="@+id/titleBar"
@@ -48,11 +67,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="visible"
+                    android:visibility="@{!isCertified ? View.VISIBLE : View.GONE}"
                     tools:visibility="visible">
                     <include
                         android:id="@+id/withdrawAccountForm"
-                        layout="@layout/view_withdraw_account_form" />
+                        layout="@layout/view_withdraw_account_form"
+                        app:isCertified="@{isCertified}"
+                        app:showBankFields="@{showBankFields}"
+                        app:showWalletFields="@{showWalletFields}" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -77,7 +99,8 @@
                     android:layout_marginTop="@dimen/dp_10"
                     android:text="@string/contact_tips"
                     android:textColor="@color/C_6D7280"
-                    android:textSize="@dimen/sp_12" />
+                    android:textSize="@dimen/sp_12"
+                    android:visibility="@{!isCertified ? View.VISIBLE : View.GONE}" />
 
                 <com.vaycore.finance.ui.views.StyledLinearLayout
                     android:layout_width="match_parent"
@@ -95,6 +118,7 @@
                     app:errorText="@string/please_choose_current_info"
                     app:formType="select"
                     app:hintText="@string/please_choose"
+                    app:editable="@{!isCertified}"
                     app:titleText="@string/contact_people1" />
 
                 <!-- Contact name -->
@@ -106,6 +130,7 @@
                     app:formType="input"
                     app:hintText="@string/please_enter_contact_name"
                     app:inputType="text"
+                    app:editable="@{!isCertified}"
                     app:titleText="@string/contact_name" />
 
                 <!-- Contact phone -->
@@ -119,6 +144,8 @@
                     app:hintText="@string/please_enter_phone_number"
                     app:inputType="phone"
                     app:showContactIcon="true"
+                    app:contactPickerVisible="@{!isCertified}"
+                    app:editable="@{!isCertified}"
                     app:titleText="@string/contact_phone_number" />
 
                 <com.vaycore.finance.ui.widget.FormItemView
@@ -128,6 +155,7 @@
                     app:errorText="@string/please_choose_current_info"
                     app:formType="select"
                     app:hintText="@string/please_choose"
+                    app:editable="@{!isCertified}"
                     app:titleText="@string/contact_people2" />
 
                 <com.vaycore.finance.ui.widget.FormItemView
@@ -138,6 +166,7 @@
                     app:formType="input"
                     app:hintText="@string/please_enter_contact_name"
                     app:inputType="text"
+                    app:editable="@{!isCertified}"
                     app:titleText="@string/contact_name" />
 
                 <com.vaycore.finance.ui.widget.FormItemView
@@ -150,13 +179,16 @@
                     app:hintText="@string/please_enter_phone_number"
                     app:inputType="phone"
                     app:showContactIcon="true"
+                    app:contactPickerVisible="@{!isCertified}"
+                    app:editable="@{!isCertified}"
                     app:titleText="@string/contact_phone_number" />
 
                 <LinearLayout
                     android:id="@+id/additionalContactContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="@{!isCertified ? View.VISIBLE : View.GONE}">
 
                     <com.vaycore.finance.ui.widget.FormItemView
                         android:id="@+id/additionalContactRelationshipView"
@@ -165,6 +197,7 @@
                         app:errorText="@string/please_choose_current_info"
                         app:formType="select"
                         app:hintText="@string/please_choose"
+                        app:editable="@{!isCertified}"
                         app:titleText="@string/contact_people3" />
 
                     <com.vaycore.finance.ui.widget.FormItemView
@@ -175,6 +208,7 @@
                         app:formType="input"
                         app:hintText="@string/please_enter_contact_name"
                         app:inputType="text"
+                        app:editable="@{!isCertified}"
                         app:titleText="@string/contact_name" />
 
                     <com.vaycore.finance.ui.widget.FormItemView
@@ -187,6 +221,8 @@
                         app:hintText="@string/please_enter_phone_number"
                         app:inputType="phone"
                         app:showContactIcon="true"
+                        app:contactPickerVisible="@{!isCertified}"
+                        app:editable="@{!isCertified}"
                         app:titleText="@string/contact_phone_number" />
                 </LinearLayout>
 
@@ -225,4 +261,5 @@
             android:text="@string/next"
             app:actionButtonVariant="filled" />
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

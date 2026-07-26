@@ -33,7 +33,6 @@ import com.vaycore.finance.util.ORDER_COMMIT
 import com.vaycore.finance.util.context.getColor2
 import com.vaycore.finance.util.deviceRiskPermissions
 import com.vaycore.finance.util.formatAmountWithPrefix
-import com.vaycore.finance.util.maskSensitive
 import com.vaycore.finance.util.requestRuntimePermissions
 import com.vaycore.finance.util.start
 import com.vaycore.finance.util.toJsonString
@@ -107,7 +106,7 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
                 product?.id.toString(), product?.maxLoanAmount.toString()
             ) {
                 loadingLayout.showError()
-                bottomLayout.isVisible = false
+                binding.product = null
             }
         }
         tvChange.singleClick {
@@ -223,7 +222,7 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
         loanEvent.logViewEnterLoan()
         if (vm.detailResult.value == null) {
             binding.loadingLayout.showLoading()
-            binding.bottomLayout.isVisible = false
+            binding.product = null
         }
         if (product != null && isFirstEnter) {
             vm.detailResult.value = product?.apply { isPlanLayoutVisible = true }
@@ -238,7 +237,7 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
                 PageProductDetail,
                 product?.id.toString(), product?.loanAmount.toString()
             ) {
-                binding.bottomLayout.isVisible = false
+                binding.product = null
                 binding.loadingLayout.showError()
             }
         }
@@ -258,7 +257,7 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
         detailResult.observe(this@LoanProductActivity) {
             binding.apply {
                 it?.let {
-                    bottomLayout.isVisible = true
+                    binding.product = it
                     loadingLayout.showContent()
                     productSummaryView.bind(
                         it,
@@ -297,7 +296,7 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
                             bankNo = it.bankNo ?: it.walletAccount,
                             payWay = if (it.bankInfoId != null) "CARD" else "WALLET",
                         )
-                        bindReceivingAccount(cardInfo)
+                        binding.account = cardInfo
                     }
                     if (it.bankInfoPayOutFailSign && !isShowBankcardError) {
                         lifecycleScope.launch {
@@ -320,16 +319,10 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
             it?.let {
                 chooseAccountsDialog(cardInfo?.bankNo, it, false) { card ->
                     cardInfo = card
-                    bindReceivingAccount(card)
+                    binding.account = card
                 }
             }
         }
-    }
-
-    private fun bindReceivingAccount(account: BankAccountResponse?) = with(binding) {
-        tvCard.text = (account?.account ?: account?.bankNo).maskSensitive()
-        tvAccountType.text = account?.payWay?.lowercase().orEmpty()
-        loanTipLayout.isVisible = account?.payWay != "CARD"
     }
 
     fun scrollBottom() {

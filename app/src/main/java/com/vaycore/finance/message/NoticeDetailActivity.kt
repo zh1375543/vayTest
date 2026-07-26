@@ -12,8 +12,6 @@ class NoticeDetailActivity :
     private val messageRecord by lazy { intent.getParcelableExtra<MessageRecord>("msg") }
 
     override fun initView() = with(binding) {
-        tvTitle.text = messageRecord?.theme
-        tvContent.text = messageRecord?.content
-        tvDate.text = messageRecord?.getTime()
+        message = messageRecord
     }
 }
