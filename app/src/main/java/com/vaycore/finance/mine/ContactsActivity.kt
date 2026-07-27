@@ -5,7 +5,7 @@ import com.vaycore.finance.base.BaseActivity
 import com.vaycore.finance.databinding.ContactsActivityBinding
 import com.vaycore.finance.model.home.CustomerContactConfig
 import com.vaycore.finance.mine.adapter.ContactWayAdapter
-import com.vaycore.finance.loan.DashboardViewModel
+import com.vaycore.finance.loan.viewmodel.DashboardViewModel
 import com.vaycore.finance.util.viewBinding
 
 class ContactsActivity : BaseActivity<ContactsActivityBinding>() {

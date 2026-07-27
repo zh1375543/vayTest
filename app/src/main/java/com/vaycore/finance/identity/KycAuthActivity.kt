@@ -29,6 +29,7 @@ import com.vaycore.finance.data.ACT_uploadFrontStart
 import com.vaycore.finance.data.PageInfoKyc
 import com.vaycore.finance.data.authConfigList
 import com.vaycore.finance.data.bean.TrackBean
+import com.vaycore.finance.identity.viewmodel.KycUploadViewModel
 import com.vaycore.finance.web.WebViewActivity
 import com.vaycore.finance.util.KYC_AADHAAR_BACK_CLICK
 import com.vaycore.finance.util.KYC_AADHAAR_FRONT_CLICK
@@ -44,7 +45,7 @@ import com.vaycore.finance.util.trackEvent
 import com.vaycore.finance.ui.showConfirmDialog
 import com.vaycore.finance.ui.showKycCardExampleDialog
 import com.vaycore.finance.ui.showKycSelfieExampleDialog
-import com.vaycore.finance.loan.DashboardViewModel
+import com.vaycore.finance.loan.viewmodel.DashboardViewModel
 import com.vaycore.finance.util.viewBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

@@ -24,6 +24,8 @@ import com.vaycore.finance.model.loan.ProductBean
 import com.vaycore.finance.app.MainActivity
 import com.vaycore.finance.home.HomeProductAdapter
 import com.vaycore.finance.loan.adapter.LoanResultAdapter
+import com.vaycore.finance.loan.viewmodel.LoanApplyViewModel
+import com.vaycore.finance.loan.viewmodel.LoanProductViewModel
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.util.AppStackUtil
 import com.vaycore.finance.util.LOAN_GET_NOW_CLICK

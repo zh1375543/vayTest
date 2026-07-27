@@ -9,7 +9,7 @@ import com.vaycore.finance.data.PRIVACY_POLICY
 import com.vaycore.finance.data.bean.TrackBean
 import com.vaycore.finance.data.loginInfo
 import com.vaycore.finance.databinding.MineFragmentBinding
-import com.vaycore.finance.loan.DashboardViewModel
+import com.vaycore.finance.loan.viewmodel.DashboardViewModel
 import com.vaycore.finance.order.LoanOrderListActivity
 import com.vaycore.finance.payback.RepaymentBatchActivity
 import com.vaycore.finance.payback.createPaybackDialog

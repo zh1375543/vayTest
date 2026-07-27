@@ -11,7 +11,7 @@ import com.vaycore.finance.identity.BankAccountAuthActivity
 import com.vaycore.finance.identity.KycAuthActivity
 import com.vaycore.finance.identity.PersonalInfoAuthActivity
 import com.vaycore.finance.mine.adapter.AuthEntryAdapter
-import com.vaycore.finance.loan.DashboardViewModel
+import com.vaycore.finance.loan.viewmodel.DashboardViewModel
 import com.vaycore.finance.util.PROFILE_PAGE
 import com.vaycore.finance.util.start
 import com.vaycore.finance.util.trackEvent

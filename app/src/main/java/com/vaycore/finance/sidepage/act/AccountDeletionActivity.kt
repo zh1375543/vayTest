@@ -7,7 +7,7 @@ import com.vaycore.finance.data.loginInfo
 import com.vaycore.finance.databinding.SidepageAccountDeletionActivityBinding
 import com.vaycore.finance.mine.LogoutSuccessActivity
 import com.vaycore.finance.ui.extension.singleClick
-import com.vaycore.finance.identity.SessionViewModel
+import com.vaycore.finance.identity.viewmodel.SessionViewModel
 import com.vaycore.finance.util.start
 import com.vaycore.finance.util.viewBinding
 

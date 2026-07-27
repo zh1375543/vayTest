@@ -4,7 +4,7 @@ import androidx.activity.viewModels
 import com.vaycore.finance.base.BaseActivity
 import com.vaycore.finance.databinding.LogoutActivityBinding
 import com.vaycore.finance.data.loginInfo
-import com.vaycore.finance.identity.SessionViewModel
+import com.vaycore.finance.identity.viewmodel.SessionViewModel
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.util.start
 import com.vaycore.finance.util.viewBinding

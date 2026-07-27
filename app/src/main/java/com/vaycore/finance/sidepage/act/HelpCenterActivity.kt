@@ -7,7 +7,7 @@ import com.vaycore.finance.base.BaseActivity
 import com.vaycore.finance.databinding.SidepageHelpCenterActivityBinding
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.ui.showContactUsDialog
-import com.vaycore.finance.loan.DashboardViewModel
+import com.vaycore.finance.loan.viewmodel.DashboardViewModel
 import com.vaycore.finance.util.viewBinding
 
 /** Support landing page for the side-page experience. */

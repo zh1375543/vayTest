@@ -31,6 +31,8 @@ import com.vaycore.finance.data.bean.ApiRequest
 import com.vaycore.finance.model.wallet.BankChannelResponse
 import com.vaycore.finance.model.identity.RelativesBean
 import com.vaycore.finance.data.bean.TrackBean
+import com.vaycore.finance.identity.viewmodel.PersonalInfoViewModel
+import com.vaycore.finance.identity.viewmodel.WorkContactViewModel
 import com.vaycore.finance.model.wallet.WalletResponse
 import com.vaycore.finance.wallet.WalletViewModel
 import com.vaycore.finance.util.SUPPLEMENTARY_INFO_COMMIT
@@ -43,7 +45,7 @@ import com.vaycore.finance.wallet.chooseWalletDialog
 import com.vaycore.finance.ui.showConfirmDialog
 import com.vaycore.finance.wallet.showWithdrawMethodDialog
 import com.vaycore.finance.ui.showOptionPickerDialog
-import com.vaycore.finance.loan.DashboardViewModel
+import com.vaycore.finance.loan.viewmodel.DashboardViewModel
 import com.vaycore.finance.util.getContactInfo
 import com.vaycore.finance.util.deviceRiskPermissions
 import com.vaycore.finance.util.viewBinding

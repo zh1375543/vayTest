@@ -12,7 +12,7 @@ import com.vaycore.finance.databinding.ActivityBankCardAddBinding
 import com.vaycore.finance.ui.extension.observeKeyboardVisibility
 import com.vaycore.finance.ui.extension.resetScale
 import com.vaycore.finance.ui.extension.singleClick
-import com.vaycore.finance.identity.PersonalInfoViewModel
+import com.vaycore.finance.identity.viewmodel.PersonalInfoViewModel
 import com.vaycore.finance.util.showToastMessage
 import com.vaycore.finance.util.viewBinding
 

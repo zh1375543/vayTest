@@ -38,10 +38,11 @@ import com.vaycore.finance.ui.extension.setSpannableClickableTexts
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.app.MainDestination
 import com.vaycore.finance.app.MainNavigator
+import com.vaycore.finance.identity.viewmodel.SessionViewModel
 import com.vaycore.finance.ui.showConfirmDialog
 import com.vaycore.finance.sidepage.PortalActivity
 import com.vaycore.finance.sidepage.act.FirstSavingsPlanActivity
-import com.vaycore.finance.loan.DashboardViewModel
+import com.vaycore.finance.loan.viewmodel.DashboardViewModel
 import com.vaycore.finance.util.LOGIN_VIA_OTP
 import com.vaycore.finance.util.SPUtil
 import com.vaycore.finance.util.context.getColor2

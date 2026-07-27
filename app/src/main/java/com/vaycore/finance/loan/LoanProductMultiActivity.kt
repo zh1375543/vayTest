@@ -19,6 +19,7 @@ import com.vaycore.finance.databinding.ActivityLoanProductMultiBinding
 import com.vaycore.finance.model.wallet.BankAccountResponse
 import com.vaycore.finance.web.WebViewActivity
 import com.vaycore.finance.loan.adapter.ComboAdapter
+import com.vaycore.finance.loan.viewmodel.LoanApplyViewModel
 import com.vaycore.finance.wallet.chooseAccountsDialog
 import com.vaycore.finance.ui.extension.resetScale
 import com.vaycore.finance.ui.extension.setSpannableClickableTexts

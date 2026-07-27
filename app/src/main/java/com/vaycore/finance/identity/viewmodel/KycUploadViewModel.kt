@@ -1,4 +1,4 @@
-package com.vaycore.finance.identity
+package com.vaycore.finance.identity.viewmodel
 
 import android.net.Uri
 import androidx.lifecycle.MutableLiveData
@@ -9,6 +9,7 @@ import com.vaycore.finance.data.ACT_uploadFace
 import com.vaycore.finance.data.ACT_uploadFront
 import com.vaycore.finance.data.PageInfoKyc
 import com.vaycore.finance.data.bean.TrackBean
+import com.vaycore.finance.identity.IdentityVerificationRepository
 import com.vaycore.finance.model.identity.KycDocumentResponse
 import com.vaycore.finance.model.identity.KycRuleConfigResponse
 import com.vaycore.finance.model.identity.LivenessWebSessionResponse

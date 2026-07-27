@@ -1,4 +1,4 @@
-package com.vaycore.finance.identity
+package com.vaycore.finance.identity.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.vaycore.finance.base.BaseViewModel
@@ -7,6 +7,7 @@ import com.vaycore.finance.data.ACT_nextStep
 import com.vaycore.finance.data.PageVerifyCode
 import com.vaycore.finance.data.PageVerifyCode2
 import com.vaycore.finance.data.bean.TrackBean
+import com.vaycore.finance.identity.IdentityVerificationRepository
 import com.vaycore.finance.util.toJsonString
 
 class CarrierVerifyViewModel(

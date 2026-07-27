@@ -10,7 +10,7 @@ import com.vaycore.finance.databinding.KycCardExampleDialogBinding
 import com.vaycore.finance.databinding.KycSelfExampleDialogBinding
 import com.vaycore.finance.databinding.PickDialogBinding
 import com.vaycore.finance.ui.extension.singleClick
-import com.vaycore.finance.identity.PersonalInfoViewModel
+import com.vaycore.finance.identity.viewmodel.PersonalInfoViewModel
 
 fun Context.showKycCardExampleDialog(
 ) {

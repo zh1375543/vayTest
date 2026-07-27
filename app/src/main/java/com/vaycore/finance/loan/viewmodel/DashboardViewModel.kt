@@ -1,4 +1,4 @@
-package com.vaycore.finance.loan
+package com.vaycore.finance.loan.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.vaycore.finance.base.BaseViewModel
@@ -10,6 +10,7 @@ import com.vaycore.finance.model.home.CampaignBannerResponse
 import com.vaycore.finance.model.home.GuestHomeResponse
 import com.vaycore.finance.data.bean.TrackBean
 import com.vaycore.finance.data.isLogin
+import com.vaycore.finance.loan.LoanDashboardRepository
 import com.vaycore.finance.model.identity.UserAuthStatusResponse
 import com.vaycore.finance.model.loan.LoanDashboardResponse
 import com.vaycore.finance.util.toJsonString

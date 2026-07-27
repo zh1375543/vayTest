@@ -1,9 +1,10 @@
-package com.vaycore.finance.loan
+package com.vaycore.finance.loan.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.vaycore.finance.base.BaseViewModel
 import com.vaycore.finance.data.ACT_LoanAppProductInfoDetail
 import com.vaycore.finance.data.bean.TrackBean
+import com.vaycore.finance.loan.LoanProductRepository
 import com.vaycore.finance.model.loan.ProductBean
 import com.vaycore.finance.util.toJsonString
 

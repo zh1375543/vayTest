@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.vaycore.finance.identity.KycUploadViewModel" />
+            type="com.vaycore.finance.identity.viewmodel.KycUploadViewModel" />
 
         <variable
             name="isCertified"

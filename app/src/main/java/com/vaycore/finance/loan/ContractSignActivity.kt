@@ -7,7 +7,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.vaycore.finance.app.App
 import com.vaycore.finance.R
-import com.vaycore.finance.identity.SessionViewModel
+import com.vaycore.finance.identity.viewmodel.SessionViewModel
 import com.vaycore.finance.base.BaseActivity
 import com.vaycore.finance.data.ACT_clickSubmit
 import com.vaycore.finance.data.ACT_in

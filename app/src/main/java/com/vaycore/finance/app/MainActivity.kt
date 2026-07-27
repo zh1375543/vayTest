@@ -21,7 +21,7 @@ import com.vaycore.finance.data.ACT_in
 import com.vaycore.finance.data.PageExit
 import com.vaycore.finance.data.authConfigList
 import com.vaycore.finance.message.NoticeListActivity
-import com.vaycore.finance.loan.DashboardViewModel
+import com.vaycore.finance.loan.viewmodel.DashboardViewModel
 import com.vaycore.finance.home.HomeFragment
 import com.vaycore.finance.mine.MineFragment
 import com.vaycore.finance.order.OrderFragment

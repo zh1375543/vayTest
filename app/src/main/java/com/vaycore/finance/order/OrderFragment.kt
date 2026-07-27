@@ -12,7 +12,7 @@ import com.vaycore.finance.data.ORDER_STATUS_OVERDUE
 import com.vaycore.finance.data.ORDER_STATUS_PAYMENT_PENDING
 import com.vaycore.finance.data.bean.TrackBean
 import com.vaycore.finance.databinding.OrderFragmentBinding
-import com.vaycore.finance.loan.DashboardViewModel
+import com.vaycore.finance.loan.viewmodel.DashboardViewModel
 import com.vaycore.finance.payback.RepaymentBatchActivity
 import com.vaycore.finance.order.adapter.HomeOrderAdapter
 import com.vaycore.finance.ui.extension.setClickableTextWithScale

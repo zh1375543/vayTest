@@ -1,4 +1,4 @@
-package com.vaycore.finance.identity
+package com.vaycore.finance.identity.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.vaycore.finance.base.BaseViewModel
@@ -7,6 +7,7 @@ import com.vaycore.finance.data.PageInfoBank
 import com.vaycore.finance.data.PageSupplementaryInformation
 import com.vaycore.finance.data.bean.ApiRequest
 import com.vaycore.finance.data.bean.TrackBean
+import com.vaycore.finance.identity.IdentityVerificationRepository
 import com.vaycore.finance.model.identity.WorkContactProfileResponse
 import com.vaycore.finance.model.identity.WorkProfileOptionsResponse
 import com.vaycore.finance.util.toJsonString

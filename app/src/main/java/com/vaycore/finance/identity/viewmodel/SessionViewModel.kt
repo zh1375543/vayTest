@@ -1,4 +1,4 @@
-package com.vaycore.finance.identity
+package com.vaycore.finance.identity.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.vaycore.finance.base.BaseViewModel
@@ -13,6 +13,7 @@ import com.vaycore.finance.data.activityUrl
 import com.vaycore.finance.data.bean.TrackBean
 import com.vaycore.finance.data.loginInfo
 import com.vaycore.finance.data.token
+import com.vaycore.finance.identity.SessionRepository
 import com.vaycore.finance.model.identity.LoginSessionResponse
 import com.vaycore.finance.util.toJsonString
 

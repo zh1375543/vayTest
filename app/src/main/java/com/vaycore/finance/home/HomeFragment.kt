@@ -20,10 +20,10 @@ import com.vaycore.finance.data.isLogin
 import com.vaycore.finance.data.signBackHome
 import com.vaycore.finance.databinding.HomeFragmentBinding
 import com.vaycore.finance.loan.ContractSignActivity
-import com.vaycore.finance.loan.DashboardViewModel
+import com.vaycore.finance.loan.viewmodel.DashboardViewModel
 import com.vaycore.finance.loan.LoanProductActivity
 import com.vaycore.finance.loan.LoanProductMultiActivity
-import com.vaycore.finance.loan.LoanProductViewModel
+import com.vaycore.finance.loan.viewmodel.LoanProductViewModel
 import com.vaycore.finance.model.identity.UserAuthStatusResponse
 import com.vaycore.finance.model.home.GuestHomeResponse
 import com.vaycore.finance.model.loan.LoanDashboardResponse

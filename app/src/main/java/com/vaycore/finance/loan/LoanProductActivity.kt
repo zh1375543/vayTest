@@ -18,6 +18,7 @@ import com.vaycore.finance.data.bean.ClickablePart
 import com.vaycore.finance.data.bean.TrackBean
 import com.vaycore.finance.data.loginInfo
 import com.vaycore.finance.databinding.ActivityLoanProductBinding
+import com.vaycore.finance.loan.viewmodel.LoanProductViewModel
 import com.vaycore.finance.model.loan.ProductBean
 import com.vaycore.finance.model.wallet.BankAccountResponse
 import com.vaycore.finance.web.WebViewActivity
