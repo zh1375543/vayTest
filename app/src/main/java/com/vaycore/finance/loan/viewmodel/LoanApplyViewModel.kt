@@ -6,7 +6,7 @@ import com.vaycore.finance.data.ACT_apply
 import com.vaycore.finance.data.PageHome
 import com.vaycore.finance.data.PageProductDetail
 import com.vaycore.finance.data.bean.TrackBean
-import com.vaycore.finance.loan.LoanRepository
+import com.vaycore.finance.loan.data.LoanRepository
 import com.vaycore.finance.model.loan.LoanDashboardResponse
 import com.vaycore.finance.model.loan.ProductBean
 import com.vaycore.finance.util.toJsonString

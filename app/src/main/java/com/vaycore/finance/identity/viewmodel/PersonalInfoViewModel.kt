@@ -7,7 +7,7 @@ import com.vaycore.finance.data.PageInfoPersonal
 import com.vaycore.finance.data.bean.ApiRequest
 import com.vaycore.finance.data.bean.SelectionOption
 import com.vaycore.finance.data.bean.TrackBean
-import com.vaycore.finance.identity.IdentityVerificationRepository
+import com.vaycore.finance.identity.data.IdentityVerificationRepository
 import com.vaycore.finance.model.identity.PersonalProfileOptionsResponse
 import com.vaycore.finance.model.identity.PersonalProfileResponse
 import com.vaycore.finance.model.identity.WorkProfileOptionsResponse

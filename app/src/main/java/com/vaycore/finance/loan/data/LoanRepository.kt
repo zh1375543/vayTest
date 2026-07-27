@@ -1,9 +1,9 @@
-package com.vaycore.finance.loan
+package com.vaycore.finance.loan.data
 
-import com.vaycore.finance.model.loan.LoanDashboardResponse
-import com.vaycore.finance.model.loan.ProductBean
 import com.vaycore.finance.data.network.Api
 import com.vaycore.finance.data.repository.dataOrThrow
+import com.vaycore.finance.model.loan.LoanDashboardResponse
+import com.vaycore.finance.model.loan.ProductBean
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 

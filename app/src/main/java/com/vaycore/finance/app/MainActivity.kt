@@ -21,7 +21,9 @@ import com.vaycore.finance.data.ACT_in
 import com.vaycore.finance.data.PageExit
 import com.vaycore.finance.data.authConfigList
 import com.vaycore.finance.message.NoticeListActivity
-import com.vaycore.finance.loan.viewmodel.DashboardViewModel
+import com.vaycore.finance.loan.viewmodel.LoanDashboardViewModel
+import com.vaycore.finance.identity.viewmodel.AuthStatusViewModel
+import com.vaycore.finance.home.viewmodel.GuestDashboardViewModel
 import com.vaycore.finance.home.HomeFragment
 import com.vaycore.finance.mine.MineFragment
 import com.vaycore.finance.order.OrderFragment
@@ -53,7 +55,9 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
         }
     }
 
-    private val vm by viewModels<DashboardViewModel>()
+    private val vm by viewModels<LoanDashboardViewModel>()
+    private val authStatusVm by viewModels<AuthStatusViewModel>()
+    private val guestDashboardVm by viewModels<GuestDashboardViewModel>()
 
     private var currentPage: Int = 0
 
@@ -134,6 +138,9 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
                 start<NoticeListActivity>()
             }
         }
+        ivCustomer.singleClick {
+            guestDashboardVm.getUnAuthData(true)
+        }
     }
 
     private fun setupBackPressHandler() {
@@ -177,16 +184,16 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
         )
     }
 
-    override fun initObserve() =with(vm){
+    override fun initObserve() = with(guestDashboardVm) {
         super.initObserve()
-        unAuthResult.observe(this@MainActivity) {
-            it?.let { homeBean -> showContactUsDialog(homeBean) }
+        result.observe(this@MainActivity) {
+            it?.let(::showContactUsDialog)
         }
     }
 
     override fun onResume() {
         super.onResume()
-        vm.fetchAuthConfigList {
+        authStatusVm.fetchAuthConfigList {
             authConfigList = it
         }
     }

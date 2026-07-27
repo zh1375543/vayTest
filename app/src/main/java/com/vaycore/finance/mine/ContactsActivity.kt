@@ -5,13 +5,13 @@ import com.vaycore.finance.base.BaseActivity
 import com.vaycore.finance.databinding.ContactsActivityBinding
 import com.vaycore.finance.model.home.CustomerContactConfig
 import com.vaycore.finance.mine.adapter.ContactWayAdapter
-import com.vaycore.finance.loan.viewmodel.DashboardViewModel
+import com.vaycore.finance.home.viewmodel.GuestDashboardViewModel
 import com.vaycore.finance.util.viewBinding
 
 class ContactsActivity : BaseActivity<ContactsActivityBinding>() {
 
     override val binding by viewBinding(ContactsActivityBinding::inflate)
-    private val vm by viewModels<DashboardViewModel>()
+    private val vm by viewModels<GuestDashboardViewModel>()
 
     private val contactAdapter by lazy { ContactWayAdapter() }
 
@@ -22,7 +22,7 @@ class ContactsActivity : BaseActivity<ContactsActivityBinding>() {
 
     override fun initObserve() = with(vm) {
         super.initObserve()
-        unAuthResult.observe(this@ContactsActivity) {
+        result.observe(this@ContactsActivity) {
             val list = mutableListOf<CustomerContactConfig>()
             it?.customerPhone?.let { phone ->
                 list.add(

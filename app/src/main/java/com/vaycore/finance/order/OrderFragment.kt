@@ -12,7 +12,7 @@ import com.vaycore.finance.data.ORDER_STATUS_OVERDUE
 import com.vaycore.finance.data.ORDER_STATUS_PAYMENT_PENDING
 import com.vaycore.finance.data.bean.TrackBean
 import com.vaycore.finance.databinding.OrderFragmentBinding
-import com.vaycore.finance.loan.viewmodel.DashboardViewModel
+import com.vaycore.finance.loan.viewmodel.LoanDashboardViewModel
 import com.vaycore.finance.payback.RepaymentBatchActivity
 import com.vaycore.finance.order.adapter.HomeOrderAdapter
 import com.vaycore.finance.ui.extension.setClickableTextWithScale
@@ -23,7 +23,7 @@ import com.vaycore.finance.util.viewBinding
 
 class OrderFragment : BaseFragment<OrderFragmentBinding>(R.layout.order_fragment) {
     override val binding by viewBinding(OrderFragmentBinding::bind)
-    private val vm by viewModels<DashboardViewModel>()
+    private val vm by viewModels<LoanDashboardViewModel>()
 
     private val orderAdapter by lazy {
         HomeOrderAdapter().apply {
@@ -66,7 +66,7 @@ class OrderFragment : BaseFragment<OrderFragmentBinding>(R.layout.order_fragment
     }
 
     override fun initObserve() =with(vm){
-        authFailedResult.observe(this@OrderFragment) {
+        loadFailedResult.observe(this@OrderFragment) {
             binding.swipeRefreshLayout.isRefreshing = false
             binding.loadingLayout.showError()
         }

@@ -1,4 +1,4 @@
-package com.vaycore.finance.identity
+package com.vaycore.finance.identity.data
 
 import android.net.Uri
 import com.vaycore.finance.BuildConfig

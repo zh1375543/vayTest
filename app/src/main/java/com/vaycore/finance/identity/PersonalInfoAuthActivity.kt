@@ -41,6 +41,7 @@ import com.vaycore.finance.data.authConfigList
 import com.vaycore.finance.data.bean.ApiRequest
 import com.vaycore.finance.data.bean.TrackBean
 import com.vaycore.finance.databinding.PersonalInfoAuthActivityBinding
+import com.vaycore.finance.identity.viewmodel.AuthStatusViewModel
 import com.vaycore.finance.identity.viewmodel.PersonalInfoViewModel
 import com.vaycore.finance.ui.extension.resetScale
 import com.vaycore.finance.ui.extension.singleClick
@@ -48,7 +49,6 @@ import com.vaycore.finance.ui.showAddressPickerDialog
 import com.vaycore.finance.ui.showConfirmDialog
 import com.vaycore.finance.ui.showDatePickerDialog
 import com.vaycore.finance.ui.showOptionPickerDialog
-import com.vaycore.finance.loan.viewmodel.DashboardViewModel
 import com.vaycore.finance.util.PERSON_INFO_COMMIT
 import com.vaycore.finance.util.PERSON_INFO_PAGE
 import com.vaycore.finance.util.deviceRiskPermissions
@@ -73,7 +73,7 @@ class PersonalInfoAuthActivity :
         intent.getBooleanExtra("isCert", false)
     }
     private val vm by viewModels<PersonalInfoViewModel>()
-    private val homeVm by viewModels<DashboardViewModel>()
+    private val homeVm by viewModels<AuthStatusViewModel>()
     private val debounceTime = 500L  // treat as input finished after 500ms idle
     private var shouldShowBottomAction = false
     private var isKeyboardVisible = false

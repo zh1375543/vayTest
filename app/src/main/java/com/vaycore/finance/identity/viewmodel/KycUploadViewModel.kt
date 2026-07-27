@@ -9,7 +9,7 @@ import com.vaycore.finance.data.ACT_uploadFace
 import com.vaycore.finance.data.ACT_uploadFront
 import com.vaycore.finance.data.PageInfoKyc
 import com.vaycore.finance.data.bean.TrackBean
-import com.vaycore.finance.identity.IdentityVerificationRepository
+import com.vaycore.finance.identity.data.IdentityVerificationRepository
 import com.vaycore.finance.model.identity.KycDocumentResponse
 import com.vaycore.finance.model.identity.KycRuleConfigResponse
 import com.vaycore.finance.model.identity.LivenessWebSessionResponse

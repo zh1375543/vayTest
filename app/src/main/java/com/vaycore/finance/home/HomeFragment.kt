@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.vaycore.finance.R
 import com.vaycore.finance.identity.routeToNextAuthStep
+import com.vaycore.finance.identity.viewmodel.AuthStatusViewModel
 import com.vaycore.finance.base.BaseFragment
 import com.vaycore.finance.data.ACT_approvalDenied
 import com.vaycore.finance.data.ACT_approvalInProgress
@@ -20,15 +21,18 @@ import com.vaycore.finance.data.isLogin
 import com.vaycore.finance.data.signBackHome
 import com.vaycore.finance.databinding.HomeFragmentBinding
 import com.vaycore.finance.loan.ContractSignActivity
-import com.vaycore.finance.loan.viewmodel.DashboardViewModel
 import com.vaycore.finance.loan.LoanProductActivity
 import com.vaycore.finance.loan.LoanProductMultiActivity
+import com.vaycore.finance.loan.viewmodel.LoanDashboardViewModel
 import com.vaycore.finance.loan.viewmodel.LoanProductViewModel
 import com.vaycore.finance.model.identity.UserAuthStatusResponse
 import com.vaycore.finance.model.home.GuestHomeResponse
 import com.vaycore.finance.model.loan.LoanDashboardResponse
 import com.vaycore.finance.model.loan.ProductBean
 import com.vaycore.finance.app.MainActivity
+import com.vaycore.finance.feedback.FeedbackViewModel
+import com.vaycore.finance.home.state.HomeEntryTracker
+import com.vaycore.finance.home.viewmodel.HomeViewModel
 import com.vaycore.finance.ui.createAvailableCreditDialog
 import com.vaycore.finance.ui.createNewProductDialog
 import com.vaycore.finance.ui.extension.animateAmount
@@ -60,7 +64,10 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
 
     override val binding by viewBinding(HomeFragmentBinding::bind)
 
-    private val vm by viewModels<DashboardViewModel>()
+    private val vm by viewModels<HomeViewModel>()
+    private val loanDashboardVm by viewModels<LoanDashboardViewModel>()
+    private val authStatusVm by viewModels<AuthStatusViewModel>()
+    private val feedbackVm by viewModels<FeedbackViewModel>()
     private val productVm by viewModels<LoanProductViewModel>()
 
     private val homeAdapter by lazy {
@@ -124,7 +131,7 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
         tvBorrowNow.singleClick {
             it.context.ifLoginAction {
                 isGoAuth = true
-                vm.getUserAuthStatus()
+                authStatusVm.getUserAuthStatus()
             }
         }
         tvLoan.singleClick {
@@ -150,6 +157,8 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
     }
 
     private var isGoAuth = false
+    private var hasRenderedLoadError = false
+
     override fun onResume() {
         super.onResume()
         // ViewPager keeps HomeFragment alive, so allow the credit dialog once per Home entry.
@@ -158,6 +167,7 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
     }
 
     fun refreshData() = with(binding) {
+        hasRenderedLoadError = false
         loadingLayout.showLoading()
         contentLayout.apply {
             topLayout.isVisible = true
@@ -166,7 +176,7 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
         calmLayout.calmLayout.isVisible = false
         if (isLogin) {
             isGoAuth = false
-            vm.getUserAuthStatus()
+            authStatusVm.getUserAuthStatus()
         } else {
             vm.getUnAuthData()
         }
@@ -177,18 +187,23 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
     private var loanDateStr: String? = null
 
     override fun initObserve() {
-        vm.authFailedResult.observe(this@HomeFragment) {
-            binding.swipeRefreshLayout.isRefreshing = false
-            binding.loadingLayout.showError()
+        vm.loadFailedResult.observe(this@HomeFragment) {
+            renderLoadError()
         }
-        vm.userAuthStatusResult.observe(this@HomeFragment) {
+        loanDashboardVm.loadFailedResult.observe(this@HomeFragment) {
+            renderLoadError()
+        }
+        authStatusVm.loadFailedResult.observe(this@HomeFragment) {
+            renderLoadError()
+        }
+        authStatusVm.userAuthStatusResult.observe(this@HomeFragment) {
             handleUserAuthStatus(it)
         }
-        vm.unAuthResult.observe(this@HomeFragment) {
-            it?.let { handleUnAuthData(it) }
+        vm.guestResult.observe(this@HomeFragment) {
+            it?.let(::handleUnAuthData)
         }
-        vm.authResult.observe(this@HomeFragment) {
-            it?.let { handleAuthData(it) }
+        loanDashboardVm.authResult.observe(this@HomeFragment) {
+            it?.let(::handleAuthData)
         }
         vm.bannerResult.observe(this@HomeFragment) {
             binding.contentLayout.bannerView.setData(it ?: emptyList())
@@ -199,15 +214,23 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
         }
     }
 
+    private fun renderLoadError() {
+        if (hasRenderedLoadError) return
+
+        hasRenderedLoadError = true
+        binding.swipeRefreshLayout.isRefreshing = false
+        binding.loadingLayout.showError()
+    }
+
     private fun handleUserAuthStatus(data: UserAuthStatusResponse?) {
         if (isGoAuth) {
             data?.routeToNextAuthStep(binding.root.context, false)
             return
         }
         isGoAuth = false
-        vm.fetchAuthConfigList { configList ->
+        authStatusVm.fetchAuthConfigList { configList ->
             if (data?.isPass(configList) == true) {
-                vm.getAuthData()
+                loanDashboardVm.getAuthData()
             } else {
                 vm.getUnAuthData()
             }
@@ -264,14 +287,15 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
 
             if (data.repayProducts?.any { it.isPendingRepayment() || it.isRepaymentProcessing() } == true) {
                 activity?.showAppRatingDialog { content ->
-                    vm.submitFeed(content) {
+                    feedbackVm.submitFeed(content) {
                         getString(R.string.feedback_success).showToastMessage()
                     }
                 }
             }
-            val navigateToOrder = !data.repayProducts.isNullOrEmpty() && DashboardViewModel.Companion.isFirstEnter
-            if (navigateToOrder) {
-                DashboardViewModel.Companion.isFirstEnter = false
+            val shouldNavigateToOrder =
+                !data.repayProducts.isNullOrEmpty() &&
+                    HomeEntryTracker.consumeFirstEntry()
+            if (shouldNavigateToOrder) {
                 (activity as MainActivity?)?.selectPage(1)
             }
 
@@ -334,7 +358,7 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
                 data.enableLoanStr ?: "-",
                 binding.root.context.getColor2(R.color.C_374151)
             )
-            if (!navigateToOrder) {
+            if (!shouldNavigateToOrder) {
                 val newProducts = data.showProducts.orEmpty().filter { it.newSign == 1 }
                 if (newProducts.isNotEmpty()) {
                     showNewProductDialogIfNeeded(newProducts)

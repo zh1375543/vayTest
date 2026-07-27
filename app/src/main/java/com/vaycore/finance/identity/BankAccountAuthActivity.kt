@@ -31,6 +31,7 @@ import com.vaycore.finance.data.bean.ApiRequest
 import com.vaycore.finance.model.wallet.BankChannelResponse
 import com.vaycore.finance.model.identity.RelativesBean
 import com.vaycore.finance.data.bean.TrackBean
+import com.vaycore.finance.identity.viewmodel.AuthStatusViewModel
 import com.vaycore.finance.identity.viewmodel.PersonalInfoViewModel
 import com.vaycore.finance.identity.viewmodel.WorkContactViewModel
 import com.vaycore.finance.model.wallet.WalletResponse
@@ -45,7 +46,6 @@ import com.vaycore.finance.wallet.chooseWalletDialog
 import com.vaycore.finance.ui.showConfirmDialog
 import com.vaycore.finance.wallet.showWithdrawMethodDialog
 import com.vaycore.finance.ui.showOptionPickerDialog
-import com.vaycore.finance.loan.viewmodel.DashboardViewModel
 import com.vaycore.finance.util.getContactInfo
 import com.vaycore.finance.util.deviceRiskPermissions
 import com.vaycore.finance.util.viewBinding
@@ -69,7 +69,7 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
 
     private val vm by viewModels<WorkContactViewModel>()
     private val personalVm by viewModels<PersonalInfoViewModel>()
-    private val homeVm by viewModels<DashboardViewModel>()
+    private val homeVm by viewModels<AuthStatusViewModel>()
     private val accountVm by viewModels<WalletViewModel>()
     private val isCert by lazy { intent.getBooleanExtra("isCert", false) }
     private var shouldShowBottomAction = false

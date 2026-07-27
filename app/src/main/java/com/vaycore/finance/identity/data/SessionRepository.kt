@@ -1,9 +1,9 @@
-package com.vaycore.finance.identity
+package com.vaycore.finance.identity.data
 
 import android.os.Build
 import com.appsflyer.AppsFlyerLib
-import com.vaycore.finance.app.App
 import com.vaycore.finance.BuildConfig
+import com.vaycore.finance.app.App
 import com.vaycore.finance.data.appFlyer
 import com.vaycore.finance.data.bean.ApiRequest
 import com.vaycore.finance.data.firebaseId

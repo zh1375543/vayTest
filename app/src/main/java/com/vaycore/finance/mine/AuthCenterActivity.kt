@@ -11,7 +11,7 @@ import com.vaycore.finance.identity.BankAccountAuthActivity
 import com.vaycore.finance.identity.KycAuthActivity
 import com.vaycore.finance.identity.PersonalInfoAuthActivity
 import com.vaycore.finance.mine.adapter.AuthEntryAdapter
-import com.vaycore.finance.loan.viewmodel.DashboardViewModel
+import com.vaycore.finance.identity.viewmodel.AuthStatusViewModel
 import com.vaycore.finance.util.PROFILE_PAGE
 import com.vaycore.finance.util.start
 import com.vaycore.finance.util.trackEvent
@@ -21,7 +21,7 @@ class AuthCenterActivity : BaseActivity<AuthCenterActivityBinding>() {
 
     override val binding by viewBinding(AuthCenterActivityBinding::inflate)
 
-    private val vm by viewModels<DashboardViewModel>()
+    private val vm by viewModels<AuthStatusViewModel>()
 
     private val authAdapter by lazy {
         AuthEntryAdapter().apply {

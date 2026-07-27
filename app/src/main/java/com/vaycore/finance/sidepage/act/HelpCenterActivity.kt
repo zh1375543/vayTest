@@ -7,14 +7,14 @@ import com.vaycore.finance.base.BaseActivity
 import com.vaycore.finance.databinding.SidepageHelpCenterActivityBinding
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.ui.showContactUsDialog
-import com.vaycore.finance.loan.viewmodel.DashboardViewModel
+import com.vaycore.finance.home.viewmodel.GuestDashboardViewModel
 import com.vaycore.finance.util.viewBinding
 
 /** Support landing page for the side-page experience. */
 class HelpCenterActivity : BaseActivity<SidepageHelpCenterActivityBinding>() {
 
     override val binding by viewBinding(SidepageHelpCenterActivityBinding::inflate)
-    private val vm by viewModels<DashboardViewModel>()
+    private val vm by viewModels<GuestDashboardViewModel>()
 
     override fun initView() = with(binding) {
         applyTopInset(root)
@@ -33,7 +33,7 @@ class HelpCenterActivity : BaseActivity<SidepageHelpCenterActivityBinding>() {
 
     override fun initObserve() = with(vm) {
         super.initObserve()
-        unAuthResult.observe(this@HelpCenterActivity) {
+        result.observe(this@HelpCenterActivity) {
             it?.let(::showContactUsDialog)
         }
     }

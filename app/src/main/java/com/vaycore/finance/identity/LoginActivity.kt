@@ -42,7 +42,7 @@ import com.vaycore.finance.identity.viewmodel.SessionViewModel
 import com.vaycore.finance.ui.showConfirmDialog
 import com.vaycore.finance.sidepage.PortalActivity
 import com.vaycore.finance.sidepage.act.FirstSavingsPlanActivity
-import com.vaycore.finance.loan.viewmodel.DashboardViewModel
+import com.vaycore.finance.home.viewmodel.GuestDashboardViewModel
 import com.vaycore.finance.util.LOGIN_VIA_OTP
 import com.vaycore.finance.util.SPUtil
 import com.vaycore.finance.util.context.getColor2
@@ -62,7 +62,7 @@ class LoginActivity : BaseActivity<LoginActivityBinding>() {
      override val adjustForImeInsets = false
 
     private val vm by viewModels<SessionViewModel>()
-    private val homeVm by viewModels<DashboardViewModel>()
+    private val homeVm by viewModels<GuestDashboardViewModel>()
 
     private val locationManager by lazy { getSystemService(LOCATION_SERVICE) as LocationManager }
 
@@ -280,7 +280,7 @@ class LoginActivity : BaseActivity<LoginActivityBinding>() {
                 finish()
             }
         }
-        homeVm.unAuthResult.observe(this@LoginActivity) {
+        homeVm.result.observe(this@LoginActivity) {
             canNavigateBack = it?.showBackButton?.trim() == "1"
             binding.titleBar.showNavigation(canNavigateBack)
         }

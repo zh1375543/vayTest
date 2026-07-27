@@ -7,7 +7,7 @@ import com.vaycore.finance.data.ACT_nextStep
 import com.vaycore.finance.data.PageVerifyCode
 import com.vaycore.finance.data.PageVerifyCode2
 import com.vaycore.finance.data.bean.TrackBean
-import com.vaycore.finance.identity.IdentityVerificationRepository
+import com.vaycore.finance.identity.data.IdentityVerificationRepository
 import com.vaycore.finance.util.toJsonString
 
 class CarrierVerifyViewModel(
