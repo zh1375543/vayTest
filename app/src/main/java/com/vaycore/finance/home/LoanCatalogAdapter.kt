@@ -4,38 +4,39 @@ import androidx.core.view.isVisible
 import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseAdapter
 import com.vaycore.finance.databinding.ItemHomeProductBinding
-import com.vaycore.finance.model.loan.ProductBean
+import com.vaycore.finance.home.state.HomeProductUi
 import com.vaycore.finance.ui.extension.loadImage
 import com.vaycore.finance.util.formatAmountWithPrefix
 import com.vaycore.finance.util.platform.formatLoanTerm
 
 class LoanCatalogAdapter :
-    BaseAdapter<ProductBean, ItemHomeProductBinding>(ItemHomeProductBinding::inflate) {
+    BaseAdapter<HomeProductUi, ItemHomeProductBinding>(ItemHomeProductBinding::inflate) {
 
     override fun bindItem(
         binding: ItemHomeProductBinding,
-        item: ProductBean,
+        item: HomeProductUi,
         position: Int,
     ) = with(binding) {
-        ivIcon.loadImage(item.productImageUrl, R.mipmap.ic_product_defalut_img)
-        tvName.text = item.productName
+        val product = item.product
+        ivIcon.loadImage(product.productImageUrl, R.mipmap.ic_product_defalut_img)
+        tvName.text = product.productName
         tvLoanAmount.text = context.getString(R.string.home_product_loan_amount_title)
         tvAmount.text =
-            if (item.canApply) item.maxLoanAmount.formatAmountWithPrefix(item.currencySymbol) else item.loanAmountRange
-        tvDays.text = context.formatLoanTerm(item.timeLimit)
+            if (item.canApply) product.maxLoanAmount.formatAmountWithPrefix(product.currencySymbol) else product.loanAmountRange
+        tvDays.text = context.formatLoanTerm(product.timeLimit)
         tvApply.isEnabled = item.canApply
         enableView.isVisible = !tvApply.isEnabled
-        ivNew.isVisible = item.newSign == 1 && !item.isTogether
+        ivNew.isVisible = product.newSign == 1 && !product.isTogether
         rvTag.adapter = LoanFeatureTagAdapter().apply {
-            submitItems(item.tagList?.distinct())
+            submitItems(product.tagList?.distinct())
         }
         tvApply.text =
-            context.getString(if (item.showConditionTypeSign != "1") R.string.withdrawal else R.string.go_add_info_str)
+            context.getString(if (product.showConditionTypeSign != "1") R.string.withdrawal else R.string.go_add_info_str)
     }
 
     override fun bindChildClickListeners(
         binding: ItemHomeProductBinding,
-        item: ProductBean,
+        item: HomeProductUi,
         position: Int,
     ) = with(binding) {
         super.bindChildClickListeners(binding, item, position)

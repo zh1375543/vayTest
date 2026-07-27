@@ -23,6 +23,7 @@ import com.vaycore.finance.model.loan.LoanDashboardResponse
 import com.vaycore.finance.model.loan.ProductBean
 import com.vaycore.finance.app.MainActivity
 import com.vaycore.finance.home.LoanCatalogAdapter
+import com.vaycore.finance.home.state.HomeProductUi
 import com.vaycore.finance.loan.adapter.ApplicationResultAdapter
 import com.vaycore.finance.loan.viewmodel.LoanApplyViewModel
 import com.vaycore.finance.loan.viewmodel.LoanProductViewModel
@@ -96,7 +97,7 @@ class ApplicationOutcomeActivity :
             setOnChildClickListener { view, _, position ->
                 if (view.id == R.id.tvApply) {
                     items.getOrNull(position)?.let { item ->
-                        handleRecommendedProductClick(item)
+                        handleRecommendedProductClick(item.product)
                     }
                 }
             }
@@ -163,7 +164,9 @@ class ApplicationOutcomeActivity :
             if (product.currency == null) product.currency = data?.currency
             if (product.currencySymbol == null) product.currencySymbol = data?.currencySymbol
         }
-        homeAdapter.submitItems(products)
+        homeAdapter.submitItems(products.map { product ->
+            HomeProductUi(product = product, canApply = product.canApply)
+        })
         val hasCashableProducts =
             data?.canApplyAmount.isPositive() &&
                 products.isNotEmpty()

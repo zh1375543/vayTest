@@ -282,207 +282,206 @@ class BorrowingDetailActivity :
     }
 
     private var orderDetail: LoanOrderDetailResponse? = null
-    override fun initObserve() = with(vm) {
-        super.initObserve()
-        orderDetailResult.observe(this@BorrowingDetailActivity) {
-            it?.let {
-                binding.apply {
-                    orderDetail = it
-                    loadingLayout.showContent()
-                    installGroup.isVisible = false
-                    val installmentRepaymentPlanDTOList =
-                        it.installmentRepaymentPlanDTOList ?: arrayListOf()
-                    val lastDueIndex =
-                        installmentRepaymentPlanDTOList.indexOfLast { it1 -> it1.isDueAndSettle() }
-                    val firstProcessIndex =
-                        installmentRepaymentPlanDTOList.indexOfFirst { it1 -> it1.isProcess() }
-                    installAdapter.submitItems(it.installmentRepaymentPlanDTOList?.onEachIndexed { index, it1 ->
+    private fun renderOrderDetail(detail: LoanOrderDetailResponse) = with(binding) {
+        orderDetail = detail
+        loadingLayout.showContent()
+        installGroup.isVisible = false
+        val plans = detail.installmentRepaymentPlanDTOList.orEmpty()
+        val lastDueIndex = plans.indexOfLast { it.isDueAndSettle() }
+        val firstProcessIndex = plans.indexOfFirst { it.isProcess() }
+        installAdapter.submitItems(plans.onEachIndexed { index, it1 ->
 //                            it1.planStatus =34
-                        it1.isSelect =
-                            (index == lastDueIndex + 1) || index == firstProcessIndex
-                        if (it1.isDueAndSettle()) {
-                            it1.isSelect = true
-                        }
-                        it1.isExpend = it1.isSelect
-                    })
-                    val hasInstallments = !it.installmentRepaymentPlanDTOList.isNullOrEmpty()
-                    detailLayout.isVisible = hasInstallments
-                    installmentTipLayout.isVisible = hasInstallments
-                    installLayout.isVisible = hasInstallments
-                    installmentContentGroup.isVisible = hasInstallments
-                    it.appOrderInfoDto?.let { order ->
-                        tvLoanAmount.text =
-                            String.format(getString(R.string.loan_amount), order.currency)
-                        tvAmount.text =
-                            order.loanAmount.formatAmountWithPrefix(order.currencySymbol)
-                        tvModel.text = "${Build.BRAND} ${Build.MODEL}"
-                        tvProductName.text = order.productName
-                        tvOrderNo.text = order.orderNo
-                        tvOrderStatus.setTextColor(resolveColorCompat(R.color.color_7087F8))
-                        when (order.status) {
-                            ORDER_STATUS_SUCCESS,
-                            ORDER_STATUS_REVIEW,
-                            ORDER_STATUS_AUTO,
-                            ORDER_STATUS_MANUAL,
-                            ORDER_STATUS_CASH,
-                            ORDER_STATUS_PAYMENT_ING,
-                            ORDER_STATUS_PAYMENT_FAIL,
-                                -> {
-                                installLayout.isVisible = false
-                                installmentContentGroup.isVisible = false
-                                installmentTipLayout.isVisible = false
-                                detailLayout.isVisible = false
-                                tvOrderStatus.text = getString(R.string.pending_cash)
-                            }
+            it1.isSelect =
+                (index == lastDueIndex + 1) || index == firstProcessIndex
+            if (it1.isDueAndSettle()) {
+                it1.isSelect = true
+            }
+            it1.isExpend = it1.isSelect
+        })
+        val hasInstallments = plans.isNotEmpty()
+        detailLayout.isVisible = hasInstallments
+        installmentTipLayout.isVisible = hasInstallments
+        installLayout.isVisible = hasInstallments
+        installmentContentGroup.isVisible = hasInstallments
+        detail.appOrderInfoDto?.let { order ->
+            tvLoanAmount.text =
+                String.format(getString(R.string.loan_amount), order.currency)
+            tvAmount.text =
+                order.loanAmount.formatAmountWithPrefix(order.currencySymbol)
+            tvModel.text = "${Build.BRAND} ${Build.MODEL}"
+            tvProductName.text = order.productName
+            tvOrderNo.text = order.orderNo
+            tvOrderStatus.setTextColor(resolveColorCompat(R.color.color_7087F8))
+            when (order.status) {
+                ORDER_STATUS_SUCCESS,
+                ORDER_STATUS_REVIEW,
+                ORDER_STATUS_AUTO,
+                ORDER_STATUS_MANUAL,
+                ORDER_STATUS_CASH,
+                ORDER_STATUS_PAYMENT_ING,
+                ORDER_STATUS_PAYMENT_FAIL,
+                    -> {
+                    installLayout.isVisible = false
+                    installmentContentGroup.isVisible = false
+                    installmentTipLayout.isVisible = false
+                    detailLayout.isVisible = false
+                    tvOrderStatus.text = getString(R.string.pending_cash)
+                }
 
-                            ORDER_STATUS_PAYMENT_PROCESS -> {
-                                tvOrderStatus.text =
-                                    getString(R.string.repayment_processing)
-                            }
+                ORDER_STATUS_PAYMENT_PROCESS -> {
+                    tvOrderStatus.text =
+                        getString(R.string.repayment_processing)
+                }
 
-                            ORDER_STATUS_PAYMENT_PENDING,
-                            ORDER_STATUS_IN_RENEWAL,
-                            ORDER_STATUS_IN_RENEWAL_PROCESS,
-                                -> {
-                                tvOrderStatus.text = getString(R.string.pending_repayment)
-                            }
+                ORDER_STATUS_PAYMENT_PENDING,
+                ORDER_STATUS_IN_RENEWAL,
+                ORDER_STATUS_IN_RENEWAL_PROCESS,
+                    -> {
+                    tvOrderStatus.text = getString(R.string.pending_repayment)
+                }
 
-                            ORDER_STATUS_OVERDUE,
-                            ORDER_STATUS_BAD_DEBTS,
-                                -> {
-                                tvOrderStatus.text = getString(R.string.overdue)
-                                tvOrderStatus.setTextColor(resolveColorCompat(R.color.C_F62909))
-                            }
+                ORDER_STATUS_OVERDUE,
+                ORDER_STATUS_BAD_DEBTS,
+                    -> {
+                    tvOrderStatus.text = getString(R.string.overdue)
+                    tvOrderStatus.setTextColor(resolveColorCompat(R.color.C_F62909))
+                }
 
-                            ORDER_STATUS_AUTO_FAIL,
-                            ORDER_STATUS_MANUAL_FAIL,
-                                -> {
-                                tvOrderStatus.text = getString(R.string.reject)
-                            }
+                ORDER_STATUS_AUTO_FAIL,
+                ORDER_STATUS_MANUAL_FAIL,
+                    -> {
+                    tvOrderStatus.text = getString(R.string.reject)
+                }
 
-                            ORDER_STATUS_CLOSE,
-                            ORDER_STATUS_INVALID,
-                                -> {
-                                tvOrderStatus.text = getString(R.string.closed)
-                            }
+                ORDER_STATUS_CLOSE,
+                ORDER_STATUS_INVALID,
+                    -> {
+                    tvOrderStatus.text = getString(R.string.closed)
+                }
 
-                            ORDER_STATUS_SETTLE,
-                            ORDER_STATUS_SETTLE_REDUCE,
-                            ORDER_STATUS_SETTLE_RENEWAL,
-                            ORDER_STATUS_SETTLE_REDUCE_OR_RENEWAL,
-                                -> {
-                                tvOrderStatus.text = getString(R.string.complete)
+                ORDER_STATUS_SETTLE,
+                ORDER_STATUS_SETTLE_REDUCE,
+                ORDER_STATUS_SETTLE_RENEWAL,
+                ORDER_STATUS_SETTLE_REDUCE_OR_RENEWAL,
+                    -> {
+                    tvOrderStatus.text = getString(R.string.complete)
+                }
+            }
+            tvOrderStatusTop.text = tvOrderStatus.text
+            vm.submitTrackingEvent(
+                TrackBean(
+                    p = PageOrderDetail,
+                    act = ACT_inOrdersDetail,
+                    result = System.currentTimeMillis()
+                        .toString() + "|" + order.orderId + "|" + order.status
+                )
+            )
+            tvApplyDate.text = detail.applyDateStr ?: "-"
+            tvLoanDate.text = detail.loanDateStr ?: "-"
+            tvDueDate.text = detail.shouldRepayDateStr ?: "-"
+            tvDays.text =
+                String.format(
+                    getString(R.string.num_days),
+                    order.timeLimit.toString()
+                )
+
+            tvInterestTitle.text =
+                String.format(
+                    getString(R.string.interest_day),
+                    detail.dayRateStr + "%"
+                )
+            tvInterest.text =
+                detail.interestAmount.formatAmountWithPrefix(order.currencySymbol)
+            tvActuallyAmount.text =
+                detail.actualAmount.formatAmountWithPrefix(order.currencySymbol)
+            tvInstallFee.text =
+                detail.totalInstallmentServiceFee.formatAmountWithPrefix(order.currencySymbol)
+            installGroup.isVisible = detail.totalInstallmentServiceFee.isPositive()
+            tvAccount.text = detail.bankNo
+            feeAdapter.currencySymbol = order.currencySymbol
+            feeAdapter.submitItems(order.orderHandleFees)
+            tvTotalRepayTitle.text =
+                String.format(
+                    getString(R.string.total_repayment_str),
+                    order.currency
+                )
+            tvTotalRepay.text =
+                detail.actualNeedRepayAmount.formatAmountWithPrefix(order.currencySymbol)
+            val isDue =
+                order.status == ORDER_STATUS_OVERDUE || order.status == ORDER_STATUS_BAD_DEBTS
+            tvDueFee.isVisible = isDue
+            tvDueFeeTitle.isVisible = isDue
+            tvDueFee.text =
+                detail.appOrderRepayDto?.penaltyAmount.formatAmountWithPrefix(
+                    null
+                )
+            tvTotalRepay.isSelected = isDue
+            tvOrderStatusTop.isSelected = isDue
+            tvApply.isSelected = isDue
+            tvBorrow.isSelected = isDue
+            tvRepay.isSelected = isDue
+            updateBottomActionColors(isDue)
+            hideBottomActionPanel()
+            when (order.status) {
+                ORDER_STATUS_PAYMENT_PENDING,
+                ORDER_STATUS_IN_RENEWAL,
+                ORDER_STATUS_IN_RENEWAL_PROCESS,
+                ORDER_STATUS_OVERDUE,
+                ORDER_STATUS_BAD_DEBTS,
+                    -> {
+                    if (!isFromBatch) {
+                        val selectedAmount =
+                            if (installLayout.isVisible) {
+                                installAdapter.items.filter { it1 -> !it1.isSettle() && it1.isSelect }
+                                    .fold(
+                                        BigDecimal.ZERO
+                                    ) { acc, order ->
+                                        acc + (order.actualNeedRepayAmount
+                                            ?: BigDecimal.ZERO)
+                                    }
+                                    .formatAmountWithPrefix(order.currencySymbol)
+                            } else {
+                                detail.actualNeedRepayAmount.formatAmountWithPrefix(order.currencySymbol)
                             }
-                        }
-                        tvOrderStatusTop.text = tvOrderStatus.text
-                        vm.submitTrackingEvent(
-                            TrackBean(
-                                p = PageOrderDetail,
-                                act = ACT_inOrdersDetail,
-                                result = System.currentTimeMillis()
-                                    .toString() + "|" + it.appOrderInfoDto.orderId + "|" + order.status
-                            )
+                        presentBorrowingActions(
+                            selectedAmount = selectedAmount
                         )
-                        tvApplyDate.text = it.applyDateStr ?: "-"
-                        tvLoanDate.text = it.loanDateStr ?: "-"
-                        tvDueDate.text = it.shouldRepayDateStr ?: "-"
-                        tvDays.text =
-                            String.format(
-                                getString(R.string.num_days),
-                                order.timeLimit.toString()
-                            )
-
-                        tvInterestTitle.text =
-                            String.format(
-                                getString(R.string.interest_day),
-                                it.dayRateStr + "%"
-                            )
-                        tvInterest.text =
-                            it.interestAmount.formatAmountWithPrefix(order.currencySymbol)
-                        tvActuallyAmount.text =
-                            it.actualAmount.formatAmountWithPrefix(order.currencySymbol)
-                        tvInstallFee.text =
-                            it.totalInstallmentServiceFee.formatAmountWithPrefix(order.currencySymbol)
-                        installGroup.isVisible = it.totalInstallmentServiceFee.isPositive()
-                        tvAccount.text = it.bankNo
-                        feeAdapter.currencySymbol = order.currencySymbol
-                        feeAdapter.submitItems(order.orderHandleFees)
-                        tvTotalRepayTitle.text =
-                            String.format(
-                                getString(R.string.total_repayment_str),
-                                order.currency
-                            )
-                        tvTotalRepay.text =
-                            it.actualNeedRepayAmount.formatAmountWithPrefix(order.currencySymbol)
-                        val isDue =
-                            order.status == ORDER_STATUS_OVERDUE || order.status == ORDER_STATUS_BAD_DEBTS
-                        tvDueFee.isVisible = isDue
-                        tvDueFeeTitle.isVisible = isDue
-                        tvDueFee.text =
-                            it.appOrderRepayDto?.penaltyAmount.formatAmountWithPrefix(
-                                null
-                            )
-                        tvTotalRepay.isSelected = isDue
-                        tvOrderStatusTop.isSelected = isDue
-                        tvApply.isSelected = isDue
-                        tvBorrow.isSelected = isDue
-                        tvRepay.isSelected = isDue
-                        updateBottomActionColors(isDue)
-                        hideBottomActionPanel()
-                        when (order.status) {
-                            ORDER_STATUS_PAYMENT_PENDING,
-                            ORDER_STATUS_IN_RENEWAL,
-                            ORDER_STATUS_IN_RENEWAL_PROCESS,
-                            ORDER_STATUS_OVERDUE,
-                            ORDER_STATUS_BAD_DEBTS,
-                                -> {
-                                if (!isFromBatch) {
-                                    val selectedAmount =
-                                        if (installLayout.isVisible) {
-                                            installAdapter.items.filter { it1 -> !it1.isSettle() && it1.isSelect }
-                                                .fold(
-                                                    BigDecimal.ZERO
-                                                ) { acc, order ->
-                                                    acc + (order.actualNeedRepayAmount
-                                                        ?: BigDecimal.ZERO)
-                                                }
-                                                .formatAmountWithPrefix(order.currencySymbol)
-                                        } else {
-                                            it.actualNeedRepayAmount.formatAmountWithPrefix(order.currencySymbol)
-                                        }
-                                    presentBorrowingActions(
-                                        selectedAmount = selectedAmount
-                                    )
-                                    vm.getButtonState()
-                                }
-                            }
-
-                            else -> {
-                                tvApply.isVisible = false
-                            }
-                        }
+                        vm.getButtonState()
                     }
                 }
-            }
-        }
-        buttonResult.observe(this@BorrowingDetailActivity) {
-            if (!binding.bottomActionLayout.isVisible) return@observe
-            renderRepaymentActionState(it)
-        }
-        installmentRepayResult.observe(this@BorrowingDetailActivity) {
-            if (!it?.payUrl.isNullOrBlank()) {
-                WebViewActivity.launch(
-                    this@BorrowingDetailActivity,
-                    getString(R.string.repayment),
-                    it.payUrl
-                )
-            } else {
-                start<RepaymentSubmissionActivity> {
-                    putExtra("orderNo", orderDetail?.appOrderInfoDto?.orderNo ?: "")
-                    putExtra("amount", binding.tvTotalRepay.text.toString())
-                    putExtra("orderId", orderId.toString())
+
+                else -> {
+                    tvApply.isVisible = false
                 }
             }
+        }
+    }
+
+    override fun initObserve() = with(vm) {
+        super.initObserve()
+
+        orderDetailResult.observe(this@BorrowingDetailActivity) { detail ->
+            detail?.let(::renderOrderDetail)
+        }
+        buttonResult.observe(this@BorrowingDetailActivity) { sign ->
+            if (binding.bottomActionLayout.isVisible) {
+                renderRepaymentActionState(sign)
+            }
+        }
+        installmentRepayResult.observe(this@BorrowingDetailActivity) {
+            openRepaymentPage(it?.payUrl)
+        }
+    }
+
+    private fun openRepaymentPage(payUrl: String?) {
+        if (!payUrl.isNullOrBlank()) {
+            WebViewActivity.launch(this, getString(R.string.repayment), payUrl)
+            return
+        }
+        start<RepaymentSubmissionActivity> {
+            putExtra("orderNo", orderDetail?.appOrderInfoDto?.orderNo.orEmpty())
+            putExtra("amount", binding.tvTotalRepay.text.toString())
+            putExtra("orderId", orderId.toString())
         }
     }
 

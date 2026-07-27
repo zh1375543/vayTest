@@ -51,7 +51,6 @@ class PersonalInfoViewModel(
             return
         }
         createNetworkRequest { verificationRepository.fetchPersonalInfoOptions() }
-            .showLoading()
             .onSuccess {
                 enumBean.value = it
                 it?.let(action)
@@ -68,7 +67,6 @@ class PersonalInfoViewModel(
 
     fun getWorkInfoOptions(action: (WorkProfileOptionsResponse) -> Unit) {
         createNetworkRequest { verificationRepository.fetchWorkInfoOptions() }
-            .showLoading()
             .onSuccess { it?.let(action) }
             .execute()
     }
