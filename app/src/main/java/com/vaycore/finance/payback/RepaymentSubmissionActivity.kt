@@ -10,8 +10,8 @@ import com.vaycore.finance.base.BaseActivity
 import com.vaycore.finance.model.wallet.BankAccountResponse
 import com.vaycore.finance.databinding.RepaymentActivityBinding
 import com.vaycore.finance.payback.adapter.RepaymentAdapter
-import com.vaycore.finance.util.compressImage
-import com.vaycore.finance.util.copyToClipboard
+import com.vaycore.finance.util.image.ImageProcessor
+import com.vaycore.finance.util.ExternalActionLauncher
 import com.vaycore.finance.util.context.resolveColorCompat
 import com.vaycore.finance.ui.extension.setSpannableClickableText
 import com.vaycore.finance.util.showToastMessage
@@ -44,7 +44,7 @@ class RepaymentSubmissionActivity :
             imgPath = result.data?.data
             lifecycleScope.launch {
                 imgPath = withContext(Dispatchers.IO) {
-                    compressImage(imgPath)
+                    ImageProcessor.compressToCache(this@RepaymentSubmissionActivity, imgPath)
                 }
                 binding.ivChoose.loadImage(imgPath)
             }
@@ -63,7 +63,7 @@ class RepaymentSubmissionActivity :
             orderNo ?: "",
             resolveColorCompat(R.color.C_374151)
         ) {
-            orderNo?.copyToClipboard()
+            orderNo?.let { ExternalActionLauncher.copyText(this@RepaymentSubmissionActivity, it) }
             getString(R.string.copy_success).showToastMessage()
         }
         tvAmount.text = amount

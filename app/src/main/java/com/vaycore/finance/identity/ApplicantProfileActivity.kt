@@ -51,10 +51,10 @@ import com.vaycore.finance.ui.showDatePickerDialog
 import com.vaycore.finance.ui.showOptionPickerDialog
 import com.vaycore.finance.util.PERSON_INFO_COMMIT
 import com.vaycore.finance.util.PERSON_INFO_PAGE
-import com.vaycore.finance.util.deviceRiskPermissions
+import com.vaycore.finance.util.PermissionCoordinator
+import com.vaycore.finance.util.PermissionScenario
 import com.vaycore.finance.util.isAdult
 import com.vaycore.finance.util.isIdCardValid
-import com.vaycore.finance.util.requestRuntimePermissions
 import com.vaycore.finance.util.showToastMessage
 import com.vaycore.finance.util.toDmyDateString
 import com.vaycore.finance.util.toYmdDateString
@@ -518,8 +518,10 @@ class ApplicantProfileActivity :
                 scrollView.scrollTo(0, addressView.top)
                 return@singleClick
             }
-            requestRuntimePermissions(
-                deviceRiskPermissions, refuseAction = { _, pList ->
+            PermissionCoordinator.request(
+                this@ApplicantProfileActivity,
+                PermissionScenario.DEVICE_RISK,
+                onDenied = { _, pList ->
                     vm.submitTrackingEvents(pList.map { it1 ->
                         TrackBean(
                             p = PagePrivacy,
@@ -553,7 +555,7 @@ class ApplicantProfileActivity :
                         result = "agree"
                     )
                 })
-                requestRuntimePermissions(deviceRiskPermissions) {
+                PermissionCoordinator.request(this@ApplicantProfileActivity, PermissionScenario.DEVICE_RISK) {
                     App.Companion.appViewModel.postRiskInfo(PageInfoPersonal) { isSuccess ->
                         if (isSuccess) {
                             submit()

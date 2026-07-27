@@ -34,9 +34,9 @@ import com.vaycore.finance.ui.showConfirmDialog
 import com.vaycore.finance.sidepage.adapter.RecordPhotoAdapter
 import com.vaycore.finance.sidepage.PlanImageUploadState
 import com.vaycore.finance.sidepage.SideHomeViewModel
-import com.vaycore.finance.util.compressImage
+import com.vaycore.finance.util.image.ImageProcessor
 import com.vaycore.finance.util.formatAmountWithPrefix
-import com.vaycore.finance.util.requestRuntimePermissions
+import com.vaycore.finance.util.PermissionCoordinator
 import com.vaycore.finance.util.runtime.LocationInfoHelper
 import com.vaycore.finance.util.viewBinding
 import kotlinx.coroutines.launch
@@ -154,9 +154,10 @@ class SavingsRecordActivity : BaseActivity<SidepageSavingsRecordActivityBinding>
     }
 
     private fun requestRecordPhotoCamera() {
-        requestRuntimePermissions(
-            array = arrayOf(PermissionLists.getCameraPermission()),
-            isShowGuide = false,
+        PermissionCoordinator.request(
+            activity = this@SavingsRecordActivity,
+            permissions = arrayOf(PermissionLists.getCameraPermission()),
+            showSettingsGuide = false,
         ) {
             val outputFile = File(cacheDir, "saving_record_${System.currentTimeMillis()}.jpg")
             val outputUri = FileProvider.getUriForFile(
@@ -210,7 +211,7 @@ class SavingsRecordActivity : BaseActivity<SidepageSavingsRecordActivityBinding>
         activePhotoUploadUri = sourceUri
         lifecycleScope.launch {
             val compressedUri = withContext(Dispatchers.IO) {
-                compressImage(sourceUri)
+                ImageProcessor.compressToCache(this@SavingsRecordActivity, sourceUri)
             }
             if (compressedUri == null) {
                 activePhotoUploadUri = null
@@ -291,9 +292,10 @@ class SavingsRecordActivity : BaseActivity<SidepageSavingsRecordActivityBinding>
     }
 
     private fun requestLocationPermission() {
-        requestRuntimePermissions(
-            array = arrayOf(PermissionLists.getAccessCoarseLocationPermission()),
-            refuseAction = { isNever, permissions ->
+        PermissionCoordinator.request(
+            activity = this@SavingsRecordActivity,
+            permissions = arrayOf(PermissionLists.getAccessCoarseLocationPermission()),
+            onDenied = { isNever, permissions ->
                 if (isNever) {
                     showConfirmDialog(
                         title = String.format(
@@ -302,11 +304,11 @@ class SavingsRecordActivity : BaseActivity<SidepageSavingsRecordActivityBinding>
                         ),
                         desc = "",
                     ) {
-                        XXPermissions.startPermissionActivity(this, permissions)
+                        PermissionCoordinator.openSystemSettings(this@SavingsRecordActivity, permissions)
                     }
                 }
             },
-            isShowGuide = false,
+            showSettingsGuide = false,
         ) {
             loadCurrentLocation()
         }

@@ -6,8 +6,7 @@ import com.vaycore.finance.data.language
 import com.vaycore.finance.databinding.ItemContactWayBinding
 import com.vaycore.finance.model.home.CustomerContactConfig
 import com.vaycore.finance.ui.extension.singleClick
-import com.vaycore.finance.util.copyToClipboard
-import com.vaycore.finance.util.dialNumber
+import com.vaycore.finance.util.ExternalActionLauncher
 import com.vaycore.finance.util.showToastMessage
 
 class ContactWayAdapter :
@@ -35,9 +34,11 @@ class ContactWayAdapter :
 
         tvCopyTelegram.singleClick { _ ->
             if (item.buttonType == 2) {
-                item.content?.filter { it1 -> it1.isDigit() }?.dialNumber()
+                item.content?.filter { it1 -> it1.isDigit() }?.let {
+                    ExternalActionLauncher.openDialer(context, it)
+                }
             } else {
-                item.content?.copyToClipboard()
+                item.content?.let { ExternalActionLauncher.copyText(context, it) }
                 context.getString(R.string.copy_success).showToastMessage()
             }
         }

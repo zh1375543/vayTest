@@ -33,7 +33,7 @@ import com.vaycore.finance.app.SplashActivity
 import com.vaycore.finance.ui.createLoadingDialog
 import com.vaycore.finance.ui.createVersionUpdateDialog
 import com.vaycore.finance.ui.views.StyledEditTextView
-import com.vaycore.finance.util.setSystemBar
+import com.vaycore.finance.util.platform.configureSystemBars
 import com.vaycore.finance.util.start
 import kotlinx.coroutines.launch
 import java.util.Locale
@@ -49,7 +49,7 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setSystemBar(darkMode = true, adjustForIme = adjustForImeInsets)
+        configureSystemBars(darkMode = true, adjustForIme = adjustForImeInsets)
         AppStackUtil.addActivity(this)
         setupDataBindingLifecycle()
         initView()

@@ -31,12 +31,12 @@ import com.vaycore.finance.util.AppStackUtil
 import com.vaycore.finance.util.LOAN_GET_NOW_CLICK
 import com.vaycore.finance.util.LoanEventUtil
 import com.vaycore.finance.util.LogUtil
-import com.vaycore.finance.util.deviceRiskPermissions
+import com.vaycore.finance.util.PermissionCoordinator
+import com.vaycore.finance.util.PermissionScenario
 import com.vaycore.finance.util.generateRequestBody
 import com.vaycore.finance.util.getLocalIpAddress
 import com.vaycore.finance.util.isPositive
 import com.vaycore.finance.util.parseJson
-import com.vaycore.finance.util.requestRuntimePermissions
 import com.vaycore.finance.util.runtime.DeviceHelper
 import com.vaycore.finance.util.start
 import com.vaycore.finance.util.trackEvent
@@ -117,7 +117,7 @@ class ApplicationOutcomeActivity :
         loadingLayout.showLoading()
         initRisk()
         if (location.first == 0.0) {
-            requestRuntimePermissions(deviceRiskPermissions) {
+            PermissionCoordinator.request(this@ApplicationOutcomeActivity, PermissionScenario.DEVICE_RISK) {
                 val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
                 locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)?.let {
                     location = it.longitude to it.latitude

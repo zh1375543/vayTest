@@ -28,8 +28,8 @@ import com.vaycore.finance.ui.showLoanAgreementDialog
 import com.vaycore.finance.util.LoanEventUtil
 import com.vaycore.finance.util.ORDER_COMMIT
 import com.vaycore.finance.util.context.resolveColorCompat
-import com.vaycore.finance.util.deviceRiskPermissions
-import com.vaycore.finance.util.requestRuntimePermissions
+import com.vaycore.finance.util.PermissionCoordinator
+import com.vaycore.finance.util.PermissionScenario
 import com.vaycore.finance.util.toJsonString
 import com.vaycore.finance.util.trackEvent
 import com.vaycore.finance.util.viewBinding
@@ -137,7 +137,7 @@ class CombinedLoanOfferActivity : BaseActivity<ActivityLoanProductMultiBinding>(
                 ),
             )
             loanEvent.logClickApplyLoan()
-            requestRuntimePermissions(deviceRiskPermissions) {
+            PermissionCoordinator.request(this@CombinedLoanOfferActivity, PermissionScenario.DEVICE_RISK) {
                 val (productInstallmentMap, termIdMap) = buildSubmissionMaps()
                 trackEvent(ORDER_COMMIT)
                 showLoanAgreementDialog(isTogether = true) {

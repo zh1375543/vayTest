@@ -3,7 +3,7 @@ package com.vaycore.finance.mine
 import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseActivity
 import com.vaycore.finance.databinding.FeedActivityBinding
-import com.vaycore.finance.util.showSoftInput
+import com.vaycore.finance.util.platform.showSoftInput
 import com.vaycore.finance.util.showToastMessage
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.util.viewBinding

@@ -15,7 +15,7 @@ import com.vaycore.finance.base.BaseActivity
 import com.vaycore.finance.model.web.WebBridgeMessage
 import com.vaycore.finance.databinding.WebActivityBinding
 import com.vaycore.finance.util.LogUtil
-import com.vaycore.finance.util.context.openExternalBrowser
+import com.vaycore.finance.util.ExternalActionLauncher
 import com.vaycore.finance.util.parseJsonSafely
 import com.vaycore.finance.util.start
 import com.vaycore.finance.util.viewBinding
@@ -145,7 +145,9 @@ class WebViewActivity : BaseActivity<WebActivityBinding>() {
         val bridgeMessage = data.parseJsonSafely<WebBridgeMessage>()
         when (bridgeMessage?.key) {
             "openExternalBrowser" -> {
-                bridgeMessage.data?.openExternalBrowser()
+                bridgeMessage.data?.let {
+                    ExternalActionLauncher.openBrowser(this@WebViewActivity, it)
+                }
             }
         }
     }

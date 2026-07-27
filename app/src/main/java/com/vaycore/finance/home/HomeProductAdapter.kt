@@ -8,7 +8,7 @@ import com.vaycore.finance.model.loan.ProductBean
 import com.vaycore.finance.home.HomeTagAdapter
 import com.vaycore.finance.ui.extension.loadImage
 import com.vaycore.finance.util.formatAmountWithPrefix
-import com.vaycore.finance.util.formatDays
+import com.vaycore.finance.util.platform.formatLoanTerm
 
 class HomeProductAdapter :
     BaseAdapter<ProductBean, ItemHomeProductBinding>(ItemHomeProductBinding::inflate) {
@@ -23,7 +23,7 @@ class HomeProductAdapter :
         tvLoanAmount.text = context.getString(R.string.home_product_loan_amount_title)
         tvAmount.text =
             if (item.canApply) item.maxLoanAmount.formatAmountWithPrefix(item.currencySymbol) else item.loanAmountRange
-        tvDays.text = context.formatDays(item.timeLimit)
+        tvDays.text = context.formatLoanTerm(item.timeLimit)
         tvApply.isEnabled = item.canApply
         enableView.isVisible = !tvApply.isEnabled
         ivNew.isVisible = item.newSign == 1 && !item.isTogether

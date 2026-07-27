@@ -21,9 +21,9 @@ import com.vaycore.finance.app.MainActivity
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.ui.views.SignatureView
 import com.vaycore.finance.util.LoanEventUtil
-import com.vaycore.finance.util.deviceRiskPermissions
-import com.vaycore.finance.util.requestRuntimePermissions
-import com.vaycore.finance.util.setSystemBar
+import com.vaycore.finance.util.PermissionCoordinator
+import com.vaycore.finance.util.PermissionScenario
+import com.vaycore.finance.util.platform.configureSystemBars
 import com.vaycore.finance.util.showToastMessage
 import com.vaycore.finance.util.start
 import com.vaycore.finance.util.viewBinding
@@ -88,7 +88,7 @@ class AgreementSignatureActivity : BaseActivity<ActivityContractSignBinding>() {
     }
 
     private fun renderSignatureWorkspace() = with(binding) {
-        setSystemBar(darkMode = true)
+        configureSystemBars(darkMode = true)
         vm.submitTrackingEvent(TrackBean(p = PageSign, act = ACT_in))
         if (isShowBackHome) {
             loanEvent.initEventFileUniqueSuffix((loginInfo?.id ?: 111).toString())
@@ -137,7 +137,7 @@ class AgreementSignatureActivity : BaseActivity<ActivityContractSignBinding>() {
             vm.submitTrackingEvent(TrackBean(p = PageSign, act = ACT_clickSubmit))
             if (isShowBackHome) {
                 loanEvent.logClickApplyLoan()
-                requestRuntimePermissions(deviceRiskPermissions) {
+                PermissionCoordinator.request(this@AgreementSignatureActivity, PermissionScenario.DEVICE_RISK) {
                     App.Companion.appViewModel.postRiskInfo(PageSign) { isSuccess ->
                         if (isSuccess) {
                             loanEvent.logClickSubmitLoan()

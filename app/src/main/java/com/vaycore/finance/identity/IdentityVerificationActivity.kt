@@ -36,10 +36,9 @@ import com.vaycore.finance.util.KYC_AADHAAR_BACK_CLICK
 import com.vaycore.finance.util.KYC_AADHAAR_FRONT_CLICK
 import com.vaycore.finance.util.KYC_INFO_COMMIT
 import com.vaycore.finance.util.KYC_INFO_PAGE
-import com.vaycore.finance.util.compressImage
+import com.vaycore.finance.util.image.ImageProcessor
 import com.vaycore.finance.ui.extension.resetScale
-import com.vaycore.finance.util.requestRuntimePermissions
-import com.vaycore.finance.util.context.saveBytesToCacheJpg
+import com.vaycore.finance.util.PermissionCoordinator
 import com.vaycore.finance.util.showToastMessage
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.util.trackEvent
@@ -66,7 +65,7 @@ class IdentityVerificationActivity : BaseActivity<KycAuthActivityBinding>() {
         if (result.resultCode == RESULT_OK) {
             lifecycleScope.launch {
                 frontUri = withContext(Dispatchers.IO) {
-                    compressImage(photoUri)
+                    ImageProcessor.compressToCache(this@IdentityVerificationActivity, photoUri)
                 }
                 vm.submitTrackingEvent(
                     TrackBean(
@@ -86,7 +85,7 @@ class IdentityVerificationActivity : BaseActivity<KycAuthActivityBinding>() {
         if (result.resultCode == RESULT_OK) {
             lifecycleScope.launch {
                 backUri = withContext(Dispatchers.IO) {
-                    compressImage(photoUri)
+                    ImageProcessor.compressToCache(this@IdentityVerificationActivity, photoUri)
                 }
                 vm.submitTrackingEvent(
                     TrackBean(
@@ -105,7 +104,7 @@ class IdentityVerificationActivity : BaseActivity<KycAuthActivityBinding>() {
         if (result.resultCode == RESULT_OK) {
             lifecycleScope.launch {
                 selfUri = withContext(Dispatchers.IO) {
-                    compressImage(photoUri)
+                    ImageProcessor.compressToCache(this@IdentityVerificationActivity, photoUri)
                 }
                 vm.submitTrackingEvent(
                     TrackBean(
@@ -127,9 +126,18 @@ class IdentityVerificationActivity : BaseActivity<KycAuthActivityBinding>() {
                 if (it.livenessImageResults.isNullOrEmpty()) return@let
                 lifecycleScope.launch {
                     val (compressedUri, encryptedFile) = withContext(Dispatchers.IO) {
-                        val imageFile = saveBytesToCacheJpg(it.livenessImageResults[0].detectImage)
-                        val imageUri = compressImage(getUri(imageFile))
-                        val liveFile = saveBytesToCacheJpg(it.livenessEncryptResult)
+                        val imageFile = ImageProcessor.saveJpegToCache(
+                            this@IdentityVerificationActivity,
+                            it.livenessImageResults[0].detectImage,
+                        )
+                        val imageUri = ImageProcessor.compressToCache(
+                            this@IdentityVerificationActivity,
+                            getUri(imageFile),
+                        )
+                        val liveFile = ImageProcessor.saveJpegToCache(
+                            this@IdentityVerificationActivity,
+                            it.livenessEncryptResult,
+                        )
                         imageUri to liveFile
                     }
                     selfUri = compressedUri
@@ -206,7 +214,10 @@ class IdentityVerificationActivity : BaseActivity<KycAuthActivityBinding>() {
                     result = System.currentTimeMillis().toString()
                 )
             )
-            requestRuntimePermissions(arrayOf(PermissionLists.getCameraPermission())) {
+            PermissionCoordinator.request(
+                this@IdentityVerificationActivity,
+                arrayOf(PermissionLists.getCameraPermission()),
+            ) {
                 trackEvent(KYC_AADHAAR_FRONT_CLICK)
                 val outputFile = File(cacheDir, "camera_temp_${System.currentTimeMillis()}.jpg")
                 photoUri = getUri(outputFile)
@@ -224,7 +235,10 @@ class IdentityVerificationActivity : BaseActivity<KycAuthActivityBinding>() {
                     result = System.currentTimeMillis().toString()
                 )
             )
-            requestRuntimePermissions(arrayOf(PermissionLists.getCameraPermission())) {
+            PermissionCoordinator.request(
+                this@IdentityVerificationActivity,
+                arrayOf(PermissionLists.getCameraPermission()),
+            ) {
                 when (kycType) {
                     1 -> {
                         val outputFile =
@@ -271,7 +285,10 @@ class IdentityVerificationActivity : BaseActivity<KycAuthActivityBinding>() {
                     result = System.currentTimeMillis().toString()
                 )
             )
-            requestRuntimePermissions(arrayOf(PermissionLists.getCameraPermission())) {
+            PermissionCoordinator.request(
+                this@IdentityVerificationActivity,
+                arrayOf(PermissionLists.getCameraPermission()),
+            ) {
                 trackEvent(KYC_AADHAAR_BACK_CLICK)
                 val outputFile = File(cacheDir, "camera_temp_${System.currentTimeMillis()}.jpg")
                 photoUri = getUri(outputFile)

@@ -41,8 +41,8 @@ import com.vaycore.finance.data.firebaseToken
 import com.vaycore.finance.data.gaId
 import com.vaycore.finance.data.refer
 import com.vaycore.finance.util.LogUtil
-import com.vaycore.finance.util.getAdvertisingId
-import com.vaycore.finance.util.setDefaultFont
+import com.vaycore.finance.util.platform.AdvertisingIdProvider
+import com.vaycore.finance.util.platform.AppFontInstaller
 import com.vaycore.finance.util.toJsonString
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -63,7 +63,7 @@ class App : Application(), DFTransferResultInterface {
         super.onCreate()
         appContext = applicationContext
         instance = this
-        setDefaultFont("fonts/medium.otf", "fonts/bold.otf")
+        AppFontInstaller.install(this, "fonts/medium.otf", "fonts/bold.otf")
         if (agreePrivacy) {
             startAppsFlyer()
         }
@@ -180,7 +180,7 @@ class App : Application(), DFTransferResultInterface {
 
     private fun fetchAdId() {
         CoroutineScope(Dispatchers.IO).launch {
-            gaId = getAdvertisingId()
+            gaId = AdvertisingIdProvider.get(this@App)
         }
     }
 

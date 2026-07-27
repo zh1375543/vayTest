@@ -2,7 +2,6 @@ package com.vaycore.finance.base
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.hjq.permissions.XXPermissions
 import com.vaycore.finance.app.App
 import com.vaycore.finance.data.ACT_UserAppUserDevice
 import com.vaycore.finance.data.ACT_UserAppUserDeviceHasDevice
@@ -14,7 +13,8 @@ import com.vaycore.finance.data.isPostDeviceInfo
 import com.vaycore.finance.data.st
 import com.vaycore.finance.app.AppConfigRepository
 import com.vaycore.finance.util.runtime.DeviceCollectHelper
-import com.vaycore.finance.util.deviceRiskPermissions
+import com.vaycore.finance.util.PermissionCoordinator
+import com.vaycore.finance.util.PermissionScenario
 import com.vaycore.finance.util.toJsonString
 import kotlinx.coroutines.launch
 
@@ -65,11 +65,10 @@ class AppViewModel(
         pageString: String,
         action: (Boolean) -> Unit
     ) {
-        if (!isLogin || !XXPermissions.isGrantedPermissions(
+        if (!isLogin || !PermissionCoordinator.hasAll(
                 App.appContext,
-                deviceRiskPermissions
-            )
-            || postingDevice
+                PermissionScenario.DEVICE_RISK,
+            ) || postingDevice
         ) return
         postingDevice = true
         if (isPostDeviceInfo) {

@@ -32,9 +32,9 @@ import com.vaycore.finance.util.LoanEventUtil
 import com.vaycore.finance.util.LogUtil
 import com.vaycore.finance.util.ORDER_COMMIT
 import com.vaycore.finance.util.context.resolveColorCompat
-import com.vaycore.finance.util.deviceRiskPermissions
+import com.vaycore.finance.util.PermissionCoordinator
+import com.vaycore.finance.util.PermissionScenario
 import com.vaycore.finance.util.formatAmountWithPrefix
-import com.vaycore.finance.util.requestRuntimePermissions
 import com.vaycore.finance.util.start
 import com.vaycore.finance.util.toJsonString
 import com.vaycore.finance.util.trackEvent
@@ -176,7 +176,7 @@ class LoanOfferActivity : BaseActivity<ActivityLoanProductBinding>() {
                 )
             )
             loanEvent.logClickApplyLoan()
-            requestRuntimePermissions(deviceRiskPermissions) {
+            PermissionCoordinator.request(this@LoanOfferActivity, PermissionScenario.DEVICE_RISK) {
                 trackEvent(ORDER_COMMIT)
                 showLoanAgreementDialog(
                     productId = product?.id.toString(),

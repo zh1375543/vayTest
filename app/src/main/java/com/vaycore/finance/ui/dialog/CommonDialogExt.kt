@@ -28,7 +28,7 @@ import com.vaycore.finance.ui.extension.setSpannableClickableText
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.util.APP_UPGRADE
 import com.vaycore.finance.util.context.resolveColorCompat
-import com.vaycore.finance.util.context.openPlayStore
+import com.vaycore.finance.util.ExternalActionLauncher
 import com.vaycore.finance.util.showToastMessage
 import com.vaycore.finance.util.toHtmlSpanned
 import com.vaycore.finance.util.trackEvent
@@ -136,7 +136,10 @@ fun Context.createVersionUpdateDialog(): Dialog {
             setCanceledOnTouchOutside(false)
             tvOK.singleClick {
                 trackEvent(APP_UPGRADE)
-                "https://play.google.com/store/apps/details?id=$packageName".openPlayStore()
+                ExternalActionLauncher.openStoreListing(
+                    this@createVersionUpdateDialog,
+                    "https://play.google.com/store/apps/details?id=$packageName",
+                )
             }
         }
     }

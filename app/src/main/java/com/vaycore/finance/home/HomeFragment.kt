@@ -45,12 +45,11 @@ import com.vaycore.finance.ui.showCreditUnderReviewDialog
 import com.vaycore.finance.ui.showPreCreditExpiredDialog
 import com.vaycore.finance.util.LOAN_GET_NOW_CLICK
 import com.vaycore.finance.util.context.resolveColorCompat
-import com.vaycore.finance.util.context.openExternalBrowser
-import com.vaycore.finance.util.context.openPlayStore
+import com.vaycore.finance.util.ExternalActionLauncher
 import com.vaycore.finance.util.countdownTimer
 import com.vaycore.finance.util.formatAmountWithPrefix
-import com.vaycore.finance.util.formatDays
-import com.vaycore.finance.util.ifLoginAction
+import com.vaycore.finance.util.platform.formatLoanTerm
+import com.vaycore.finance.util.platform.requireLogin
 import com.vaycore.finance.util.isPositive
 import com.vaycore.finance.util.showToastMessage
 import com.vaycore.finance.util.start
@@ -87,8 +86,13 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
                             return@setOnChildClickListener
                         }
                         when (item.jumpType) {
-                            1 -> item.downloadUrl?.openExternalBrowser()
-                            2 -> item.downloadUrl?.openPlayStore()
+                            1 -> item.downloadUrl?.let {
+                                ExternalActionLauncher.openBrowser(requireContext(), it)
+                            }
+                            2 -> ExternalActionLauncher.openStoreListing(
+                                requireContext(),
+                                item.downloadUrl,
+                            )
                             else -> {
                                 productVm.getProductDetail(
                                     PageHome,
@@ -129,13 +133,13 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
             it.context.start<PayoutAccountListActivity>()
         }
         tvBorrowNow.singleClick {
-            it.context.ifLoginAction {
+            it.context.requireLogin {
                 isGoAuth = true
                 authStatusVm.getUserAuthStatus()
             }
         }
         tvLoan.singleClick {
-            it.context.ifLoginAction {
+            it.context.requireLogin {
                 context?.start<CombinedLoanOfferActivity>()
             }
         }
@@ -244,7 +248,7 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
             tvAmount.animateAmount(data.maxAmount, prefix = data.currencySymbol ?: "")
             tvLoanAmount.text = getString(R.string.l_amount)
             tvPercent.text = data.annualizedInterestRate
-            tvPeriod.text = root.context.formatDays(data.loanTerm)
+            tvPeriod.text = root.context.formatLoanTerm(data.loanTerm)
             tvRateLabel.text = data.recommendText
             tvRateLabel.isVisible = !data.recommendText.isNullOrEmpty()
             authLayout.isVisible = false

@@ -38,7 +38,8 @@ import com.vaycore.finance.model.wallet.WalletResponse
 import com.vaycore.finance.wallet.WalletViewModel
 import com.vaycore.finance.util.SUPPLEMENTARY_INFO_COMMIT
 import com.vaycore.finance.ui.extension.resetScale
-import com.vaycore.finance.util.requestRuntimePermissions
+import com.vaycore.finance.util.PermissionCoordinator
+import com.vaycore.finance.util.PermissionScenario
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.util.trackEvent
 import com.vaycore.finance.wallet.chooseBankDialog
@@ -47,7 +48,6 @@ import com.vaycore.finance.ui.showConfirmDialog
 import com.vaycore.finance.wallet.showWithdrawMethodDialog
 import com.vaycore.finance.ui.showOptionPickerDialog
 import com.vaycore.finance.util.getContactInfo
-import com.vaycore.finance.util.deviceRiskPermissions
 import com.vaycore.finance.util.viewBinding
 import kotlin.math.max
 import kotlin.toString
@@ -195,7 +195,7 @@ class PayoutAndContactActivity : BaseActivity<BankAccountAuthActivityBinding>() 
             if (!validateBankPage()) {
                 return@singleClick
             }
-            requestRuntimePermissions(deviceRiskPermissions) {
+            PermissionCoordinator.request(this@PayoutAndContactActivity, PermissionScenario.DEVICE_RISK) {
                 App.appViewModel.hasDeviceInfo(PageInfoBank) { isPost ->
                     if (isPost) {
                         submit()

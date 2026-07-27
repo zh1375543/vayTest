@@ -26,8 +26,8 @@ import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.ui.showConfirmDialog
 import com.vaycore.finance.sidepage.PlanImageUploadState
 import com.vaycore.finance.sidepage.SideHomeViewModel
-import com.vaycore.finance.util.compressImage
-import com.vaycore.finance.util.requestRuntimePermissions
+import com.vaycore.finance.util.image.ImageProcessor
+import com.vaycore.finance.util.PermissionCoordinator
 import com.vaycore.finance.util.showToastMessage
 import com.vaycore.finance.util.viewBinding
 import java.io.File
@@ -185,8 +185,9 @@ class EditPlanActivity : BaseActivity<SidepageEditPlanActivityBinding>() {
     }
 
     private fun requestCameraPermission() {
-        requestRuntimePermissions(
-            array = arrayOf(PermissionLists.getCameraPermission()),
+        PermissionCoordinator.request(
+            activity = this@EditPlanActivity,
+            permissions = arrayOf(PermissionLists.getCameraPermission()),
         ) {
             openPlanPhotoCamera()
         }
@@ -206,7 +207,7 @@ class EditPlanActivity : BaseActivity<SidepageEditPlanActivityBinding>() {
     private fun processSelectedPlanPhoto(sourceUri: Uri) {
         lifecycleScope.launch {
             val compressedUri = withContext(Dispatchers.IO) {
-                compressImage(sourceUri)
+                ImageProcessor.compressToCache(this@EditPlanActivity, sourceUri)
             } ?: return@launch
             selectedPlanPhotoUri = compressedUri
             activePhotoUploadUri = compressedUri

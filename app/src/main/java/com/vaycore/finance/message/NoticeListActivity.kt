@@ -8,7 +8,7 @@ import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseActivity
 import com.vaycore.finance.databinding.ActivityNoticeListBinding
 import com.vaycore.finance.ui.showConfirmDialog
-import com.vaycore.finance.util.requestRuntimePermissions
+import com.vaycore.finance.util.PermissionCoordinator
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.util.start
 import com.vaycore.finance.util.viewBinding
@@ -55,17 +55,18 @@ class NoticeListActivity : BaseActivity<ActivityNoticeListBinding>() {
 
     private fun setupToolbarActions() = with(binding) {
         tvOpen.singleClick {
-            requestRuntimePermissions(
+            PermissionCoordinator.request(
+                this@NoticeListActivity,
                 arrayOf(PermissionLists.getPostNotificationsPermission()),
-                refuseAction = { isPermanentlyDenied, deniedPermissions ->
+                onDenied = { isPermanentlyDenied, deniedPermissions ->
                     if (isPermanentlyDenied) {
-                        XXPermissions.startPermissionActivity(
+                        PermissionCoordinator.openSystemSettings(
                             this@NoticeListActivity,
                             deniedPermissions,
                         )
                     }
                 },
-                isShowGuide = false,
+                showSettingsGuide = false,
             ) {}
         }
         titleBar.setAction {

@@ -4,8 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.Matrix
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.provider.ContactsContract
@@ -85,14 +83,6 @@ fun Map<String, String>.generateRequestBody(): Map<String, RequestBody> {
     }
     return requestBodyMap
 }
-
-fun rotateBitmapIfNeeded(bitmap: Bitmap, degrees: Int): Bitmap {
-    if (degrees == 0) return bitmap
-    val matrix = Matrix()
-    matrix.postRotate(degrees.toFloat())
-    return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
-}
-
 
 fun BigDecimal?.isPositive(): Boolean {
     return (this ?: BigDecimal(0)) > BigDecimal.ZERO

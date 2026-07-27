@@ -5,7 +5,7 @@ import android.graphics.Rect
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import com.vaycore.finance.util.getStatusBarHeight
+import com.vaycore.finance.util.platform.statusBarHeight
 
 fun View.observeKeyboardVisibility(callback: (isVisible: Boolean, height: Int) -> Unit) {
     viewTreeObserver.addOnGlobalLayoutListener {
@@ -32,7 +32,7 @@ fun View.hideKeyboard() {
 fun View.addStatusBarTopMargin() {
     val lp = layoutParams
     if (lp is ViewGroup.MarginLayoutParams) {
-        lp.topMargin += context.getStatusBarHeight()
+        lp.topMargin += context.statusBarHeight
         layoutParams = lp
     }
 }
@@ -40,10 +40,10 @@ fun View.addStatusBarTopMargin() {
 fun View.addStatusBarTopPaddingAndHeight() {
     val lp = layoutParams
     if (lp != null && lp.height > 0) {
-        lp.height += context.getStatusBarHeight() // increase height
+        lp.height += context.statusBarHeight // increase height
     }
     setPadding(
-        paddingLeft, paddingTop + context.getStatusBarHeight(),
+        paddingLeft, paddingTop + context.statusBarHeight,
         paddingRight, paddingBottom
     )
 }

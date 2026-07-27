@@ -27,7 +27,7 @@ import com.vaycore.finance.home.viewmodel.GuestDashboardViewModel
 import com.vaycore.finance.home.HomeFragment
 import com.vaycore.finance.mine.MineFragment
 import com.vaycore.finance.order.OrderFragment
-import com.vaycore.finance.util.ifLoginAction
+import com.vaycore.finance.util.platform.requireLogin
 import com.vaycore.finance.ui.extension.addStatusBarTopMargin
 import com.vaycore.finance.util.showToastMessage
 import com.vaycore.finance.ui.extension.singleClick
@@ -124,17 +124,17 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
             selectPage(0)
         }
         vOrder.singleClick {
-            ifLoginAction {
+            requireLogin {
                 selectPage(1)
             }
         }
         vMine.singleClick {
-            ifLoginAction {
+            requireLogin {
                 selectPage(2)
             }
         }
         ivMsg.singleClick {
-            ifLoginAction {
+            requireLogin {
                 start<NoticeListActivity>()
             }
         }
