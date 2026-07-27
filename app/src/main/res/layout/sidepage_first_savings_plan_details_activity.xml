@@ -27,7 +27,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleBar" />
 
-    <com.vaycore.finance.ui.widget.FormItemView
+    <com.vaycore.finance.ui.views.FormItemView
         android:id="@+id/targetAmountView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
         app:layout_constraintTop_toBottomOf="@id/divider"
         app:titleText="@string/portal_target_amount" />
 
-    <com.vaycore.finance.ui.widget.FormItemView
+    <com.vaycore.finance.ui.views.FormItemView
         android:id="@+id/frequencyView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
         app:layout_constraintTop_toBottomOf="@id/targetAmountView"
         app:titleText="@string/portal_saving_frequency" />
 
-    <com.vaycore.finance.ui.widget.FormItemView
+    <com.vaycore.finance.ui.views.FormItemView
         android:id="@+id/eachAmountView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -95,7 +95,7 @@
         app:right_top_radius="@dimen/dp_30"
         app:solidColor="@color/white">
 
-        <com.vaycore.finance.ui.widget.ActionButtonView
+        <com.vaycore.finance.ui.views.StatefulActionButton
             android:id="@+id/btSubmit"
             android:layout_width="0dp"
             android:layout_height="@dimen/dp_52"

@@ -15,7 +15,7 @@ import com.vaycore.finance.databinding.PaybackDialogBinding
 import com.vaycore.finance.databinding.RepayAutoApplyDialogBinding
 import com.vaycore.finance.app.MainActivity
 import com.vaycore.finance.ui.extension.singleClick
-import com.vaycore.finance.ui.widget.ActionButtonView
+import com.vaycore.finance.ui.views.StatefulActionButton
 import com.vaycore.finance.util.showToastMessage
 
 fun Context.showRepayAndReapplyDialog(
@@ -37,8 +37,8 @@ fun Context.showRepayAndReapplyDialog(
             btnApply.text = getString(
                 if (isApplyAll) R.string.repay_auto_apply_all else R.string.repay_auto_apply
             )
-            btnApply.applyStyle(
-                variant = ActionButtonView.VARIANT_FILLED,
+            btnApply.updateAppearance(
+                variant = StatefulActionButton.VARIANT_FILLED,
                 solidColor = ContextCompat.getColor(
                     this@showRepayAndReapplyDialog,
                     when {

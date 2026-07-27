@@ -13,7 +13,7 @@ import com.vaycore.finance.loan.viewmodel.LoanDashboardViewModel
 import com.vaycore.finance.order.BorrowingHistoryActivity
 import com.vaycore.finance.payback.BulkRepaymentActivity
 import com.vaycore.finance.payback.createPaybackDialog
-import com.vaycore.finance.web.WebViewActivity
+import com.vaycore.finance.browser.WebViewActivity
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.util.start
 import com.vaycore.finance.util.viewBinding

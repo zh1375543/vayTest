@@ -717,7 +717,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="₱500,000,000" />
 
-                <com.vaycore.finance.ui.widget.ActionButtonView
+                <com.vaycore.finance.ui.views.StatefulActionButton
                     android:id="@+id/tvRepay"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/dp_48"
@@ -760,7 +760,7 @@
                     app:layout_constraintStart_toEndOf="@id/cbAutoApply"
                     app:layout_constraintTop_toTopOf="@id/cbAutoApply" />
 
-                <com.vaycore.finance.ui.widget.ActionButtonView
+                <com.vaycore.finance.ui.views.StatefulActionButton
                     android:id="@+id/tvBorrow"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/dp_52"
@@ -777,7 +777,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/cbAutoApply" />
 
-                <com.vaycore.finance.ui.widget.ActionButtonView
+                <com.vaycore.finance.ui.views.StatefulActionButton
                     android:id="@+id/tvBorrowAll"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/dp_52"

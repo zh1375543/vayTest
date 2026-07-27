@@ -19,7 +19,7 @@ class NoticeListActivity : BaseActivity<ActivityNoticeListBinding>() {
     private val vm by viewModels<MessageCenterViewModel>()
 
     private val messageAdapter by lazy {
-        NoticeAdapter().apply {
+        MessageInboxAdapter().apply {
             setOnItemClickListener { item, _ ->
                 start<NoticeDetailActivity> {
                     putExtra("msg", item)

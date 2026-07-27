@@ -110,7 +110,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tvSavingsGoalLabel" />
 
-                    <com.vaycore.finance.ui.widget.ActionButtonView
+                    <com.vaycore.finance.ui.views.StatefulActionButton
                         android:id="@+id/btWithdraw"
                         android:layout_width="@dimen/dp_112"
                         android:layout_height="@dimen/dp_42"
@@ -292,7 +292,7 @@
                         android:layout_height="wrap_content"
                         app:constraint_referenced_ids="ivUpdatePlan,tvSavingsGoalLabel,tvSavingsGoalAmount,btWithdraw,progressPlan,tvRemainingDays,tvRemainingDaysValue,tvNextSavingTime,tvNextSavingDays,tvNextSavingDaysValue,btSaveMoney" />
 
-                    <com.vaycore.finance.ui.widget.ActionButtonView
+                    <com.vaycore.finance.ui.views.StatefulActionButton
                         android:id="@+id/btSaveMoney"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/dp_48"

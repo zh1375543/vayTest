@@ -22,7 +22,7 @@ import com.vaycore.finance.databinding.HomeRefuseDialogBinding
 import com.vaycore.finance.databinding.LoadingDialogBinding
 import com.vaycore.finance.databinding.RateDialogBinding
 import com.vaycore.finance.databinding.VersionUpdateDialogBinding
-import com.vaycore.finance.mine.adapter.ContactUsDialogAdapter
+import com.vaycore.finance.mine.adapter.SupportContactDialogAdapter
 import com.vaycore.finance.ui.extension.hideKeyboard
 import com.vaycore.finance.ui.extension.setSpannableClickableText
 import com.vaycore.finance.ui.extension.singleClick
@@ -116,7 +116,7 @@ fun Context.showContactUsDialog(homeBean: GuestHomeResponse) {
             homeBean.customerConfigs?.let { configs ->
                 list.addAll(configs)
             }
-            rvCustomer.adapter = ContactUsDialogAdapter().apply {
+            rvCustomer.adapter = SupportContactDialogAdapter().apply {
                 submitItems(list)
             }
         }

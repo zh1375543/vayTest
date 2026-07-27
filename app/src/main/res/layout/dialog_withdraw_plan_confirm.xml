@@ -36,7 +36,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ivPayout" />
 
-    <com.vaycore.finance.ui.widget.ActionButtonView
+    <com.vaycore.finance.ui.views.StatefulActionButton
         android:id="@+id/btCancel"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_44"
@@ -50,7 +50,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvMessage" />
 
-    <com.vaycore.finance.ui.widget.ActionButtonView
+    <com.vaycore.finance.ui.views.StatefulActionButton
         android:id="@+id/btConfirm"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_44"

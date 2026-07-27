@@ -13,8 +13,8 @@ import com.vaycore.finance.data.loginInfo
 import com.vaycore.finance.databinding.CreditDialogBinding
 import com.vaycore.finance.databinding.LoanAgreementDialogBinding
 import com.vaycore.finance.databinding.NewProductDialogBinding
-import com.vaycore.finance.web.WebViewActivity
-import com.vaycore.finance.loan.adapter.ProductCardAdapter
+import com.vaycore.finance.browser.WebViewActivity
+import com.vaycore.finance.loan.adapter.LoanOfferPickerAdapter
 import com.vaycore.finance.ui.extension.singleClick
 
 fun Context.showLoanAgreementDialog(
@@ -75,7 +75,7 @@ fun Context.createNewProductDialog(
             var shouldTrackClose = true
             val fullText = String.format(getString(R.string.home_product_num), list.size)
             tvTitle.text = fullText
-            rvProduct.adapter = ProductCardAdapter().apply {
+            rvProduct.adapter = LoanOfferPickerAdapter().apply {
                 submitItems(list)
             }
             ivClose.singleClick {

@@ -128,7 +128,7 @@
                     app:radius="@dimen/dp_24"
                     app:solidColor="@color/white">
 
-                    <com.vaycore.finance.ui.widget.FormItemView
+                    <com.vaycore.finance.ui.views.FormItemView
                         android:id="@+id/savingAmountView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -140,7 +140,7 @@
                         app:inputType="number"
                         app:titleText="@string/portal_today_saving" />
 
-                    <com.vaycore.finance.ui.widget.FormItemView
+                    <com.vaycore.finance.ui.views.FormItemView
                         android:id="@+id/locationView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -258,7 +258,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <com.vaycore.finance.ui.widget.ActionButtonView
+        <com.vaycore.finance.ui.views.StatefulActionButton
             android:id="@+id/btSubmitRecord"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_52"

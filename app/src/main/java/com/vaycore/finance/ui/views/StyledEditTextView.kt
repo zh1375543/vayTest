@@ -12,9 +12,9 @@ import androidx.annotation.ColorInt
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatEditText
 import com.vaycore.finance.R
-import com.vaycore.finance.ui.widget.shape.ShapeAttributeReader
-import com.vaycore.finance.ui.widget.shape.ShapeBackgroundController
-import com.vaycore.finance.ui.widget.shape.TextStateController
+import com.vaycore.finance.ui.views.shape.ShapeAttributeReader
+import com.vaycore.finance.ui.views.shape.ShapeBackgroundController
+import com.vaycore.finance.ui.views.shape.TextStateController
 
 /** An EditText that supports ShapeView styling and exposes pasted text events. */
 class StyledEditTextView @JvmOverloads constructor(

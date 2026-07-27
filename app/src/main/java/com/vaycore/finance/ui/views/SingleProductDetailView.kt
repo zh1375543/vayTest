@@ -9,9 +9,9 @@ import androidx.core.view.isVisible
 import com.vaycore.finance.R
 import com.vaycore.finance.databinding.SingleProductDetailViewBinding
 import com.vaycore.finance.model.loan.ProductBean
-import com.vaycore.finance.loan.adapter.ProductHeaderFeeAdapter
-import com.vaycore.finance.loan.adapter.ProductInstallmentAdapter
-import com.vaycore.finance.loan.adapter.ProductRepaymentMenuAdapter
+import com.vaycore.finance.loan.adapter.OfferFeeSummaryAdapter
+import com.vaycore.finance.loan.adapter.InstallmentScheduleAdapter
+import com.vaycore.finance.loan.adapter.RepaymentPlanOptionAdapter
 import com.vaycore.finance.util.LogUtil
 import com.vaycore.finance.util.formatAmountWithPrefix
 
@@ -23,9 +23,9 @@ class SingleProductDetailView @JvmOverloads constructor(
     private val binding =
         SingleProductDetailViewBinding.inflate(LayoutInflater.from(context), this, true)
 
-    private val repaymentMenuAdapter by lazy { ProductRepaymentMenuAdapter() }
-    private val installAdapter by lazy { ProductInstallmentAdapter() }
-    private val headerFeeAdapter by lazy { ProductHeaderFeeAdapter() }
+    private val repaymentMenuAdapter by lazy { RepaymentPlanOptionAdapter() }
+    private val installAdapter by lazy { InstallmentScheduleAdapter() }
+    private val headerFeeAdapter by lazy { OfferFeeSummaryAdapter() }
 
     private var currentProduct: ProductBean? = null
 

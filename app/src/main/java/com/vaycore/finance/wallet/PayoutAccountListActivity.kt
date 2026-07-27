@@ -3,7 +3,7 @@ package com.vaycore.finance.wallet
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import com.vaycore.finance.R
-import com.vaycore.finance.wallet.adapter.BankCardListAdapter
+import com.vaycore.finance.wallet.adapter.PayoutAccountAdapter
 import com.vaycore.finance.base.BaseActivity
 import com.vaycore.finance.databinding.ActivityBankCardListBinding
 import com.vaycore.finance.ui.extension.singleClick
@@ -20,7 +20,7 @@ class PayoutAccountListActivity :
     private val vm by viewModels<WalletViewModel>()
 
     private val bankAdapter by lazy {
-        BankCardListAdapter().apply {
+        PayoutAccountAdapter().apply {
             setOnChildClickListener { view, _, position ->
                 val account = items[position]
                 when (view.id) {

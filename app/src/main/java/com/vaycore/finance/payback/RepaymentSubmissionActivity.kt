@@ -9,7 +9,7 @@ import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseActivity
 import com.vaycore.finance.model.wallet.BankAccountResponse
 import com.vaycore.finance.databinding.RepaymentActivityBinding
-import com.vaycore.finance.payback.adapter.RepaymentAdapter
+import com.vaycore.finance.payback.adapter.RepaymentAccountAdapter
 import com.vaycore.finance.util.image.ImageProcessor
 import com.vaycore.finance.util.ExternalActionLauncher
 import com.vaycore.finance.util.context.resolveColorCompat
@@ -34,7 +34,7 @@ class RepaymentSubmissionActivity :
     private val orderNo by lazy { intent.getStringExtra("orderNo") }
     private val amount by lazy { intent.getStringExtra("amount") }
     private val bankAdapter by lazy {
-        RepaymentAdapter()
+        RepaymentAccountAdapter()
     }
 
     private val photoLauncher = registerForActivityResult(

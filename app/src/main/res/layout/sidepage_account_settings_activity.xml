@@ -68,7 +68,7 @@
             app:layout_constraintTop_toTopOf="parent" />
     </com.vaycore.finance.ui.views.StyledConstraintLayout>
 
-    <com.vaycore.finance.ui.widget.ActionButtonView
+    <com.vaycore.finance.ui.views.StatefulActionButton
         android:id="@+id/tvLogOut"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_48"

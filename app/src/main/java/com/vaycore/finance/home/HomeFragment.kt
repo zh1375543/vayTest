@@ -70,7 +70,7 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
     private val productVm by viewModels<LoanProductViewModel>()
 
     private val homeAdapter by lazy {
-        HomeProductAdapter().apply {
+        LoanCatalogAdapter().apply {
             setOnChildClickListener { view, _, position ->
                 when (view.id) {
                     R.id.tvApply -> {

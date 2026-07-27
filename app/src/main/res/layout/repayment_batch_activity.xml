@@ -123,7 +123,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     tools:text="3" />
 
-                <com.vaycore.finance.ui.widget.ActionButtonView
+                <com.vaycore.finance.ui.views.StatefulActionButton
                     android:id="@+id/tvApply"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/dp_48"

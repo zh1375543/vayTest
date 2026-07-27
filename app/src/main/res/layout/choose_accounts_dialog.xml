@@ -63,7 +63,7 @@
             android:src="@mipmap/ic_add_img" />
     </com.vaycore.finance.ui.views.StyledLinearLayout>
 
-    <com.vaycore.finance.ui.widget.ActionButtonView
+    <com.vaycore.finance.ui.views.StatefulActionButton
         android:id="@+id/BtnApply"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_48"

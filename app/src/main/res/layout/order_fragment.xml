@@ -26,7 +26,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <com.vaycore.finance.ui.widget.RollingNoticeView
+                <com.vaycore.finance.ui.views.RollingNoticeView
                     android:id="@+id/marqueeView"
                     android:layout_width="@dimen/dp_0"
                     android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvOrderNum" />
 
-                <com.vaycore.finance.ui.widget.ActionButtonView
+                <com.vaycore.finance.ui.views.StatefulActionButton
                     android:id="@+id/tvRepayment"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/dp_48"

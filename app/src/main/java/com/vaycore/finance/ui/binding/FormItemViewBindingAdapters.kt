@@ -1,7 +1,7 @@
 package com.vaycore.finance.ui.binding
 
 import androidx.databinding.BindingAdapter
-import com.vaycore.finance.ui.widget.FormItemView
+import com.vaycore.finance.ui.views.FormItemView
 
 /** Keeps FormItemView editing state one-way to avoid text listener feedback loops. */
 @BindingAdapter("editable")

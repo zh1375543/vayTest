@@ -102,7 +102,7 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.36" />
 
-    <com.vaycore.finance.ui.widget.ActionButtonView
+    <com.vaycore.finance.ui.views.StatefulActionButton
         android:id="@+id/btnClose"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_44"
@@ -121,7 +121,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cbUnderstand" />
 
-    <com.vaycore.finance.ui.widget.ActionButtonView
+    <com.vaycore.finance.ui.views.StatefulActionButton
         android:id="@+id/btnApply"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_44"

@@ -10,7 +10,7 @@ import com.vaycore.finance.model.identity.UserAuthStatusResponse
 import com.vaycore.finance.identity.PayoutAndContactActivity
 import com.vaycore.finance.identity.IdentityVerificationActivity
 import com.vaycore.finance.identity.ApplicantProfileActivity
-import com.vaycore.finance.mine.adapter.AuthEntryAdapter
+import com.vaycore.finance.mine.adapter.VerificationRequirementAdapter
 import com.vaycore.finance.identity.viewmodel.AuthStatusViewModel
 import com.vaycore.finance.util.PROFILE_PAGE
 import com.vaycore.finance.util.start
@@ -24,7 +24,7 @@ class VerificationCenterActivity : BaseActivity<AuthCenterActivityBinding>() {
     private val vm by viewModels<AuthStatusViewModel>()
 
     private val authAdapter by lazy {
-        AuthEntryAdapter().apply {
+        VerificationRequirementAdapter().apply {
             setOnItemClickListener { item, _ ->
                 when (if (item.isCertified) item.title else items.first { !it.isCertified }.title) {
                     getString(R.string.kyc_certification) -> {

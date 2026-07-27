@@ -31,7 +31,7 @@ import com.vaycore.finance.data.authConfigList
 import com.vaycore.finance.data.bean.TrackBean
 import com.vaycore.finance.identity.viewmodel.AuthStatusViewModel
 import com.vaycore.finance.identity.viewmodel.KycUploadViewModel
-import com.vaycore.finance.web.WebViewActivity
+import com.vaycore.finance.browser.WebViewActivity
 import com.vaycore.finance.util.KYC_AADHAAR_BACK_CLICK
 import com.vaycore.finance.util.KYC_AADHAAR_FRONT_CLICK
 import com.vaycore.finance.util.KYC_INFO_COMMIT

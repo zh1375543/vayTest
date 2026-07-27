@@ -5,11 +5,11 @@ import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseActivity
 import com.vaycore.finance.databinding.RepaymentBatchActivityBinding
 import com.vaycore.finance.order.BorrowingDetailActivity
-import com.vaycore.finance.payback.adapter.BatchRepaymentAdapter
+import com.vaycore.finance.payback.adapter.BulkRepaymentLoanAdapter
 import com.vaycore.finance.util.showToastMessage
 import com.vaycore.finance.util.start
 import com.vaycore.finance.ui.extension.singleClick
-import com.vaycore.finance.web.WebViewActivity
+import com.vaycore.finance.browser.WebViewActivity
 import com.vaycore.finance.util.viewBinding
 
 class BulkRepaymentActivity :
@@ -19,7 +19,7 @@ class BulkRepaymentActivity :
     private val vm by viewModels<RepayViewModel>()
 
     private val orderAdapter by lazy {
-        BatchRepaymentAdapter().apply {
+        BulkRepaymentLoanAdapter().apply {
             setOnItemClickListener { item, position ->
                 item.isCheck = !item.isCheck
                 notifyItemRangeChanged(position, 1, 0)

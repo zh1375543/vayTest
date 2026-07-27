@@ -3,9 +3,9 @@ package com.vaycore.finance.ui.views
 import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
-import com.vaycore.finance.ui.widget.shape.ShapeAttributeReader
-import com.vaycore.finance.ui.widget.shape.ShapeBackgroundController
-import com.vaycore.finance.ui.widget.shape.TextStateController
+import com.vaycore.finance.ui.views.shape.ShapeAttributeReader
+import com.vaycore.finance.ui.views.shape.ShapeBackgroundController
+import com.vaycore.finance.ui.views.shape.TextStateController
 
 /** A TextView that supports ShapeView backgrounds, state colors, and state drawables. */
 class StyledTextView @JvmOverloads constructor(

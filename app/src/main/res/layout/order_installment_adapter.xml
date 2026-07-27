@@ -60,7 +60,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.vaycore.finance.ui.widget.VerticalSolidLineView
+    <com.vaycore.finance.ui.views.VerticalSolidLineView
         android:id="@+id/line"
         android:layout_width="@dimen/dp_1"
         android:layout_height="0dp"

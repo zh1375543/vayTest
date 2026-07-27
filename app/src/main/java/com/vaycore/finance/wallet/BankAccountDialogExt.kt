@@ -14,7 +14,7 @@ import com.vaycore.finance.databinding.ChooseAccountsDialogBinding
 import com.vaycore.finance.databinding.ChooseBankDialogBinding
 import com.vaycore.finance.databinding.ChooseWalletDialogBinding
 import com.vaycore.finance.databinding.WithdrawMethodDialogBinding
-import com.vaycore.finance.wallet.adapter.ChooseAccountsDialogAdapter
+import com.vaycore.finance.wallet.adapter.PayoutAccountPickerAdapter
 import com.vaycore.finance.wallet.adapter.ChooseBankDialogAdapter
 import com.vaycore.finance.wallet.adapter.ChooseWalletDialogAdapter
 import com.vaycore.finance.ui.extension.hideKeyboard
@@ -73,7 +73,7 @@ fun Context.chooseAccountsDialog(
                 height = itemHeight * visibleItemCount
             }
             val adapter =
-                ChooseAccountsDialogAdapter(index).apply {
+                PayoutAccountPickerAdapter(index).apply {
                     submitItems(list)
                     setOnItemClickListener { _, index ->
                         selectPosition = index

@@ -26,7 +26,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
 
-            <com.vaycore.finance.ui.widget.RollingNoticeView
+            <com.vaycore.finance.ui.views.RollingNoticeView
                 android:id="@+id/marqueeView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -186,7 +186,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/rate_layout">
 
-                        <com.vaycore.finance.ui.widget.ActionButtonView
+                        <com.vaycore.finance.ui.views.StatefulActionButton
                             android:id="@+id/tvBorrowNow"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/dp_54"
@@ -344,7 +344,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/amount_layout">
 
-                        <com.vaycore.finance.ui.widget.ActionButtonView
+                        <com.vaycore.finance.ui.views.StatefulActionButton
                             android:id="@+id/tvLoan"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/dp_54"
@@ -506,7 +506,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvPreTimes" />
 
-                <com.vaycore.finance.ui.widget.ActionButtonView
+                <com.vaycore.finance.ui.views.StatefulActionButton
                     android:id="@+id/tvRefresh"
                     android:layout_width="@dimen/dp_0"
                     android:layout_height="@dimen/dp_42"
@@ -774,7 +774,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvFailed" />
 
-            <com.vaycore.finance.ui.widget.ActionButtonView
+            <com.vaycore.finance.ui.views.StatefulActionButton
                 android:id="@+id/tvModifyCard"
                 android:layout_width="@dimen/dp_0"
                 android:layout_height="@dimen/dp_36"

@@ -446,7 +446,7 @@
                     android:layout_marginHorizontal="@dimen/dp_16"
                     android:layout_marginBottom="@dimen/dp_10" />
 
-                <com.vaycore.finance.ui.widget.ActionButtonView
+                <com.vaycore.finance.ui.views.StatefulActionButton
                     android:id="@+id/btNext"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_48"

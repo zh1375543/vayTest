@@ -3,8 +3,8 @@ package com.vaycore.finance.ui.views
 import android.content.Context
 import android.util.AttributeSet
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.vaycore.finance.ui.widget.shape.ShapeAttributeReader
-import com.vaycore.finance.ui.widget.shape.ShapeBackgroundController
+import com.vaycore.finance.ui.views.shape.ShapeAttributeReader
+import com.vaycore.finance.ui.views.shape.ShapeBackgroundController
 
 /** A ConstraintLayout that renders the shared ShapeView background attributes. */
 class StyledConstraintLayout @JvmOverloads constructor(

@@ -111,7 +111,7 @@
                     app:solidColor="@color/white">
 
                 <!-- Relationship 1 -->
-                <com.vaycore.finance.ui.widget.FormItemView
+                <com.vaycore.finance.ui.views.FormItemView
                     android:id="@+id/relativesView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -122,7 +122,7 @@
                     app:titleText="@string/contact_people1" />
 
                 <!-- Contact name -->
-                <com.vaycore.finance.ui.widget.FormItemView
+                <com.vaycore.finance.ui.views.FormItemView
                     android:id="@+id/relativesNameView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -134,7 +134,7 @@
                     app:titleText="@string/contact_name" />
 
                 <!-- Contact phone -->
-                <com.vaycore.finance.ui.widget.FormItemView
+                <com.vaycore.finance.ui.views.FormItemView
                     android:id="@+id/relativesPhoneView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -148,7 +148,7 @@
                     app:editable="@{!isCertified}"
                     app:titleText="@string/contact_phone_number" />
 
-                <com.vaycore.finance.ui.widget.FormItemView
+                <com.vaycore.finance.ui.views.FormItemView
                     android:id="@+id/friendView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -158,7 +158,7 @@
                     app:editable="@{!isCertified}"
                     app:titleText="@string/contact_people2" />
 
-                <com.vaycore.finance.ui.widget.FormItemView
+                <com.vaycore.finance.ui.views.FormItemView
                     android:id="@+id/friendNameView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -169,7 +169,7 @@
                     app:editable="@{!isCertified}"
                     app:titleText="@string/contact_name" />
 
-                <com.vaycore.finance.ui.widget.FormItemView
+                <com.vaycore.finance.ui.views.FormItemView
                     android:id="@+id/friendPhoneView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -190,7 +190,7 @@
                     android:orientation="vertical"
                     android:visibility="@{!isCertified ? View.VISIBLE : View.GONE}">
 
-                    <com.vaycore.finance.ui.widget.FormItemView
+                    <com.vaycore.finance.ui.views.FormItemView
                         android:id="@+id/additionalContactRelationshipView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -200,7 +200,7 @@
                         app:editable="@{!isCertified}"
                         app:titleText="@string/contact_people3" />
 
-                    <com.vaycore.finance.ui.widget.FormItemView
+                    <com.vaycore.finance.ui.views.FormItemView
                         android:id="@+id/additionalContactNameView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -211,7 +211,7 @@
                         app:editable="@{!isCertified}"
                         app:titleText="@string/contact_name" />
 
-                    <com.vaycore.finance.ui.widget.FormItemView
+                    <com.vaycore.finance.ui.views.FormItemView
                         android:id="@+id/additionalContactPhoneView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -253,7 +253,7 @@
             android:layout_marginHorizontal="@dimen/dp_16"
             android:layout_marginBottom="@dimen/dp_10" />
 
-        <com.vaycore.finance.ui.widget.ActionButtonView
+        <com.vaycore.finance.ui.views.StatefulActionButton
             android:id="@+id/btNext"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_48"

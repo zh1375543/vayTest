@@ -91,7 +91,7 @@
         app:solidColor="@color/C_F6F6F6"
         tools:visibility="visible" />
 
-    <com.vaycore.finance.ui.widget.ActionButtonView
+    <com.vaycore.finance.ui.views.StatefulActionButton
         android:id="@+id/btnApply"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_48"

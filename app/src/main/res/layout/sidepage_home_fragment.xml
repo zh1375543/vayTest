@@ -93,7 +93,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:text="0₫" />
 
-            <com.vaycore.finance.ui.widget.ActionButtonView
+            <com.vaycore.finance.ui.views.StatefulActionButton
                 android:id="@+id/tvAddPlan"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/dp_48"
@@ -171,7 +171,7 @@
                     app:layout_constraintVertical_chainStyle="packed"
                     tools:text="Log in to view plan" />
 
-                <com.vaycore.finance.ui.widget.ActionButtonView
+                <com.vaycore.finance.ui.views.StatefulActionButton
                     android:id="@+id/tvLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dp_36"

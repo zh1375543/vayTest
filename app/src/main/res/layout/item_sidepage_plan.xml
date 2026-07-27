@@ -54,7 +54,7 @@
             app:layout_constraintTop_toBottomOf="@id/tvPlanName"
             tools:text="372 days left" />
 
-        <com.vaycore.finance.ui.widget.ActionButtonView
+        <com.vaycore.finance.ui.views.StatefulActionButton
             android:id="@+id/btSaveMoney"
             android:layout_width="@dimen/dp_112"
             android:layout_height="@dimen/dp_42"

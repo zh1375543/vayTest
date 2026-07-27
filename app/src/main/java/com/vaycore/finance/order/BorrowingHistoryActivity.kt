@@ -7,7 +7,7 @@ import com.vaycore.finance.data.bean.TrackBean
 import com.vaycore.finance.databinding.ActivityLoanOrderListBinding
 import com.vaycore.finance.data.ACT_inOrderHistory
 import com.vaycore.finance.data.PageHistory
-import com.vaycore.finance.order.adapter.OrderListAdapter
+import com.vaycore.finance.order.adapter.BorrowingHistoryAdapter
 import com.vaycore.finance.util.start
 import com.vaycore.finance.util.viewBinding
 
@@ -17,7 +17,7 @@ class BorrowingHistoryActivity : BaseActivity<ActivityLoanOrderListBinding>() {
     private val vm by viewModels<LoanOrderViewModel>()
 
     private val orderAdapter by lazy {
-        OrderListAdapter().apply {
+        BorrowingHistoryAdapter().apply {
             setOnItemClickListener { _, position ->
                 start<BorrowingDetailActivity> {
                     putExtra("orderId", items[position].id)

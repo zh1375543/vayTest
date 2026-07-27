@@ -38,7 +38,7 @@
             app:radius="@dimen/dp_24"
             app:solidColor="@color/white">
 
-            <com.vaycore.finance.ui.widget.FormItemView
+            <com.vaycore.finance.ui.views.FormItemView
                 android:id="@+id/planNameView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
                 app:inputType="text"
                 app:titleText="@string/portal_plan_name" />
 
-            <com.vaycore.finance.ui.widget.FormItemView
+            <com.vaycore.finance.ui.views.FormItemView
                 android:id="@+id/targetAmountView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
                 app:inputType="number"
                 app:titleText="@string/portal_target_amount" />
 
-            <com.vaycore.finance.ui.widget.FormItemView
+            <com.vaycore.finance.ui.views.FormItemView
                 android:id="@+id/frequencyView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
                 app:inputType="text"
                 app:titleText="@string/portal_saving_frequency" />
 
-            <com.vaycore.finance.ui.widget.FormItemView
+            <com.vaycore.finance.ui.views.FormItemView
                 android:id="@+id/eachAmountView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -148,7 +148,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <com.vaycore.finance.ui.widget.ActionButtonView
+        <com.vaycore.finance.ui.views.StatefulActionButton
             android:id="@+id/btStartPlan"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_52"

@@ -33,7 +33,7 @@ import com.vaycore.finance.data.bean.TrackBean
 import com.vaycore.finance.data.location
 import com.vaycore.finance.databinding.LoginActivityBinding
 import com.vaycore.finance.app.MainActivity
-import com.vaycore.finance.web.WebViewActivity
+import com.vaycore.finance.browser.WebViewActivity
 import com.vaycore.finance.ui.extension.setSpannableClickableTexts
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.app.MainDestination

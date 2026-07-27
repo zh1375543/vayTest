@@ -277,7 +277,7 @@
                 app:layout_constraintTop_toTopOf="@id/tvTransactionTitle"
                 tools:text="3" />
 
-            <com.vaycore.finance.ui.widget.ActionButtonView
+            <com.vaycore.finance.ui.views.StatefulActionButton
                 android:id="@+id/btnApply"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/dp_48"

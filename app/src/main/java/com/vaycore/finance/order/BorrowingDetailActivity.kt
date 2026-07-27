@@ -37,8 +37,8 @@ import com.vaycore.finance.data.PAWN_AGREEMENT
 import com.vaycore.finance.data.PageOrderDetail
 import com.vaycore.finance.data.PageRepaymentLink
 import com.vaycore.finance.model.order.LoanOrderDetailResponse
-import com.vaycore.finance.order.adapter.OrderFeeAdapter
-import com.vaycore.finance.order.adapter.OrderInstallmentAdapter
+import com.vaycore.finance.order.adapter.BorrowingFeeBreakdownAdapter
+import com.vaycore.finance.order.adapter.BorrowingScheduleAdapter
 import com.vaycore.finance.util.LOAN_ORDER_CONFIRMATION_PAGE
 import com.vaycore.finance.util.context.resolveColorCompat
 import com.vaycore.finance.util.showToastMessage
@@ -46,8 +46,8 @@ import com.vaycore.finance.ui.extension.setSpannableClickableTexts
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.util.trackEvent
 import com.vaycore.finance.payback.RepaymentSubmissionActivity
-import com.vaycore.finance.web.WebViewActivity
-import com.vaycore.finance.ui.widget.ActionButtonView
+import com.vaycore.finance.browser.WebViewActivity
+import com.vaycore.finance.ui.views.StatefulActionButton
 import com.vaycore.finance.payback.showRepayAndReapplyDialog
 import com.vaycore.finance.util.formatAmountWithPrefix
 import com.vaycore.finance.util.isPositive
@@ -67,10 +67,10 @@ class BorrowingDetailActivity :
     // Server state reloanButtonSign supports "0"-"4"; null/unknown values fall back to state 2.
     private var currentButtonSign: String? = null
     private val feeAdapter by lazy {
-        OrderFeeAdapter()
+        BorrowingFeeBreakdownAdapter()
     }
     private val installAdapter by lazy {
-        OrderInstallmentAdapter().apply {
+        BorrowingScheduleAdapter().apply {
             setOnItemClickListener { item, position ->
                 val lastDueIndex = items.indexOfLast { it1 -> it1.isDue() }
                 val firstProcessIndex = items.indexOfFirst { it1 -> it1.isProcess() }
@@ -554,13 +554,13 @@ class BorrowingDetailActivity :
 
     private fun updateBottomActionColors(isDue: Boolean) = with(binding) {
         val actionColor = resolveColorCompat(if (isDue) R.color.C_F62909 else R.color.color_7087F8)
-        tvRepay.applyStyle(
-            variant = ActionButtonView.VARIANT_OUTLINE,
+        tvRepay.updateAppearance(
+            variant = StatefulActionButton.VARIANT_OUTLINE,
             strokeColor = actionColor,
             textColor = actionColor,
         )
-        tvBorrow.applyStyle(
-            variant = ActionButtonView.VARIANT_FILLED,
+        tvBorrow.updateAppearance(
+            variant = StatefulActionButton.VARIANT_FILLED,
             solidColor = actionColor,
             textColor = resolveColorCompat(R.color.white),
         )

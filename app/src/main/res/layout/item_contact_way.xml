@@ -43,7 +43,7 @@
         app:layout_constraintTop_toBottomOf="@id/tvTelegramTitle"
         app:layout_constraintVertical_chainStyle="packed" />
 
-    <com.vaycore.finance.ui.widget.ActionButtonView
+    <com.vaycore.finance.ui.views.StatefulActionButton
         android:id="@+id/tvCopyTelegram"
         android:layout_width="@dimen/dp_73"
         android:layout_height="@dimen/dp_40"

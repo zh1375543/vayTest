@@ -174,7 +174,7 @@
             android:src="@mipmap/mine_right" />
     </com.vaycore.finance.ui.views.StyledLinearLayout>
 
-    <com.vaycore.finance.ui.widget.ActionButtonView
+    <com.vaycore.finance.ui.views.StatefulActionButton
         android:id="@+id/cancelView"
         android:layout_width="@dimen/dp_160"
         android:layout_height="@dimen/dp_48"

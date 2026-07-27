@@ -22,8 +22,8 @@ import com.vaycore.finance.databinding.ActivityLoanApplyResultBinding
 import com.vaycore.finance.model.loan.LoanDashboardResponse
 import com.vaycore.finance.model.loan.ProductBean
 import com.vaycore.finance.app.MainActivity
-import com.vaycore.finance.home.HomeProductAdapter
-import com.vaycore.finance.loan.adapter.LoanResultAdapter
+import com.vaycore.finance.home.LoanCatalogAdapter
+import com.vaycore.finance.loan.adapter.ApplicationResultAdapter
 import com.vaycore.finance.loan.viewmodel.LoanApplyViewModel
 import com.vaycore.finance.loan.viewmodel.LoanProductViewModel
 import com.vaycore.finance.ui.extension.singleClick
@@ -89,10 +89,10 @@ class ApplicationOutcomeActivity :
     private val productInstallmentMap by lazy { intent.getStringExtra("productInstallmentMap") }
     private val payWay by lazy { intent.getStringExtra("payWay") ?: "CARD" }
     private val resultAdapter by lazy {
-        LoanResultAdapter()
+        ApplicationResultAdapter()
     }
     private val homeAdapter by lazy {
-        HomeProductAdapter().apply {
+        LoanCatalogAdapter().apply {
             setOnChildClickListener { view, _, position ->
                 if (view.id == R.id.tvApply) {
                     items.getOrNull(position)?.let { item ->

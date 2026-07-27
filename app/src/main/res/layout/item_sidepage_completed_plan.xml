@@ -166,7 +166,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="2025-05-20" />
 
-        <com.vaycore.finance.ui.widget.ActionButtonView
+        <com.vaycore.finance.ui.views.StatefulActionButton
             android:id="@+id/btViewDetails"
             android:layout_width="0dp"
             android:layout_height="@dimen/dp_46"

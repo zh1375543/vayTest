@@ -130,7 +130,7 @@
 
 
     <!--sssss-->
-    <declare-styleable name="ActionButtonView">
+    <declare-styleable name="StatefulActionButton">
         <attr name="actionButtonVariant" format="enum">
             <enum name="filled" value="0" />
             <enum name="outline" value="1" />

@@ -15,7 +15,7 @@ import com.vaycore.finance.databinding.BannerAdapterBinding
 import com.vaycore.finance.model.home.CampaignBannerResponse
 import com.vaycore.finance.util.context.resolveColorCompat
 import com.vaycore.finance.ui.extension.setRoundedRectangleBackground
-import com.vaycore.finance.web.WebViewActivity
+import com.vaycore.finance.browser.WebViewActivity
 import com.vaycore.finance.ui.extension.loadImage
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
