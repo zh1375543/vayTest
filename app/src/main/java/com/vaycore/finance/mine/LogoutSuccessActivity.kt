@@ -9,7 +9,7 @@ import com.vaycore.finance.sidepage.PortalActivity
 import com.vaycore.finance.sidepage.act.AccountSettingsActivity
 import com.vaycore.finance.util.AppStackUtil
 import com.vaycore.finance.util.countdownTimer
-import com.vaycore.finance.util.context.getColor2
+import com.vaycore.finance.util.context.resolveColorCompat
 import com.vaycore.finance.ui.extension.setClickableTextWithScale
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.util.viewBinding
@@ -27,14 +27,14 @@ class LogoutSuccessActivity :
         tvOK.singleClick {
             handleBackPressed()
         }
-        onBackAction(null) {
+        registerTrackedBackHandler(null) {
             handleBackPressed()
         }
         lifecycleScope.countdownTimer(10, next = { seconds ->
             binding.tvTips.setClickableTextWithScale(
                 String.format(getString(R.string.back_to_home_tips), seconds.toString()),
                 seconds.toString(),
-                getColor2(R.color.C_FA560D)
+                resolveColorCompat(R.color.C_FA560D)
             )
         }, end = {
             handleBackPressed()
@@ -42,7 +42,7 @@ class LogoutSuccessActivity :
         tvTips.setClickableTextWithScale(
             String.format(getString(R.string.back_to_home_tips), "10"),
             "10",
-            getColor2(R.color.C_FA560D)
+            resolveColorCompat(R.color.C_FA560D)
         )
     }
 

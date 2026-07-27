@@ -4,7 +4,7 @@ import androidx.activity.viewModels
 import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseActivity
 import com.vaycore.finance.databinding.RepaymentBatchActivityBinding
-import com.vaycore.finance.order.LoanOrderDetailActivity
+import com.vaycore.finance.order.BorrowingDetailActivity
 import com.vaycore.finance.payback.adapter.BatchRepaymentAdapter
 import com.vaycore.finance.util.showToastMessage
 import com.vaycore.finance.util.start
@@ -12,7 +12,7 @@ import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.web.WebViewActivity
 import com.vaycore.finance.util.viewBinding
 
-class RepaymentBatchActivity :
+class BulkRepaymentActivity :
     BaseActivity<RepaymentBatchActivityBinding>() {
 
     override val binding by viewBinding(RepaymentBatchActivityBinding::inflate)
@@ -27,7 +27,7 @@ class RepaymentBatchActivity :
             }
             setOnChildClickListener { view, item, _ ->
                 if (view.id == R.id.tvProductDetail) {
-                    start<LoanOrderDetailActivity> {
+                    start<BorrowingDetailActivity> {
                         putExtra("orderId", item.orderId)
                         putExtra("isFromBatch", true)
                     }
@@ -68,15 +68,15 @@ class RepaymentBatchActivity :
 
     override fun initObserve() = with(vm) {
         super.initObserve()
-        orderListResult.observe(this@RepaymentBatchActivity) {
+        orderListResult.observe(this@BulkRepaymentActivity) {
             binding.apply {
                 loadingLayout.showContent()
             }
         }
-        togetherRepayResult.observe(this@RepaymentBatchActivity) {
+        togetherRepayResult.observe(this@BulkRepaymentActivity) {
             it?.payUrl?.let { payUrl ->
                 WebViewActivity.launch(
-                    this@RepaymentBatchActivity,
+                    this@BulkRepaymentActivity,
                     getString(R.string.batch_repayment_orders),
                     payUrl
                 )

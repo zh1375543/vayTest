@@ -45,7 +45,7 @@ import com.vaycore.finance.sidepage.act.FirstSavingsPlanActivity
 import com.vaycore.finance.home.viewmodel.GuestDashboardViewModel
 import com.vaycore.finance.util.LOGIN_VIA_OTP
 import com.vaycore.finance.util.SPUtil
-import com.vaycore.finance.util.context.getColor2
+import com.vaycore.finance.util.context.resolveColorCompat
 import com.vaycore.finance.util.countdownTimer
 import com.vaycore.finance.util.isPhoneNumberValid
 import com.vaycore.finance.util.showToastMessage
@@ -103,7 +103,7 @@ class LoginActivity : BaseActivity<LoginActivityBinding>() {
             getString(R.string.app_name)
         )
         smsHelper.register(this@LoginActivity)
-        vm.recordEvent(
+        vm.submitTrackingEvent(
             TrackBean(
                 p = PageLogin,
                 act = ACT_in
@@ -125,7 +125,7 @@ class LoginActivity : BaseActivity<LoginActivityBinding>() {
             // 1. first input → record start time
             if (startInputTime == 0L) {
                 startInputTime = now
-                vm.recordEvent(
+                vm.submitTrackingEvent(
                     TrackBean(
                         p = PageLogin,
                         act = ACT_InputPhonenumberStart,
@@ -141,7 +141,7 @@ class LoginActivity : BaseActivity<LoginActivityBinding>() {
 
                 // 3. user stopped typing → record end time
 
-                vm.recordEvent(
+                vm.submitTrackingEvent(
                     TrackBean(
                         p = PageLogin,
                         act = ACT_InputPhoneNumberEnd,
@@ -166,7 +166,7 @@ class LoginActivity : BaseActivity<LoginActivityBinding>() {
     @SuppressLint("MissingPermission")
     private fun connectLoginCommands() = with(binding) {
         tvOtpLogin.singleClick {
-            vm.recordEvent(
+            vm.submitTrackingEvent(
                 TrackBean(
                     p = PageLogin,
                     act = ACT_clickOTPLogin,
@@ -182,7 +182,7 @@ class LoginActivity : BaseActivity<LoginActivityBinding>() {
             arrayListOf(
                 ClickablePart(
                     getString(R.string.privacy_agreement),
-                    getColor2(R.color.color_7087F8),
+                    resolveColorCompat(R.color.color_7087F8),
                     onClick = {
                         WebViewActivity.Companion.launch(
                             this@LoginActivity,
@@ -192,7 +192,7 @@ class LoginActivity : BaseActivity<LoginActivityBinding>() {
                     }),
                 ClickablePart(
                     getString(R.string.privacy_blue),
-                    getColor2(R.color.color_7087F8),
+                    resolveColorCompat(R.color.color_7087F8),
                     onClick = {
                         WebViewActivity.Companion.launch(
                             this@LoginActivity,
@@ -230,7 +230,7 @@ class LoginActivity : BaseActivity<LoginActivityBinding>() {
                 return@singleClick
             }
             trackEvent(LOGIN_VIA_OTP)
-            vm.recordEvent(
+            vm.submitTrackingEvent(
                 TrackBean(
                     p = PageLogin,
                     act = ACT_clickLoginOTP,
@@ -299,7 +299,7 @@ class LoginActivity : BaseActivity<LoginActivityBinding>() {
 
         val currentTime = System.currentTimeMillis()
         if (currentTime - lastBackPressTime < EXIT_INTERVAL) {
-            vm.recordEvent(
+            vm.submitTrackingEvent(
                 TrackBean(
                     act = ACT_exit,
                     result = PageHome,
@@ -338,7 +338,7 @@ class LoginActivity : BaseActivity<LoginActivityBinding>() {
             getString(R.string.please_check_phone).showToastMessage()
             return
         }
-        vm.recordEvent(
+        vm.submitTrackingEvent(
             TrackBean(
                 p = PageLogin,
                 act = ACT_clickVerifyCode

@@ -13,29 +13,29 @@ fun UserAuthStatusResponse.routeToNextAuthStep(
     val hasPassedRequiredSteps = isPass(configList)
 
     if (userAuthState == "30" && hasPassedRequiredSteps) {
-        context.start<AuthSuccessActivity>()
+        context.start<VerificationCompleteActivity>()
         return
     }
     if (isFromAuthPage
         && hasPassedRequiredSteps
     ) {
-        context.start<AuthSuccessActivity>()
+        context.start<VerificationCompleteActivity>()
         return
     }
     configList.forEach {
         when {
             it.uppercase() == "KYC" && kycState != "30" -> {
-                context.start<KycAuthActivity>()
+                context.start<IdentityVerificationActivity>()
                 return
             }
 
             it.uppercase() == "ID" && idState != "30" -> {
-                context.start<PersonalInfoAuthActivity>()
+                context.start<ApplicantProfileActivity>()
                 return
             }
 
             it.uppercase() == "BANK" && bankCardState != "30" -> {
-                context.start<BankAccountAuthActivity>()
+                context.start<PayoutAndContactActivity>()
                 return
             }
         }

@@ -21,11 +21,11 @@ class HomeViewModel(
     val bannerResult = MutableLiveData<List<CampaignBannerResponse>>()
 
     fun getUnAuthData(showLoading: Boolean = false) {
-        launchData {
+        createNetworkRequest {
             homeRepository.loadGuestHome()
         }.showLoading(showLoading).onSuccess {
             guestResult.value = it
-            recordEvent(
+            submitTrackingEvent(
                 TrackBean(
                     p = PageHome,
                     act = ACT_common,
@@ -34,7 +34,7 @@ class HomeViewModel(
             )
         }.onFailed {
             loadFailedResult.value = Unit
-            recordEvent(
+            submitTrackingEvent(
                 TrackBean(
                     p = PageHome,
                     act = ACT_common,
@@ -46,7 +46,7 @@ class HomeViewModel(
     }
 
     fun getBannerList() {
-        launchData {
+        createNetworkRequest {
             homeRepository.loadBanners()
         }.onSuccess {
             bannerResult.value = it ?: emptyList()

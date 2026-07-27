@@ -20,13 +20,13 @@ class LoanProductViewModel(
         showLoading: Boolean = false,
         errorAction: () -> Unit,
     ) {
-        launchData {
+        createNetworkRequest {
             loanProductRepository.fetchProductDetail(
                 productId = id,
                 amount = amount,
             )
         }.showLoading(showLoading).onSuccess {
-            recordEvent(
+            submitTrackingEvent(
                 TrackBean(
                     p = trackPage,
                     act = ACT_LoanAppProductInfoDetail,
@@ -35,7 +35,7 @@ class LoanProductViewModel(
             )
             detailResult.value = it
         }.onFailed {
-            recordEvent(
+            submitTrackingEvent(
                 TrackBean(
                     p = trackPage,
                     act = ACT_LoanAppProductInfoDetail,

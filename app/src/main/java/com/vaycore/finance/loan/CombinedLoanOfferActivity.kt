@@ -27,7 +27,7 @@ import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.ui.showLoanAgreementDialog
 import com.vaycore.finance.util.LoanEventUtil
 import com.vaycore.finance.util.ORDER_COMMIT
-import com.vaycore.finance.util.context.getColor2
+import com.vaycore.finance.util.context.resolveColorCompat
 import com.vaycore.finance.util.deviceRiskPermissions
 import com.vaycore.finance.util.requestRuntimePermissions
 import com.vaycore.finance.util.toJsonString
@@ -35,7 +35,7 @@ import com.vaycore.finance.util.trackEvent
 import com.vaycore.finance.util.viewBinding
 import com.vaycore.finance.wallet.WalletViewModel
 
-class LoanProductMultiActivity : BaseActivity<ActivityLoanProductMultiBinding>() {
+class CombinedLoanOfferActivity : BaseActivity<ActivityLoanProductMultiBinding>() {
 
     override val binding by viewBinding(ActivityLoanProductMultiBinding::inflate)
 
@@ -59,14 +59,14 @@ class LoanProductMultiActivity : BaseActivity<ActivityLoanProductMultiBinding>()
         loanEvent.initEventFileUniqueSuffix((loginInfo?.id ?: 111).toString())
 
         titleBar.setNavigationAction { finish() }
-        onBackAction(vm) { finish() }
+        registerTrackedBackHandler(vm) { finish() }
         rvProduct.adapter = togetherAdapter
     }
 
     private fun connectBundleUtilities() = with(binding) {
         tvAbout.singleClick {
             WebViewActivity.Companion.launch(
-                this@LoanProductMultiActivity,
+                this@CombinedLoanOfferActivity,
                 tvAbout.text.toString(),
                 AGREEMENT_ABOUT,
             )
@@ -81,11 +81,11 @@ class LoanProductMultiActivity : BaseActivity<ActivityLoanProductMultiBinding>()
             arrayListOf(
                 ClickablePart(
                     getString(R.string.lease_contract),
-                    getColor2(R.color.color_7087F8),
+                    resolveColorCompat(R.color.color_7087F8),
                     onClick = {
                         loanEvent.logClickOpenAgreement()
                         WebViewActivity.Companion.launch(
-                            this@LoanProductMultiActivity,
+                            this@CombinedLoanOfferActivity,
                             getString(R.string.lease_contract),
                             leaseUrl,
                         )
@@ -93,11 +93,11 @@ class LoanProductMultiActivity : BaseActivity<ActivityLoanProductMultiBinding>()
                 ),
                 ClickablePart(
                     getString(R.string.mortgage_contract),
-                    getColor2(R.color.color_7087F8),
+                    resolveColorCompat(R.color.color_7087F8),
                     onClick = {
                         loanEvent.logClickOpenAgreement()
                         WebViewActivity.Companion.launch(
-                            this@LoanProductMultiActivity,
+                            this@CombinedLoanOfferActivity,
                             getString(R.string.mortgage_contract),
                             pawnUrl,
                         )
@@ -107,7 +107,7 @@ class LoanProductMultiActivity : BaseActivity<ActivityLoanProductMultiBinding>()
         )
 
         tvChange.singleClick {
-            vm.recordEvent(
+            vm.submitTrackingEvent(
                 TrackBean(
                     p = PageProductDetail,
                     act = ACT_userAppBankMyCard,
@@ -129,7 +129,7 @@ class LoanProductMultiActivity : BaseActivity<ActivityLoanProductMultiBinding>()
     private fun connectBundleApplication() = with(binding) {
         btnApply.resetScale()
         btnApply.singleClick {
-            vm.recordEvent(
+            vm.submitTrackingEvent(
                 TrackBean(
                     p = PageProductDetail,
                     act = ACT_clickApply,
@@ -141,15 +141,15 @@ class LoanProductMultiActivity : BaseActivity<ActivityLoanProductMultiBinding>()
                 val (productInstallmentMap, termIdMap) = buildSubmissionMaps()
                 trackEvent(ORDER_COMMIT)
                 showLoanAgreementDialog(isTogether = true) {
-                    vm.recordEvent(
+                    vm.submitTrackingEvent(
                         TrackBean(
                             p = PageProductDetail,
                             act = ACT_clickConfirm,
                         ),
                     )
                     loanEvent.logClickSubmitLoan()
-                    LoanApplyResultActivity.Companion.launch(
-                        this@LoanProductMultiActivity,
+                    ApplicationOutcomeActivity.Companion.launch(
+                        this@CombinedLoanOfferActivity,
                         ArrayList(togetherAdapter.items),
                         null,
                         cardInfo?.id ?: 0L,
@@ -186,7 +186,7 @@ class LoanProductMultiActivity : BaseActivity<ActivityLoanProductMultiBinding>()
 
     override fun initObserve() = with(vm) {
         super.initObserve()
-        togetherInfo.observe(this@LoanProductMultiActivity) { loan ->
+        togetherInfo.observe(this@CombinedLoanOfferActivity) { loan ->
             loan ?: return@observe
 
             val products = loan.showProducts.orEmpty().onEach { product ->
@@ -197,7 +197,7 @@ class LoanProductMultiActivity : BaseActivity<ActivityLoanProductMultiBinding>()
 
             if (!hasRecordedEnterEvent) {
                 hasRecordedEnterEvent = true
-                recordEvent(
+                submitTrackingEvent(
                     TrackBean(
                         p = PageProductDetail,
                         act = ACT_in,
@@ -225,7 +225,7 @@ class LoanProductMultiActivity : BaseActivity<ActivityLoanProductMultiBinding>()
             binding.loadingLayout.showContent()
         }
 
-        accountVm.loanAccountList.observe(this@LoanProductMultiActivity) { accounts ->
+        accountVm.loanAccountList.observe(this@CombinedLoanOfferActivity) { accounts ->
             accounts ?: return@observe
             chooseAccountsDialog(cardInfo?.bankNo, accounts, false) { card ->
                 cardInfo = card

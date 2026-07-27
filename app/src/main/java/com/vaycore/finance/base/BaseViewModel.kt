@@ -21,33 +21,36 @@ import java.util.concurrent.TimeUnit
 abstract class BaseViewModel : ViewModel() {
 
     /** Launch a network request returning unwrapped business data */
-    fun <T> launchData(block: suspend () -> T?): DataNetworkRequest<T> {
+    fun <T> createNetworkRequest(block: suspend () -> T?): DataNetworkRequest<T> {
         return DataNetworkRequest(viewModelScope, block)
     }
 
-    /** Record a single analytics event and enrich it with navigation context */
-    fun recordEvent(log: TrackBean) {
-        pCount++
-        log.apply {
-            pp = "$EnterTime;$pCount"
-            prevAct = lastTrackBean?.act
-            prevP = lastTrackBean?.p
-            lastP = lastPageTrackBean?.p
-            lastAct = lastPageTrackBean?.act
-        }
-        recordEvent(listOf(log))
+    /** Submit a single analytics event */
+    fun submitTrackingEvent(log: TrackBean) {
+        submitTrackingEvents(listOf(log))
     }
 
-    /** Record and submit a batch of analytics events */
-    fun recordEvent(logs: List<TrackBean>) {
+    /** Submit analytics events after enriching each one with navigation context */
+    fun submitTrackingEvents(logs: List<TrackBean>) {
         if (logs.isEmpty()) return
-        
-        lastTrackBean = logs.last()
-        logs.last().takeIf { it.p != null && it.p != lastPageTrackBean?.p }?.let {
-            lastPageTrackBean = it
+
+        logs.forEach { log ->
+            pCount++
+            log.apply {
+                pp = "$EnterTime;$pCount"
+                prevAct = lastTrackBean?.act
+                prevP = lastTrackBean?.p
+                lastP = lastPageTrackBean?.p
+                lastAct = lastPageTrackBean?.act
+            }
+
+            lastTrackBean = log
+            log.takeIf { it.p != null && it.p != lastPageTrackBean?.p }?.let {
+                lastPageTrackBean = it
+            }
         }
 
-        launchData {
+        createNetworkRequest {
             trackApi.submitTrack(TrackParamBean(logs.map { SurveyBean(it.toJsonString()) })).dataOrThrow()
         }.onSuccess { }.onFailed { true }
     }

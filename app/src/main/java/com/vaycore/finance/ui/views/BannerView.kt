@@ -13,7 +13,7 @@ import com.vaycore.finance.R
 import com.vaycore.finance.base.createAdapter
 import com.vaycore.finance.databinding.BannerAdapterBinding
 import com.vaycore.finance.model.home.CampaignBannerResponse
-import com.vaycore.finance.util.context.getColor2
+import com.vaycore.finance.util.context.resolveColorCompat
 import com.vaycore.finance.ui.extension.setRoundedRectangleBackground
 import com.vaycore.finance.web.WebViewActivity
 import com.vaycore.finance.ui.extension.loadImage
@@ -127,7 +127,7 @@ class BannerView @JvmOverloads constructor(
         repeat(count) {
             val dot = View(context).apply {
                 setRoundedRectangleBackground(
-                    context.getColor2(R.color.C_9CA3AF),
+                    context.resolveColorCompat(R.color.C_9CA3AF),
                     context.resources.getDimension(R.dimen.dp_11)
                 )
                 val margin = 2.dp
@@ -144,7 +144,7 @@ class BannerView @JvmOverloads constructor(
     private fun updateIndicator(index: Int) {
         indicators.forEachIndexed { i, dot ->
             dot.setRoundedRectangleBackground(
-                context.getColor2(if (i == index) R.color.color_7087F8 else R.color.C_9CA3AF),
+                context.resolveColorCompat(if (i == index) R.color.color_7087F8 else R.color.C_9CA3AF),
                 context.resources.getDimension(R.dimen.dp_11)
             )
         }

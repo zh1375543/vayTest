@@ -19,11 +19,11 @@ class GuestDashboardViewModel(
     val loadFailedResult = MutableLiveData<Unit>()
 
     fun getUnAuthData(showLoading: Boolean = false) {
-        launchData {
+        createNetworkRequest {
             homeRepository.loadGuestHome()
         }.showLoading(showLoading).onSuccess {
             result.value = it
-            recordEvent(
+            submitTrackingEvent(
                 TrackBean(
                     p = PageHome,
                     act = ACT_common,
@@ -32,7 +32,7 @@ class GuestDashboardViewModel(
             )
         }.onFailed {
             loadFailedResult.value = Unit
-            recordEvent(
+            submitTrackingEvent(
                 TrackBean(
                     p = PageHome,
                     act = ACT_common,

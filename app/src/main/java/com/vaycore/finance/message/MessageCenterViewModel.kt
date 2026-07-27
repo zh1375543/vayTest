@@ -13,7 +13,7 @@ class MessageCenterViewModel(
     val msgResult: LiveData<List<MessageRecord>> = _msgResult
 
     fun getMessageList(errorAction: () -> Unit) {
-        launchData {
+        createNetworkRequest {
             messageRepository.fetchMessages()
         }.onSuccess {
             _msgResult.value = it ?: emptyList()
@@ -37,7 +37,7 @@ class MessageCenterViewModel(
     }
 
     private fun updateReadStatus(idList: List<Long>) {
-        launchData {
+        createNetworkRequest {
             messageRepository.markAsRead(idList)
         }.showLoading().onSuccess {
             val readIds = idList.toSet()

@@ -26,7 +26,7 @@ class AppViewModel(
 
     val secretResult = MutableLiveData<String?>()
     fun getAppSecret() {
-        launchData { appConfigRepository.fetchAppSecret() }.onSuccess {
+        createNetworkRequest { appConfigRepository.fetchAppSecret() }.onSuccess {
             if (!it?.verifySignSecret.isNullOrBlank()) {
                 st = it.verifySignSecret
             }
@@ -36,8 +36,8 @@ class AppViewModel(
 
     fun hasDeviceInfo(pageString: String, action: (Boolean) -> Unit) {
         if (!isLogin) return
-        launchData { appConfigRepository.hasUploadedDevice() }.onSuccess {
-            recordEvent(
+        createNetworkRequest { appConfigRepository.hasUploadedDevice() }.onSuccess {
+            submitTrackingEvent(
                 TrackBean(
                     p = pageString,
                     act = ACT_UserAppUserDeviceHasDevice,
@@ -47,7 +47,7 @@ class AppViewModel(
             isPostDeviceInfo = it == true
             action.invoke(it == true)
         }.onFailed {
-            recordEvent(
+            submitTrackingEvent(
                 TrackBean(
                     p = pageString,
                     act = ACT_UserAppUserDeviceHasDevice,
@@ -79,11 +79,11 @@ class AppViewModel(
         }
         viewModelScope.launch {
             val riskJson = DeviceCollectHelper.getInstance().getRiskBy2Json()
-            launchData {
+            createNetworkRequest {
                 appConfigRepository.uploadRiskInfo(riskJson)
             }.showLoading().onSuccess {
                 isPostDeviceInfo = true
-                recordEvent(
+                submitTrackingEvent(
                     TrackBean(
                         p = pageString,
                         act = ACT_UserAppUserDevice,
@@ -93,7 +93,7 @@ class AppViewModel(
                 action(true)
                 postingDevice = false
             }.onFailed {
-                recordEvent(
+                submitTrackingEvent(
                     TrackBean(
                         p = pageString,
                         act = ACT_UserAppUserDevice,

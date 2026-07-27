@@ -4,30 +4,30 @@ import androidx.lifecycle.lifecycleScope
 import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseActivity
 import com.vaycore.finance.databinding.RepaymentSuccessActivityBinding
-import com.vaycore.finance.order.LoanOrderDetailActivity
-import com.vaycore.finance.order.LoanOrderListActivity
+import com.vaycore.finance.order.BorrowingDetailActivity
+import com.vaycore.finance.order.BorrowingHistoryActivity
 import com.vaycore.finance.app.MainActivity
 import com.vaycore.finance.util.AppStackUtil
 import com.vaycore.finance.util.countdownTimer
-import com.vaycore.finance.util.context.getColor2
+import com.vaycore.finance.util.context.resolveColorCompat
 import com.vaycore.finance.ui.extension.setClickableTextWithScale
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.util.viewBinding
 
-class RepaymentSuccessActivity :
+class RepaymentConfirmationActivity :
     BaseActivity<RepaymentSuccessActivityBinding>() {
 
     override val binding by viewBinding(RepaymentSuccessActivityBinding::inflate)
     override fun initView() = with(binding) {
         applyTopInset(root)
-        onBackAction(null) {
-            handleBack()
+        registerTrackedBackHandler(null) {
+            returnToBorrowingOverview()
         }
 
         binding.tvTips.setClickableTextWithScale(
             String.format(getString(R.string.back_to_home_tips), "10"),
             "10",
-            getColor2(R.color.color_7087F8)
+            resolveColorCompat(R.color.color_7087F8)
         )
         lifecycleScope.countdownTimer(
             10,
@@ -35,21 +35,21 @@ class RepaymentSuccessActivity :
                 binding.tvTips.setClickableTextWithScale(
                     String.format(getString(R.string.back_to_home_tips), seconds.toString()),
                     seconds.toString(),
-                    getColor2(R.color.color_7087F8)
+                    resolveColorCompat(R.color.color_7087F8)
                 )
             },
             end = {
-                handleBack()
+                returnToBorrowingOverview()
             }
         )
         tvOK.singleClick {
-            handleBack()
+            returnToBorrowingOverview()
         }
     }
 
-    private fun handleBack() {
-        AppStackUtil.finishActivity(LoanOrderListActivity::class.java)
-        AppStackUtil.finishActivity(LoanOrderDetailActivity::class.java)
+    private fun returnToBorrowingOverview() {
+        AppStackUtil.finishActivity(BorrowingHistoryActivity::class.java)
+        AppStackUtil.finishActivity(BorrowingDetailActivity::class.java)
         MainActivity.launch(this)
         finish()
     }

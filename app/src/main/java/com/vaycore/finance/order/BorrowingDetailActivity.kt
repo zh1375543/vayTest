@@ -40,12 +40,12 @@ import com.vaycore.finance.model.order.LoanOrderDetailResponse
 import com.vaycore.finance.order.adapter.OrderFeeAdapter
 import com.vaycore.finance.order.adapter.OrderInstallmentAdapter
 import com.vaycore.finance.util.LOAN_ORDER_CONFIRMATION_PAGE
-import com.vaycore.finance.util.context.getColor2
+import com.vaycore.finance.util.context.resolveColorCompat
 import com.vaycore.finance.util.showToastMessage
 import com.vaycore.finance.ui.extension.setSpannableClickableTexts
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.util.trackEvent
-import com.vaycore.finance.payback.RepaymentActivity
+import com.vaycore.finance.payback.RepaymentSubmissionActivity
 import com.vaycore.finance.web.WebViewActivity
 import com.vaycore.finance.ui.widget.ActionButtonView
 import com.vaycore.finance.payback.showRepayAndReapplyDialog
@@ -56,7 +56,7 @@ import com.vaycore.finance.util.viewBinding
 import java.math.BigDecimal
 import kotlin.toString
 
-class LoanOrderDetailActivity :
+class BorrowingDetailActivity :
     BaseActivity<ActivityLoanOrderDetailBinding>() {
 
     override val binding by viewBinding(ActivityLoanOrderDetailBinding::inflate)
@@ -128,15 +128,15 @@ class LoanOrderDetailActivity :
             listOf(
                 ClickablePart(
                     getString(R.string.lease_contract),
-                    getColor2(R.color.color_7087F8),
+                    resolveColorCompat(R.color.color_7087F8),
                 ) {
-                    openContract(getString(R.string.lease_contract), LEASE_AGREEMENT)
+                    showLoanAgreement(getString(R.string.lease_contract), LEASE_AGREEMENT)
                 },
                 ClickablePart(
                     getString(R.string.mortgage_contract),
-                    getColor2(R.color.color_7087F8),
+                    resolveColorCompat(R.color.color_7087F8),
                 ) {
-                    openContract(getString(R.string.mortgage_contract), PAWN_AGREEMENT)
+                    showLoanAgreement(getString(R.string.mortgage_contract), PAWN_AGREEMENT)
                 },
             ),
         )
@@ -151,13 +151,13 @@ class LoanOrderDetailActivity :
         tvApply.singleClick {
             val payGoUrl = orderDetail?.appOrderRepayDto?.payGoUrl
             if (payGoUrl.isNullOrBlank()) {
-                start<RepaymentActivity> {
+                start<RepaymentSubmissionActivity> {
                     putExtra("orderNo", orderDetail?.appOrderInfoDto?.orderNo ?: "")
                     putExtra("amount", tvTotalRepay.text.toString())
                     putExtra("orderId", orderId.toString())
                 }
             } else {
-                vm.recordEvent(
+                vm.submitTrackingEvent(
                     TrackBean(
                         p = PageRepaymentLink,
                         act = ACT_inRepaymentLink,
@@ -165,7 +165,7 @@ class LoanOrderDetailActivity :
                     )
                 )
                 WebViewActivity.launch(
-                    this@LoanOrderDetailActivity, getString(R.string.repayment), payGoUrl
+                    this@BorrowingDetailActivity, getString(R.string.repayment), payGoUrl
                 )
             }
         }
@@ -179,10 +179,10 @@ class LoanOrderDetailActivity :
             }
             if (currentButtonSign == "2" || currentButtonSign == "3"|| currentButtonSign == "4") {
                 vm.cancelApply(orderId) {
-                    continueRepayment()
+                    proceedWithSelectedRepayment()
                 }
             } else {
-                continueRepayment()
+                proceedWithSelectedRepayment()
             }
         }
         tvBorrow.singleClick {
@@ -196,7 +196,7 @@ class LoanOrderDetailActivity :
             }
             if (currentButtonSign == "1") {
                 vm.repayAndBorrow(orderId, 1) {
-                    continueRepayment()
+                    proceedWithSelectedRepayment()
                 }
             } else if (tvBorrow.text.toString() == getString(R.string.repay)) {
                 tvRepay.performClick()
@@ -209,7 +209,7 @@ class LoanOrderDetailActivity :
                     },
                     confirmAction = {
                         vm.repayAndBorrow(orderId, 1) {
-                            continueRepayment()
+                            proceedWithSelectedRepayment()
                         }
                     }
                 )
@@ -225,7 +225,7 @@ class LoanOrderDetailActivity :
                 },
                 confirmAction = {
                     vm.repayAndBorrow(orderId, 2) {
-                        continueRepayment()
+                        proceedWithSelectedRepayment()
                     }
                 },
             )
@@ -240,7 +240,7 @@ class LoanOrderDetailActivity :
         }
     }
 
-    private fun continueRepayment() = with(binding) {
+    private fun proceedWithSelectedRepayment() = with(binding) {
         if (installLayout.isVisible) {
             vm.installmentRepay(
                 orderNo = orderDetail?.appOrderInfoDto?.orderNo,
@@ -273,7 +273,7 @@ class LoanOrderDetailActivity :
         }
     }
 
-    private fun openContract(title: String, baseUrl: String) {
+    private fun showLoanAgreement(title: String, baseUrl: String) {
         WebViewActivity.launch(
             this,
             title,
@@ -284,7 +284,7 @@ class LoanOrderDetailActivity :
     private var orderDetail: LoanOrderDetailResponse? = null
     override fun initObserve() = with(vm) {
         super.initObserve()
-        orderDetailResult.observe(this@LoanOrderDetailActivity) {
+        orderDetailResult.observe(this@BorrowingDetailActivity) {
             it?.let {
                 binding.apply {
                     orderDetail = it
@@ -318,7 +318,7 @@ class LoanOrderDetailActivity :
                         tvModel.text = "${Build.BRAND} ${Build.MODEL}"
                         tvProductName.text = order.productName
                         tvOrderNo.text = order.orderNo
-                        tvOrderStatus.setTextColor(getColor2(R.color.color_7087F8))
+                        tvOrderStatus.setTextColor(resolveColorCompat(R.color.color_7087F8))
                         when (order.status) {
                             ORDER_STATUS_SUCCESS,
                             ORDER_STATUS_REVIEW,
@@ -351,7 +351,7 @@ class LoanOrderDetailActivity :
                             ORDER_STATUS_BAD_DEBTS,
                                 -> {
                                 tvOrderStatus.text = getString(R.string.overdue)
-                                tvOrderStatus.setTextColor(getColor2(R.color.C_F62909))
+                                tvOrderStatus.setTextColor(resolveColorCompat(R.color.C_F62909))
                             }
 
                             ORDER_STATUS_AUTO_FAIL,
@@ -375,7 +375,7 @@ class LoanOrderDetailActivity :
                             }
                         }
                         tvOrderStatusTop.text = tvOrderStatus.text
-                        vm.recordEvent(
+                        vm.submitTrackingEvent(
                             TrackBean(
                                 p = PageOrderDetail,
                                 act = ACT_inOrdersDetail,
@@ -450,7 +450,7 @@ class LoanOrderDetailActivity :
                                         } else {
                                             it.actualNeedRepayAmount.formatAmountWithPrefix(order.currencySymbol)
                                         }
-                                    showBottomActionPanel(
+                                    presentBorrowingActions(
                                         selectedAmount = selectedAmount
                                     )
                                     vm.getButtonState()
@@ -465,19 +465,19 @@ class LoanOrderDetailActivity :
                 }
             }
         }
-        buttonResult.observe(this@LoanOrderDetailActivity) {
+        buttonResult.observe(this@BorrowingDetailActivity) {
             if (!binding.bottomActionLayout.isVisible) return@observe
-            applyButtonState(it)
+            renderRepaymentActionState(it)
         }
-        installmentRepayResult.observe(this@LoanOrderDetailActivity) {
+        installmentRepayResult.observe(this@BorrowingDetailActivity) {
             if (!it?.payUrl.isNullOrBlank()) {
                 WebViewActivity.launch(
-                    this@LoanOrderDetailActivity,
+                    this@BorrowingDetailActivity,
                     getString(R.string.repayment),
                     it.payUrl
                 )
             } else {
-                start<RepaymentActivity> {
+                start<RepaymentSubmissionActivity> {
                     putExtra("orderNo", orderDetail?.appOrderInfoDto?.orderNo ?: "")
                     putExtra("amount", binding.tvTotalRepay.text.toString())
                     putExtra("orderId", orderId.toString())
@@ -486,7 +486,7 @@ class LoanOrderDetailActivity :
         }
     }
 
-    fun scrollBottom() {
+    fun scrollToRepaymentOptions() {
         binding.scrollView.post {
             binding.scrollView.fullScroll(View.FOCUS_DOWN)
         }
@@ -497,7 +497,7 @@ class LoanOrderDetailActivity :
         binding.bottomActionLayout.isVisible = false
     }
 
-    private fun showBottomActionPanel(
+    private fun presentBorrowingActions(
         selectedAmount: String,
     ) = with(binding) {
         currentButtonSign = null
@@ -505,11 +505,11 @@ class LoanOrderDetailActivity :
         cbAutoApply.isSelected = true
         tvSelectAmount.text = selectedAmount
         // Show state 2 while waiting for the server response.
-        applyButtonState(null)
+        renderRepaymentActionState(null)
     }
 
     /** Applies state 0-4 to the fixed bottom layout without rearranging constraints. */
-    private fun applyButtonState(sign: String?) = with(binding) {
+    private fun renderRepaymentActionState(sign: String?) = with(binding) {
         val normalizedSign = when (sign) {
             "0", "1", "2", "3", "4" -> sign
             else -> "2"
@@ -553,7 +553,7 @@ class LoanOrderDetailActivity :
             binding.cbAutoApply.isVisible && !binding.cbAutoApply.isSelected
 
     private fun updateBottomActionColors(isDue: Boolean) = with(binding) {
-        val actionColor = getColor2(if (isDue) R.color.C_F62909 else R.color.color_7087F8)
+        val actionColor = resolveColorCompat(if (isDue) R.color.C_F62909 else R.color.color_7087F8)
         tvRepay.applyStyle(
             variant = ActionButtonView.VARIANT_OUTLINE,
             strokeColor = actionColor,
@@ -562,7 +562,7 @@ class LoanOrderDetailActivity :
         tvBorrow.applyStyle(
             variant = ActionButtonView.VARIANT_FILLED,
             solidColor = actionColor,
-            textColor = getColor2(R.color.white),
+            textColor = resolveColorCompat(R.color.white),
         )
     }
 }

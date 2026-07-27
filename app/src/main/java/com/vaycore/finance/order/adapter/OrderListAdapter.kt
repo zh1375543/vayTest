@@ -26,7 +26,7 @@ import com.vaycore.finance.data.ORDER_STATUS_SUCCESS
 import com.vaycore.finance.databinding.ItemOrderBinding
 import com.vaycore.finance.model.order.OrderBean
 import com.vaycore.finance.ui.binding.BindableItemsAdapter
-import com.vaycore.finance.util.context.getColor2
+import com.vaycore.finance.util.context.resolveColorCompat
 import com.vaycore.finance.util.formatAmountWithPrefix
 
 class OrderListAdapter :
@@ -47,7 +47,7 @@ class OrderListAdapter :
         binding.tvAmount.text = item.loanAmount.formatAmountWithPrefix(item.currencySymbol)
         binding.tvDateTitle.text = binding.root.context.getString(R.string.apply_date)
         binding.tvDate.text = item.createTime?.substringBefore(' ')
-        binding.tvStatus.setTextColor(binding.root.context.getColor2(R.color.color_7087F8))
+        binding.tvStatus.setTextColor(binding.root.context.resolveColorCompat(R.color.color_7087F8))
         binding.tvStatus.text = when (item.status) {
             ORDER_STATUS_SETTLE,
             ORDER_STATUS_SETTLE_REDUCE,
@@ -76,7 +76,7 @@ class OrderListAdapter :
 
             ORDER_STATUS_OVERDUE,
             ORDER_STATUS_BAD_DEBTS -> {
-                binding.tvStatus.setTextColor(binding.root.context.getColor2(R.color.C_F62909))
+                binding.tvStatus.setTextColor(binding.root.context.resolveColorCompat(R.color.C_F62909))
                 binding.root.context.getString(R.string.overdue)
             }
 

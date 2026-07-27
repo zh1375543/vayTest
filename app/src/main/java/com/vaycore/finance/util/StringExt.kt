@@ -32,7 +32,7 @@ fun String.copyToClipboard() {
     val clipboard = App.appContext.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
     val clip = ClipData.newPlainText("Phone Number", this)
     clipboard.setPrimaryClip(clip)
-    App.appViewModel.recordEvent(
+    App.appViewModel.submitTrackingEvent(
         TrackBean(
             p = PageAll,
             act = ACT_copy,

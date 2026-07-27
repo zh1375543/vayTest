@@ -7,9 +7,9 @@ import com.vaycore.finance.databinding.AuthCenterActivityBinding
 import com.vaycore.finance.data.authConfigList
 import com.vaycore.finance.model.identity.AuthOptionResponse
 import com.vaycore.finance.model.identity.UserAuthStatusResponse
-import com.vaycore.finance.identity.BankAccountAuthActivity
-import com.vaycore.finance.identity.KycAuthActivity
-import com.vaycore.finance.identity.PersonalInfoAuthActivity
+import com.vaycore.finance.identity.PayoutAndContactActivity
+import com.vaycore.finance.identity.IdentityVerificationActivity
+import com.vaycore.finance.identity.ApplicantProfileActivity
 import com.vaycore.finance.mine.adapter.AuthEntryAdapter
 import com.vaycore.finance.identity.viewmodel.AuthStatusViewModel
 import com.vaycore.finance.util.PROFILE_PAGE
@@ -17,7 +17,7 @@ import com.vaycore.finance.util.start
 import com.vaycore.finance.util.trackEvent
 import com.vaycore.finance.util.viewBinding
 
-class AuthCenterActivity : BaseActivity<AuthCenterActivityBinding>() {
+class VerificationCenterActivity : BaseActivity<AuthCenterActivityBinding>() {
 
     override val binding by viewBinding(AuthCenterActivityBinding::inflate)
 
@@ -28,19 +28,19 @@ class AuthCenterActivity : BaseActivity<AuthCenterActivityBinding>() {
             setOnItemClickListener { item, _ ->
                 when (if (item.isCertified) item.title else items.first { !it.isCertified }.title) {
                     getString(R.string.kyc_certification) -> {
-                        context.start<KycAuthActivity> {
+                        context.start<IdentityVerificationActivity> {
                             putExtra("isCert", item.isCertified)
                         }
                     }
 
                     getString(R.string.personal_info) -> {
-                        context.start<PersonalInfoAuthActivity> {
+                        context.start<ApplicantProfileActivity> {
                             putExtra("isCert", item.isCertified)
                         }
                     }
 
                     else -> {
-                        context.start<BankAccountAuthActivity> {
+                        context.start<PayoutAndContactActivity> {
                             putExtra("isCert", item.isCertified)
                         }
                     }
@@ -70,7 +70,7 @@ class AuthCenterActivity : BaseActivity<AuthCenterActivityBinding>() {
 
     override fun initObserve() = with(vm) {
         super.initObserve()
-        userAuthStatusResult.observe(this@AuthCenterActivity) {
+        userAuthStatusResult.observe(this@VerificationCenterActivity) {
             it?.let { auth ->
                 binding.loadingLayout.showContent()
                 val list = authConfigList.map { type ->

@@ -12,7 +12,7 @@ import com.vaycore.finance.databinding.RepaymentActivityBinding
 import com.vaycore.finance.payback.adapter.RepaymentAdapter
 import com.vaycore.finance.util.compressImage
 import com.vaycore.finance.util.copyToClipboard
-import com.vaycore.finance.util.context.getColor2
+import com.vaycore.finance.util.context.resolveColorCompat
 import com.vaycore.finance.ui.extension.setSpannableClickableText
 import com.vaycore.finance.util.showToastMessage
 import com.vaycore.finance.ui.extension.singleClick
@@ -24,7 +24,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class RepaymentActivity :
+class RepaymentSubmissionActivity :
     BaseActivity<RepaymentActivityBinding>() {
 
     override val binding by viewBinding(RepaymentActivityBinding::inflate)
@@ -61,7 +61,7 @@ class RepaymentActivity :
         tvOrderNo.setSpannableClickableText(
             getString(R.string.order_no) + ":" + orderNo,
             orderNo ?: "",
-            getColor2(R.color.C_374151)
+            resolveColorCompat(R.color.C_374151)
         ) {
             orderNo?.copyToClipboard()
             getString(R.string.copy_success).showToastMessage()
@@ -113,11 +113,11 @@ class RepaymentActivity :
 
     override fun initObserve() =with(vm){
         super.initObserve()
-        accountsResult.observe(this@RepaymentActivity) {
+        accountsResult.observe(this@RepaymentSubmissionActivity) {
             binding.loadingLayout.showContent()
             bankAdapter.submitItems(it)
         }
-        cardListResult.observe(this@RepaymentActivity) {
+        cardListResult.observe(this@RepaymentSubmissionActivity) {
             it?.let {
                 chooseAccountsDialog(
                     cardInfo?.account,
@@ -130,8 +130,8 @@ class RepaymentActivity :
                 }
             }
         }
-        repayResult.observe(this@RepaymentActivity) {
-            start<RepaymentSuccessActivity>()
+        repayResult.observe(this@RepaymentSubmissionActivity) {
+            start<RepaymentConfirmationActivity>()
             finish()
         }
     }

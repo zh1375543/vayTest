@@ -31,7 +31,7 @@ class KycUploadViewModel(
     val selfUploadSuccess = MutableLiveData(false)
 
     fun getKycInfo(errorAction: () -> Unit) {
-        launchData { verificationRepository.fetchKycDocument() }
+        createNetworkRequest { verificationRepository.fetchKycDocument() }
             .onSuccess {
                 kycResult.value = it
                 frontImageSource.value = it?.frontImageUrl.toRemoteImageSource()
@@ -46,7 +46,7 @@ class KycUploadViewModel(
 
     val h5Live = MutableLiveData<LivenessWebSessionResponse>()
     fun fetchH5Live(error: () -> Unit) {
-        launchData { verificationRepository.createLivenessWebSession() }
+        createNetworkRequest { verificationRepository.createLivenessWebSession() }
             .showLoading()
             .onSuccess { h5Live.value = it }
             .onFailed {
@@ -57,7 +57,7 @@ class KycUploadViewModel(
 
     val h5Result = MutableLiveData<String?>()
     fun getH5LiveResult() {
-        launchData { verificationRepository.fetchLivenessResult(h5Live.value?.bizNo) }
+        createNetworkRequest { verificationRepository.fetchLivenessResult(h5Live.value?.bizNo) }
             .showLoading()
             .onSuccess {
                 h5Result.value = it?.faceUrl
@@ -69,10 +69,10 @@ class KycUploadViewModel(
 
     val submitFrontResult = MutableLiveData<Uri>()
     fun submitKycFront(frontUri: Uri) {
-        launchData { verificationRepository.uploadKycImage(frontUri, "IDCARD_CARD_FRONT") }
+        createNetworkRequest { verificationRepository.uploadKycImage(frontUri, "IDCARD_CARD_FRONT") }
             .showLoading()
             .onSuccess {
-                recordEvent(
+                submitTrackingEvent(
                     TrackBean(
                         p = PageInfoKyc,
                         act = ACT_uploadFront,
@@ -84,7 +84,7 @@ class KycUploadViewModel(
                 frontUploadSuccess.value = true
             }
             .onFailed {
-                recordEvent(
+                submitTrackingEvent(
                     TrackBean(
                         p = PageInfoKyc,
                         act = ACT_uploadFront,
@@ -97,10 +97,10 @@ class KycUploadViewModel(
 
     val submitBackResult = MutableLiveData<Uri>()
     fun submitKycBack(backUri: Uri) {
-        launchData { verificationRepository.uploadKycImage(backUri, "IDCARD_CARD_BACK") }
+        createNetworkRequest { verificationRepository.uploadKycImage(backUri, "IDCARD_CARD_BACK") }
             .showLoading()
             .onSuccess {
-                recordEvent(
+                submitTrackingEvent(
                     TrackBean(
                         p = PageInfoKyc,
                         act = ACT_uploadBack,
@@ -112,7 +112,7 @@ class KycUploadViewModel(
                 backUploadSuccess.value = true
             }
             .onFailed {
-                recordEvent(
+                submitTrackingEvent(
                     TrackBean(
                         p = PageInfoKyc,
                         act = ACT_uploadBack,
@@ -125,31 +125,31 @@ class KycUploadViewModel(
 
     val configResult = MutableLiveData<KycRuleConfigResponse?>()
     fun getKycConfig() {
-        launchData { verificationRepository.fetchKycConfig() }
+        createNetworkRequest { verificationRepository.fetchKycConfig() }
             .onSuccess { configResult.value = it }
             .execute()
     }
 
     val compareResult = MutableLiveData<Any?>()
     fun compareFace() {
-        launchData { verificationRepository.compareFace() }
+        createNetworkRequest { verificationRepository.compareFace() }
             .showLoading()
             .onSuccess {
-                recordEvent(TrackBean(p = PageInfoKyc, act = ACT_next, result = it.toJsonString()))
+                submitTrackingEvent(TrackBean(p = PageInfoKyc, act = ACT_next, result = it.toJsonString()))
                 compareResult.value = it
             }
             .onFailed {
-                recordEvent(TrackBean(p = PageInfoKyc, act = ACT_next, result = it.toJsonString()))
+                submitTrackingEvent(TrackBean(p = PageInfoKyc, act = ACT_next, result = it.toJsonString()))
                 false
             }
     }
 
     val submitSelfResult = MutableLiveData<Uri?>()
     fun submitKycSelf(uri: Uri, liveFile: File?) {
-        launchData { verificationRepository.uploadLiveness(uri, liveFile) }
+        createNetworkRequest { verificationRepository.uploadLiveness(uri, liveFile) }
             .showLoading()
             .onSuccess {
-                recordEvent(
+                submitTrackingEvent(
                     TrackBean(
                         p = PageInfoKyc,
                         act = ACT_uploadFace,
@@ -161,7 +161,7 @@ class KycUploadViewModel(
                 selfUploadSuccess.value = true
             }
             .onFailed {
-                recordEvent(
+                submitTrackingEvent(
                     TrackBean(
                         p = PageInfoKyc,
                         act = ACT_uploadFace,

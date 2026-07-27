@@ -9,7 +9,7 @@ class FeedbackViewModel(
 ) : BaseViewModel() {
 
     fun submitFeed(content: String, action: () -> Unit) {
-        launchData {
+        createNetworkRequest {
             feedbackRepository.submitFeedback(content)
         }.showLoading().onSuccess {
             action()

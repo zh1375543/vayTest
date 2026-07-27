@@ -18,7 +18,7 @@ class WorkContactViewModel(
 ) : BaseViewModel() {
 
     fun getContactEnum(action: (WorkProfileOptionsResponse) -> Unit) {
-        launchData { verificationRepository.fetchWorkInfoOptions() }
+        createNetworkRequest { verificationRepository.fetchWorkInfoOptions() }
             .showLoading()
             .onSuccess { it?.let(action) }
             .execute()
@@ -26,7 +26,7 @@ class WorkContactViewModel(
 
     val contractResult = MutableLiveData<WorkContactProfileResponse?>()
     fun getContactsInfo(errorAction: () -> Unit = {}) {
-        launchData { verificationRepository.fetchContactInfo() }
+        createNetworkRequest { verificationRepository.fetchContactInfo() }
             .onSuccess { contractResult.value = it }
             .onFailed {
                 errorAction()
@@ -36,24 +36,24 @@ class WorkContactViewModel(
 
     val submitBankAndCtsResult = MutableLiveData<Any?>()
     fun submitBankAndCtsInfo(paramBean: ApiRequest) {
-        launchData { verificationRepository.submitBankAndContactInfo(paramBean) }
+        createNetworkRequest { verificationRepository.submitBankAndContactInfo(paramBean) }
             .showLoading()
             .onSuccess {
-                recordEvent(TrackBean(p = PageInfoBank, act = ACT_next, result = it.toJsonString()))
+                submitTrackingEvent(TrackBean(p = PageInfoBank, act = ACT_next, result = it.toJsonString()))
                 submitBankAndCtsResult.value = it
             }
             .onFailed {
-                recordEvent(TrackBean(p = PageInfoBank, act = ACT_next, result = it.toJsonString()))
+                submitTrackingEvent(TrackBean(p = PageInfoBank, act = ACT_next, result = it.toJsonString()))
                 false
             }
     }
 
     val submitSuppleInfoResult = MutableLiveData<Any?>()
     fun submitSuppleInfo(paramBean: ApiRequest) {
-        launchData { verificationRepository.submitSupplementInfo(paramBean) }
+        createNetworkRequest { verificationRepository.submitSupplementInfo(paramBean) }
             .showLoading()
             .onSuccess {
-                recordEvent(
+                submitTrackingEvent(
                     TrackBean(
                         p = PageSupplementaryInformation,
                         act = ACT_next,
@@ -63,7 +63,7 @@ class WorkContactViewModel(
                 submitSuppleInfoResult.value = it
             }
             .onFailed {
-                recordEvent(
+                submitTrackingEvent(
                     TrackBean(
                         p = PageSupplementaryInformation,
                         act = ACT_next,

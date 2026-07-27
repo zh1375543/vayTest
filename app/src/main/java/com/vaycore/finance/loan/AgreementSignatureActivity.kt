@@ -32,7 +32,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
 
-class ContractSignActivity : BaseActivity<ActivityContractSignBinding>() {
+class AgreementSignatureActivity : BaseActivity<ActivityContractSignBinding>() {
 
     override val binding by viewBinding(ActivityContractSignBinding::inflate)
     companion object {
@@ -49,7 +49,7 @@ class ContractSignActivity : BaseActivity<ActivityContractSignBinding>() {
             isBackHome: Boolean = false,
             payWay: String = "CARD",
         ) {
-            context.start<ContractSignActivity> {
+            context.start<AgreementSignatureActivity> {
                 putExtra("isBackHome", isBackHome)
                 putExtra("productList", productList)
                 putExtra("bankId", bankId)
@@ -89,7 +89,7 @@ class ContractSignActivity : BaseActivity<ActivityContractSignBinding>() {
 
     private fun renderSignatureWorkspace() = with(binding) {
         setSystemBar(darkMode = true)
-        vm.recordEvent(TrackBean(p = PageSign, act = ACT_in))
+        vm.submitTrackingEvent(TrackBean(p = PageSign, act = ACT_in))
         if (isShowBackHome) {
             loanEvent.initEventFileUniqueSuffix((loginInfo?.id ?: 111).toString())
         }
@@ -111,13 +111,13 @@ class ContractSignActivity : BaseActivity<ActivityContractSignBinding>() {
     }
 
     private fun connectSigningCommands() = with(binding) {
-        titleBar.setNavigationAction { handleBack() }
+        titleBar.setNavigationAction { exitSignatureFlow() }
         tvBack.singleClick {
-            MainActivity.Companion.launch(this@ContractSignActivity)
-            handleBack()
+            MainActivity.Companion.launch(this@AgreementSignatureActivity)
+            exitSignatureFlow()
         }
-        onBackAction(vm) {
-            handleBack()
+        registerTrackedBackHandler(vm) {
+            exitSignatureFlow()
         }
 //            if (CacheManager.signFile.exists() && CacheManager.signFile.length() > 0) {
 //                setResult(
@@ -134,24 +134,24 @@ class ContractSignActivity : BaseActivity<ActivityContractSignBinding>() {
                 getString(R.string.please_sign).showToastMessage()
                 return@singleClick
             }
-            vm.recordEvent(TrackBean(p = PageSign, act = ACT_clickSubmit))
+            vm.submitTrackingEvent(TrackBean(p = PageSign, act = ACT_clickSubmit))
             if (isShowBackHome) {
                 loanEvent.logClickApplyLoan()
                 requestRuntimePermissions(deviceRiskPermissions) {
                     App.Companion.appViewModel.postRiskInfo(PageSign) { isSuccess ->
                         if (isSuccess) {
                             loanEvent.logClickSubmitLoan()
-                            sign()
+                            submitSignedAgreement()
                         }
                     }
                 }
             } else {
-                sign()
+                submitSignedAgreement()
             }
         }
     }
 
-    private fun handleBack() {
+    private fun exitSignatureFlow() {
         if (isShowBackHome) {
             signBackHome = true
             MainActivity.Companion.launch(this)
@@ -159,7 +159,7 @@ class ContractSignActivity : BaseActivity<ActivityContractSignBinding>() {
         finish()
     }
 
-    private fun sign() {
+    private fun submitSignedAgreement() {
         lifecycleScope.launch {
             val file =
                 File(App.Companion.appContext.cacheDir, "sign_${System.currentTimeMillis()}.png")
@@ -167,8 +167,8 @@ class ContractSignActivity : BaseActivity<ActivityContractSignBinding>() {
                     binding.signView.saveToFile(file)
                 }) {
                 finish()
-                LoanApplyResultActivity.Companion.launch(
-                    this@ContractSignActivity,
+                ApplicationOutcomeActivity.Companion.launch(
+                    this@AgreementSignatureActivity,
                     productList,
                     productId,
                     bankId,

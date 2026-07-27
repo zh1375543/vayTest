@@ -10,14 +10,14 @@ import com.vaycore.finance.data.bean.TrackBean
 import com.vaycore.finance.data.loginInfo
 import com.vaycore.finance.databinding.MineFragmentBinding
 import com.vaycore.finance.loan.viewmodel.LoanDashboardViewModel
-import com.vaycore.finance.order.LoanOrderListActivity
-import com.vaycore.finance.payback.RepaymentBatchActivity
+import com.vaycore.finance.order.BorrowingHistoryActivity
+import com.vaycore.finance.payback.BulkRepaymentActivity
 import com.vaycore.finance.payback.createPaybackDialog
 import com.vaycore.finance.web.WebViewActivity
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.util.start
 import com.vaycore.finance.util.viewBinding
-import com.vaycore.finance.wallet.BankCardListActivity
+import com.vaycore.finance.wallet.PayoutAccountListActivity
 
 class MineFragment : BaseFragment<MineFragmentBinding>(
     R.layout.mine_fragment
@@ -49,16 +49,16 @@ class MineFragment : BaseFragment<MineFragmentBinding>(
             )
         }
         tvAccount.singleClick {
-            it.context.start<BankCardListActivity>()
+            it.context.start<PayoutAccountListActivity>()
         }
         tvOrder.singleClick {
-            context?.start<LoanOrderListActivity>()
+            context?.start<BorrowingHistoryActivity>()
         }
         tvPayBack.singleClick {
             vm.getAuthData(true)
         }
         tvCert.singleClick {
-            it.context.start<AuthCenterActivity>()
+            it.context.start<VerificationCenterActivity>()
         }
     }
 
@@ -68,9 +68,9 @@ class MineFragment : BaseFragment<MineFragmentBinding>(
 //        binding.tvPhone.setClickableTextWithScale(
 //            String.format(getString(R.string.welcome) + "\n" + loginInfo?.phone),
 //            loginInfo?.phone.orEmpty(),
-//            binding.root.context.getColor2(R.color.C_492E0D)
+//            binding.root.context.resolveColorCompat(R.color.C_492E0D)
 //        )
-        vm.recordEvent(
+        vm.submitTrackingEvent(
             TrackBean(
                 p = PageMine,
                 act = ACT_inMy,
@@ -82,7 +82,7 @@ class MineFragment : BaseFragment<MineFragmentBinding>(
     override fun initObserve() = with(vm) {
         authResult.observe(this@MineFragment) {
             if (it?.showMultipleRepaySign == 1) {
-                context?.start<RepaymentBatchActivity>()
+                context?.start<BulkRepaymentActivity>()
             } else {
                 paybackDialog.show()
             }

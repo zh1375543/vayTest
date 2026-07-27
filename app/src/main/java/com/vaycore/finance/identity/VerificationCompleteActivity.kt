@@ -6,38 +6,38 @@ import com.vaycore.finance.base.BaseActivity
 import com.vaycore.finance.databinding.AuthSuccessActivityBinding
 import com.vaycore.finance.app.MainActivity
 import com.vaycore.finance.util.countdownTimer
-import com.vaycore.finance.util.context.getColor2
+import com.vaycore.finance.util.context.resolveColorCompat
 import com.vaycore.finance.ui.extension.setClickableTextWithScale
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.util.viewBinding
 
-class AuthSuccessActivity :
+class VerificationCompleteActivity :
     BaseActivity<AuthSuccessActivityBinding>() {
 
     override val binding by viewBinding(AuthSuccessActivityBinding::inflate)
     override fun initView() = with(binding) {
         applyTopInset(root)
-        onBackAction(null) {
+        registerTrackedBackHandler(null) {
             finish()
-            MainActivity.launch(this@AuthSuccessActivity, isFromAuth = true)
+            MainActivity.launch(this@VerificationCompleteActivity, isFromAuth = true)
         }
         binding.tvTips.setClickableTextWithScale(
             String.format(getString(R.string.back_to_home_tips), "10"),
             "10",
-            getColor2(R.color.color_7087F8)
+            resolveColorCompat(R.color.color_7087F8)
         )
         lifecycleScope.countdownTimer(10, next = { seconds ->
             binding.tvTips.setClickableTextWithScale(
                 String.format(getString(R.string.back_to_home_tips), seconds.toString()),
                 seconds.toString(),
-                getColor2(R.color.color_7087F8)
+                resolveColorCompat(R.color.color_7087F8)
             )
         }, end = {
             tvOK.performClick()
         })
         tvOK.singleClick {
             finish()
-            MainActivity.launch(this@AuthSuccessActivity, isFromAuth = true)
+            MainActivity.launch(this@VerificationCompleteActivity, isFromAuth = true)
         }
     }
 }

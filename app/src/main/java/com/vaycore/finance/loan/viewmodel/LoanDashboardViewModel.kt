@@ -24,11 +24,11 @@ class LoanDashboardViewModel(
 
     fun getAuthData(isLoading: Boolean = false) {
         authJob?.cancel()
-        authJob = launchData {
+        authJob = createNetworkRequest {
             homeRepository.loadMemberHome()
         }.showLoading(isLoading).onSuccess {
             HomeLoanAmountRange = it?.loanAmountRange
-            recordEvent(
+            submitTrackingEvent(
                 TrackBean(
                     p = PageHome,
                     act = ACT_index,
@@ -38,7 +38,7 @@ class LoanDashboardViewModel(
             authResult.value = it
         }.onFailed {
             loadFailedResult.value = Unit
-            recordEvent(
+            submitTrackingEvent(
                 TrackBean(
                     p = PageHome,
                     act = ACT_index,

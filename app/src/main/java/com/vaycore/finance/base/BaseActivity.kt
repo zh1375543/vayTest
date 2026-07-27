@@ -199,10 +199,10 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
         }
     }
 
-    fun onBackAction(vm: BaseViewModel? = null, action: () -> Unit) {
+    fun registerTrackedBackHandler(vm: BaseViewModel? = null, action: () -> Unit) {
         onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                vm?.recordEvent(
+                vm?.submitTrackingEvent(
                     TrackBean(
                         act = ACT_back,
                         p = localClassName
@@ -232,7 +232,7 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
     private fun setupPasteListener(root: ViewGroup) {
         traverseView(root) { editText ->
             (editText as? StyledEditTextView)?.onPasteListener = { content ->
-                App.appViewModel.recordEvent(
+                App.appViewModel.submitTrackingEvent(
                     TrackBean(
                         p = PageAll,
                         act = ACT_paste,
@@ -257,7 +257,7 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
         val clipData = clipboard.primaryClip
         val content = clipData?.getItemAt(0)?.text.toString()
 
-        App.appViewModel.recordEvent(
+        App.appViewModel.submitTrackingEvent(
             TrackBean(
                 p = PageAll,
                 act = ACT_copy,

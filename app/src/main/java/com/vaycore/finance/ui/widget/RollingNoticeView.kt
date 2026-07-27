@@ -9,7 +9,7 @@ import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
 import com.vaycore.finance.R
-import com.vaycore.finance.util.context.getColor2
+import com.vaycore.finance.util.context.resolveColorCompat
 import kotlin.math.ceil
 import kotlin.random.Random
 
@@ -79,7 +79,7 @@ class RollingNoticeView @JvmOverloads constructor(
             this.text = text
             gravity = Gravity.CENTER
             maxLines = 1
-            setTextColor(context.getColor2(if (isWhiteColor) R.color.C_111827 else R.color.C_111827))
+            setTextColor(context.resolveColorCompat(if (isWhiteColor) R.color.C_111827 else R.color.C_111827))
             textSize = textSizeSp
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,

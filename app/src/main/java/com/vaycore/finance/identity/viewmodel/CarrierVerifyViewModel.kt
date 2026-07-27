@@ -17,10 +17,10 @@ class CarrierVerifyViewModel(
 
     val getOtpResult = MutableLiveData<Any?>()
     fun getOtp(phone: String, company: String) {
-        launchData { verificationRepository.requestCarrierOtp(phone, company) }
+        createNetworkRequest { verificationRepository.requestCarrierOtp(phone, company) }
             .showLoading()
             .onSuccess {
-                recordEvent(
+                submitTrackingEvent(
                     TrackBean(
                         p = PageVerifyCode,
                         act = ACT_getVerifyCode,
@@ -30,7 +30,7 @@ class CarrierVerifyViewModel(
                 getOtpResult.value = it
             }
             .onFailed {
-                recordEvent(
+                submitTrackingEvent(
                     TrackBean(
                         p = PageVerifyCode,
                         act = ACT_getVerifyCode,
@@ -43,10 +43,10 @@ class CarrierVerifyViewModel(
 
     val submitOtpResult = MutableLiveData<Any?>()
     fun submitOtp(phone: String, company: String, otp: String) {
-        launchData { verificationRepository.submitCarrierOtp(phone, company, otp) }
+        createNetworkRequest { verificationRepository.submitCarrierOtp(phone, company, otp) }
             .showLoading()
             .onSuccess {
-                recordEvent(
+                submitTrackingEvent(
                     TrackBean(
                         p = PageVerifyCode2,
                         act = ACT_nextStep,
@@ -56,7 +56,7 @@ class CarrierVerifyViewModel(
                 submitOtpResult.value = it
             }
             .onFailed {
-                recordEvent(
+                submitTrackingEvent(
                     TrackBean(
                         p = PageVerifyCode2,
                         act = ACT_nextStep,
@@ -69,7 +69,7 @@ class CarrierVerifyViewModel(
 
     val submitWithGetOtpResult = MutableLiveData<Any?>()
     fun submitWithGetOtp(phone: String, company: String, otp: String) {
-        launchData { verificationRepository.submitCarrierOtpAndRequestNext(phone, company, otp) }
+        createNetworkRequest { verificationRepository.submitCarrierOtpAndRequestNext(phone, company, otp) }
             .showLoading()
             .onSuccess { submitWithGetOtpResult.value = it }
             .execute()

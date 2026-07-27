@@ -11,7 +11,7 @@ import com.vaycore.finance.order.adapter.OrderListAdapter
 import com.vaycore.finance.util.start
 import com.vaycore.finance.util.viewBinding
 
-class LoanOrderListActivity : BaseActivity<ActivityLoanOrderListBinding>() {
+class BorrowingHistoryActivity : BaseActivity<ActivityLoanOrderListBinding>() {
 
     override val binding by viewBinding(ActivityLoanOrderListBinding::inflate)
     private val vm by viewModels<LoanOrderViewModel>()
@@ -19,7 +19,7 @@ class LoanOrderListActivity : BaseActivity<ActivityLoanOrderListBinding>() {
     private val orderAdapter by lazy {
         OrderListAdapter().apply {
             setOnItemClickListener { _, position ->
-                start<LoanOrderDetailActivity> {
+                start<BorrowingDetailActivity> {
                     putExtra("orderId", items[position].id)
                     putExtra("isFromBatch", false)
                 }
@@ -29,7 +29,7 @@ class LoanOrderListActivity : BaseActivity<ActivityLoanOrderListBinding>() {
 
     override fun initView() = with(binding) {
         viewModel = vm
-        vm.recordEvent(
+        vm.submitTrackingEvent(
             TrackBean(
                 p = PageHistory,
                 act = ACT_inOrderHistory,
@@ -55,7 +55,7 @@ class LoanOrderListActivity : BaseActivity<ActivityLoanOrderListBinding>() {
 
     override fun initObserve() =with(vm){
         super.initObserve()
-        orderListResult.observe(this@LoanOrderListActivity) {
+        orderListResult.observe(this@BorrowingHistoryActivity) {
             binding.apply {
                 if (it.isNullOrEmpty()) {
                     loadingLayout.showEmpty(R.mipmap.ic_order_null, R.string.order_empty)

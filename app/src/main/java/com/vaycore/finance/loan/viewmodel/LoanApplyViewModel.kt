@@ -22,11 +22,11 @@ class LoanApplyViewModel(
         files: List<MultipartBody.Part>,
         multipartBody: Map<String, RequestBody>,
     ) {
-        launchData {
+        createNetworkRequest {
             loanRepository.submitTogetherLoan(files, multipartBody)
         }.onSuccess {
             togetherLoanResult.value = it
-            recordEvent(
+            submitTrackingEvent(
                 TrackBean(
                     p = PageProductDetail,
                     act = ACT_apply,
@@ -35,7 +35,7 @@ class LoanApplyViewModel(
             )
         }.onFailed {
             loanFailResult.value = true
-            recordEvent(
+            submitTrackingEvent(
                 TrackBean(
                     p = PageProductDetail,
                     act = ACT_apply,
@@ -52,10 +52,10 @@ class LoanApplyViewModel(
         files: List<MultipartBody.Part>,
         multipartBody: Map<String, RequestBody>,
     ) {
-        launchData {
+        createNetworkRequest {
             loanRepository.submitLoan(files, multipartBody)
         }.onSuccess {
-            recordEvent(
+            submitTrackingEvent(
                 TrackBean(
                     p = PageProductDetail,
                     act = ACT_apply,
@@ -64,7 +64,7 @@ class LoanApplyViewModel(
             )
             loanResult.value = it
         }.onFailed {
-            recordEvent(
+            submitTrackingEvent(
                 TrackBean(
                     p = PageProductDetail,
                     act = ACT_apply,
@@ -81,10 +81,10 @@ class LoanApplyViewModel(
         showLoading: Boolean = false,
         errorAction: () -> Unit,
     ) {
-        launchData {
+        createNetworkRequest {
             loanRepository.fetchTogetherLoan()
         }.showLoading(showLoading).onSuccess {
-            recordEvent(
+            submitTrackingEvent(
                 TrackBean(
                     p = PageHome,
                     act = ACT_apply,
@@ -93,7 +93,7 @@ class LoanApplyViewModel(
             )
             togetherInfo.value = it
         }.onFailed {
-            recordEvent(
+            submitTrackingEvent(
                 TrackBean(
                     p = PageHome,
                     act = ACT_apply,

@@ -52,7 +52,7 @@ import com.vaycore.finance.util.viewBinding
 import kotlin.math.max
 import kotlin.toString
 
-class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
+class PayoutAndContactActivity : BaseActivity<BankAccountAuthActivityBinding>() {
 
     private enum class WithdrawMethod {
         BANK,
@@ -88,7 +88,7 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
         showBankFields = false
         showWalletFields = false
         setupBottomActionKeyboardBehavior()
-        vm.recordEvent(TrackBean(p = PageInfoBank, act = ACT_in))
+        vm.submitTrackingEvent(TrackBean(p = PageInfoBank, act = ACT_in))
         titleBar.setAction("${authConfigList.indexOf("BANK") + 1}/${authConfigList.size}")
         clearWithdrawMethodSelection()
         setBottomActionVisible(false)
@@ -189,8 +189,8 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
 
     /** Connect navigation, validation, permission-gated submission and initial data loading. */
     private fun connectBankPageActions() = with(binding) {
-        titleBar.setNavigationAction { handleBack() }
-        onBackAction(vm) { handleBack() }
+        titleBar.setNavigationAction { confirmPayoutSetupExit() }
+        registerTrackedBackHandler(vm) { confirmPayoutSetupExit() }
         btNext.singleClick {
             if (!validateBankPage()) {
                 return@singleClick
@@ -302,7 +302,7 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
     }
 
     private fun recordContactPickStart(event: String, target: ContactPickTarget) {
-        vm.recordEvent(
+        vm.submitTrackingEvent(
             TrackBean(
                 p = PageInfoBank,
                 act = event,
@@ -340,11 +340,11 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
             R.mipmap.ic_wallet_select_bg
         }
         val iconSize = resources.getDimensionPixelSize(R.dimen.dp_36)
-        val icon = AppCompatResources.getDrawable(this@BankAccountAuthActivity, iconRes)?.apply {
+        val icon = AppCompatResources.getDrawable(this@PayoutAndContactActivity, iconRes)?.apply {
             setBounds(0, 0, iconSize, iconSize)
         }
         val arrowSize = resources.getDimensionPixelSize(R.dimen.dp_24)
-        val arrow = AppCompatResources.getDrawable(this@BankAccountAuthActivity, R.mipmap.mine_right)?.apply {
+        val arrow = AppCompatResources.getDrawable(this@PayoutAndContactActivity, R.mipmap.mine_right)?.apply {
             setBounds(0, 0, arrowSize, arrowSize)
         }
         methodSelectionView.setCompoundDrawablesRelative(icon, null, arrow, null)
@@ -359,7 +359,7 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
         selectedWithdrawMethod = null
         tvWithdrawMethodError.isVisible = false
         val arrowSize = resources.getDimensionPixelSize(R.dimen.dp_24)
-        val arrow = AppCompatResources.getDrawable(this@BankAccountAuthActivity, R.mipmap.mine_right)?.apply {
+        val arrow = AppCompatResources.getDrawable(this@PayoutAndContactActivity, R.mipmap.mine_right)?.apply {
             setBounds(0, 0, arrowSize, arrowSize)
         }
         methodSelectionView.setCompoundDrawablesRelative(null, null, arrow, null)
@@ -368,7 +368,7 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
         binding.showWalletFields = false
     }
 
-    private fun handleBack() {
+    private fun confirmPayoutSetupExit() {
         if (shouldShowBottomAction) {
             val step =
                 authConfigList.size - max(0, authConfigList.indexOf("BANK"))
@@ -381,7 +381,7 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
                 ok = getString(R.string.continue_str),
                 highLight = step.toString(),
                 cancelAction = {
-                    vm.recordEvent(
+                    vm.submitTrackingEvent(
                         TrackBean(
                             p = PageInfoBank,
                             act = ACT_clickBack
@@ -390,7 +390,7 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
                     finish()
                 }
             ) {
-                vm.recordEvent(
+                vm.submitTrackingEvent(
                     TrackBean(
                         p = PageInfoBank,
                         act = ACT_clickContinue
@@ -403,7 +403,7 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
     }
 
     private fun submit() {
-        vm.recordEvent(TrackBean(p = PageInfoBank, act = ACT_clickNext))
+        vm.submitTrackingEvent(TrackBean(p = PageInfoBank, act = ACT_clickNext))
         trackEvent(SUPPLEMENTARY_INFO_COMMIT)
         val isWallet = selectedWithdrawMethod == WithdrawMethod.WALLET
         val contactEntries = arrayListOf(
@@ -452,7 +452,7 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
     private var additionalContactStatus: Int? = null
     override fun initObserve() = with(vm) {
         super.initObserve()
-        accountVm.payChannelList.observe(this@BankAccountAuthActivity) {
+        accountVm.payChannelList.observe(this@PayoutAndContactActivity) {
             val channelList = it ?: arrayListOf()
             chooseBankDialog(
                 channelList
@@ -463,7 +463,7 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
                 bankBean = bean
             }
         }
-        accountVm.walletList.observe(this@BankAccountAuthActivity) {
+        accountVm.walletList.observe(this@PayoutAndContactActivity) {
             val walletItems = it ?: arrayListOf()
             chooseWalletDialog(walletItems) { wallet ->
                 selectWithdrawMethod(WithdrawMethod.WALLET)
@@ -473,7 +473,7 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
                 fillWalletAccountFromLoginPhone()
             }
         }
-        contractResult.observe(this@BankAccountAuthActivity) {
+        contractResult.observe(this@PayoutAndContactActivity) {
             binding.apply {
                 loadingLayout.showContent()
                 setBottomActionVisible(!isCert)
@@ -490,14 +490,14 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
                 }
             }
         }
-        submitBankAndCtsResult.observe(this@BankAccountAuthActivity) {
+        submitBankAndCtsResult.observe(this@PayoutAndContactActivity) {
             homeVm.getUserAuthStatus()
         }
-        personalVm.personalResult.observe(this@BankAccountAuthActivity) {
+        personalVm.personalResult.observe(this@PayoutAndContactActivity) {
             binding.withdrawAccountForm.holderView.setText(it?.firstName)
         }
-        homeVm.userAuthStatusResult.observe(this@BankAccountAuthActivity) {
-            it?.routeToNextAuthStep(this@BankAccountAuthActivity)
+        homeVm.userAuthStatusResult.observe(this@PayoutAndContactActivity) {
+            it?.routeToNextAuthStep(this@PayoutAndContactActivity)
             finish()
         }
     }
@@ -525,7 +525,7 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
                             ContactPickTarget.PRIMARY -> {
                                 binding.relativesNameView.setText(name)
                                 binding.relativesPhoneView.setText(number)
-                                vm.recordEvent(
+                                vm.submitTrackingEvent(
                                     TrackBean(
                                         p = PageInfoBank,
                                         act = ACT_selectContactName1End,
@@ -536,7 +536,7 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
                             ContactPickTarget.SECONDARY -> {
                                 binding.friendNameView.setText(name)
                                 binding.friendPhoneView.setText(number)
-                                vm.recordEvent(
+                                vm.submitTrackingEvent(
                                     TrackBean(
                                         p = PageInfoBank,
                                         act = ACT_selectContactName2End,
@@ -547,7 +547,7 @@ class BankAccountAuthActivity : BaseActivity<BankAccountAuthActivityBinding>() {
                             ContactPickTarget.ADDITIONAL -> {
                                 binding.additionalContactNameView.setText(name)
                                 binding.additionalContactPhoneView.setText(number)
-                                vm.recordEvent(
+                                vm.submitTrackingEvent(
                                     TrackBean(
                                         p = PageInfoBank,
                                         act = ACT_selectContactName3End,

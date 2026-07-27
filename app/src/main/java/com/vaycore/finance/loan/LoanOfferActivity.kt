@@ -31,7 +31,7 @@ import com.vaycore.finance.ui.showLoanAgreementDialog
 import com.vaycore.finance.util.LoanEventUtil
 import com.vaycore.finance.util.LogUtil
 import com.vaycore.finance.util.ORDER_COMMIT
-import com.vaycore.finance.util.context.getColor2
+import com.vaycore.finance.util.context.resolveColorCompat
 import com.vaycore.finance.util.deviceRiskPermissions
 import com.vaycore.finance.util.formatAmountWithPrefix
 import com.vaycore.finance.util.requestRuntimePermissions
@@ -39,13 +39,13 @@ import com.vaycore.finance.util.start
 import com.vaycore.finance.util.toJsonString
 import com.vaycore.finance.util.trackEvent
 import com.vaycore.finance.util.viewBinding
-import com.vaycore.finance.wallet.BankCardListActivity
+import com.vaycore.finance.wallet.PayoutAccountListActivity
 import com.vaycore.finance.wallet.WalletViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.milliseconds
 
-class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
+class LoanOfferActivity : BaseActivity<ActivityLoanProductBinding>() {
 
     override val binding by viewBinding(ActivityLoanProductBinding::inflate)
     private val vm by viewModels<LoanProductViewModel>()
@@ -66,7 +66,7 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
     }
 
     private fun prepareProductExperience() = with(binding) {
-        vm.recordEvent(
+        vm.submitTrackingEvent(
             TrackBean(
                 p = PageProductDetail,
                 act = ACT_in,
@@ -78,9 +78,9 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
             LEASE_AGREEMENT + "userId=${loginInfo?.id}&productId=${product?.id}&amount=${product?.maxLoanAmount.toString()}"
         pawnUrl =
             PAWN_AGREEMENT + "userId=${loginInfo?.id}&productId=${product?.id}&amount=${product?.maxLoanAmount.toString()}"
-        titleBar.setNavigationAction { handleBack() }
-        onBackAction(vm) {
-            handleBack()
+        titleBar.setNavigationAction { exitOfferFlow() }
+        registerTrackedBackHandler(vm) {
+            exitOfferFlow()
         }
         loadingLayout.setOnRetryClickListener {
             loadingLayout.showLoading()
@@ -102,25 +102,25 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
                 getString(R.string.mortgage_contract)
             ), arrayListOf(
                 ClickablePart(
-                    getString(R.string.lease_contract), getColor2(R.color.color_7087F8), onClick = {
+                    getString(R.string.lease_contract), resolveColorCompat(R.color.color_7087F8), onClick = {
                         loanEvent.logClickOpenAgreement()
                         WebViewActivity.Companion.launch(
-                            this@LoanProductActivity, getString(R.string.lease_contract), leaseUrl
+                            this@LoanOfferActivity, getString(R.string.lease_contract), leaseUrl
                         )
                     }),
                 ClickablePart(
                     getString(R.string.mortgage_contract),
-                    getColor2(R.color.color_7087F8),
+                    resolveColorCompat(R.color.color_7087F8),
                     onClick = {
                         loanEvent.logClickOpenAgreement()
                         WebViewActivity.Companion.launch(
-                            this@LoanProductActivity, getString(R.string.mortgage_contract), pawnUrl
+                            this@LoanOfferActivity, getString(R.string.mortgage_contract), pawnUrl
                         )
                     }),
             )
         )
         tvChange.singleClick {
-            vm.recordEvent(
+            vm.submitTrackingEvent(
                 TrackBean(
                     p = PageProductDetail,
                     act = ACT_userAppBankMyCard
@@ -131,7 +131,7 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
         }
         tvAbout.singleClick {
             WebViewActivity.Companion.launch(
-                this@LoanProductActivity, tvAbout.text.toString(), AGREEMENT_ABOUT
+                this@LoanOfferActivity, tvAbout.text.toString(), AGREEMENT_ABOUT
             )
         }
         detailView.isVisible = true
@@ -160,7 +160,7 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
             }
 
             onPlanSelected = { selectedPlan ->
-                bindHeaderDetail(selectedPlan)
+                renderOfferSummary(selectedPlan)
             }
         }
     }
@@ -168,7 +168,7 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
     private fun connectLoanApplication() = with(binding) {
         btnApply.resetScale()
         btnApply.singleClick {
-            vm.recordEvent(
+            vm.submitTrackingEvent(
                 TrackBean(
                     p = PageProductDetail,
                     act = ACT_clickApply,
@@ -182,7 +182,7 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
                     productId = product?.id.toString(),
                     amount = product?.loanAmount.toString()
                 ) {
-                    vm.recordEvent(
+                    vm.submitTrackingEvent(
                         TrackBean(
                             p = PageProductDetail,
                             act = ACT_clickConfirm,
@@ -190,8 +190,8 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
                     )
                     loanEvent.logClickSubmitLoan()
                     if (product?.isSign == 0) {
-                        ContractSignActivity.Companion.launch(
-                            this@LoanProductActivity,
+                        AgreementSignatureActivity.Companion.launch(
+                            this@LoanOfferActivity,
                             cardInfo?.id,
                             null,
                             product?.id.toString(),
@@ -202,8 +202,8 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
                             payWay = cardInfo?.payWay ?: "CARD",
                         )
                     } else {
-                        LoanApplyResultActivity.Companion.launch(
-                            this@LoanProductActivity,
+                        ApplicationOutcomeActivity.Companion.launch(
+                            this@LoanOfferActivity,
                             null,
                             product?.id.toString(),
                             cardInfo?.id,
@@ -220,7 +220,7 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
         }
     }
 
-    private fun handleBack() {
+    private fun exitOfferFlow() {
         finish()
     }
 
@@ -267,7 +267,7 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
     private val termIdMap: MutableMap<Long?, Long?> = HashMap()
     override fun initObserve() = with(vm) {
         super.initObserve()
-        detailResult.observe(this@LoanProductActivity) {
+        detailResult.observe(this@LoanOfferActivity) {
             binding.apply {
                 it?.let {
                     binding.product = it
@@ -276,8 +276,8 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
                         it,
                         it.loanAmount.formatAmountWithPrefix(it.currencySymbol),
                     )
-                    bindHeaderDetail(it)
-                    mergeDetailViewState(it)
+                    renderOfferSummary(it)
+                    restoreOfferSelection(it)
 
                     // if state was never saved (savedTermIndex < 0),
                     // ignore the Bean value (may be GSON default 0) and find the item with defaultSign == 1
@@ -320,7 +320,7 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
                                 cancel = getString(R.string.already_edited),
                                 ok = getString(R.string.revise)
                             ) {
-                                start<BankCardListActivity>()
+                                start<PayoutAccountListActivity>()
                                 isAddCard = true
                             }
                         }
@@ -328,7 +328,7 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
                 }
             }
         }
-        accountVm.loanAccountList.observe(this@LoanProductActivity) {
+        accountVm.loanAccountList.observe(this@LoanOfferActivity) {
             it?.let {
                 chooseAccountsDialog(cardInfo?.bankNo, it, false) { card ->
                     cardInfo = card
@@ -338,13 +338,13 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
         }
     }
 
-    fun scrollBottom() {
+    fun scrollToOfferActions() {
         binding.scrollView.postDelayed({
             binding.scrollView.fullScroll(View.FOCUS_DOWN)
         }, 200)
     }
 
-    private fun mergeDetailViewState(newProduct: ProductBean) {
+    private fun restoreOfferSelection(newProduct: ProductBean) {
         // savedTermIndex == -1 means first load, no merge needed
         if (savedTermIndex < 0) return
 
@@ -352,7 +352,7 @@ class LoanProductActivity : BaseActivity<ActivityLoanProductBinding>() {
         newProduct.isPlanLayoutVisible = savedIsPlanLayoutVisible
     }
 
-    private fun bindHeaderDetail(plan: ProductBean) = with(binding) {
+    private fun renderOfferSummary(plan: ProductBean) = with(binding) {
         val currencySymbol = plan.currencySymbol ?: product?.currencySymbol
         detailView.bindHeaderDetail(plan, currencySymbol)
     }

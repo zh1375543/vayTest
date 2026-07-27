@@ -16,7 +16,7 @@ class WalletViewModel(
             payChannelList.value = payChannelList.value
             return
         }
-        launchData {
+        createNetworkRequest {
             walletRepository.fetchPayChannelList()
         }.showLoading().onSuccess {
             payChannelList.value = it
@@ -29,7 +29,7 @@ class WalletViewModel(
             walletList.value = walletList.value
             return
         }
-        launchData {
+        createNetworkRequest {
             walletRepository.fetchWalletList()
         }.showLoading().onSuccess {
             walletList.value = it
@@ -45,7 +45,7 @@ class WalletViewModel(
         walletId: Int? = null,
         accountCode: String? = null,
     ) {
-        launchData {
+        createNetworkRequest {
             walletRepository.addCard(
                 bankId = bankId,
                 accountUser = accountUser,
@@ -61,7 +61,7 @@ class WalletViewModel(
 
     val bankCardListResult = MutableLiveData<List<BankAccountResponse>>()
     fun getBankcardList(errorAction: () -> Unit) {
-        launchData {
+        createNetworkRequest {
             walletRepository.fetchBankcardList()
         }.onSuccess {
             bankCardListResult.value = it
@@ -73,7 +73,7 @@ class WalletViewModel(
 
     val accountListResult = MutableLiveData<List<BankAccountResponse>>()
     fun getAccountList(errorAction: () -> Unit) {
-        launchData {
+        createNetworkRequest {
             walletRepository.fetchBankcardList()
         }.onSuccess { cards ->
             loadWalletAccounts(cards.orEmpty(), errorAction)
@@ -87,7 +87,7 @@ class WalletViewModel(
         cards: List<BankAccountResponse>,
         errorAction: () -> Unit,
     ) {
-        launchData {
+        createNetworkRequest {
             walletRepository.fetchMyWalletList()
         }.onSuccess { wallets ->
             val bankAccounts = cards.map { card ->
@@ -105,7 +105,7 @@ class WalletViewModel(
 
     val loanAccountList = MutableLiveData<List<BankAccountResponse>>()
     fun getLoanAccountList(errorAction: () -> Unit) {
-        launchData {
+        createNetworkRequest {
             walletRepository.fetchMyWalletList()
         }.onSuccess { wallets ->
             loadLoanBankAccounts(wallets.orEmpty(), errorAction)
@@ -119,7 +119,7 @@ class WalletViewModel(
         wallets: List<WalletResponse>,
         errorAction: () -> Unit,
     ) {
-        launchData {
+        createNetworkRequest {
             walletRepository.fetchBankcardList()
         }.onSuccess { cards ->
             val walletAccounts = wallets.map { wallet -> wallet.toBankAccountResponse() }
@@ -134,7 +134,7 @@ class WalletViewModel(
     }
 
     fun unBindCard(id: String, payWay: String = "CARD", action: () -> Unit) {
-        launchData {
+        createNetworkRequest {
             walletRepository.unbindCard(id, payWay)
         }.showLoading().onSuccess {
             action.invoke()
@@ -142,7 +142,7 @@ class WalletViewModel(
     }
 
     fun setDefaultCard(id: String, action: () -> Unit) {
-        launchData {
+        createNetworkRequest {
             walletRepository.setDefaultCard(id)
         }.showLoading().onSuccess {
             action.invoke()
@@ -150,7 +150,7 @@ class WalletViewModel(
     }
 
     fun setDefaultWallet(id: Int?, action: () -> Unit) {
-        launchData {
+        createNetworkRequest {
             walletRepository.setDefaultWallet(id)
         }.showLoading().onSuccess {
             action.invoke()

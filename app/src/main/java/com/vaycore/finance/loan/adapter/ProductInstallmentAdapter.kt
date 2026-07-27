@@ -3,7 +3,7 @@ package com.vaycore.finance.loan.adapter
 import androidx.core.view.isVisible
 import com.vaycore.finance.base.BaseAdapter
 import com.vaycore.finance.databinding.ProductInstallmentAdapterBinding
-import com.vaycore.finance.loan.LoanProductActivity
+import com.vaycore.finance.loan.LoanOfferActivity
 import com.vaycore.finance.model.loan.ProductPlanBean
 import com.vaycore.finance.util.formatAmountWithPrefix
 
@@ -22,8 +22,8 @@ class ProductInstallmentAdapter :
         val toggleDetails = {
             infoLayout.isVisible = !infoLayout.isVisible
             ivArrow.rotation = if (!infoLayout.isVisible) 0f else 180f
-            if (context is LoanProductActivity) {
-                (context as LoanProductActivity?)?.scrollBottom()
+            if (context is LoanOfferActivity) {
+                (context as LoanOfferActivity?)?.scrollToOfferActions()
             }
         }
         tvDueDate.setOnClickListener { toggleDetails() }

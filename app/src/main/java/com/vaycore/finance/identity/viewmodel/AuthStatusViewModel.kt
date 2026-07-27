@@ -15,7 +15,7 @@ class AuthStatusViewModel(
     val loadFailedResult = MutableLiveData<Unit>()
 
     fun getUserAuthStatus(errorAction: () -> Unit = {}) {
-        launchData {
+        createNetworkRequest {
             authStatusRepository.loadUserAuthStatus()
         }.onSuccess {
             userAuthStatusResult.value = it
@@ -28,7 +28,7 @@ class AuthStatusViewModel(
 
     fun fetchAuthConfigList(action: (List<String>) -> Unit) {
         if (!isLogin) return
-        launchData {
+        createNetworkRequest {
             authStatusRepository.loadAuthConfigList()
         }.onSuccess { list ->
             action(list.orEmpty())

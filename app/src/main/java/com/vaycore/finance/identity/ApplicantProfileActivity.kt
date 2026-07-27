@@ -65,7 +65,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.math.max
 
-class PersonalInfoAuthActivity :
+class ApplicantProfileActivity :
     BaseActivity<PersonalInfoAuthActivityBinding>() {
 
     override val binding by viewBinding(PersonalInfoAuthActivityBinding::inflate)
@@ -96,15 +96,15 @@ class PersonalInfoAuthActivity :
         shouldShowBottomAction = !isCert
         setupBottomActionKeyboardBehavior()
         trackEvent(PERSON_INFO_PAGE)
-        vm.recordEvent(
+        vm.submitTrackingEvent(
             TrackBean(
                 p = PageInfoPersonal,
                 act = ACT_in,
             )
         )
-        titleBar.setNavigationAction { handleBack() }
-        onBackAction(vm) {
-            handleBack()
+        titleBar.setNavigationAction { confirmProfileExit() }
+        registerTrackedBackHandler(vm) {
+            confirmProfileExit()
         }
         titleBar.setAction(
             "${authConfigList.indexOf("ID") + 1}/${authConfigList.size}"
@@ -121,7 +121,7 @@ class PersonalInfoAuthActivity :
             // 1. first input → record start time
             if (startNameTime == 0L) {
                 startNameTime = now
-                vm.recordEvent(
+                vm.submitTrackingEvent(
                     TrackBean(
                         p = PageInfoPersonal,
                         act = ACT_inputNameStart,
@@ -134,7 +134,7 @@ class PersonalInfoAuthActivity :
             nameJob = lifecycleScope.launch {
                 delay(debounceTime)
                 // 3. user stopped typing → record end time
-                vm.recordEvent(
+                vm.submitTrackingEvent(
                     TrackBean(
                         p = PageInfoPersonal,
                         act = ACT_inputNameEnd,
@@ -151,7 +151,7 @@ class PersonalInfoAuthActivity :
             // 1. first input → record start time
             if (startIDTime == 0L) {
                 startIDTime = now
-                vm.recordEvent(
+                vm.submitTrackingEvent(
                     TrackBean(
                         p = PageInfoPersonal,
                         act = ACT_inputIDCardNumberStart,
@@ -164,7 +164,7 @@ class PersonalInfoAuthActivity :
             idJob = lifecycleScope.launch {
                 delay(debounceTime)
                 // 3. user stopped typing → record end time
-                vm.recordEvent(
+                vm.submitTrackingEvent(
                     TrackBean(
                         p = PageInfoPersonal,
                         act = ACT_inputIDCardNumberEnd,
@@ -191,7 +191,7 @@ class PersonalInfoAuthActivity :
             // 1. first input → record start time
             if (startSalaryTime == 0L) {
                 startSalaryTime = now
-                vm.recordEvent(
+                vm.submitTrackingEvent(
                     TrackBean(
                         p = PageInfoPersonal,
                         act = ACT_inputSalaryStart,
@@ -204,7 +204,7 @@ class PersonalInfoAuthActivity :
             salaryJob = lifecycleScope.launch {
                 delay(debounceTime)
                 // 3. user stopped typing → record end time
-                vm.recordEvent(
+                vm.submitTrackingEvent(
                     TrackBean(
                         p = PageInfoPersonal,
                         act = ACT_inputSalaryEnd,
@@ -227,7 +227,7 @@ class PersonalInfoAuthActivity :
             }
         }
         birthView.setOnClick {
-            vm.recordEvent(
+            vm.submitTrackingEvent(
                 TrackBean(
                     p = PageInfoPersonal,
                     act = ACT_selectDateStart,
@@ -237,7 +237,7 @@ class PersonalInfoAuthActivity :
             showDatePickerDialog { dateStr ->
                 birthView.setText(dateStr)
                 birthView.hideError()
-                vm.recordEvent(
+                vm.submitTrackingEvent(
                     TrackBean(
                         p = PageInfoPersonal,
                         act = ACT_selectDateEnd,
@@ -247,7 +247,7 @@ class PersonalInfoAuthActivity :
             }
         }
         educationView.setOnClick {
-            vm.recordEvent(
+            vm.submitTrackingEvent(
                 TrackBean(
                     p = PageInfoPersonal,
                     act = ACT_inputEducationStart,
@@ -263,7 +263,7 @@ class PersonalInfoAuthActivity :
                     educationView.setText(genderList[index].info)
                     educationView.hideError()
                     eduStatus = it.education?.get(index)?.state
-                    vm.recordEvent(
+                    vm.submitTrackingEvent(
                         TrackBean(
                             p = PageInfoPersonal,
                             act = ACT_inputEducationEnd,
@@ -274,7 +274,7 @@ class PersonalInfoAuthActivity :
             }
         }
         industryView.setOnClick {
-            vm.recordEvent(
+            vm.submitTrackingEvent(
                 TrackBean(
                     p = PageInfoPersonal,
                     act = ACT_selectIndustryStart,
@@ -290,7 +290,7 @@ class PersonalInfoAuthActivity :
                     industryView.setText(options[index].info)
                     industryView.hideError()
                     industryStatus = options[index].state
-                    vm.recordEvent(
+                    vm.submitTrackingEvent(
                         TrackBean(
                             p = PageInfoPersonal,
                             act = ACT_selectIndustryEnd,
@@ -301,7 +301,7 @@ class PersonalInfoAuthActivity :
             }
         }
         professionView.setOnClick {
-            vm.recordEvent(
+            vm.submitTrackingEvent(
                 TrackBean(
                     p = PageInfoPersonal,
                     act = ACT_selectProfessionStart,
@@ -317,7 +317,7 @@ class PersonalInfoAuthActivity :
                     professionView.setText(options[index].info)
                     professionView.hideError()
                     professionStatus = options[index].state
-                    vm.recordEvent(
+                    vm.submitTrackingEvent(
                         TrackBean(
                             p = PageInfoPersonal,
                             act = ACT_selectProfessionEnd,
@@ -328,7 +328,7 @@ class PersonalInfoAuthActivity :
             }
         }
         workTimeView.setOnClick {
-            vm.recordEvent(
+            vm.submitTrackingEvent(
                 TrackBean(
                     p = PageInfoPersonal,
                     act = ACT_selectWorkTimeStart,
@@ -344,7 +344,7 @@ class PersonalInfoAuthActivity :
                     workTimeView.setText(options[index].info)
                     workTimeView.hideError()
                     workTimeStatus = options[index].state
-                    vm.recordEvent(
+                    vm.submitTrackingEvent(
                         TrackBean(
                             p = PageInfoPersonal,
                             act = ACT_selectWorkTimeEnd,
@@ -355,7 +355,7 @@ class PersonalInfoAuthActivity :
             }
         }
         reasonView.setOnClick {
-            vm.recordEvent(
+            vm.submitTrackingEvent(
                 TrackBean(
                     p = PageInfoPersonal,
                     act = ACT_selectReasonOfLoanStart,
@@ -371,7 +371,7 @@ class PersonalInfoAuthActivity :
                     reasonView.setText(options[index].info)
                     reasonView.hideError()
                     reasonStatus = options[index].state
-                    vm.recordEvent(
+                    vm.submitTrackingEvent(
                         TrackBean(
                             p = PageInfoPersonal,
                             act = ACT_selectReasonOfLoanEnd,
@@ -382,7 +382,7 @@ class PersonalInfoAuthActivity :
             }
         }
         marryView.setOnClick {
-            vm.recordEvent(
+            vm.submitTrackingEvent(
                 TrackBean(
                     p = PageInfoPersonal,
                     act = ACT_inputMaritalStateStart,
@@ -398,7 +398,7 @@ class PersonalInfoAuthActivity :
                     marryView.setText(genderList[index].info)
                     marryView.hideError()
                     marStatus = it.maritalStatus?.get(index)?.state
-                    vm.recordEvent(
+                    vm.submitTrackingEvent(
                         TrackBean(
                             p = PageInfoPersonal,
                             act = ACT_inputMaritalStateEnd,
@@ -409,7 +409,7 @@ class PersonalInfoAuthActivity :
             }
         }
         provinceView.setOnClick {
-            vm.recordEvent(
+            vm.submitTrackingEvent(
                 TrackBean(
                     p = PageInfoPersonal,
                     act = ACT_inputAddressStart,
@@ -427,7 +427,7 @@ class PersonalInfoAuthActivity :
                 cityId = cId
                 areaId = aId
 //                LogUtil.d("pId$pId|$cityId|$areaId")
-                vm.recordEvent(
+                vm.submitTrackingEvent(
                     TrackBean(
                         p = PageInfoPersonal,
                         act = ACT_inputAddressEnd,
@@ -520,7 +520,7 @@ class PersonalInfoAuthActivity :
             }
             requestRuntimePermissions(
                 deviceRiskPermissions, refuseAction = { _, pList ->
-                    vm.recordEvent(pList.map { it1 ->
+                    vm.submitTrackingEvents(pList.map { it1 ->
                         TrackBean(
                             p = PagePrivacy,
                             act = when (it1?.permissionName) {
@@ -534,13 +534,13 @@ class PersonalInfoAuthActivity :
                         )
                     })
                 }) {
-                vm.recordEvent(
+                vm.submitTrackingEvent(
                     TrackBean(
                         p = PageInfoPersonal,
                         act = ACT_clickNext,
                     )
                 )
-                vm.recordEvent(it.map { it1 ->
+                vm.submitTrackingEvents(it.map { it1 ->
                     TrackBean(
                         p = PagePrivacy,
                         act = when (it1?.permissionName) {
@@ -608,7 +608,7 @@ class PersonalInfoAuthActivity :
 
     override fun initObserve() = with(vm) {
         super.initObserve()
-        personalResult.observe(this@PersonalInfoAuthActivity) {
+        personalResult.observe(this@ApplicantProfileActivity) {
             binding.apply {
                 loadingLayout.showContent()
                 it?.let {
@@ -642,11 +642,11 @@ class PersonalInfoAuthActivity :
                 }
             }
         }
-        homeVm.userAuthStatusResult.observe(this@PersonalInfoAuthActivity) {
-            it?.routeToNextAuthStep(this@PersonalInfoAuthActivity)
+        homeVm.userAuthStatusResult.observe(this@ApplicantProfileActivity) {
+            it?.routeToNextAuthStep(this@ApplicantProfileActivity)
             finish()
         }
-        submitResult.observe(this@PersonalInfoAuthActivity) {
+        submitResult.observe(this@ApplicantProfileActivity) {
             homeVm.getUserAuthStatus()
         }
     }
@@ -686,7 +686,7 @@ class PersonalInfoAuthActivity :
         binding.bottomActionLayout.isVisible = shouldShowBottomAction && !isKeyboardVisible
     }
 
-    private fun handleBack() {
+    private fun confirmProfileExit() {
         if (shouldShowBottomAction) {
             val list = authConfigList.filterNot { it1 -> it1.isBlank() }
             val step =

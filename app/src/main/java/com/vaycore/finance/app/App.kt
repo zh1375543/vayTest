@@ -231,7 +231,7 @@ class App : Application(), DFTransferResultInterface {
             if (++startedActivityCount == 1 && !lastStopWasConfigChange) {
                 // App enters foreground from background
 //                MyLogUtil.d("App entered foreground")
-                appViewModel.recordEvent(
+                appViewModel.submitTrackingEvent(
                     TrackBean(
                         act = ACT_EnterApp,
                         result = p0.localClassName,
@@ -246,7 +246,7 @@ class App : Application(), DFTransferResultInterface {
             if (--startedActivityCount == 0 && !lastStopWasConfigChange) {
                 // App enters background from foreground
 //                MyLogUtil.d("App entered background")
-                appViewModel.recordEvent(
+                appViewModel.submitTrackingEvent(
                     TrackBean(
                         act = ACT_EnterBackground,
                         result = p0.localClassName,

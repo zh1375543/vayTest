@@ -46,7 +46,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
 
-class LoanApplyResultActivity :
+class ApplicationOutcomeActivity :
     BaseActivity<ActivityLoanApplyResultBinding>() {
 
     override val binding by viewBinding(ActivityLoanApplyResultBinding::inflate)
@@ -62,7 +62,7 @@ class LoanApplyResultActivity :
             termIdMap: String? = null,
             payWay: String = "CARD",
         ) {
-            context.start<LoanApplyResultActivity> {
+            context.start<ApplicationOutcomeActivity> {
                 putExtra("productList", productList)
                 putExtra("bankId", bankId)
                 putExtra("signPath", signPath)
@@ -105,12 +105,12 @@ class LoanApplyResultActivity :
 
     @SuppressLint("MissingPermission")
     override fun initView() = with(binding) {
-        onBackAction(vm) {
-            handleBack()
+        registerTrackedBackHandler(vm) {
+            returnToDashboard()
         }
-        titleBar.setNavigationAction { handleBack() }
+        titleBar.setNavigationAction { returnToDashboard() }
         tvWithdrawal.singleClick {
-            start<LoanProductMultiActivity>()
+            start<CombinedLoanOfferActivity>()
         }
         rvProduct.adapter = resultAdapter
         rvCashableProduct.adapter = homeAdapter
@@ -126,10 +126,10 @@ class LoanApplyResultActivity :
         }
     }
 
-    private fun handleBack() {
-        AppStackUtil.finishActivity(LoanProductMultiActivity::class.java)
-        AppStackUtil.finishActivity(ContractSignActivity::class.java)
-        AppStackUtil.finishActivity(LoanProductActivity::class.java)
+    private fun returnToDashboard() {
+        AppStackUtil.finishActivity(CombinedLoanOfferActivity::class.java)
+        AppStackUtil.finishActivity(AgreementSignatureActivity::class.java)
+        AppStackUtil.finishActivity(LoanOfferActivity::class.java)
         finish()
         MainActivity.Companion.launch(this)
     }
@@ -152,7 +152,7 @@ class LoanApplyResultActivity :
         }
         homeAdapter.submitItems(emptyList())
         vm.getTogetherLoan(showLoading = true) {
-            hideRecommendedProducts()
+            collapseOfferRecommendations()
         }
     }
 
@@ -174,7 +174,7 @@ class LoanApplyResultActivity :
         }
     }
 
-    private fun hideRecommendedProducts() = with(binding) {
+    private fun collapseOfferRecommendations() = with(binding) {
         cashableProductLayout.isVisible = false
         tvWithdrawal.isVisible = false
         updateResultsCardVisibility()
@@ -186,8 +186,8 @@ class LoanApplyResultActivity :
 
     private fun handleProductDetail(data: ProductBean?) {
         data ?: return
-        AppStackUtil.finishActivity(LoanProductActivity::class.java)
-        start<LoanProductActivity> {
+        AppStackUtil.finishActivity(LoanOfferActivity::class.java)
+        start<LoanOfferActivity> {
             putExtra("product", data)
         }
     }
@@ -334,14 +334,14 @@ class LoanApplyResultActivity :
 
     override fun initObserve() {
         super.initObserve()
-        vm.loanResult.observe(this@LoanApplyResultActivity) {
+        vm.loanResult.observe(this@ApplicationOutcomeActivity) {
             binding.rvProduct.isVisible = false
             loanSuccess()
         }
-        vm.loanFailResult.observe(this@LoanApplyResultActivity) {
+        vm.loanFailResult.observe(this@ApplicationOutcomeActivity) {
             loanFailed()
         }
-        vm.togetherLoanResult.observe(this@LoanApplyResultActivity) {
+        vm.togetherLoanResult.observe(this@ApplicationOutcomeActivity) {
             resultAdapter.submitItems(it?.onEach { it1 ->
                 it1.currency = productList?.get(0)?.currency
                 it1.currencySymbol = productList?.get(0)?.currencySymbol
@@ -349,10 +349,10 @@ class LoanApplyResultActivity :
             binding.rvProduct.isVisible = !it.isNullOrEmpty()
             loanSuccess()
         }
-        vm.togetherInfo.observe(this@LoanApplyResultActivity) {
+        vm.togetherInfo.observe(this@ApplicationOutcomeActivity) {
             updateRecommendedProducts(it)
         }
-        productVm.detailResult.observe(this@LoanApplyResultActivity) {
+        productVm.detailResult.observe(this@ApplicationOutcomeActivity) {
             handleProductDetail(it)
         }
     }

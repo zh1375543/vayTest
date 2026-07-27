@@ -1,6 +1,7 @@
 package com.vaycore.finance.wallet
 
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import com.vaycore.finance.R
 import com.vaycore.finance.wallet.adapter.BankCardListAdapter
 import com.vaycore.finance.base.BaseActivity
@@ -12,7 +13,7 @@ import com.vaycore.finance.util.start
 import com.vaycore.finance.util.trackEvent
 import com.vaycore.finance.util.viewBinding
 
-class BankCardListActivity :
+class PayoutAccountListActivity :
     BaseActivity<ActivityBankCardListBinding>() {
 
     override val binding by viewBinding(ActivityBankCardListBinding::inflate)
@@ -70,7 +71,7 @@ class BankCardListActivity :
         trackEvent(WALLET_INFO_PAGE)
         rvAccounts.adapter = bankAdapter
         addLayout.singleClick {
-            start<BankCardAddActivity>()
+            start<PayoutAccountSetupActivity>()
         }
         loadingLayout.setOnRetryClickListener {
             loadingLayout.showLoading()
@@ -90,8 +91,9 @@ class BankCardListActivity :
 
     override fun initObserve() =with(vm){
         super.initObserve()
-        accountListResult.observe(this@BankCardListActivity) {
+        accountListResult.observe(this@PayoutAccountListActivity) {
             binding.apply {
+                rvAccounts.isVisible = !it.isNullOrEmpty()
                 if (it.isNullOrEmpty()) {
                     loadingLayout.showEmpty(R.mipmap.ic_banklist_null, R.string.empty_bankcard)
                 } else {

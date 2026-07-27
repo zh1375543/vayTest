@@ -64,7 +64,7 @@ class SideHomeViewModel(
 
     fun getPlanHomeData() {
         planHomeJob?.cancel()
-        planHomeJob = launchData {
+        planHomeJob = createNetworkRequest {
             repository.getPlanHomeData()
         }.onSuccess {
             planHomeResult.value = it
@@ -79,7 +79,7 @@ class SideHomeViewModel(
     fun saveReport() {
         if (!isLogin) return
         savingsReportJob?.cancel()
-        savingsReportJob = launchData {
+        savingsReportJob = createNetworkRequest {
             repository.saveReport()
         }.onSuccess {
             savingsReportResult.value = it
@@ -91,7 +91,7 @@ class SideHomeViewModel(
 
     fun getPlanList(status: Int?, pageNum: Int, pageSize: Int) {
         planListJob?.cancel()
-        planListJob = launchData {
+        planListJob = createNetworkRequest {
             repository.getPlanList(status, pageNum, pageSize)
         }.onSuccess { result ->
             planListResult.value = PlanListPage(status, pageNum, result)
@@ -103,7 +103,7 @@ class SideHomeViewModel(
 
     fun getPlanDetail(planId: Int) {
         planDetailJob?.cancel()
-        planDetailJob = launchData {
+        planDetailJob = createNetworkRequest {
             repository.getPlanDetail(planId)
         }.onSuccess {
             planDetailResult.value = it
@@ -115,7 +115,7 @@ class SideHomeViewModel(
 
     fun getPlanCalendar(year: Int, month: Int) {
         planCalendarJob?.cancel()
-        planCalendarJob = launchData {
+        planCalendarJob = createNetworkRequest {
             repository.getPlanCalendar(year, month)
         }.onSuccess {
             planCalendarResult.value = it
@@ -126,7 +126,7 @@ class SideHomeViewModel(
     }
 
     fun uploadPlanImage(imageUri: Uri) {
-        launchData {
+        createNetworkRequest {
             repository.uploadPlanImage(imageUri)
         }.showLoading().onSuccess { result ->
             if (result != null && result.imageUrl.isNotBlank()) {
@@ -143,7 +143,7 @@ class SideHomeViewModel(
     fun addPlan(request: CreatePlanRequest) {
         if (addPlanJob?.isActive == true) return
 
-        addPlanJob = launchData {
+        addPlanJob = createNetworkRequest {
             repository.addPlan(request)
         }.showLoading().onSuccess {
             addPlanResult.value = Event(Unit)
@@ -155,7 +155,7 @@ class SideHomeViewModel(
     fun updatePlan(request: UpdatePlanRequest) {
         if (updatePlanJob?.isActive == true) return
 
-        updatePlanJob = launchData {
+        updatePlanJob = createNetworkRequest {
             repository.updatePlan(request)
         }.showLoading().onSuccess {
             updatePlanResult.value = Event(Unit)
@@ -167,7 +167,7 @@ class SideHomeViewModel(
     fun cancelPlan(request: CancelPlanRequest) {
         if (cancelPlanJob?.isActive == true) return
 
-        cancelPlanJob = launchData {
+        cancelPlanJob = createNetworkRequest {
             repository.cancelPlan(request)
         }.showLoading().onSuccess {
             cancelPlanResult.value = Event(Unit)
@@ -179,7 +179,7 @@ class SideHomeViewModel(
     fun savePlan(request: SavePlanRequest) {
         if (savePlanJob?.isActive == true) return
 
-        savePlanJob = launchData {
+        savePlanJob = createNetworkRequest {
             repository.savePlan(request)
         }.showLoading().onSuccess { result ->
             result?.let { savePlanResult.value = Event(it) }
@@ -191,7 +191,7 @@ class SideHomeViewModel(
     fun withdrawPlan(request: SavePlanRequest) {
         if (withdrawPlanJob?.isActive == true) return
 
-        withdrawPlanJob = launchData {
+        withdrawPlanJob = createNetworkRequest {
             repository.withdrawPlan(request)
         }.showLoading().onSuccess { result ->
             result?.let { withdrawPlanResult.value = Event(it) }

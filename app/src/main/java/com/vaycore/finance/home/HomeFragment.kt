@@ -20,9 +20,9 @@ import com.vaycore.finance.data.bean.TrackBean
 import com.vaycore.finance.data.isLogin
 import com.vaycore.finance.data.signBackHome
 import com.vaycore.finance.databinding.HomeFragmentBinding
-import com.vaycore.finance.loan.ContractSignActivity
-import com.vaycore.finance.loan.LoanProductActivity
-import com.vaycore.finance.loan.LoanProductMultiActivity
+import com.vaycore.finance.loan.AgreementSignatureActivity
+import com.vaycore.finance.loan.LoanOfferActivity
+import com.vaycore.finance.loan.CombinedLoanOfferActivity
 import com.vaycore.finance.loan.viewmodel.LoanDashboardViewModel
 import com.vaycore.finance.loan.viewmodel.LoanProductViewModel
 import com.vaycore.finance.model.identity.UserAuthStatusResponse
@@ -44,7 +44,7 @@ import com.vaycore.finance.ui.showAppRatingDialog
 import com.vaycore.finance.ui.showCreditUnderReviewDialog
 import com.vaycore.finance.ui.showPreCreditExpiredDialog
 import com.vaycore.finance.util.LOAN_GET_NOW_CLICK
-import com.vaycore.finance.util.context.getColor2
+import com.vaycore.finance.util.context.resolveColorCompat
 import com.vaycore.finance.util.context.openExternalBrowser
 import com.vaycore.finance.util.context.openPlayStore
 import com.vaycore.finance.util.countdownTimer
@@ -57,7 +57,7 @@ import com.vaycore.finance.util.start
 import com.vaycore.finance.util.toJsonString
 import com.vaycore.finance.util.trackEvent
 import com.vaycore.finance.util.viewBinding
-import com.vaycore.finance.wallet.BankCardListActivity
+import com.vaycore.finance.wallet.PayoutAccountListActivity
 import kotlinx.coroutines.Job
 
 class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
@@ -120,13 +120,13 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
 
     private fun setupBusinessActions() = with(binding.contentLayout) {
         tvModifyCard.singleClick {
-            vm.recordEvent(
+            vm.submitTrackingEvent(
                 TrackBean(
                     p = PageHome,
                     act = ACT_userAppBankMyCard
                 )
             )
-            it.context.start<BankCardListActivity>()
+            it.context.start<PayoutAccountListActivity>()
         }
         tvBorrowNow.singleClick {
             it.context.ifLoginAction {
@@ -136,7 +136,7 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
         }
         tvLoan.singleClick {
             it.context.ifLoginAction {
-                context?.start<LoanProductMultiActivity>()
+                context?.start<CombinedLoanOfferActivity>()
             }
         }
         ivCloseBank.singleClick {
@@ -332,7 +332,7 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
             refuseLayout.isVisible = data.userCreditStatus == 2
 
             if (data.userCreditStatus == 0) {
-                vm.recordEvent(
+                vm.submitTrackingEvent(
                     TrackBean(
                         p = PageHomePre,
                         act = ACT_approvalInProgress,
@@ -340,7 +340,7 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
                     )
                 )
             } else if (data.userCreditStatus == 2) {
-                vm.recordEvent(
+                vm.submitTrackingEvent(
                     TrackBean(
                         p = PageHomeRefuse,
                         act = ACT_approvalDenied,
@@ -356,7 +356,7 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
             binding.calmLayout.tvCalmTips3.setClickableTextWithScale(
                 calmTips,
                 data.enableLoanStr ?: "-",
-                binding.root.context.getColor2(R.color.C_374151)
+                binding.root.context.resolveColorCompat(R.color.C_374151)
             )
             if (!shouldNavigateToOrder) {
                 val newProducts = data.showProducts.orEmpty().filter { it.newSign == 1 }
@@ -409,7 +409,7 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
             creditDialog = root.context.createAvailableCreditDialog(amount) {
                 if (!tvLoan.isEnabled) return@createAvailableCreditDialog
                 isNavigatingToLoan = true
-                root.context.start<LoanProductMultiActivity>()
+                root.context.start<CombinedLoanOfferActivity>()
             }
             creditDialog?.setOnDismissListener {
                 creditDialog = null
@@ -427,11 +427,11 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
         if (creditDialog?.isShowing == true || newProductDialog?.isShowing == true) return
 
         newProductDialog = context?.createNewProductDialog(newProducts, closeAction = {
-            vm.recordEvent(TrackBean(p = PageHome, act = ACT_clickClose))
+            vm.submitTrackingEvent(TrackBean(p = PageHome, act = ACT_clickClose))
         }) {
             if (!binding.contentLayout.tvLoan.isEnabled) return@createNewProductDialog
-            vm.recordEvent(TrackBean(p = PageHome, act = ACT_clickImmediate))
-            context?.start<LoanProductMultiActivity>()
+            vm.submitTrackingEvent(TrackBean(p = PageHome, act = ACT_clickImmediate))
+            context?.start<CombinedLoanOfferActivity>()
         }
         newProductDialog?.show()
     }
@@ -445,7 +445,7 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
                 tvPreTimes.setClickableTextWithScale(
                     fullText,
                     t.toString(),
-                    root.context.getColor2(R.color.color_7087F8)
+                    root.context.resolveColorCompat(R.color.color_7087F8)
                 )
             }, end = {
                 tvPreTimes.isVisible = false
@@ -455,7 +455,7 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
             tvPreTimes.setClickableTextWithScale(
                 fullText,
                 it.toString(),
-                root.context.getColor2(R.color.color_7087F8)
+                root.context.resolveColorCompat(R.color.color_7087F8)
             )
         }
     }
@@ -477,7 +477,7 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
                     termMap[data.id] = list[index].id
                 }
             }
-            ContractSignActivity.Companion.launch(
+            AgreementSignatureActivity.Companion.launch(
                 binding.root.context,
                 data.bankInfoId,
                 null,
@@ -489,7 +489,7 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
                 true
             )
         } else {
-            context?.start<LoanProductActivity> {
+            context?.start<LoanOfferActivity> {
                 putExtra("product", data)
             }
         }

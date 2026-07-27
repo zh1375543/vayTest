@@ -38,7 +38,7 @@ class SplashActivity :
         App.appViewModel.apply {
             getAppSecret()
             hasDeviceInfo(PageHome) {}
-            recordEvent(
+            submitTrackingEvent(
                 TrackBean(
                     act = ACT_inApp
                 )

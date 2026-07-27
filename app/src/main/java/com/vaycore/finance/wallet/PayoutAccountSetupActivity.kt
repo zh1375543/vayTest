@@ -16,7 +16,7 @@ import com.vaycore.finance.identity.viewmodel.PersonalInfoViewModel
 import com.vaycore.finance.util.showToastMessage
 import com.vaycore.finance.util.viewBinding
 
-class BankCardAddActivity : BaseActivity<ActivityBankCardAddBinding>() {
+class PayoutAccountSetupActivity : BaseActivity<ActivityBankCardAddBinding>() {
 
     private enum class WithdrawMethod {
         BANK,
@@ -160,11 +160,11 @@ class BankCardAddActivity : BaseActivity<ActivityBankCardAddBinding>() {
             R.mipmap.ic_wallet_select_bg
         }
         val iconSize = resources.getDimensionPixelSize(R.dimen.dp_36)
-        val icon = AppCompatResources.getDrawable(this@BankCardAddActivity, iconRes)?.apply {
+        val icon = AppCompatResources.getDrawable(this@PayoutAccountSetupActivity, iconRes)?.apply {
             setBounds(0, 0, iconSize, iconSize)
         }
         val arrowSize = resources.getDimensionPixelSize(R.dimen.dp_24)
-        val arrow = AppCompatResources.getDrawable(this@BankCardAddActivity, R.mipmap.mine_right)?.apply {
+        val arrow = AppCompatResources.getDrawable(this@PayoutAccountSetupActivity, R.mipmap.mine_right)?.apply {
             setBounds(0, 0, arrowSize, arrowSize)
         }
         methodSelectionView.setCompoundDrawablesRelative(icon, null, arrow, null)
@@ -179,7 +179,7 @@ class BankCardAddActivity : BaseActivity<ActivityBankCardAddBinding>() {
         selectedWithdrawMethod = null
         tvWithdrawMethodError.isVisible = false
         val arrowSize = resources.getDimensionPixelSize(R.dimen.dp_24)
-        val arrow = AppCompatResources.getDrawable(this@BankCardAddActivity, R.mipmap.mine_right)?.apply {
+        val arrow = AppCompatResources.getDrawable(this@PayoutAccountSetupActivity, R.mipmap.mine_right)?.apply {
             setBounds(0, 0, arrowSize, arrowSize)
         }
         methodSelectionView.setCompoundDrawablesRelative(null, null, arrow, null)
@@ -190,7 +190,7 @@ class BankCardAddActivity : BaseActivity<ActivityBankCardAddBinding>() {
 
     override fun initObserve() = with(vm) {
         super.initObserve()
-        payChannelList.observe(this@BankCardAddActivity) {
+        payChannelList.observe(this@PayoutAccountSetupActivity) {
             chooseBankDialog(it ?: emptyList()) { bean ->
                 selectWithdrawMethod(WithdrawMethod.BANK)
                 binding.withdrawAccountForm.bankView.setText(bean.bankName)
@@ -198,7 +198,7 @@ class BankCardAddActivity : BaseActivity<ActivityBankCardAddBinding>() {
                 bankBean = bean
             }
         }
-        walletList.observe(this@BankCardAddActivity) {
+        walletList.observe(this@PayoutAccountSetupActivity) {
             chooseWalletDialog(it ?: emptyList()) { wallet ->
                 selectWithdrawMethod(WithdrawMethod.WALLET)
                 binding.withdrawAccountForm.walletProviderView.setText(wallet.walletName)
@@ -206,11 +206,11 @@ class BankCardAddActivity : BaseActivity<ActivityBankCardAddBinding>() {
                 walletBean = wallet
             }
         }
-        addResult.observe(this@BankCardAddActivity) {
+        addResult.observe(this@PayoutAccountSetupActivity) {
             getString(R.string.toast_add_account_receivable).showToastMessage()
             finish()
         }
-        personalVm.personalResult.observe(this@BankCardAddActivity) {
+        personalVm.personalResult.observe(this@PayoutAccountSetupActivity) {
             binding.withdrawAccountForm.holderView.setText(it?.firstName)
         }
     }

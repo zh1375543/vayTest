@@ -53,7 +53,7 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import kotlin.math.max
 
-class KycAuthActivity : BaseActivity<KycAuthActivityBinding>() {
+class IdentityVerificationActivity : BaseActivity<KycAuthActivityBinding>() {
 
     override val binding by viewBinding(KycAuthActivityBinding::inflate)
     private val vm by viewModels<KycUploadViewModel>()
@@ -68,7 +68,7 @@ class KycAuthActivity : BaseActivity<KycAuthActivityBinding>() {
                 frontUri = withContext(Dispatchers.IO) {
                     compressImage(photoUri)
                 }
-                vm.recordEvent(
+                vm.submitTrackingEvent(
                     TrackBean(
                         p = PageInfoKyc,
                         act = ACT_uploadFrontEnd,
@@ -88,7 +88,7 @@ class KycAuthActivity : BaseActivity<KycAuthActivityBinding>() {
                 backUri = withContext(Dispatchers.IO) {
                     compressImage(photoUri)
                 }
-                vm.recordEvent(
+                vm.submitTrackingEvent(
                     TrackBean(
                         p = PageInfoKyc,
                         act = ACT_uploadBackEnd,
@@ -107,7 +107,7 @@ class KycAuthActivity : BaseActivity<KycAuthActivityBinding>() {
                 selfUri = withContext(Dispatchers.IO) {
                     compressImage(photoUri)
                 }
-                vm.recordEvent(
+                vm.submitTrackingEvent(
                     TrackBean(
                         p = PageInfoKyc,
                         act = ACT_uploadFaceEnd,
@@ -133,7 +133,7 @@ class KycAuthActivity : BaseActivity<KycAuthActivityBinding>() {
                         imageUri to liveFile
                     }
                     selfUri = compressedUri
-                    vm.recordEvent(
+                    vm.submitTrackingEvent(
                         TrackBean(
                             p = PageInfoKyc,
                             act = ACT_uploadFaceEnd,
@@ -175,14 +175,14 @@ class KycAuthActivity : BaseActivity<KycAuthActivityBinding>() {
         viewModel = vm
         isCertified = isCert
         trackEvent(KYC_INFO_PAGE)
-        vm.recordEvent(
+        vm.submitTrackingEvent(
             TrackBean(
                 p = PageInfoKyc,
                 act = ACT_in
             )
         )
         titleBar.setNavigationAction { handleBackPressed() }
-        onBackAction(vm) {
+        registerTrackedBackHandler(vm) {
             handleBackPressed()
         }
         titleBar.setAction(
@@ -199,7 +199,7 @@ class KycAuthActivity : BaseActivity<KycAuthActivityBinding>() {
 
     private fun routeMediaRequests() = with(binding) {
         ivCardFront.singleClick {
-            vm.recordEvent(
+            vm.submitTrackingEvent(
                 TrackBean(
                     p = PageInfoKyc,
                     act = ACT_uploadFrontStart,
@@ -217,7 +217,7 @@ class KycAuthActivity : BaseActivity<KycAuthActivityBinding>() {
             }
         }
         ivSelf.singleClick {
-            vm.recordEvent(
+            vm.submitTrackingEvent(
                 TrackBean(
                     p = PageInfoKyc,
                     act = ACT_uploadFaceStart,
@@ -238,7 +238,7 @@ class KycAuthActivity : BaseActivity<KycAuthActivityBinding>() {
 
                     2 -> {
                         selfLauncher.launch(
-                            Intent(this@KycAuthActivity, DFSilentLivenessActivity::class.java)
+                            Intent(this@IdentityVerificationActivity, DFSilentLivenessActivity::class.java)
                                 .putExtra(
                                     DFSilentLivenessActivity.KEY_DETECT_IMAGE_RESULT,
                                     true
@@ -250,7 +250,7 @@ class KycAuthActivity : BaseActivity<KycAuthActivityBinding>() {
                         vm.fetchH5Live {
                             selfLauncher.launch(
                                 Intent(
-                                    this@KycAuthActivity,
+                                    this@IdentityVerificationActivity,
                                     DFSilentLivenessActivity::class.java
                                 )
                                     .putExtra(
@@ -264,7 +264,7 @@ class KycAuthActivity : BaseActivity<KycAuthActivityBinding>() {
             }
         }
         ivCardBack.singleClick {
-            vm.recordEvent(
+            vm.submitTrackingEvent(
                 TrackBean(
                     p = PageInfoKyc,
                     act = ACT_uploadBackStart,
@@ -303,7 +303,7 @@ class KycAuthActivity : BaseActivity<KycAuthActivityBinding>() {
                     return@singleClick
                 }
             }
-            vm.recordEvent(
+            vm.submitTrackingEvent(
                 TrackBean(
                     p = PageInfoKyc,
                     act = ACT_clickNext,
@@ -327,30 +327,30 @@ class KycAuthActivity : BaseActivity<KycAuthActivityBinding>() {
     private var kycType: Int = 1
     override fun initObserve() =with(vm){
         super.initObserve()
-        kycResult.observe(this@KycAuthActivity) {
+        kycResult.observe(this@IdentityVerificationActivity) {
             it?.let {
                 binding.loadingLayout.showContent()
             }
         }
-        compareResult.observe(this@KycAuthActivity) {
+        compareResult.observe(this@IdentityVerificationActivity) {
             homeVm.getUserAuthStatus()
         }
-        homeVm.userAuthStatusResult.observe(this@KycAuthActivity) {
-            it?.routeToNextAuthStep(this@KycAuthActivity)
+        homeVm.userAuthStatusResult.observe(this@IdentityVerificationActivity) {
+            it?.routeToNextAuthStep(this@IdentityVerificationActivity)
             finish()
         }
-        configResult.observe(this@KycAuthActivity) {
+        configResult.observe(this@IdentityVerificationActivity) {
             isCompare = it?.FACE_COMPARE == 1
             kycType = it?.FACE ?: 1
             vm.getKycInfo {
                 binding.loadingLayout.showError()
             }
         }
-        h5Live.observe(this@KycAuthActivity) {
+        h5Live.observe(this@IdentityVerificationActivity) {
             if (it.verifyUrl == null) {
                 selfLauncher.launch(
                     Intent(
-                        this@KycAuthActivity,
+                        this@IdentityVerificationActivity,
                         DFSilentLivenessActivity::class.java
                     )
                         .putExtra(
@@ -361,7 +361,7 @@ class KycAuthActivity : BaseActivity<KycAuthActivityBinding>() {
                 return@observe
             }
             h5Launcher.launch(
-                WebViewActivity.getIntent(this@KycAuthActivity, it.verifyUrl)
+                WebViewActivity.getIntent(this@IdentityVerificationActivity, it.verifyUrl)
             )
         }
     }
@@ -369,7 +369,7 @@ class KycAuthActivity : BaseActivity<KycAuthActivityBinding>() {
     private fun getUri(outputFile: File): Uri {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
             FileProvider.getUriForFile(
-                this@KycAuthActivity,
+                this@IdentityVerificationActivity,
                 "$packageName.fileprovider",
                 outputFile
             )
@@ -402,7 +402,7 @@ class KycAuthActivity : BaseActivity<KycAuthActivityBinding>() {
                 ok = getString(R.string.continue_str),
                 highLight = step.toString(),
                 cancelAction = {
-                    vm.recordEvent(
+                    vm.submitTrackingEvent(
                         TrackBean(
                             p = PageInfoKyc,
                             act = ACT_clickBack,
@@ -411,7 +411,7 @@ class KycAuthActivity : BaseActivity<KycAuthActivityBinding>() {
                     finish()
                 }
             ) {
-                vm.recordEvent(
+                vm.submitTrackingEvent(
                     TrackBean(
                         p = PageInfoKyc,
                         act = ACT_clickContinue,

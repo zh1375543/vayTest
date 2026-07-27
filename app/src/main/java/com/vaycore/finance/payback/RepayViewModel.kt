@@ -15,7 +15,7 @@ class RepayViewModel(
 
     val accountsResult = MutableLiveData<List<BankAccountResponse>?>()
     fun getRepayBankList(errorAction: () -> Unit) {
-        launchData {
+        createNetworkRequest {
             repaymentRepository.fetchRepayBankList()
         }.onSuccess {
             accountsResult.value = it
@@ -27,7 +27,7 @@ class RepayViewModel(
 
     val cardListResult = MutableLiveData<MutableList<BankAccountResponse>?>()
     fun getRepayCardList() {
-        launchData {
+        createNetworkRequest {
             repaymentRepository.fetchRepayCardList()
         }.showLoading().onSuccess {
             cardListResult.value = it
@@ -41,7 +41,7 @@ class RepayViewModel(
         repayInfoId: String?,
         repayType: String?,
     ) {
-        launchData {
+        createNetworkRequest {
             repaymentRepository.uploadRepaymentVoucher(
                 imageCert = imagCert,
                 orderId = orderId,
@@ -58,7 +58,7 @@ class RepayViewModel(
     val selectedOrderAmount = MutableLiveData("0")
 
     fun getOrderList(errorAction: () -> Unit) {
-        launchData {
+        createNetworkRequest {
             repaymentRepository.fetchBatchRepaymentOrders()
         }.onSuccess {
             val orders = it.orEmpty().onEach { order -> order.isCheck = true }
@@ -84,7 +84,7 @@ class RepayViewModel(
 
     val togetherRepayResult = MutableLiveData<RepaymentActionResponse?>()
     fun togetherRepayment(orderList: List<String>) {
-        launchData {
+        createNetworkRequest {
             repaymentRepository.submitBatchRepayment(orderList)
         }.onSuccess {
             togetherRepayResult.value = it

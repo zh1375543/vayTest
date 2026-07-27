@@ -84,7 +84,7 @@ fun Context.chooseAccountsDialog(
             rvCard.post { rvCard.scrollToPosition(index) }
             tvAdd.singleClick {
                 dismiss()
-                start<BankCardAddActivity>()
+                start<PayoutAccountSetupActivity>()
             }
             BtnApply.singleClick {
                 dismiss()

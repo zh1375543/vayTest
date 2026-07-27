@@ -27,7 +27,7 @@ import com.vaycore.finance.ui.extension.hideKeyboard
 import com.vaycore.finance.ui.extension.setSpannableClickableText
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.util.APP_UPGRADE
-import com.vaycore.finance.util.context.getColor2
+import com.vaycore.finance.util.context.resolveColorCompat
 import com.vaycore.finance.util.context.openPlayStore
 import com.vaycore.finance.util.showToastMessage
 import com.vaycore.finance.util.toHtmlSpanned
@@ -68,7 +68,7 @@ fun Context.showConfirmDialog(
             tvDesc.setSpannableClickableText(
                 desc,
                 highLight,
-                getColor2(R.color.C_111827)
+                resolveColorCompat(R.color.C_111827)
             ) {}
             tvDesc.isVisible = desc.isNotBlank()
             tvSure.text = ok
@@ -152,7 +152,7 @@ fun Context.showPreCreditExpiredDialog(date: String) {
             tvTips.setSpannableClickableText(
                 String.format(getString(R.string.pre_credit_has_expired_tips), date),
                 date.ifBlank { "XXXXXXXX" },
-                getColor2(R.color.C_111827)
+                resolveColorCompat(R.color.C_111827)
             ) {
             }
         }

@@ -20,10 +20,10 @@ class PersonalInfoViewModel(
 
     val submitResult = MutableLiveData<Any?>()
     fun submitPersonalInfo(paramBean: ApiRequest) {
-        launchData { verificationRepository.submitPersonalInfo(paramBean) }
+        createNetworkRequest { verificationRepository.submitPersonalInfo(paramBean) }
             .showLoading()
             .onSuccess {
-                recordEvent(
+                submitTrackingEvent(
                     TrackBean(
                         p = PageInfoPersonal,
                         act = ACT_next,
@@ -33,7 +33,7 @@ class PersonalInfoViewModel(
                 submitResult.value = it
             }
             .onFailed {
-                recordEvent(
+                submitTrackingEvent(
                     TrackBean(
                         p = PageInfoPersonal,
                         act = ACT_next,
@@ -50,7 +50,7 @@ class PersonalInfoViewModel(
             action(it)
             return
         }
-        launchData { verificationRepository.fetchPersonalInfoOptions() }
+        createNetworkRequest { verificationRepository.fetchPersonalInfoOptions() }
             .showLoading()
             .onSuccess {
                 enumBean.value = it
@@ -60,14 +60,14 @@ class PersonalInfoViewModel(
     }
 
     fun getAddressList(id: String? = null, action: (List<SelectionOption>) -> Unit) {
-        launchData { verificationRepository.fetchAddressOptions(id) }
+        createNetworkRequest { verificationRepository.fetchAddressOptions(id) }
             .showLoading()
             .onSuccess { action(it ?: emptyList()) }
             .execute()
     }
 
     fun getWorkInfoOptions(action: (WorkProfileOptionsResponse) -> Unit) {
-        launchData { verificationRepository.fetchWorkInfoOptions() }
+        createNetworkRequest { verificationRepository.fetchWorkInfoOptions() }
             .showLoading()
             .onSuccess { it?.let(action) }
             .execute()
@@ -75,7 +75,7 @@ class PersonalInfoViewModel(
 
     val personalResult = MutableLiveData<PersonalProfileResponse?>()
     fun getPersonalInfo(errorAction: () -> Unit) {
-        launchData { verificationRepository.fetchPersonalInfo() }
+        createNetworkRequest { verificationRepository.fetchPersonalInfo() }
             .onSuccess { personalResult.value = it }
             .onFailed {
                 errorAction()

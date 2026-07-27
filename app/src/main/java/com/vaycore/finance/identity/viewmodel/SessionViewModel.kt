@@ -23,9 +23,9 @@ class SessionViewModel(
 
     val otpResult = MutableLiveData<Any?>()
     fun sendOTP(phone: String) {
-        launchData { sessionRepository.sendOTP(phone) }
+        createNetworkRequest { sessionRepository.sendOTP(phone) }
             .showLoading().onSuccess {
-                recordEvent(
+                submitTrackingEvent(
                     TrackBean(
                         p = PageLogin,
                         act = ACT_getVerifyCode,
@@ -34,14 +34,14 @@ class SessionViewModel(
                 )
                 otpResult.value = it
             }.onFailed {
-                recordEvent(
+                submitTrackingEvent(
                     TrackBean(
                         p = PageLogin,
                         act = ACT_getVerifyCode,
                         result = it.toJsonString()
                     )
                 )
-                recordEvent(
+                submitTrackingEvent(
                     TrackBean(
                         p = PageLogin,
                         act = ACT_OTPFail,
@@ -58,11 +58,11 @@ class SessionViewModel(
         code: String?,
         password: String?,
     ) {
-        launchData {
+        createNetworkRequest {
             sessionRepository.login(phone, code, password)
         }.showLoading().onSuccess {
             it?.let {
-                recordEvent(
+                submitTrackingEvent(
                     TrackBean(
                         p = PageLogin,
                         act = if (password == null) ACT_loginOTP else ACT_loginPassword,
@@ -75,7 +75,7 @@ class SessionViewModel(
                 loginResult.value = it
             }
         }.onFailed {
-            recordEvent(
+            submitTrackingEvent(
                 TrackBean(
                     p = PageLogin,
                     act = if (password == null) ACT_loginOTP else ACT_loginPassword,
@@ -87,14 +87,14 @@ class SessionViewModel(
     }
 
     fun postDeviceInfo() {
-        launchData {
+        createNetworkRequest {
             sessionRepository.postDeviceInfo()
         }.onSuccess { }.execute()
     }
 
     val logoutResult = MutableLiveData<Any?>()
     fun logout() {
-        launchData {
+        createNetworkRequest {
             sessionRepository.logout()
         }.showLoading().onSuccess {
             logoutResult.value = it
@@ -103,14 +103,14 @@ class SessionViewModel(
 
     val sendChangePasswordOtpResult = MutableLiveData<Any?>()
     fun sendChangePasswordOTP(phone: String) {
-        launchData { sessionRepository.sendOTP(phone) }.showLoading().onSuccess {
+        createNetworkRequest { sessionRepository.sendOTP(phone) }.showLoading().onSuccess {
             sendChangePasswordOtpResult.value = it
         }.execute()
     }
 
     val changeResult = MutableLiveData<LoginSessionResponse?>()
     fun changePassword(phone: String, code: String, password: String) {
-        launchData {
+        createNetworkRequest {
             sessionRepository.changePassword(phone, code, password)
         }.showLoading().onSuccess {
             changeResult.value = it
@@ -119,10 +119,10 @@ class SessionViewModel(
 
     val setPwdResult = MutableLiveData<LoginSessionResponse?>()
     fun setPassword(phone: String, password: String) {
-        launchData {
+        createNetworkRequest {
             sessionRepository.setPassword(phone, password)
         }.showLoading().onSuccess {
-            recordEvent(
+            submitTrackingEvent(
                 TrackBean(
                     p = PageCreatePassword,
                     act = ACT_createPassword,
@@ -131,7 +131,7 @@ class SessionViewModel(
             )
             setPwdResult.value = it
         }.onFailed {
-            recordEvent(
+            submitTrackingEvent(
                 TrackBean(
                     p = PageCreatePassword,
                     act = ACT_createPassword,

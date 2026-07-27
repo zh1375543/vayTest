@@ -55,7 +55,7 @@ class WebViewActivity : BaseActivity<WebActivityBinding>() {
     }
 
     private fun setupNavigation() = with(binding) {
-        onBackAction(null) {
+        registerTrackedBackHandler(null) {
             handleBack()
         }
         titleBar.setNavigationAction { handleBack() }

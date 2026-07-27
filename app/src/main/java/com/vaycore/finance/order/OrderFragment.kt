@@ -13,11 +13,11 @@ import com.vaycore.finance.data.ORDER_STATUS_PAYMENT_PENDING
 import com.vaycore.finance.data.bean.TrackBean
 import com.vaycore.finance.databinding.OrderFragmentBinding
 import com.vaycore.finance.loan.viewmodel.LoanDashboardViewModel
-import com.vaycore.finance.payback.RepaymentBatchActivity
+import com.vaycore.finance.payback.BulkRepaymentActivity
 import com.vaycore.finance.order.adapter.HomeOrderAdapter
 import com.vaycore.finance.ui.extension.setClickableTextWithScale
 import com.vaycore.finance.ui.extension.singleClick
-import com.vaycore.finance.util.context.getColor2
+import com.vaycore.finance.util.context.resolveColorCompat
 import com.vaycore.finance.util.start
 import com.vaycore.finance.util.viewBinding
 
@@ -28,7 +28,7 @@ class OrderFragment : BaseFragment<OrderFragmentBinding>(R.layout.order_fragment
     private val orderAdapter by lazy {
         HomeOrderAdapter().apply {
             setOnItemClickListener { item, _ ->
-                context.start<LoanOrderDetailActivity> {
+                context.start<BorrowingDetailActivity> {
                     putExtra("orderId", item.orderId)
                     putExtra("isFromBatch", false)
                 }
@@ -44,7 +44,7 @@ class OrderFragment : BaseFragment<OrderFragmentBinding>(R.layout.order_fragment
             vm.getAuthData()
         }
         tvRepayment.singleClick {
-            it.context.start<RepaymentBatchActivity>()
+            it.context.start<BulkRepaymentActivity>()
         }
         swipeRefreshLayout.setOnRefreshListener {
             binding.loadingLayout.showLoading()
@@ -56,7 +56,7 @@ class OrderFragment : BaseFragment<OrderFragmentBinding>(R.layout.order_fragment
         super.onResume()
         binding.loadingLayout.showLoading()
         vm.getAuthData()
-        vm.recordEvent(
+        vm.submitTrackingEvent(
             TrackBean(
                 p = PageOrder,
                 act = ACT_inOrdersPage,
@@ -93,7 +93,7 @@ class OrderFragment : BaseFragment<OrderFragmentBinding>(R.layout.order_fragment
                                 size.toString()
                             ),
                             size.toString(),
-                            root.context.getColor2(R.color.color_7087F8)
+                            root.context.resolveColorCompat(R.color.color_7087F8)
                         )
                         repaymentLayout.isVisible = it.showMultipleRepaySign == 1 && size > 0
                     }

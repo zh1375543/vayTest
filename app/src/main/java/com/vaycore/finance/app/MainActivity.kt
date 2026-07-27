@@ -83,7 +83,7 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
     }
 
     private fun setupPager() = with(binding) {
-        vm.recordEvent(
+        vm.submitTrackingEvent(
             TrackBean(
                 p = PageHome, act = ACT_in
             )
@@ -150,7 +150,7 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
                     val currentTime = System.currentTimeMillis()
                     if (currentTime - lastBackPressTime < EXIT_INTERVAL) {
                         isEnabled = false
-                        vm.recordEvent(
+                        vm.submitTrackingEvent(
                             TrackBean(
                                 act = ACT_exit, result = PageHome, p = PageExit
                             )
@@ -173,7 +173,7 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
         binding.apply {
             vpMain.setCurrentItem(page, false)
         }
-        vm.recordEvent(
+        vm.submitTrackingEvent(
             TrackBean(
                 p = PageHome, act = when (page) {
                     0 -> ACT_clickActivity

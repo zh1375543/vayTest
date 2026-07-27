@@ -23,7 +23,7 @@ import com.google.android.gms.ads.identifier.AdvertisingIdClient
 import com.vaycore.finance.R
 import com.vaycore.finance.data.isLogin
 import com.vaycore.finance.identity.LoginActivity
-import com.vaycore.finance.util.context.getColor2
+import com.vaycore.finance.util.context.resolveColorCompat
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -205,8 +205,8 @@ fun Context.getStatusBarHeight(): Int {
 }
 
 fun AppCompatActivity.setSystemBar(
-    @ColorInt statusBarColor: Int = getColor2(R.color.transparent),
-    @ColorInt navBarColor: Int = getColor2(R.color.white),
+    @ColorInt statusBarColor: Int = resolveColorCompat(R.color.transparent),
+    @ColorInt navBarColor: Int = resolveColorCompat(R.color.white),
     darkMode: Boolean = false,
     adjustForIme: Boolean = true,
 ) {

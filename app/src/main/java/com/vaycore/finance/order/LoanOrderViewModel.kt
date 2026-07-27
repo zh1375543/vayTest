@@ -12,7 +12,7 @@ class LoanOrderViewModel(
 
     val orderListResult = MutableLiveData<List<OrderBean>>()
     fun getOrderList(errorAction: () -> Unit) {
-        launchData {
+        createNetworkRequest {
             loanOrderRepository.fetchOrderList()
         }.onSuccess {
             orderListResult.value = it ?: emptyList()
@@ -24,7 +24,7 @@ class LoanOrderViewModel(
 
     val orderDetailResult = MutableLiveData<LoanOrderDetailResponse?>()
     fun getOrderDetail(orderId: Long?, errorAction: () -> Unit) {
-        launchData {
+        createNetworkRequest {
             loanOrderRepository.fetchOrderDetail(orderId)
         }.onSuccess {
             orderDetailResult.value = it
@@ -36,7 +36,7 @@ class LoanOrderViewModel(
 
     val buttonResult = MutableLiveData<String?>()
     fun getButtonState() {
-        launchData {
+        createNetworkRequest {
             loanOrderRepository.fetchRepaymentBorrowButtonState()
         }.onSuccess {
             buttonResult.value = it
@@ -48,7 +48,7 @@ class LoanOrderViewModel(
 
     val installmentRepayResult = MutableLiveData<RepaymentActionResponse?>()
     fun installmentRepay(orderNo: String?, planNumberList: List<Int?>?) {
-        launchData {
+        createNetworkRequest {
             loanOrderRepository.installmentRepay(orderNo, planNumberList)
         }.showLoading().onSuccess {
             installmentRepayResult.value = it
@@ -56,7 +56,7 @@ class LoanOrderViewModel(
     }
 
     fun repayAndBorrow(id: Long?, applyAgainSign: Int?, block: () -> Unit) {
-        launchData {
+        createNetworkRequest {
             loanOrderRepository.repayAndBorrow(id, applyAgainSign)
         }.showLoading().onSuccess {
             block()
@@ -64,7 +64,7 @@ class LoanOrderViewModel(
     }
 
     fun cancelApply(id: Long?, block: () -> Unit) {
-        launchData {
+        createNetworkRequest {
             loanOrderRepository.cancelApply(id)
         }.showLoading().onSuccess {
             block()

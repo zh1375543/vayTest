@@ -7,8 +7,6 @@
 
         <import type="android.view.View" />
 
-        <import type="com.vaycore.finance.R" />
-
         <variable
             name="item"
             type="com.vaycore.finance.model.wallet.BankAccountResponse" />
@@ -30,7 +28,7 @@
         android:layout_marginTop="@dimen/dp_20"
         android:contentDescription="@null"
         android:scaleType="fitCenter"
-        android:src="@{item.payWay == `WALLET` ? R.mipmap.ic_wallet_defalut : R.mipmap.ic_bank_default}"
+        app:accountIcon="@{item.payWay}"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@mipmap/ic_bank_default" />
