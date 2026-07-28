@@ -6,6 +6,7 @@ import com.vaycore.finance.databinding.SidepageFirstSavingsPlanActivityBinding
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.util.viewBinding
 import com.vaycore.finance.base.BaseActivity
+import com.vaycore.finance.sidepage.PortalActivity
 
 /** Collects an optional plan name during the one-time savings-plan introduction. */
 class FirstSavingsPlanActivity : BaseActivity<SidepageFirstSavingsPlanActivityBinding>() {
@@ -45,8 +46,11 @@ class FirstSavingsPlanActivity : BaseActivity<SidepageFirstSavingsPlanActivityBi
     }
 
     private fun completeOnboarding() {
-        setResult(RESULT_OK)
-        finish()
+        startActivity(
+            Intent(this, PortalActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            },
+        )
     }
 
     companion object {

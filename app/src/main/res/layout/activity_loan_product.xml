@@ -193,7 +193,6 @@
             android:layout_marginTop="@dimen/dp_16"
             android:paddingHorizontal="@dimen/dp_15"
             android:paddingVertical="@dimen/dp_14"
-            android:visibility="@{account == null || account.payWay != `CARD` ? View.VISIBLE : View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvAccountTitle"

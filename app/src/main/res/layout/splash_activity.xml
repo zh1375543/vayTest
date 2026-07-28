@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/ic_splash_bg">
+    android:background="@mipmap/ic_page_bg">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/ivIcon"
@@ -11,7 +11,7 @@
         android:layout_height="@dimen/dp_67"
         android:layout_marginTop="@dimen/dp_106"
         android:padding="@dimen/dp_1"
-        android:src="@mipmap/logo"
+        android:src="@mipmap/ic_launcher"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

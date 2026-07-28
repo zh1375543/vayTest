@@ -66,6 +66,7 @@ class BorrowingDetailActivity :
     private val orderId by lazy { intent.getLongExtra("orderId", 0L) }
     // Server state reloanButtonSign supports "0"-"4"; null/unknown values fall back to state 2.
     private var currentButtonSign: String? = null
+    private var isAwaitingBottomActionState = false
     private val feeAdapter by lazy {
         BorrowingFeeBreakdownAdapter()
     }
@@ -464,8 +465,10 @@ class BorrowingDetailActivity :
             detail?.let(::renderOrderDetail)
         }
         buttonResult.observe(this@BorrowingDetailActivity) { sign ->
-            if (binding.bottomActionLayout.isVisible) {
+            if (isAwaitingBottomActionState) {
                 renderRepaymentActionState(sign)
+                binding.bottomActionLayout.visibility = View.VISIBLE
+                isAwaitingBottomActionState = false
             }
         }
         installmentRepayResult.observe(this@BorrowingDetailActivity) {
@@ -493,6 +496,7 @@ class BorrowingDetailActivity :
 
     private fun hideBottomActionPanel() {
         currentButtonSign = null
+        isAwaitingBottomActionState = false
         binding.bottomActionLayout.isVisible = false
     }
 
@@ -500,11 +504,11 @@ class BorrowingDetailActivity :
         selectedAmount: String,
     ) = with(binding) {
         currentButtonSign = null
-        bottomActionLayout.isVisible = true
+        isAwaitingBottomActionState = true
+        // Keep the bottom area reserved until the server state is known, avoiding a default-state flash.
+        bottomActionLayout.visibility = View.INVISIBLE
         cbAutoApply.isSelected = true
         tvSelectAmount.text = selectedAmount
-        // Show state 2 while waiting for the server response.
-        renderRepaymentActionState(null)
     }
 
     /** Applies state 0-4 to the fixed bottom layout without rearranging constraints. */

@@ -275,8 +275,7 @@ class LoginActivity : BaseActivity<LoginActivityBinding>() {
             it?.let {
                 App.Companion.appViewModel.postRiskInfo(PageLogin) {}
                 vm.postDeviceInfo()
-//                launchPostLoginDestination()
-                MainActivity.Companion.launch(this@LoginActivity)
+                launchPostLoginDestination()
                 finish()
             }
         }

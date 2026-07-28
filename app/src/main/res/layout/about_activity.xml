@@ -18,7 +18,7 @@
         android:layout_height="@dimen/dp_65"
         android:layout_marginTop="@dimen/dp_82"
         android:padding="@dimen/dp_2"
-        android:src="@mipmap/logo"
+        android:src="@mipmap/ic_launcher"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleBar"
