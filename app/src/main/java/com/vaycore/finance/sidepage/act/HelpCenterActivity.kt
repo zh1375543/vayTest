@@ -1,5 +1,6 @@
 package com.vaycore.finance.sidepage.act
 
+import android.content.Intent
 import androidx.activity.viewModels
 import com.vaycore.finance.BuildConfig
 import com.vaycore.finance.R
@@ -26,7 +27,7 @@ class HelpCenterActivity : BaseActivity<SidepageHelpCenterActivityBinding>() {
             vm.getUnAuthData(true)
         }
         tvFaq.singleClick {
-
+            startActivity(Intent(this@HelpCenterActivity, FaqActivity::class.java))
         }
 
     }

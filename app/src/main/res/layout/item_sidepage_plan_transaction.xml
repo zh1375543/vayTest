@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/dp_16"
-    android:minHeight="@dimen/dp_128"
     android:padding="@dimen/dp_20"
     app:radius="@dimen/dp_24"
     app:solidColor="@color/C_F6F6F6">

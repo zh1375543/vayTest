@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/ic_page_bg">
+
+    <com.vaycore.finance.ui.views.PageHeaderView
+        android:id="@+id/titleBar"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_56"
+        app:centerText="@string/faq"
+        app:fitStatusBar="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:paddingStart="@dimen/dp_16"
+        android:paddingTop="@dimen/dp_18"
+        android:paddingEnd="@dimen/dp_16"
+        android:paddingBottom="@dimen/dp_28"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleBar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:text="1. What is a Savings Check-In Plan?"
+                android:textColor="@color/C_374151"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                android:includeFontPadding="false"
+                android:text="A Savings Check-In Plan helps you build a better saving habit. You can create personal saving goals and stay on track by checking in regularly."
+                android:textColor="@color/C_374151"
+                android:textSize="@dimen/sp_14" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_22"
+                android:includeFontPadding="false"
+                android:text="2. How do I create a new savings plan?"
+                android:textColor="@color/C_374151"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                android:includeFontPadding="false"
+                android:text="Go to the home page and tap “Create Plan”. Enter your plan name, target amount, check-in frequency, and estimated completion date to get started."
+                android:textColor="@color/C_374151"
+                android:textSize="@dimen/sp_14" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_22"
+                android:includeFontPadding="false"
+                android:text="3. Can I create multiple savings plans at the same time?"
+                android:textColor="@color/C_374151"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                android:includeFontPadding="false"
+                android:text="Go to the home page and tap “Create Plan”. Enter your plan name, target amount, check-in frequency, and estimated completion date to get started."
+                android:textColor="@color/C_374151"
+                android:textSize="@dimen/sp_14" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_22"
+                android:includeFontPadding="false"
+                android:text="4. What if I forget to check in? Can I make up a missed check-in?"
+                android:textColor="@color/C_374151"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                android:includeFontPadding="false"
+                android:text="Go to the home page and tap “Create Plan”. Enter your plan name, target amount, check-in frequency, and estimated completion date to get started."
+                android:textColor="@color/C_374151"
+                android:textSize="@dimen/sp_14" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_22"
+                android:includeFontPadding="false"
+                android:text="5. Does the check-in amount have to match my original plan amount?"
+                android:textColor="@color/C_374151"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                android:includeFontPadding="false"
+                android:text="No. You can adjust the amount you save each time according to your actual situation and saving progress."
+                android:textColor="@color/C_374151"
+                android:textSize="@dimen/sp_14" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_22"
+                android:includeFontPadding="false"
+                android:text="6. How can I track my savings progress?"
+                android:textColor="@color/C_374151"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                android:includeFontPadding="false"
+                android:text="On the plan details page, you can view your total saved amount, completion percentage, check-in history, and overall progress."
+                android:textColor="@color/C_374151"
+                android:textSize="@dimen/sp_14" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_22"
+                android:includeFontPadding="false"
+                android:text="7. Can I recover a deleted savings plan?"
+                android:textColor="@color/C_374151"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                android:includeFontPadding="false"
+                android:text="Deleted plans may not be recoverable. Please confirm carefully before deleting any plan."
+                android:textColor="@color/C_374151"
+                android:textSize="@dimen/sp_14" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_22"
+                android:includeFontPadding="false"
+                android:text="8. Why am I not receiving check-in reminders?"
+                android:textColor="@color/C_374151"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                android:includeFontPadding="false"
+                android:text="Please make sure notification permissions are enabled and check whether your phone system is restricting app notifications or background activity."
+                android:textColor="@color/C_374151"
+                android:textSize="@dimen/sp_14" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_22"
+                android:includeFontPadding="false"
+                android:text="9. Will the app automatically deduct money from my bank account?"
+                android:textColor="@color/C_374151"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                android:includeFontPadding="false"
+                android:text="No. This app is designed only to help you record and manage your savings goals. It will never automatically charge or deduct funds from your bank account."
+                android:textColor="@color/C_374151"
+                android:textSize="@dimen/sp_14" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

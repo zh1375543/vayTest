@@ -582,7 +582,7 @@ No personal SMS messages will be accessed, read, or collected.</string>
     <string name="portal_completed_plans">Completed Plans</string>
     <string name="portal_average_savings">Average Savings</string>
     <string name="portal_savings_level">Savings Level</string>
-    <string name="portal_savings_level_desc">Having the idea to save is already ahead of many people</string>
+    <string name="portal_savings_level_code">%1$s Beginner Saver</string>
     <string name="portal_add_savings_plan">Add Savings Plan now</string>
     <string name="portal_my_plan">My Plan</string>
     <string name="portal_no_plan_yet">No plan yet</string>

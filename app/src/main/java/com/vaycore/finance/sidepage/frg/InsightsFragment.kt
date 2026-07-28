@@ -46,6 +46,10 @@ class InsightsFragment : BaseFragment<SidepageStatsFragmentBinding>(
         averageSavingsCard.tvMetricTitle.setText(R.string.portal_average_savings)
         averageSavingsCard.tvMetricValue.text = BigDecimal.ZERO.formatAmountWithPrefix()
         tvLevelDesc.text = PLACEHOLDER
+        tvSavingsLevelCode.text = getString(
+            R.string.portal_savings_level_code,
+            DEFAULT_LEVEL_CODE,
+        )
     }
 
     private fun renderSavingsReport(data: SavingsReportResponse?) = with(binding) {
@@ -61,10 +65,15 @@ class InsightsFragment : BaseFragment<SidepageStatsFragmentBinding>(
         completedPlansCard.tvMetricValue.text = (data?.finishedPlanCount ?: 0).toString()
         averageSavingsCard.tvMetricValue.text = data?.averageSaveAmount.formatAmountWithPrefix()
         tvLevelDesc.text = data?.levelText.orPlaceholder()
+        val levelCode = data?.levelCode
+            ?.takeIf(String::isNotBlank)
+            ?: DEFAULT_LEVEL_CODE
+        tvSavingsLevelCode.text = getString(R.string.portal_savings_level_code, levelCode)
     }
 
     private companion object {
         const val PLACEHOLDER = "-"
+        const val DEFAULT_LEVEL_CODE = "L1"
     }
 
     private fun String?.orPlaceholder(): String = takeUnless { it.isNullOrBlank() } ?: PLACEHOLDER

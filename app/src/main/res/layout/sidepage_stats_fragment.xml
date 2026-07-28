@@ -174,15 +174,32 @@
             android:textSize="@dimen/sp_20"
             android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/ivSavingsLevel"
+        <FrameLayout
             android:layout_width="@dimen/dp_180"
             android:layout_height="@dimen/dp_180"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/dp_20"
-            android:contentDescription="@null"
-            android:scaleType="fitCenter"
-            android:src="@mipmap/ic_as_level" />
+            android:layout_marginTop="@dimen/dp_20">
+
+            <ImageView
+                android:id="@+id/ivSavingsLevel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@null"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/ic_as_level" />
+
+            <TextView
+                android:id="@+id/tvSavingsLevelCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_marginBottom="@dimen/dp_38"
+                android:textColor="@color/C_FA560D"
+                android:textSize="@dimen/sp_12"
+                android:textStyle="bold"
+                tools:text="L1 Beginner Saver" />
+
+        </FrameLayout>
 
         <TextView
             android:id="@+id/tvLevelDesc"
@@ -190,7 +207,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_20"
             android:gravity="center"
-            android:text="@string/portal_savings_level_desc"
             android:textColor="@color/C_6D7280"
             android:textSize="@dimen/sp_12" />
 

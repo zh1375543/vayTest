@@ -124,18 +124,10 @@
                                 app:solidColor="@color/C_F6F6F6">
 
                                 <androidx.appcompat.widget.AppCompatImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:src="@mipmap/pic_id_front"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
-                                <androidx.appcompat.widget.AppCompatImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:src="@mipmap/ic_kyc_creame"
+                                    android:layout_width="@dimen/dp_32"
+                                    android:layout_height="@dimen/dp_32"
+                                    android:src="@mipmap/ic_kyc_card_upload"
+                                    android:layout_marginBottom="@dimen/dp_20"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
@@ -160,8 +152,8 @@
 
                                 <com.google.android.material.imageview.ShapeableImageView
                                     android:id="@+id/ivCardFront"
-                                    android:layout_width="176dp"
-                                    android:layout_height="95dp"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
                                     android:scaleType="fitXY"
                                     android:enabled="@{!isCertified}"
                                     app:imageUrl="@{viewModel.frontImageSource}"
@@ -217,19 +209,12 @@
                                 app:radius="@dimen/dp_6"
                                 app:solidColor="@color/C_F6F6F6">
 
-                                <androidx.appcompat.widget.AppCompatImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:src="@mipmap/pic_id_back"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
 
                                 <androidx.appcompat.widget.AppCompatImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:src="@mipmap/ic_kyc_creame"
+                                    android:layout_width="@dimen/dp_32"
+                                    android:layout_height="@dimen/dp_32"
+                                    android:src="@mipmap/ic_kyc_card_upload"
+                                    android:layout_marginBottom="@dimen/dp_20"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
@@ -359,18 +344,10 @@
                             app:solidColor="@color/C_F6F6F6">
 
                             <androidx.appcompat.widget.AppCompatImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@mipmap/pic_id_portrait"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <androidx.appcompat.widget.AppCompatImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@mipmap/ic_kyc_creame"
+                                android:layout_width="@dimen/dp_32"
+                                android:layout_height="@dimen/dp_32"
+                                android:layout_marginBottom="@dimen/dp_20"
+                                android:src="@mipmap/ic_kyc_selfie_upload"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"

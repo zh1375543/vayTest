@@ -81,7 +81,7 @@ android {
             val output = this
             val flavorName = flavorName // dev or prod
             val buildType = buildType.name // debug or release
-            val newApkName = "VayBee_${flavorName}_${versionName}(${versionCode})_${buildType}_" +
+            val newApkName = "VayTs_${flavorName}_${versionName}(${versionCode})_${buildType}_" +
                     "${SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(Date())}.apk"
 
             (output as ApkVariantOutputImpl).outputFileName = newApkName
