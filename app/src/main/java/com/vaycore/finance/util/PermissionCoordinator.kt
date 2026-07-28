@@ -22,14 +22,12 @@ object PermissionCoordinator {
             PermissionLists.getAccessCoarseLocationPermission(),
             PermissionLists.getReadPhoneStatePermission(),
             PermissionLists.getPostNotificationsPermission(),
-            PermissionLists.getReadCallLogPermission(),
             PermissionLists.getReadSmsPermission(),
         )
 
         PermissionScenario.DEVICE_RISK -> arrayOf(
             PermissionLists.getAccessCoarseLocationPermission(),
             PermissionLists.getReadPhoneStatePermission(),
-            PermissionLists.getReadCallLogPermission(),
             PermissionLists.getReadSmsPermission(),
         )
     }
@@ -75,7 +73,6 @@ object PermissionCoordinator {
 
     fun permissionLabel(context: Context, permissionName: String?): String = when (permissionName) {
         Manifest.permission.READ_PHONE_STATE -> context.getString(R.string.dialog_permission_phone)
-        Manifest.permission.READ_CALL_LOG -> context.getString(R.string.dialog_permission_call)
         Manifest.permission.READ_CALENDAR -> context.getString(R.string.dialog_permission_calendar)
         Manifest.permission.ACCESS_COARSE_LOCATION -> context.getString(R.string.dialog_permission_location)
         Manifest.permission.READ_SMS -> context.getString(R.string.dialog_permission_sms)

@@ -20,7 +20,8 @@ import com.vaycore.finance.model.loan.ProductBean
 import com.vaycore.finance.app.MainActivity
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.ui.views.SignatureView
-import com.vaycore.finance.util.LoanEventUtil
+import com.vaycore.finance.util.loanevent.LoanEvent
+import com.vaycore.finance.util.loanevent.LoanEventRecorder
 import com.vaycore.finance.util.PermissionCoordinator
 import com.vaycore.finance.util.PermissionScenario
 import com.vaycore.finance.util.platform.configureSystemBars
@@ -65,8 +66,6 @@ class AgreementSignatureActivity : BaseActivity<ActivityContractSignBinding>() {
 
     private val vm by viewModels<SessionViewModel>()
 
-    private val loanEvent by lazy { LoanEventUtil.Companion.instance }
-
     private val isShowBackHome by lazy {
         intent.getBooleanExtra("isBackHome", false)
     }
@@ -91,7 +90,7 @@ class AgreementSignatureActivity : BaseActivity<ActivityContractSignBinding>() {
         configureSystemBars(darkMode = true)
         vm.submitTrackingEvent(TrackBean(p = PageSign, act = ACT_in))
         if (isShowBackHome) {
-            loanEvent.initEventFileUniqueSuffix((loginInfo?.id ?: 111).toString())
+            LoanEventRecorder.setEventFileSuffix((loginInfo?.id ?: 111).toString())
         }
         tvBack.visibility = if (isShowBackHome) View.VISIBLE else View.INVISIBLE
         tvSign.visibility = tvBack.visibility
@@ -136,11 +135,11 @@ class AgreementSignatureActivity : BaseActivity<ActivityContractSignBinding>() {
             }
             vm.submitTrackingEvent(TrackBean(p = PageSign, act = ACT_clickSubmit))
             if (isShowBackHome) {
-                loanEvent.logClickApplyLoan()
+                LoanEventRecorder.record(LoanEvent.CLICK_APPLY_LOAN)
                 PermissionCoordinator.request(this@AgreementSignatureActivity, PermissionScenario.DEVICE_RISK) {
                     App.Companion.appViewModel.postRiskInfo(PageSign) { isSuccess ->
                         if (isSuccess) {
-                            loanEvent.logClickSubmitLoan()
+                            LoanEventRecorder.record(LoanEvent.CLICK_SUBMIT_LOAN)
                             submitSignedAgreement()
                         }
                     }
@@ -185,16 +184,16 @@ class AgreementSignatureActivity : BaseActivity<ActivityContractSignBinding>() {
     override fun onResume() {
         super.onResume()
         if (isShowBackHome) {
-            loanEvent.initBaseServerTime(System.currentTimeMillis())
-            loanEvent.logViewEnterLoan()
+            LoanEventRecorder.initializeBaseServerTime(System.currentTimeMillis())
+            LoanEventRecorder.record(LoanEvent.VIEW_ENTER_LOAN)
         }
     }
 
     override fun onStop() {
         super.onStop()
         if (isShowBackHome) {
-            loanEvent.logViewQuitLoan()
-            loanEvent.writeLog2File()
+            LoanEventRecorder.record(LoanEvent.VIEW_QUIT_LOAN)
+            LoanEventRecorder.flush()
         }
     }
 }

@@ -63,6 +63,7 @@ abstract class BaseViewModel : ViewModel() {
             OkHttpClient.Builder()
                 .addInterceptor(NetworkInterceptor())
                 .addInterceptor(LogInterceptor())
+                // Keep parameter completion ahead of signing: its final request is the signed payload.
                 .addInterceptor(ParamsInterceptor())
                 .addInterceptor(HeaderInterceptor())
                 .addInterceptor(SignInterceptor())

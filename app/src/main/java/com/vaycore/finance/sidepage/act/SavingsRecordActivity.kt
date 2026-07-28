@@ -16,7 +16,6 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import com.hjq.permissions.XXPermissions
 import com.hjq.permissions.permission.PermissionLists
 import com.vaycore.finance.BuildConfig
 import com.vaycore.finance.R
@@ -37,7 +36,7 @@ import com.vaycore.finance.sidepage.SideHomeViewModel
 import com.vaycore.finance.util.image.ImageProcessor
 import com.vaycore.finance.util.formatAmountWithPrefix
 import com.vaycore.finance.util.PermissionCoordinator
-import com.vaycore.finance.util.runtime.LocationInfoHelper
+import com.vaycore.finance.util.deivce.LocationInfoHelper
 import com.vaycore.finance.util.viewBinding
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.Dispatchers

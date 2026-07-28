@@ -7,7 +7,7 @@ import com.vaycore.finance.data.afSource
 import com.vaycore.finance.data.gaId
 import com.vaycore.finance.data.loginInfo
 import com.vaycore.finance.data.refer
-import com.vaycore.finance.util.runtime.DeviceHelper
+import com.vaycore.finance.util.deivce.DeviceIdentityReader
 import com.vaycore.finance.util.removeWhitespace
 
 data class TrackParamBean(
@@ -30,7 +30,7 @@ data class TrackBean(
     var prevP: String? = null,
     var lastAct: String? = null,
     var lastP: String? = null,
-    val deviceId: String? = gaId.ifBlank { DeviceHelper.getDeviceId() },
+    val deviceId: String? = gaId.ifBlank { DeviceIdentityReader.getDeviceId() },
     val source: String? = afSource,
     val referer: String? = refer,
     val vestName: String? = App.appContext.resources.getString(R.string.app_name).removeWhitespace(),

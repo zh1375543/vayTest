@@ -28,7 +28,8 @@ import com.vaycore.finance.ui.extension.setSpannableClickableTexts
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.wallet.showBankCardErrorDialog
 import com.vaycore.finance.ui.showLoanAgreementDialog
-import com.vaycore.finance.util.LoanEventUtil
+import com.vaycore.finance.util.loanevent.LoanEvent
+import com.vaycore.finance.util.loanevent.LoanEventRecorder
 import com.vaycore.finance.util.LogUtil
 import com.vaycore.finance.util.ORDER_COMMIT
 import com.vaycore.finance.util.context.resolveColorCompat
@@ -54,7 +55,6 @@ class LoanOfferActivity : BaseActivity<ActivityLoanProductBinding>() {
     private val product by lazy { intent.getParcelableExtra<ProductBean>("product") }
     private var cardInfo: BankAccountResponse? = null
 
-    private val loanEvent by lazy { LoanEventUtil.Companion.instance }
     private lateinit var leaseUrl: String
     private lateinit var pawnUrl: String
     private var isAddCard = false
@@ -73,7 +73,7 @@ class LoanOfferActivity : BaseActivity<ActivityLoanProductBinding>() {
                 result = product?.id.toString() + "|" + System.currentTimeMillis()
             )
         )
-        loanEvent.initEventFileUniqueSuffix((loginInfo?.id ?: 111).toString())
+        LoanEventRecorder.setEventFileSuffix((loginInfo?.id ?: 111).toString())
         leaseUrl =
             LEASE_AGREEMENT + "userId=${loginInfo?.id}&productId=${product?.id}&amount=${product?.maxLoanAmount.toString()}"
         pawnUrl =
@@ -103,7 +103,7 @@ class LoanOfferActivity : BaseActivity<ActivityLoanProductBinding>() {
             ), arrayListOf(
                 ClickablePart(
                     getString(R.string.lease_contract), resolveColorCompat(R.color.color_7087F8), onClick = {
-                        loanEvent.logClickOpenAgreement()
+                        LoanEventRecorder.record(LoanEvent.CLICK_OPEN_AGREEMENT)
                         WebViewActivity.Companion.launch(
                             this@LoanOfferActivity, getString(R.string.lease_contract), leaseUrl
                         )
@@ -112,7 +112,7 @@ class LoanOfferActivity : BaseActivity<ActivityLoanProductBinding>() {
                     getString(R.string.mortgage_contract),
                     resolveColorCompat(R.color.color_7087F8),
                     onClick = {
-                        loanEvent.logClickOpenAgreement()
+                        LoanEventRecorder.record(LoanEvent.CLICK_OPEN_AGREEMENT)
                         WebViewActivity.Companion.launch(
                             this@LoanOfferActivity, getString(R.string.mortgage_contract), pawnUrl
                         )
@@ -126,7 +126,7 @@ class LoanOfferActivity : BaseActivity<ActivityLoanProductBinding>() {
                     act = ACT_userAppBankMyCard
                 )
             )
-            loanEvent.logClickChooseWallet()
+            LoanEventRecorder.record(LoanEvent.CLICK_CHOOSE_WALLET)
             accountVm.getLoanAccountList {}
         }
         tvAbout.singleClick {
@@ -175,7 +175,7 @@ class LoanOfferActivity : BaseActivity<ActivityLoanProductBinding>() {
                     result = product?.id.toString() + "|" + System.currentTimeMillis()
                 )
             )
-            loanEvent.logClickApplyLoan()
+            LoanEventRecorder.record(LoanEvent.CLICK_APPLY_LOAN)
             PermissionCoordinator.request(this@LoanOfferActivity, PermissionScenario.DEVICE_RISK) {
                 trackEvent(ORDER_COMMIT)
                 showLoanAgreementDialog(
@@ -188,7 +188,7 @@ class LoanOfferActivity : BaseActivity<ActivityLoanProductBinding>() {
                             act = ACT_clickConfirm,
                         )
                     )
-                    loanEvent.logClickSubmitLoan()
+                    LoanEventRecorder.record(LoanEvent.CLICK_SUBMIT_LOAN)
                     if (product?.isSign == 0) {
                         AgreementSignatureActivity.Companion.launch(
                             this@LoanOfferActivity,
@@ -231,8 +231,8 @@ class LoanOfferActivity : BaseActivity<ActivityLoanProductBinding>() {
     private var savedIsPlanLayoutVisible: Boolean = true
     override fun onResume() {
         super.onResume()
-        loanEvent.initBaseServerTime(System.currentTimeMillis())
-        loanEvent.logViewEnterLoan()
+        LoanEventRecorder.initializeBaseServerTime(System.currentTimeMillis())
+        LoanEventRecorder.record(LoanEvent.VIEW_ENTER_LOAN)
         if (vm.detailResult.value == null) {
             binding.loadingLayout.showLoading()
             binding.product = null
@@ -258,8 +258,8 @@ class LoanOfferActivity : BaseActivity<ActivityLoanProductBinding>() {
 
     override fun onStop() {
         super.onStop()
-        loanEvent.logViewQuitLoan()
-        loanEvent.writeLog2File()
+        LoanEventRecorder.record(LoanEvent.VIEW_QUIT_LOAN)
+        LoanEventRecorder.flush()
     }
 
     private var isShowBankcardError = false

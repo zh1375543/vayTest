@@ -25,7 +25,8 @@ import com.vaycore.finance.ui.extension.resetScale
 import com.vaycore.finance.ui.extension.setSpannableClickableTexts
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.ui.showLoanAgreementDialog
-import com.vaycore.finance.util.LoanEventUtil
+import com.vaycore.finance.util.loanevent.LoanEvent
+import com.vaycore.finance.util.loanevent.LoanEventRecorder
 import com.vaycore.finance.util.ORDER_COMMIT
 import com.vaycore.finance.util.context.resolveColorCompat
 import com.vaycore.finance.util.PermissionCoordinator
@@ -42,7 +43,6 @@ class CombinedLoanOfferActivity : BaseActivity<ActivityLoanProductMultiBinding>(
     private val togetherAdapter by lazy { ComboAdapter() }
     private val vm by viewModels<LoanApplyViewModel>()
     private val accountVm by viewModels<WalletViewModel>()
-    private val loanEvent by lazy { LoanEventUtil.Companion.instance }
 
     private var cardInfo: BankAccountResponse? = null
     private var hasRecordedEnterEvent = false
@@ -56,7 +56,7 @@ class CombinedLoanOfferActivity : BaseActivity<ActivityLoanProductMultiBinding>(
     }
 
     private fun prepareBundleScreen() = with(binding) {
-        loanEvent.initEventFileUniqueSuffix((loginInfo?.id ?: 111).toString())
+        LoanEventRecorder.setEventFileSuffix((loginInfo?.id ?: 111).toString())
 
         titleBar.setNavigationAction { finish() }
         registerTrackedBackHandler(vm) { finish() }
@@ -83,7 +83,7 @@ class CombinedLoanOfferActivity : BaseActivity<ActivityLoanProductMultiBinding>(
                     getString(R.string.lease_contract),
                     resolveColorCompat(R.color.color_7087F8),
                     onClick = {
-                        loanEvent.logClickOpenAgreement()
+                        LoanEventRecorder.record(LoanEvent.CLICK_OPEN_AGREEMENT)
                         WebViewActivity.Companion.launch(
                             this@CombinedLoanOfferActivity,
                             getString(R.string.lease_contract),
@@ -95,7 +95,7 @@ class CombinedLoanOfferActivity : BaseActivity<ActivityLoanProductMultiBinding>(
                     getString(R.string.mortgage_contract),
                     resolveColorCompat(R.color.color_7087F8),
                     onClick = {
-                        loanEvent.logClickOpenAgreement()
+                        LoanEventRecorder.record(LoanEvent.CLICK_OPEN_AGREEMENT)
                         WebViewActivity.Companion.launch(
                             this@CombinedLoanOfferActivity,
                             getString(R.string.mortgage_contract),
@@ -113,7 +113,7 @@ class CombinedLoanOfferActivity : BaseActivity<ActivityLoanProductMultiBinding>(
                     act = ACT_userAppBankMyCard,
                 ),
             )
-            loanEvent.logClickChooseWallet()
+            LoanEventRecorder.record(LoanEvent.CLICK_CHOOSE_WALLET)
             accountVm.getLoanAccountList { }
         }
 
@@ -136,7 +136,7 @@ class CombinedLoanOfferActivity : BaseActivity<ActivityLoanProductMultiBinding>(
                     result = productIdsForTrack() + "|" + System.currentTimeMillis(),
                 ),
             )
-            loanEvent.logClickApplyLoan()
+            LoanEventRecorder.record(LoanEvent.CLICK_APPLY_LOAN)
             PermissionCoordinator.request(this@CombinedLoanOfferActivity, PermissionScenario.DEVICE_RISK) {
                 val (productInstallmentMap, termIdMap) = buildSubmissionMaps()
                 trackEvent(ORDER_COMMIT)
@@ -147,7 +147,7 @@ class CombinedLoanOfferActivity : BaseActivity<ActivityLoanProductMultiBinding>(
                             act = ACT_clickConfirm,
                         ),
                     )
-                    loanEvent.logClickSubmitLoan()
+                    LoanEventRecorder.record(LoanEvent.CLICK_SUBMIT_LOAN)
                     ApplicationOutcomeActivity.Companion.launch(
                         this@CombinedLoanOfferActivity,
                         ArrayList(togetherAdapter.items),
@@ -175,8 +175,8 @@ class CombinedLoanOfferActivity : BaseActivity<ActivityLoanProductMultiBinding>(
 
     override fun onResume() {
         super.onResume()
-        loanEvent.initBaseServerTime(System.currentTimeMillis())
-        loanEvent.logViewEnterLoan()
+        LoanEventRecorder.initializeBaseServerTime(System.currentTimeMillis())
+        LoanEventRecorder.record(LoanEvent.VIEW_ENTER_LOAN)
         binding.loadingLayout.showLoading()
         binding.bottomLayout.isVisible = false
         vm.getTogetherLoan {
@@ -236,8 +236,8 @@ class CombinedLoanOfferActivity : BaseActivity<ActivityLoanProductMultiBinding>(
 
     override fun onStop() {
         super.onStop()
-        loanEvent.logViewQuitLoan()
-        loanEvent.writeLog2File()
+        LoanEventRecorder.record(LoanEvent.VIEW_QUIT_LOAN)
+        LoanEventRecorder.flush()
     }
 
     private fun productIdsForTrack(): String = togetherAdapter.items.joinToString(",") { product ->

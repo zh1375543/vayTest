@@ -1,4 +1,4 @@
-package com.vaycore.finance.util.runtime
+package com.vaycore.finance.util.deivce
 
 import android.Manifest
 import android.annotation.SuppressLint

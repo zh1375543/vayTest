@@ -14,7 +14,7 @@ import com.vaycore.finance.data.loginInfo
 import com.vaycore.finance.data.network.Api
 import com.vaycore.finance.data.repository.dataOrThrow
 import com.vaycore.finance.model.identity.LoginSessionResponse
-import com.vaycore.finance.util.runtime.DeviceHelper
+import com.vaycore.finance.util.deivce.DeviceIdentityReader
 import com.vaycore.finance.util.toMd5
 
 class SessionRepository(
@@ -40,7 +40,7 @@ class SessionRepository(
                 .getAppsFlyerUID(App.Companion.appContext)
                 ?: "",
             content = appFlyer,
-            phoneMark = DeviceHelper.getDeviceId(),
+            phoneMark = DeviceIdentityReader.getDeviceId(),
             passwd = password?.toMd5(),
             loginType = if (code != null) 1 else 2,
             firebaseClientId = firebaseId,
@@ -71,7 +71,7 @@ class SessionRepository(
             ApiRequest(
                 phoneModel = Build.MODEL,
                 phoneBrand = Build.BRAND,
-                phoneMark = DeviceHelper.getDeviceId(),
+                phoneMark = DeviceIdentityReader.getDeviceId(),
                 appVersion = BuildConfig.VERSION_NAME,
                 regClient = "Android"
             )

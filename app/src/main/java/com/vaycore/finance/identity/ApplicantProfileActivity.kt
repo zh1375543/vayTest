@@ -529,7 +529,6 @@ class ApplicantProfileActivity :
                                 Manifest.permission.ACCESS_COARSE_LOCATION -> "gps"
                                 Manifest.permission.READ_PHONE_STATE -> "device"
                                 Manifest.permission.READ_SMS -> "sms"
-                                Manifest.permission.READ_CALL_LOG -> "callRecords"
                                 else -> "notification"
                             },
                             result = "reject"
@@ -549,7 +548,6 @@ class ApplicantProfileActivity :
                             Manifest.permission.ACCESS_COARSE_LOCATION -> "gps"
                             Manifest.permission.READ_PHONE_STATE -> "device"
                             Manifest.permission.READ_SMS -> "sms"
-                            Manifest.permission.READ_CALL_LOG -> "callRecords"
                             else -> "notification"
                         },
                         result = "agree"

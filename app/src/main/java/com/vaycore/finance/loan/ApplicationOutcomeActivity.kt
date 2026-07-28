@@ -3,11 +3,9 @@ package com.vaycore.finance.loan
 import android.annotation.SuppressLint
 import android.content.Context
 import android.location.LocationManager
-import android.os.Handler
-import android.os.Looper
-import android.os.Message
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import com.vaycore.finance.app.App
 import com.vaycore.finance.BuildConfig
 import com.vaycore.finance.R
@@ -30,7 +28,7 @@ import com.vaycore.finance.loan.viewmodel.LoanProductViewModel
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.util.AppStackUtil
 import com.vaycore.finance.util.LOAN_GET_NOW_CLICK
-import com.vaycore.finance.util.LoanEventUtil
+import com.vaycore.finance.util.loanevent.LoanEventRecorder
 import com.vaycore.finance.util.LogUtil
 import com.vaycore.finance.util.PermissionCoordinator
 import com.vaycore.finance.util.PermissionScenario
@@ -38,7 +36,7 @@ import com.vaycore.finance.util.generateRequestBody
 import com.vaycore.finance.util.getLocalIpAddress
 import com.vaycore.finance.util.isPositive
 import com.vaycore.finance.util.parseJson
-import com.vaycore.finance.util.runtime.DeviceHelper
+import com.vaycore.finance.util.deivce.DeviceIdentityReader
 import com.vaycore.finance.util.start
 import com.vaycore.finance.util.trackEvent
 import com.vaycore.finance.util.viewBinding
@@ -46,6 +44,7 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
+import kotlinx.coroutines.launch
 
 class ApplicationOutcomeActivity :
     BaseActivity<ActivityLoanApplyResultBinding>() {
@@ -228,7 +227,7 @@ class ApplicationOutcomeActivity :
             map["userCashWalletId"] = bankId.toString()
         }
         map["ip"] = getLocalIpAddress() ?: ""
-        map["imei"] = DeviceHelper.getDeviceId()
+        map["imei"] = DeviceIdentityReader.getDeviceId()
         map["coordinate"] =
             "${location.first},${location.second}"
         map["auditKey"] = "auditKey"
@@ -300,13 +299,9 @@ class ApplicationOutcomeActivity :
     }
 
     private fun getEventFile(action: (File?) -> Unit) {
-        val mEventLogHandler = Handler(Looper.getMainLooper()) { msg: Message ->
-            if (msg.what == LoanEventUtil.Companion.MSG_LOG_FILE_PREPARED) {
-                action.invoke(msg.obj as File?)
-            }
-            true
+        lifecycleScope.launch {
+            action(LoanEventRecorder.prepareUploadFile())
         }
-        LoanEventUtil.Companion.instance.preparedUploadLogFile(mEventLogHandler)
     }
 
     private fun loanSuccess() {

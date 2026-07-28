@@ -12,7 +12,7 @@ import com.vaycore.finance.data.isLogin
 import com.vaycore.finance.data.isPostDeviceInfo
 import com.vaycore.finance.data.st
 import com.vaycore.finance.app.AppConfigRepository
-import com.vaycore.finance.util.runtime.DeviceCollectHelper
+import com.vaycore.finance.util.deivce.RiskSnapshotCollector
 import com.vaycore.finance.util.PermissionCoordinator
 import com.vaycore.finance.util.PermissionScenario
 import com.vaycore.finance.util.toJsonString
@@ -77,7 +77,7 @@ class AppViewModel(
             return
         }
         viewModelScope.launch {
-            val riskJson = DeviceCollectHelper.getInstance().getRiskBy2Json()
+            val riskJson = RiskSnapshotCollector.collect()
             createNetworkRequest {
                 appConfigRepository.uploadRiskInfo(riskJson)
             }.showLoading().onSuccess {
