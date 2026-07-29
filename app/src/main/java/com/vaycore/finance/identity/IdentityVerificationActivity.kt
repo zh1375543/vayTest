@@ -15,7 +15,7 @@ import com.liveness.dflivenesslibrary.liveness.DFSilentLivenessActivity
 import com.vaycore.finance.R
 import com.vaycore.finance.app.App
 import com.vaycore.finance.base.BaseActivity
-import com.vaycore.finance.databinding.KycAuthActivityBinding
+import com.vaycore.finance.databinding.ActivityIdentityVerificationBinding
 import com.vaycore.finance.data.ACT_clickBack
 import com.vaycore.finance.data.ACT_clickContinue
 import com.vaycore.finance.data.ACT_clickNext
@@ -52,9 +52,9 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import kotlin.math.max
 
-class IdentityVerificationActivity : BaseActivity<KycAuthActivityBinding>() {
+class IdentityVerificationActivity : BaseActivity<ActivityIdentityVerificationBinding>() {
 
-    override val binding by viewBinding(KycAuthActivityBinding::inflate)
+    override val binding by viewBinding(ActivityIdentityVerificationBinding::inflate)
     private val vm by viewModels<KycUploadViewModel>()
     private val homeVm by viewModels<AuthStatusViewModel>()
 

@@ -3,7 +3,7 @@ package com.vaycore.finance.identity
 import androidx.lifecycle.lifecycleScope
 import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseActivity
-import com.vaycore.finance.databinding.AuthSuccessActivityBinding
+import com.vaycore.finance.databinding.ActivityVerificationCompleteBinding
 import com.vaycore.finance.app.MainActivity
 import com.vaycore.finance.util.countdownTimer
 import com.vaycore.finance.util.context.resolveColorCompat
@@ -12,9 +12,9 @@ import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.util.viewBinding
 
 class VerificationCompleteActivity :
-    BaseActivity<AuthSuccessActivityBinding>() {
+    BaseActivity<ActivityVerificationCompleteBinding>() {
 
-    override val binding by viewBinding(AuthSuccessActivityBinding::inflate)
+    override val binding by viewBinding(ActivityVerificationCompleteBinding::inflate)
     override fun initView() = with(binding) {
         applyTopInset(root)
         registerTrackedBackHandler(null) {

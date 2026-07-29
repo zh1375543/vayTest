@@ -2,16 +2,16 @@ package com.vaycore.finance.mine
 
 import androidx.activity.viewModels
 import com.vaycore.finance.base.BaseActivity
-import com.vaycore.finance.databinding.LogoutActivityBinding
+import com.vaycore.finance.databinding.ActivityLogoutConfirmationBinding
 import com.vaycore.finance.data.loginInfo
 import com.vaycore.finance.identity.viewmodel.SessionViewModel
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.util.start
 import com.vaycore.finance.util.viewBinding
 
-class LogoutActivity : BaseActivity<LogoutActivityBinding>() {
+class LogoutActivity : BaseActivity<ActivityLogoutConfirmationBinding>() {
 
-    override val binding by viewBinding(LogoutActivityBinding::inflate)
+    override val binding by viewBinding(ActivityLogoutConfirmationBinding::inflate)
     private val vm by viewModels<SessionViewModel>()
 
     private val selectTextList by lazy {

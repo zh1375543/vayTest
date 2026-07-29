@@ -16,12 +16,12 @@ import com.vaycore.finance.data.ORDER_STATUS_PAYMENT_PROCESS
 import com.vaycore.finance.data.ORDER_STATUS_REVIEW
 import com.vaycore.finance.data.ORDER_STATUS_SUCCESS
 import com.vaycore.finance.model.loan.ProductBean
-import com.vaycore.finance.databinding.BatchRepaymentAdapterBinding
+import com.vaycore.finance.databinding.ItemBulkRepaymentLoanBinding
 import com.vaycore.finance.ui.binding.BindableItemsAdapter
 import com.vaycore.finance.util.formatAmountWithPrefix
 
 class BulkRepaymentLoanAdapter :
-    BaseAdapter<ProductBean, BatchRepaymentAdapterBinding>(BatchRepaymentAdapterBinding::inflate),
+    BaseAdapter<ProductBean, ItemBulkRepaymentLoanBinding>(ItemBulkRepaymentLoanBinding::inflate),
     BindableItemsAdapter {
 
     override fun submitBindingItems(items: List<*>?) {
@@ -29,7 +29,7 @@ class BulkRepaymentLoanAdapter :
     }
 
     override fun bindItem(
-        binding: BatchRepaymentAdapterBinding,
+        binding: ItemBulkRepaymentLoanBinding,
         item: ProductBean,
         position: Int,
     ) {
@@ -63,7 +63,7 @@ class BulkRepaymentLoanAdapter :
     }
 
     override fun bindChildClickListeners(
-        binding: BatchRepaymentAdapterBinding,
+        binding: ItemBulkRepaymentLoanBinding,
         item: ProductBean,
         position: Int,
     ) {

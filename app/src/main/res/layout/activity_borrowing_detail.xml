@@ -354,7 +354,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             tools:itemCount="4"
-                            tools:listitem="@layout/fee_adapter" />
+                            tools:listitem="@layout/item_borrowing_fee" />
 
                         <TextView
                             style="@style/OrderDetailInfoLabel"

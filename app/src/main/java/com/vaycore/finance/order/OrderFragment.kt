@@ -11,7 +11,7 @@ import com.vaycore.finance.data.ORDER_STATUS_IN_RENEWAL_PROCESS
 import com.vaycore.finance.data.ORDER_STATUS_OVERDUE
 import com.vaycore.finance.data.ORDER_STATUS_PAYMENT_PENDING
 import com.vaycore.finance.data.bean.TrackBean
-import com.vaycore.finance.databinding.OrderFragmentBinding
+import com.vaycore.finance.databinding.FragmentBorrowingOverviewBinding
 import com.vaycore.finance.loan.viewmodel.LoanDashboardViewModel
 import com.vaycore.finance.payback.BulkRepaymentActivity
 import com.vaycore.finance.order.adapter.HomeOrderAdapter
@@ -21,8 +21,8 @@ import com.vaycore.finance.util.context.resolveColorCompat
 import com.vaycore.finance.util.start
 import com.vaycore.finance.util.viewBinding
 
-class OrderFragment : BaseFragment<OrderFragmentBinding>(R.layout.order_fragment) {
-    override val binding by viewBinding(OrderFragmentBinding::bind)
+class OrderFragment : BaseFragment<FragmentBorrowingOverviewBinding>(R.layout.fragment_borrowing_overview) {
+    override val binding by viewBinding(FragmentBorrowingOverviewBinding::bind)
     private val vm by viewModels<LoanDashboardViewModel>()
 
     private val orderAdapter by lazy {

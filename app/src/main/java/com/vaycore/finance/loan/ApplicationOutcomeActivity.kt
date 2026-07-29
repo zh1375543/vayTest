@@ -16,7 +16,7 @@ import com.vaycore.finance.data.APPCODE
 import com.vaycore.finance.data.location
 import com.vaycore.finance.data.loginInfo
 import com.vaycore.finance.data.signBackHome
-import com.vaycore.finance.databinding.ActivityLoanApplyResultBinding
+import com.vaycore.finance.databinding.ActivityApplicationOutcomeBinding
 import com.vaycore.finance.model.loan.LoanDashboardResponse
 import com.vaycore.finance.model.loan.ProductBean
 import com.vaycore.finance.app.MainActivity
@@ -47,9 +47,9 @@ import java.io.File
 import kotlinx.coroutines.launch
 
 class ApplicationOutcomeActivity :
-    BaseActivity<ActivityLoanApplyResultBinding>() {
+    BaseActivity<ActivityApplicationOutcomeBinding>() {
 
-    override val binding by viewBinding(ActivityLoanApplyResultBinding::inflate)
+    override val binding by viewBinding(ActivityApplicationOutcomeBinding::inflate)
     companion object {
         fun launch(
             context: Context,

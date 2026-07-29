@@ -13,16 +13,16 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.vaycore.finance.base.BaseActivity
 import com.vaycore.finance.model.web.WebBridgeMessage
-import com.vaycore.finance.databinding.WebActivityBinding
+import com.vaycore.finance.databinding.ActivityWebContentBinding
 import com.vaycore.finance.util.LogUtil
 import com.vaycore.finance.util.ExternalActionLauncher
 import com.vaycore.finance.util.parseJsonSafely
 import com.vaycore.finance.util.start
 import com.vaycore.finance.util.viewBinding
 
-class WebViewActivity : BaseActivity<WebActivityBinding>() {
+class WebViewActivity : BaseActivity<ActivityWebContentBinding>() {
 
-    override val binding by viewBinding(WebActivityBinding::inflate)
+    override val binding by viewBinding(ActivityWebContentBinding::inflate)
     companion object {
         fun launch(context: Context, title: String, url: String) {
             context.start<WebViewActivity> {

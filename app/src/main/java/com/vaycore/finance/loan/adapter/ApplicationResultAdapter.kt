@@ -2,15 +2,15 @@ package com.vaycore.finance.loan.adapter
 
 import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseAdapter
-import com.vaycore.finance.databinding.LoanResultAdapterBinding
+import com.vaycore.finance.databinding.ItemApplicationResultBinding
 import com.vaycore.finance.model.loan.ProductBean
 import com.vaycore.finance.util.formatAmountWithPrefix
 
 class ApplicationResultAdapter :
-    BaseAdapter<ProductBean, LoanResultAdapterBinding>(LoanResultAdapterBinding::inflate) {
+    BaseAdapter<ProductBean, ItemApplicationResultBinding>(ItemApplicationResultBinding::inflate) {
 
     override fun bindItem(
-        binding: LoanResultAdapterBinding,
+        binding: ItemApplicationResultBinding,
         item: ProductBean,
         position: Int,
     ) = with(binding) {

@@ -4,16 +4,16 @@ import androidx.activity.viewModels
 import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseActivity
 import com.vaycore.finance.data.bean.TrackBean
-import com.vaycore.finance.databinding.ActivityLoanOrderListBinding
+import com.vaycore.finance.databinding.ActivityBorrowingHistoryBinding
 import com.vaycore.finance.data.ACT_inOrderHistory
 import com.vaycore.finance.data.PageHistory
 import com.vaycore.finance.order.adapter.BorrowingHistoryAdapter
 import com.vaycore.finance.util.start
 import com.vaycore.finance.util.viewBinding
 
-class BorrowingHistoryActivity : BaseActivity<ActivityLoanOrderListBinding>() {
+class BorrowingHistoryActivity : BaseActivity<ActivityBorrowingHistoryBinding>() {
 
-    override val binding by viewBinding(ActivityLoanOrderListBinding::inflate)
+    override val binding by viewBinding(ActivityBorrowingHistoryBinding::inflate)
     private val vm by viewModels<LoanOrderViewModel>()
 
     private val orderAdapter by lazy {

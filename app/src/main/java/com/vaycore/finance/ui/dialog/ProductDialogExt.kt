@@ -10,9 +10,9 @@ import com.vaycore.finance.data.LEASE_AGREEMENT
 import com.vaycore.finance.data.PAWN_AGREEMENT
 import com.vaycore.finance.model.loan.ProductBean
 import com.vaycore.finance.data.loginInfo
-import com.vaycore.finance.databinding.CreditDialogBinding
-import com.vaycore.finance.databinding.LoanAgreementDialogBinding
-import com.vaycore.finance.databinding.NewProductDialogBinding
+import com.vaycore.finance.databinding.DialogAvailableCreditBinding
+import com.vaycore.finance.databinding.DialogLoanAgreementBinding
+import com.vaycore.finance.databinding.DialogLoanOfferPickerBinding
 import com.vaycore.finance.browser.WebViewActivity
 import com.vaycore.finance.loan.adapter.LoanOfferPickerAdapter
 import com.vaycore.finance.ui.extension.singleClick
@@ -24,9 +24,9 @@ fun Context.showLoanAgreementDialog(
     applyAction: () -> Unit,
 ) {
     object :
-        BaseDialog<LoanAgreementDialogBinding>(
+        BaseDialog<DialogLoanAgreementBinding>(
             this,
-            LoanAgreementDialogBinding::inflate
+            DialogLoanAgreementBinding::inflate
         ) {
         override fun initView() = with(binding) {
             super.initView()
@@ -64,9 +64,9 @@ fun Context.createNewProductDialog(
     closeAction: () -> Unit = {},
     action: () -> Unit,
 ): Dialog {
-    return object : BaseDialog<NewProductDialogBinding>(
+    return object : BaseDialog<DialogLoanOfferPickerBinding>(
         this,
-        NewProductDialogBinding::inflate,
+        DialogLoanOfferPickerBinding::inflate,
     ) {
         override fun initView() = with(binding) {
             super.initView()
@@ -97,9 +97,9 @@ fun Context.createAvailableCreditDialog(
     amount: CharSequence,
     withdrawAction: () -> Unit,
 ): Dialog {
-    return object : BaseDialog<CreditDialogBinding>(
+    return object : BaseDialog<DialogAvailableCreditBinding>(
         this,
-        CreditDialogBinding::inflate,
+        DialogAvailableCreditBinding::inflate,
     ) {
         override fun initView() = with(binding) {
             super.initView()

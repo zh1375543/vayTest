@@ -31,7 +31,7 @@ import com.vaycore.finance.data.agreePhonePrivacy
 import com.vaycore.finance.data.bean.ClickablePart
 import com.vaycore.finance.data.bean.TrackBean
 import com.vaycore.finance.data.location
-import com.vaycore.finance.databinding.LoginActivityBinding
+import com.vaycore.finance.databinding.ActivitySignInBinding
 import com.vaycore.finance.app.MainActivity
 import com.vaycore.finance.browser.WebViewActivity
 import com.vaycore.finance.ui.extension.setSpannableClickableTexts
@@ -56,9 +56,9 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.milliseconds
 
-class LoginActivity : BaseActivity<LoginActivityBinding>() {
+class LoginActivity : BaseActivity<ActivitySignInBinding>() {
 
-    override val binding by viewBinding(LoginActivityBinding::inflate)
+    override val binding by viewBinding(ActivitySignInBinding::inflate)
      override val adjustForImeInsets = false
 
     private val vm by viewModels<SessionViewModel>()

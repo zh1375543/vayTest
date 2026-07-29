@@ -5,7 +5,7 @@ import androidx.core.view.isVisible
 import com.vaycore.finance.R
 import com.vaycore.finance.wallet.adapter.PayoutAccountAdapter
 import com.vaycore.finance.base.BaseActivity
-import com.vaycore.finance.databinding.ActivityBankCardListBinding
+import com.vaycore.finance.databinding.ActivityPayoutAccountListBinding
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.ui.showConfirmDialog
 import com.vaycore.finance.util.WALLET_INFO_PAGE
@@ -14,9 +14,9 @@ import com.vaycore.finance.util.trackEvent
 import com.vaycore.finance.util.viewBinding
 
 class PayoutAccountListActivity :
-    BaseActivity<ActivityBankCardListBinding>() {
+    BaseActivity<ActivityPayoutAccountListBinding>() {
 
-    override val binding by viewBinding(ActivityBankCardListBinding::inflate)
+    override val binding by viewBinding(ActivityPayoutAccountListBinding::inflate)
     private val vm by viewModels<WalletViewModel>()
 
     private val bankAdapter by lazy {

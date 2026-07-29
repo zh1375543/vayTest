@@ -3,7 +3,7 @@ package com.vaycore.finance.payback
 import androidx.lifecycle.lifecycleScope
 import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseActivity
-import com.vaycore.finance.databinding.RepaymentSuccessActivityBinding
+import com.vaycore.finance.databinding.ActivityRepaymentConfirmationBinding
 import com.vaycore.finance.order.BorrowingDetailActivity
 import com.vaycore.finance.order.BorrowingHistoryActivity
 import com.vaycore.finance.app.MainActivity
@@ -15,9 +15,9 @@ import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.util.viewBinding
 
 class RepaymentConfirmationActivity :
-    BaseActivity<RepaymentSuccessActivityBinding>() {
+    BaseActivity<ActivityRepaymentConfirmationBinding>() {
 
-    override val binding by viewBinding(RepaymentSuccessActivityBinding::inflate)
+    override val binding by viewBinding(ActivityRepaymentConfirmationBinding::inflate)
     override fun initView() = with(binding) {
         applyTopInset(root)
         registerTrackedBackHandler(null) {

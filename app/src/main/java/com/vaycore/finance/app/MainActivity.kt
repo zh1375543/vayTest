@@ -12,7 +12,7 @@ import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseActivity
 import com.vaycore.finance.data.PageHome
 import com.vaycore.finance.data.bean.TrackBean
-import com.vaycore.finance.databinding.MainActivityBinding
+import com.vaycore.finance.databinding.ActivityMainShellBinding
 import com.vaycore.finance.data.ACT_clickActivity
 import com.vaycore.finance.data.ACT_clickMy
 import com.vaycore.finance.data.ACT_clickOrder
@@ -36,9 +36,9 @@ import com.vaycore.finance.util.start
 
 import com.vaycore.finance.util.viewBinding
 
-class MainActivity : BaseActivity<MainActivityBinding>() {
+class MainActivity : BaseActivity<ActivityMainShellBinding>() {
 
-    override val binding by viewBinding(MainActivityBinding::inflate)
+    override val binding by viewBinding(ActivityMainShellBinding::inflate)
 
     companion object {
         fun launch(

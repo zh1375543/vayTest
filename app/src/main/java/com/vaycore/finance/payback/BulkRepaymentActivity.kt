@@ -3,7 +3,7 @@ package com.vaycore.finance.payback
 import androidx.activity.viewModels
 import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseActivity
-import com.vaycore.finance.databinding.RepaymentBatchActivityBinding
+import com.vaycore.finance.databinding.ActivityBulkRepaymentBinding
 import com.vaycore.finance.order.BorrowingDetailActivity
 import com.vaycore.finance.payback.adapter.BulkRepaymentLoanAdapter
 import com.vaycore.finance.util.showToastMessage
@@ -13,9 +13,9 @@ import com.vaycore.finance.browser.WebViewActivity
 import com.vaycore.finance.util.viewBinding
 
 class BulkRepaymentActivity :
-    BaseActivity<RepaymentBatchActivityBinding>() {
+    BaseActivity<ActivityBulkRepaymentBinding>() {
 
-    override val binding by viewBinding(RepaymentBatchActivityBinding::inflate)
+    override val binding by viewBinding(ActivityBulkRepaymentBinding::inflate)
     private val vm by viewModels<RepayViewModel>()
 
     private val orderAdapter by lazy {

@@ -8,7 +8,7 @@ import com.vaycore.finance.data.PageMine
 import com.vaycore.finance.data.PRIVACY_POLICY
 import com.vaycore.finance.data.bean.TrackBean
 import com.vaycore.finance.data.loginInfo
-import com.vaycore.finance.databinding.MineFragmentBinding
+import com.vaycore.finance.databinding.FragmentAccountCenterBinding
 import com.vaycore.finance.loan.viewmodel.LoanDashboardViewModel
 import com.vaycore.finance.order.BorrowingHistoryActivity
 import com.vaycore.finance.payback.BulkRepaymentActivity
@@ -19,10 +19,10 @@ import com.vaycore.finance.util.start
 import com.vaycore.finance.util.viewBinding
 import com.vaycore.finance.wallet.PayoutAccountListActivity
 
-class MineFragment : BaseFragment<MineFragmentBinding>(
-    R.layout.mine_fragment
+class MineFragment : BaseFragment<FragmentAccountCenterBinding>(
+    R.layout.fragment_account_center
 ) {
-    override val binding by viewBinding(MineFragmentBinding::bind)
+    override val binding by viewBinding(FragmentAccountCenterBinding::bind)
 
     private val vm by viewModels<LoanDashboardViewModel>()
 

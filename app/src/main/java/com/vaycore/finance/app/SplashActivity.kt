@@ -12,7 +12,7 @@ import com.vaycore.finance.data.EnterTime
 import com.vaycore.finance.data.bean.TrackBean
 import com.vaycore.finance.data.isLogin
 import com.vaycore.finance.data.pCount
-import com.vaycore.finance.databinding.SplashActivityBinding
+import com.vaycore.finance.databinding.ActivityAppLaunchBinding
 import com.vaycore.finance.data.PageHome
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -22,9 +22,9 @@ import kotlin.time.Duration.Companion.milliseconds
 import com.vaycore.finance.util.viewBinding
 
 class SplashActivity :
-    BaseActivity<SplashActivityBinding>() {
+    BaseActivity<ActivityAppLaunchBinding>() {
 
-    override val binding by viewBinding(SplashActivityBinding::inflate)
+    override val binding by viewBinding(ActivityAppLaunchBinding::inflate)
 
     private var hasJump = false
     private var timeoutJob: Job? = null

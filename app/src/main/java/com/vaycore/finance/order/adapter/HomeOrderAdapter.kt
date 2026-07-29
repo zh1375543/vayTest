@@ -16,15 +16,15 @@ import com.vaycore.finance.data.ORDER_STATUS_PAYMENT_PENDING
 import com.vaycore.finance.data.ORDER_STATUS_PAYMENT_PROCESS
 import com.vaycore.finance.data.ORDER_STATUS_REVIEW
 import com.vaycore.finance.data.ORDER_STATUS_SUCCESS
-import com.vaycore.finance.databinding.HomeOrderAdapterBinding
+import com.vaycore.finance.databinding.ItemHomeBorrowingBinding
 import com.vaycore.finance.model.loan.ProductBean
 import com.vaycore.finance.util.formatAmountWithPrefix
 
 class HomeOrderAdapter :
-    BaseAdapter<ProductBean, HomeOrderAdapterBinding>(HomeOrderAdapterBinding::inflate) {
+    BaseAdapter<ProductBean, ItemHomeBorrowingBinding>(ItemHomeBorrowingBinding::inflate) {
 
     override fun bindItem(
-        binding: HomeOrderAdapterBinding,
+        binding: ItemHomeBorrowingBinding,
         item: ProductBean,
         position: Int,
     ) = with(binding) {

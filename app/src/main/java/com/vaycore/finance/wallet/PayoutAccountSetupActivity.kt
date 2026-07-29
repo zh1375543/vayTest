@@ -8,7 +8,7 @@ import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseActivity
 import com.vaycore.finance.model.wallet.BankChannelResponse
 import com.vaycore.finance.model.wallet.WalletResponse
-import com.vaycore.finance.databinding.ActivityBankCardAddBinding
+import com.vaycore.finance.databinding.ActivityPayoutAccountSetupBinding
 import com.vaycore.finance.ui.extension.observeKeyboardVisibility
 import com.vaycore.finance.ui.extension.resetScale
 import com.vaycore.finance.ui.extension.singleClick
@@ -16,14 +16,14 @@ import com.vaycore.finance.identity.viewmodel.PersonalInfoViewModel
 import com.vaycore.finance.util.showToastMessage
 import com.vaycore.finance.util.viewBinding
 
-class PayoutAccountSetupActivity : BaseActivity<ActivityBankCardAddBinding>() {
+class PayoutAccountSetupActivity : BaseActivity<ActivityPayoutAccountSetupBinding>() {
 
     private enum class WithdrawMethod {
         BANK,
         WALLET,
     }
 
-    override val binding by viewBinding(ActivityBankCardAddBinding::inflate)
+    override val binding by viewBinding(ActivityPayoutAccountSetupBinding::inflate)
 
     private val vm by viewModels<WalletViewModel>()
     private val personalVm by viewModels<PersonalInfoViewModel>()

@@ -40,7 +40,7 @@ import com.vaycore.finance.data.PagePrivacy
 import com.vaycore.finance.data.authConfigList
 import com.vaycore.finance.data.bean.ApiRequest
 import com.vaycore.finance.data.bean.TrackBean
-import com.vaycore.finance.databinding.PersonalInfoAuthActivityBinding
+import com.vaycore.finance.databinding.ActivityApplicantProfileBinding
 import com.vaycore.finance.identity.viewmodel.AuthStatusViewModel
 import com.vaycore.finance.identity.viewmodel.PersonalInfoViewModel
 import com.vaycore.finance.ui.extension.resetScale
@@ -66,9 +66,9 @@ import kotlinx.coroutines.launch
 import kotlin.math.max
 
 class ApplicantProfileActivity :
-    BaseActivity<PersonalInfoAuthActivityBinding>() {
+    BaseActivity<ActivityApplicantProfileBinding>() {
 
-    override val binding by viewBinding(PersonalInfoAuthActivityBinding::inflate)
+    override val binding by viewBinding(ActivityApplicantProfileBinding::inflate)
     private val isCert by lazy {
         intent.getBooleanExtra("isCert", false)
     }

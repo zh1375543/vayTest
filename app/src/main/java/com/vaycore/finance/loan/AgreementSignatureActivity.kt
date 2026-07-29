@@ -15,7 +15,7 @@ import com.vaycore.finance.data.PageSign
 import com.vaycore.finance.data.bean.TrackBean
 import com.vaycore.finance.data.loginInfo
 import com.vaycore.finance.data.signBackHome
-import com.vaycore.finance.databinding.ActivityContractSignBinding
+import com.vaycore.finance.databinding.ActivityAgreementSignatureBinding
 import com.vaycore.finance.model.loan.ProductBean
 import com.vaycore.finance.app.MainActivity
 import com.vaycore.finance.ui.extension.singleClick
@@ -33,9 +33,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
 
-class AgreementSignatureActivity : BaseActivity<ActivityContractSignBinding>() {
+class AgreementSignatureActivity : BaseActivity<ActivityAgreementSignatureBinding>() {
 
-    override val binding by viewBinding(ActivityContractSignBinding::inflate)
+    override val binding by viewBinding(ActivityAgreementSignatureBinding::inflate)
     companion object {
 
         fun launch(

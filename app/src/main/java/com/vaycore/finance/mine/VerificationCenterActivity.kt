@@ -3,7 +3,7 @@ package com.vaycore.finance.mine
 import androidx.activity.viewModels
 import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseActivity
-import com.vaycore.finance.databinding.AuthCenterActivityBinding
+import com.vaycore.finance.databinding.ActivityVerificationCenterBinding
 import com.vaycore.finance.data.authConfigList
 import com.vaycore.finance.model.identity.AuthOptionResponse
 import com.vaycore.finance.model.identity.UserAuthStatusResponse
@@ -17,9 +17,9 @@ import com.vaycore.finance.util.start
 import com.vaycore.finance.util.trackEvent
 import com.vaycore.finance.util.viewBinding
 
-class VerificationCenterActivity : BaseActivity<AuthCenterActivityBinding>() {
+class VerificationCenterActivity : BaseActivity<ActivityVerificationCenterBinding>() {
 
-    override val binding by viewBinding(AuthCenterActivityBinding::inflate)
+    override val binding by viewBinding(ActivityVerificationCenterBinding::inflate)
 
     private val vm by viewModels<AuthStatusViewModel>()
 

@@ -137,7 +137,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/tvDateTitle"
         tools:itemCount="1"
-        tools:listitem="@layout/product_header_fee_adapter" />
+        tools:listitem="@layout/item_offer_fee_summary" />
 
     <TextView
         android:id="@+id/tvInstallFeeTitle"
@@ -301,7 +301,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/tvDueDateTitle"
         tools:itemCount="3"
-        tools:listitem="@layout/product_installment_adapter" />
+        tools:listitem="@layout/item_installment_schedule" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/repaymentGroup"

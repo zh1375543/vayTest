@@ -8,7 +8,7 @@ import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseActivity
 import com.vaycore.finance.data.bean.ClickablePart
 import com.vaycore.finance.data.bean.TrackBean
-import com.vaycore.finance.databinding.ActivityLoanOrderDetailBinding
+import com.vaycore.finance.databinding.ActivityBorrowingDetailBinding
 import com.vaycore.finance.data.ACT_inOrdersDetail
 import com.vaycore.finance.data.ACT_inRepaymentLink
 import com.vaycore.finance.data.LEASE_AGREEMENT
@@ -57,9 +57,9 @@ import java.math.BigDecimal
 import kotlin.toString
 
 class BorrowingDetailActivity :
-    BaseActivity<ActivityLoanOrderDetailBinding>() {
+    BaseActivity<ActivityBorrowingDetailBinding>() {
 
-    override val binding by viewBinding(ActivityLoanOrderDetailBinding::inflate)
+    override val binding by viewBinding(ActivityBorrowingDetailBinding::inflate)
     private val isFromBatch by lazy { intent.getBooleanExtra("isFromBatch", false) }
     private val vm by viewModels<LoanOrderViewModel>()
 

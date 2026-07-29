@@ -15,7 +15,7 @@ import com.vaycore.finance.data.PAWN_AGREEMENT
 import com.vaycore.finance.data.bean.ClickablePart
 import com.vaycore.finance.data.bean.TrackBean
 import com.vaycore.finance.data.loginInfo
-import com.vaycore.finance.databinding.ActivityLoanProductMultiBinding
+import com.vaycore.finance.databinding.ActivityCombinedLoanOfferBinding
 import com.vaycore.finance.model.wallet.BankAccountResponse
 import com.vaycore.finance.browser.WebViewActivity
 import com.vaycore.finance.loan.adapter.ComboAdapter
@@ -36,9 +36,9 @@ import com.vaycore.finance.util.trackEvent
 import com.vaycore.finance.util.viewBinding
 import com.vaycore.finance.wallet.WalletViewModel
 
-class CombinedLoanOfferActivity : BaseActivity<ActivityLoanProductMultiBinding>() {
+class CombinedLoanOfferActivity : BaseActivity<ActivityCombinedLoanOfferBinding>() {
 
-    override val binding by viewBinding(ActivityLoanProductMultiBinding::inflate)
+    override val binding by viewBinding(ActivityCombinedLoanOfferBinding::inflate)
 
     private val togetherAdapter by lazy { ComboAdapter() }
     private val vm by viewModels<LoanApplyViewModel>()

@@ -16,7 +16,7 @@ import com.vaycore.finance.data.bean.Event
 import com.vaycore.finance.data.bean.TrackBean
 import com.vaycore.finance.data.isLogin
 import com.vaycore.finance.data.signBackHome
-import com.vaycore.finance.databinding.HomeFragmentBinding
+import com.vaycore.finance.databinding.FragmentLoanHomeBinding
 import com.vaycore.finance.loan.AgreementSignatureActivity
 import com.vaycore.finance.loan.LoanOfferActivity
 import com.vaycore.finance.loan.CombinedLoanOfferActivity
@@ -56,9 +56,9 @@ import com.vaycore.finance.util.viewBinding
 import com.vaycore.finance.wallet.PayoutAccountListActivity
 import kotlinx.coroutines.Job
 
-class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
+class HomeFragment : BaseFragment<FragmentLoanHomeBinding>(R.layout.fragment_loan_home) {
 
-    override val binding by viewBinding(HomeFragmentBinding::bind)
+    override val binding by viewBinding(FragmentLoanHomeBinding::bind)
 
     private val vm by viewModels<HomeViewModel>()
     private val loanDashboardVm by viewModels<LoanDashboardViewModel>()

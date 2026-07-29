@@ -3,7 +3,7 @@ package com.vaycore.finance.mine
 import androidx.lifecycle.lifecycleScope
 import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseActivity
-import com.vaycore.finance.databinding.LogoutSuccessActivityBinding
+import com.vaycore.finance.databinding.ActivityLogoutCompleteBinding
 import com.vaycore.finance.app.MainActivity
 import com.vaycore.finance.sidepage.PortalActivity
 import com.vaycore.finance.sidepage.act.AccountSettingsActivity
@@ -15,9 +15,9 @@ import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.util.viewBinding
 
 class LogoutSuccessActivity :
-    BaseActivity<LogoutSuccessActivityBinding>() {
+    BaseActivity<ActivityLogoutCompleteBinding>() {
 
-    override val binding by viewBinding(LogoutSuccessActivityBinding::inflate)
+    override val binding by viewBinding(ActivityLogoutCompleteBinding::inflate)
     private val returnToPortal by lazy {
         intent.getBooleanExtra(EXTRA_RETURN_TO_PORTAL, false)
     }

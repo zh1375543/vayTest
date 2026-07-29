@@ -17,7 +17,7 @@ import com.vaycore.finance.data.PAWN_AGREEMENT
 import com.vaycore.finance.data.bean.ClickablePart
 import com.vaycore.finance.data.bean.TrackBean
 import com.vaycore.finance.data.loginInfo
-import com.vaycore.finance.databinding.ActivityLoanProductBinding
+import com.vaycore.finance.databinding.ActivityLoanOfferBinding
 import com.vaycore.finance.loan.viewmodel.LoanProductViewModel
 import com.vaycore.finance.model.loan.ProductBean
 import com.vaycore.finance.model.wallet.BankAccountResponse
@@ -46,9 +46,9 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.milliseconds
 
-class LoanOfferActivity : BaseActivity<ActivityLoanProductBinding>() {
+class LoanOfferActivity : BaseActivity<ActivityLoanOfferBinding>() {
 
-    override val binding by viewBinding(ActivityLoanProductBinding::inflate)
+    override val binding by viewBinding(ActivityLoanOfferBinding::inflate)
     private val vm by viewModels<LoanProductViewModel>()
     private val accountVm by viewModels<WalletViewModel>()
 

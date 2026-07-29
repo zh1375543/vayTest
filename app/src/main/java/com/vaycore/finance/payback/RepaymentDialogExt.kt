@@ -12,7 +12,7 @@ import androidx.core.content.ContextCompat
 import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseDialog
 import com.vaycore.finance.databinding.PaybackDialogBinding
-import com.vaycore.finance.databinding.RepayAutoApplyDialogBinding
+import com.vaycore.finance.databinding.DialogRepayAndReapplyBinding
 import com.vaycore.finance.app.MainActivity
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.ui.views.StatefulActionButton
@@ -24,9 +24,9 @@ fun Context.showRepayAndReapplyDialog(
     closeAction: () -> Unit = {},
     confirmAction: () -> Unit,
 ) {
-    object : BaseDialog<RepayAutoApplyDialogBinding>(
+    object : BaseDialog<DialogRepayAndReapplyBinding>(
         this,
-        RepayAutoApplyDialogBinding::inflate,
+        DialogRepayAndReapplyBinding::inflate,
     ) {
         override fun initView() = with(binding) {
             super.initView()

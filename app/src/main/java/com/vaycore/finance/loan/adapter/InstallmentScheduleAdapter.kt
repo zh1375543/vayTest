@@ -2,16 +2,16 @@ package com.vaycore.finance.loan.adapter
 
 import androidx.core.view.isVisible
 import com.vaycore.finance.base.BaseAdapter
-import com.vaycore.finance.databinding.ProductInstallmentAdapterBinding
+import com.vaycore.finance.databinding.ItemInstallmentScheduleBinding
 import com.vaycore.finance.loan.LoanOfferActivity
 import com.vaycore.finance.model.loan.ProductPlanBean
 import com.vaycore.finance.util.formatAmountWithPrefix
 
 class InstallmentScheduleAdapter :
-    BaseAdapter<ProductPlanBean, ProductInstallmentAdapterBinding>(ProductInstallmentAdapterBinding::inflate) {
+    BaseAdapter<ProductPlanBean, ItemInstallmentScheduleBinding>(ItemInstallmentScheduleBinding::inflate) {
 
     override fun bindItem(
-        binding: ProductInstallmentAdapterBinding,
+        binding: ItemInstallmentScheduleBinding,
         item: ProductPlanBean,
         position: Int,
     ) = with(binding) {

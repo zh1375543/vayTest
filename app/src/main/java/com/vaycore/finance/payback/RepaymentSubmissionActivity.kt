@@ -8,7 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseActivity
 import com.vaycore.finance.model.wallet.BankAccountResponse
-import com.vaycore.finance.databinding.RepaymentActivityBinding
+import com.vaycore.finance.databinding.ActivityRepaymentSubmissionBinding
 import com.vaycore.finance.payback.adapter.RepaymentAccountAdapter
 import com.vaycore.finance.util.image.ImageProcessor
 import com.vaycore.finance.util.ExternalActionLauncher
@@ -25,9 +25,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class RepaymentSubmissionActivity :
-    BaseActivity<RepaymentActivityBinding>() {
+    BaseActivity<ActivityRepaymentSubmissionBinding>() {
 
-    override val binding by viewBinding(RepaymentActivityBinding::inflate)
+    override val binding by viewBinding(ActivityRepaymentSubmissionBinding::inflate)
     private val vm by viewModels<RepayViewModel>()
 
     private val orderId by lazy { intent.getStringExtra("orderId") ?: "" }

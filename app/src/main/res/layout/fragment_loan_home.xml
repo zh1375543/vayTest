@@ -19,11 +19,11 @@
             <include
                 android:id="@+id/calm_layout"
                 android:visibility="gone"
-                layout="@layout/home_calm_layout" />
+                layout="@layout/view_home_restricted_state" />
 
             <include
                 android:id="@+id/content_layout"
-                layout="@layout/home_content_layout" />
+                layout="@layout/view_home_dashboard_content" />
 
         </FrameLayout>
     </com.vaycore.finance.ui.views.ContentStateLayout>

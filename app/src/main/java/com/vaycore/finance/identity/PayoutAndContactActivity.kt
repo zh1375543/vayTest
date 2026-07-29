@@ -13,7 +13,7 @@ import androidx.core.widget.doAfterTextChanged
 import com.vaycore.finance.R
 import com.vaycore.finance.app.App
 import com.vaycore.finance.base.BaseActivity
-import com.vaycore.finance.databinding.BankAccountAuthActivityBinding
+import com.vaycore.finance.databinding.ActivityPayoutAndContactBinding
 import com.vaycore.finance.data.ACT_clickBack
 import com.vaycore.finance.data.ACT_clickContinue
 import com.vaycore.finance.data.ACT_clickNext
@@ -52,7 +52,7 @@ import com.vaycore.finance.util.viewBinding
 import kotlin.math.max
 import kotlin.toString
 
-class PayoutAndContactActivity : BaseActivity<BankAccountAuthActivityBinding>() {
+class PayoutAndContactActivity : BaseActivity<ActivityPayoutAndContactBinding>() {
 
     private enum class WithdrawMethod {
         BANK,
@@ -65,7 +65,7 @@ class PayoutAndContactActivity : BaseActivity<BankAccountAuthActivityBinding>() 
         ADDITIONAL,
     }
 
-    override val binding by viewBinding(BankAccountAuthActivityBinding::inflate)
+    override val binding by viewBinding(ActivityPayoutAndContactBinding::inflate)
 
     private val vm by viewModels<WorkContactViewModel>()
     private val personalVm by viewModels<PersonalInfoViewModel>()

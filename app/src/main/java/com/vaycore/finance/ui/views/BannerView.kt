@@ -11,7 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.vaycore.finance.R
 import com.vaycore.finance.base.createAdapter
-import com.vaycore.finance.databinding.BannerAdapterBinding
+import com.vaycore.finance.databinding.ItemCampaignBannerBinding
 import com.vaycore.finance.model.home.CampaignBannerResponse
 import com.vaycore.finance.util.context.resolveColorCompat
 import com.vaycore.finance.ui.extension.setRoundedRectangleBackground
@@ -39,7 +39,7 @@ class BannerView @JvmOverloads constructor(
     private val indicatorLayout: LinearLayout
     private var autoScrollJob: Job? = null
     private val adapter by lazy {
-        createAdapter<CampaignBannerResponse, BannerAdapterBinding>(BannerAdapterBinding::inflate) { item, _ ->
+        createAdapter<CampaignBannerResponse, ItemCampaignBannerBinding>(ItemCampaignBannerBinding::inflate) { item, _ ->
             ivIcon.loadImage(item.activityPicUrl)
         }.apply {
             setOnItemClickListener { item, _ ->

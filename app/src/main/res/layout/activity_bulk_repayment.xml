@@ -48,7 +48,7 @@
                 app:layout_constraintBottom_toTopOf="@id/bottom_layout"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:itemCount="3"
-                tools:listitem="@layout/batch_repayment_adapter" />
+                tools:listitem="@layout/item_bulk_repayment_loan" />
 
             <com.vaycore.finance.ui.views.StyledConstraintLayout
                 android:id="@+id/bottom_layout"
