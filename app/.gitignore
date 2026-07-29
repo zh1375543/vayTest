@@ -1,1 +1,5 @@
 /build
+
+# APK output dirs produced by the custom outputFileName config (per flavor)
+/dev
+/prod
