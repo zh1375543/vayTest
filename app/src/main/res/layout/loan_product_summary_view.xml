@@ -8,7 +8,7 @@
     android:paddingTop="@dimen/dp_20"
     android:paddingBottom="@dimen/dp_16"
     app:radius="@dimen/dp_30"
-    app:solidColor="@color/white">
+    app:solidColor="@color/surface_primary">
 
     <com.vaycore.finance.ui.views.StyledConstraintLayout
         android:id="@+id/productHeaderBg"
@@ -17,7 +17,7 @@
         android:paddingVertical="@dimen/dp_10"
         app:layout_constraintTop_toTopOf="parent"
         app:radius="@dimen/dp_16"
-        app:solidColor="@color/C_F6F6F6">
+        app:solidColor="@color/surface_secondary">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ivProductIcon"
@@ -39,7 +39,7 @@
             android:layout_marginEnd="@dimen/dp_16"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textColor="@color/C_111827"
+            android:textColor="@color/text_primary"
             android:textSize="@dimen/sp_18"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -56,7 +56,7 @@
         android:layout_marginTop="@dimen/dp_15"
         android:gravity="center"
         android:text="@string/l_amount"
-        android:textColor="@color/C_9CA3AF"
+        android:textColor="@color/text_tertiary"
         android:textSize="@dimen/sp_14"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -71,7 +71,7 @@
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
-        android:textColor="@color/C_111827"
+        android:textColor="@color/text_primary"
         android:textSize="@dimen/sp_28"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -86,7 +86,7 @@
         android:layout_marginTop="@dimen/dp_15"
         android:gravity="center"
         android:text="@string/product_details"
-        android:textColor="@color/C_111827"
+        android:textColor="@color/text_primary"
         android:textSize="@dimen/sp_12"
         app:layout_constraintEnd_toStartOf="@id/ivArrow"
         app:layout_constraintHorizontal_chainStyle="packed"

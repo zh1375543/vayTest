@@ -53,13 +53,13 @@
                 android:paddingStart="@dimen/dp_20"
                 android:paddingEnd="@dimen/dp_16"
                 android:text="@string/about_lease"
-                android:textColor="@color/color_7087F8"
+                android:textColor="@color/brand_primary"
                 android:textSize="@dimen/sp_15"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:radius="@dimen/dp_16"
-                app:solidColor="@color/white" />
+                app:solidColor="@color/surface_primary" />
 
             <com.vaycore.finance.ui.views.StyledRecyclerView
                 android:id="@+id/rvProduct"
@@ -93,7 +93,7 @@
         android:paddingTop="@dimen/dp_15"
         android:paddingBottom="@dimen/dp_6"
         android:text="@string/product_detail_agreement"
-        android:textColor="@color/C_6D7280"
+        android:textColor="@color/text_secondary"
         android:textSize="@dimen/sp_13"
         app:layout_constraintBottom_toTopOf="@id/bottomCard" />
 
@@ -108,8 +108,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:radius="@dimen/dp_30"
-        app:solidColor="@color/C_F6F6F6"
-        app:strokeColor="@color/white"
+        app:solidColor="@color/surface_secondary"
+        app:strokeColor="@color/surface_primary"
         app:strokeWidth="@dimen/dp_1">
 
         <TextView
@@ -119,7 +119,7 @@
             android:layout_marginStart="@dimen/dp_20"
             android:layout_marginTop="@dimen/dp_20"
             android:text="@string/account_receivable"
-            android:textColor="@color/C_9CA3AF"
+            android:textColor="@color/text_tertiary"
             android:textSize="@dimen/sp_14"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -140,7 +140,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:textColor="@color/C_111827"
+                android:textColor="@color/text_primary"
                 android:textSize="@dimen/sp_12"
                 android:textStyle="bold"
                 app:accountType="@{account.payWay}"
@@ -151,7 +151,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:textColor="@color/C_111827"
+                android:textColor="@color/text_primary"
                 android:textSize="@dimen/sp_16"
                 android:textStyle="bold"
                 app:maskedAccount="@{account.account != null ? account.account : account.bankNo}"
@@ -167,13 +167,13 @@
             android:paddingHorizontal="@dimen/dp_12"
             android:paddingVertical="@dimen/dp_8"
             android:text="@string/change"
-            android:textColor="@color/white"
+            android:textColor="@color/text_on_brand"
             android:textSize="@dimen/sp_14"
             app:layout_constraintBottom_toBottomOf="@id/tvAccountTitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tvAccountTitle"
             app:radius="@dimen/dp_15"
-            app:solidColor="@color/color_7087F8" />
+            app:solidColor="@color/brand_primary" />
 
         <com.vaycore.finance.ui.views.StyledConstraintLayout
             android:id="@+id/loanTipLayout"
@@ -188,7 +188,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvAccountTitle"
             app:radius="@dimen/dp_16"
-            app:solidColor="@color/white">
+            app:solidColor="@color/surface_primary">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivLoanTip"
@@ -206,7 +206,7 @@
                 android:layout_marginStart="@dimen/dp_12"
                 android:lineSpacingExtra="@dimen/dp_2"
                 android:text="@string/loan_account_tip"
-                android:textColor="@color/C_9CA3AF"
+                android:textColor="@color/text_tertiary"
                 android:textSize="@dimen/sp_14"
                 app:layout_constraintBottom_toBottomOf="@id/ivLoanTip"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -223,7 +223,7 @@
             android:paddingBottom="@dimen/dp_20"
             app:layout_constraintTop_toBottomOf="@id/loanTipLayout"
             app:radius="@dimen/dp_30"
-            app:solidColor="@color/white">
+            app:solidColor="@color/surface_primary">
 
             <TextView
                 android:id="@+id/tvRepaymentTitle"
@@ -231,7 +231,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_20"
                 android:text="@string/total_repayment"
-                android:textColor="@color/C_9CA3AF"
+                android:textColor="@color/text_tertiary"
                 android:textSize="@dimen/sp_14"
                 app:layout_constraintBottom_toBottomOf="@id/tvAmount"
                 app:layout_constraintStart_toStartOf="parent"
@@ -242,7 +242,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/dp_20"
-                android:textColor="@color/color_7087F8"
+                android:textColor="@color/brand_primary"
                 android:textSize="@dimen/sp_18"
                 android:textStyle="bold"
                 app:amountWithCurrency="@{togetherInfo.canApplyAmount}"
@@ -258,7 +258,7 @@
                 android:layout_marginStart="@dimen/dp_20"
                 android:layout_marginTop="@dimen/dp_10"
                 android:text="@string/together_num"
-                android:textColor="@color/C_9CA3AF"
+                android:textColor="@color/text_tertiary"
                 android:textSize="@dimen/sp_14"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvAmount" />
@@ -268,7 +268,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/dp_20"
-                android:textColor="@color/C_111827"
+                android:textColor="@color/text_primary"
                 android:textSize="@dimen/sp_18"
                 android:textStyle="bold"
                 android:text="@{String.valueOf(togetherInfo.showProducts != null ? togetherInfo.showProducts.size() : 0)}"

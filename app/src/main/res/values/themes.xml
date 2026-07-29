@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="MyTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:windowBackground">@color/white</item>
-        <item name="android:statusBarColor">@color/white</item>
-        <item name="android:navigationBarColor">@color/white</item>
+        <item name="android:windowBackground">@color/surface_primary</item>
+        <item name="android:statusBarColor">@color/surface_primary</item>
+        <item name="android:navigationBarColor">@color/surface_primary</item>
         <item name="android:windowTranslucentStatus">false</item>
         <item name="android:windowTranslucentNavigation">false</item>
         <item name="editTextStyle">@style/AppEditTextStyle</item>
@@ -81,25 +81,25 @@
         <item name="cornerSizeBottomRight">@dimen/dp_12</item>
     </style>
     <style name="mainButton">
-        <item name="solidColor">@color/color_7087F8</item>
+        <item name="solidColor">@color/brand_primary</item>
         <item name="radius">@dimen/dp_50</item>
         <item name="android:gravity">center</item>
         <item name="android:textSize">@dimen/sp_18</item>
         <item name="android:textStyle">bold</item>
-        <item name="disabledColor">@color/C_9CA3AF</item>
-        <item name="textColorDisabled">@color/white</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="disabledColor">@color/surface_disabled</item>
+        <item name="textColorDisabled">@color/text_on_disabled</item>
+        <item name="android:textColor">@color/text_on_brand</item>
     </style>
 
     <style name="otherButton">
-        <item name="solidColor">@color/color_7087F8</item>
+        <item name="solidColor">@color/brand_primary</item>
         <item name="radius">@dimen/dp_24</item>
         <item name="android:gravity">center</item>
         <item name="android:textSize">@dimen/sp_18</item>
         <item name="android:textStyle">bold</item>
-        <item name="disabledColor">@color/C_9CA3AF</item>
-        <item name="textColorDisabled">@color/white</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="disabledColor">@color/surface_disabled</item>
+        <item name="textColorDisabled">@color/text_on_disabled</item>
+        <item name="android:textColor">@color/text_on_brand</item>
     </style>
 
 

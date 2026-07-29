@@ -31,4 +31,26 @@
     <color name="color_33ffff">#33ffffff</color>
     <color name="color_D2D5DA">#D2D5DA</color>
     <color name="color_E8963B">#E8963B</color>
+
+    <!-- Semantic design tokens. Keep legacy color names until all usages are migrated. -->
+    <color name="text_primary">#111827</color>
+    <color name="text_body">#374151</color>
+    <color name="text_secondary">#6D7280</color>
+    <color name="text_tertiary">#9CA3AF</color>
+    <color name="text_on_brand">#FFFFFFFF</color>
+    <color name="text_on_disabled">#FFFFFFFF</color>
+
+    <color name="surface_primary">#FFFFFFFF</color>
+    <color name="surface_secondary">#F6F6F6</color>
+    <color name="surface_tertiary">#EFEFEF</color>
+    <color name="surface_brand">#E3E8FF</color>
+    <color name="surface_disabled">#9CA3AF</color>
+
+    <!-- The existing brand color is #5965F6 despite the legacy resource name. -->
+    <color name="brand_primary">#5965F6</color>
+    <color name="brand_primary_light">#A3B2FF</color>
+
+    <color name="border_default">#D2D5DA</color>
+    <color name="status_error">#F62909</color>
+    <color name="status_success">#08994E</color>
 </resources>
