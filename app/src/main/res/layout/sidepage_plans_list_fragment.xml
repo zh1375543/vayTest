@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textColor="@color/C_9CA3AF"
+            android:textColor="@color/text_tertiary"
             android:textSize="@dimen/sp_14"
             tools:text="No active plans yet" />
 

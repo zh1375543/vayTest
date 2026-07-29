@@ -51,7 +51,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/notice_layout"
             app:radius="@dimen/dp_24"
-            app:solidColor="@color/white">
+            app:solidColor="@color/surface_primary">
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -85,7 +85,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="start"
                         android:text="@string/loan_amount"
-                        android:textColor="@color/C_374151"
+                        android:textColor="@color/text_body"
                         android:textSize="@dimen/sp_14"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toStartOf="@id/unAuthMoneyGuide"
@@ -100,7 +100,7 @@
                         android:ellipsize="end"
                         android:gravity="start"
                         android:maxLines="1"
-                        android:textColor="@color/C_111827"
+                        android:textColor="@color/text_primary"
                         android:textSize="@dimen/sp_32"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toStartOf="@id/unAuthMoneyGuide"
@@ -123,7 +123,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="start"
                             android:text="@string/annual_rate"
-                            android:textColor="@color/C_6D7280"
+                            android:textColor="@color/text_secondary"
                             android:textSize="@dimen/sp_14"
                             app:layout_constraintEnd_toStartOf="@id/tvPercent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -136,7 +136,7 @@
                             android:layout_marginTop="@dimen/dp_12"
                             android:gravity="start"
                             android:text="@string/loan_period"
-                            android:textColor="@color/C_6D7280"
+                            android:textColor="@color/text_secondary"
                             android:textSize="@dimen/sp_14"
                             app:layout_constraintEnd_toStartOf="@id/tvPeriod"
                             app:layout_constraintStart_toStartOf="parent"
@@ -147,7 +147,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="end"
-                            android:textColor="@color/C_111827"
+                            android:textColor="@color/text_primary"
                             android:textSize="@dimen/sp_16"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -158,7 +158,7 @@
                             android:id="@+id/tvPeriod"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/C_111827"
+                            android:textColor="@color/text_primary"
                             android:gravity="end"
                             android:textSize="@dimen/sp_16"
                             android:textStyle="bold"
@@ -192,7 +192,7 @@
                             android:layout_height="@dimen/dp_54"
                             android:layout_gravity="bottom"
                             android:text="@string/withdraw_now"
-                            app:buttonTextColor="@color/white" />
+                            app:buttonTextColor="@color/text_on_brand" />
 
                         <com.vaycore.finance.ui.views.StyledTextView
                             android:id="@+id/tv_rate_label"
@@ -207,11 +207,11 @@
                             android:paddingHorizontal="@dimen/sp_9"
                             android:includeFontPadding="false"
                             android:text="@string/home_approval_rate_label"
-                            android:textColor="@color/C_374151"
+                            android:textColor="@color/text_body"
                             android:textSize="@dimen/sp_12"
                             android:textStyle="bold"
                             app:radius="@dimen/dp_50"
-                            app:solidColor="@color/C_FFDD00" />
+                            app:solidColor="@color/badge_promotion" />
                     </FrameLayout>
 
                     <TextView
@@ -221,7 +221,7 @@
                         android:layout_marginTop="@dimen/dp_8"
                         android:gravity="center"
                         android:text="@string/refuse_18"
-                        android:textColor="@color/C_9CA3AF"
+                        android:textColor="@color/text_tertiary"
                         android:textSize="@dimen/sp_11"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -251,7 +251,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="start"
                         android:text="@string/current_available_credit_str"
-                        android:textColor="@color/C_374151"
+                        android:textColor="@color/text_body"
                         android:textSize="@dimen/sp_14"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toStartOf="@id/authMoneyGuide"
@@ -266,7 +266,7 @@
                         android:ellipsize="end"
                         android:gravity="start"
                         android:maxLines="1"
-                        android:textColor="@color/C_111827"
+                        android:textColor="@color/text_primary"
                         android:textSize="@dimen/sp_32"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toStartOf="@id/authMoneyGuide"
@@ -289,7 +289,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="start"
                             android:text="@string/maximum_mortgage_amount"
-                            android:textColor="@color/C_6D7280"
+                            android:textColor="@color/text_secondary"
                             android:textSize="@dimen/sp_14"
                             app:layout_constraintEnd_toStartOf="@id/tvMaxAmount"
                             app:layout_constraintStart_toStartOf="parent"
@@ -302,7 +302,7 @@
                             android:layout_marginTop="@dimen/dp_12"
                             android:gravity="start"
                             android:text="@string/used_credit_str"
-                            android:textColor="@color/C_6D7280"
+                            android:textColor="@color/text_secondary"
                             android:textSize="@dimen/sp_14"
                             app:layout_constraintEnd_toStartOf="@id/tvUsedAmount"
                             app:layout_constraintStart_toStartOf="parent"
@@ -313,7 +313,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="end"
-                            android:textColor="@color/C_111827"
+                            android:textColor="@color/text_primary"
                             android:textSize="@dimen/sp_16"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -325,7 +325,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="end"
-                            android:textColor="@color/C_111827"
+                            android:textColor="@color/text_primary"
                             android:textSize="@dimen/sp_16"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -350,7 +350,7 @@
                             android:layout_height="@dimen/dp_54"
                             android:layout_gravity="bottom"
                             android:text="@string/withdrawal"
-                            app:buttonTextColor="@color/white" />
+                            app:buttonTextColor="@color/text_on_brand" />
 
                         <com.vaycore.finance.ui.views.StyledTextView
                             android:id="@+id/tv_loan_rate_label"
@@ -363,13 +363,13 @@
                             android:paddingHorizontal="@dimen/sp_9"
                             android:includeFontPadding="false"
                             android:text="@string/home_approval_rate_label"
-                            android:textColor="@color/C_374151"
+                            android:textColor="@color/text_body"
                             android:textSize="@dimen/sp_10"
                             android:textStyle="bold"
                             android:maxLines="1"
                             android:ellipsize="end"
                             app:radius="@dimen/dp_50"
-                            app:solidColor="@color/C_FFDD00" />
+                            app:solidColor="@color/badge_promotion" />
                     </FrameLayout>
 
                     <TextView
@@ -379,7 +379,7 @@
                         android:layout_marginTop="@dimen/dp_8"
                         android:gravity="center"
                         android:text="@string/quick_withdraw"
-                        android:textColor="@color/C_9CA3AF"
+                        android:textColor="@color/text_tertiary"
                         android:textSize="@dimen/sp_11"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -424,7 +424,7 @@
                     android:gravity="center"
                     android:layout_marginTop="@dimen/dp_20"
                     android:text="@string/home_pre"
-                    android:textColor="@color/C_111827"
+                    android:textColor="@color/text_primary"
                     android:textSize="@dimen/sp_16"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -439,7 +439,7 @@
                     android:gravity="center"
                     android:lineSpacingExtra="@dimen/dp_3"
                     android:text="@string/home_pre_tips"
-                    android:textColor="@color/C_374151"
+                    android:textColor="@color/text_body"
                     android:textSize="@dimen/sp_12"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -457,7 +457,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/refuse_layout"
                 app:radius="@dimen/dp_8"
-                app:solidColor="@color/white">
+                app:solidColor="@color/surface_primary">
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_approval"
                     android:layout_width="@dimen/dp_100"
@@ -472,7 +472,7 @@
                     android:gravity="center"
                     android:layout_marginTop="@dimen/dp_20"
                     android:text="@string/home_refuse"
-                    android:textColor="@color/C_111827"
+                    android:textColor="@color/text_primary"
                     android:textSize="@dimen/sp_16"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -486,7 +486,7 @@
                     android:layout_marginTop="@dimen/dp_4"
                     android:gravity="center"
                     android:text="@string/home_refuse_times"
-                    android:textColor="@color/C_374151"
+                    android:textColor="@color/text_body"
                     android:textSize="@dimen/sp_12"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -500,7 +500,7 @@
                     android:gravity="center"
                     android:lineSpacingExtra="@dimen/dp_3"
                     android:text="@string/home_refuse_tips"
-                    android:textColor="@color/C_6D7280"
+                    android:textColor="@color/text_secondary"
                     android:textSize="@dimen/sp_12"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -548,7 +548,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/home_question_title"
-                android:textColor="@color/C_111827"
+                android:textColor="@color/text_primary"
                 android:textSize="@dimen/sp_20"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -561,7 +561,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_4"
                 android:text="@string/home_question_desc"
-                android:textColor="@color/C_6D7280"
+                android:textColor="@color/text_secondary"
                 android:textSize="@dimen/sp_14"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -588,7 +588,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         app:radius="@dimen/dp_24"
-                        app:solidColor="@color/white">
+                        app:solidColor="@color/surface_primary">
 
                         <TextView
                             android:layout_width="0dp"
@@ -599,7 +599,7 @@
                             android:includeFontPadding="false"
                             android:maxLines="3"
                             android:text="@string/home_question1"
-                            android:textColor="@color/C_374151"
+                            android:textColor="@color/text_body"
                             android:textSize="@dimen/sp_14"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/premiumTipImage"
@@ -623,7 +623,7 @@
                         android:layout_marginStart="@dimen/dp_12"
                         android:layout_weight="1"
                         app:radius="@dimen/dp_24"
-                        app:solidColor="@color/white">
+                        app:solidColor="@color/surface_primary">
 
                         <TextView
                             android:layout_width="0dp"
@@ -634,7 +634,7 @@
                             android:includeFontPadding="false"
                             android:maxLines="3"
                             android:text="@string/home_question4"
-                            android:textColor="@color/C_374151"
+                            android:textColor="@color/text_body"
                             android:textSize="@dimen/sp_14"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/applyTipImage"
@@ -665,7 +665,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         app:radius="@dimen/dp_24"
-                        app:solidColor="@color/white">
+                        app:solidColor="@color/surface_primary">
 
                         <TextView
                             android:layout_width="0dp"
@@ -676,7 +676,7 @@
                             android:includeFontPadding="false"
                             android:maxLines="3"
                             android:text="@string/home_question3"
-                            android:textColor="@color/C_374151"
+                            android:textColor="@color/text_body"
                             android:textSize="@dimen/sp_14"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/informationTipImage"
@@ -700,7 +700,7 @@
                         android:layout_marginStart="@dimen/dp_12"
                         android:layout_weight="1"
                         app:radius="@dimen/dp_24"
-                        app:solidColor="@color/white">
+                        app:solidColor="@color/surface_primary">
 
                         <TextView
                             android:layout_width="0dp"
@@ -711,7 +711,7 @@
                             android:includeFontPadding="false"
                             android:maxLines="3"
                             android:text="@string/home_question2"
-                            android:textColor="@color/C_374151"
+                            android:textColor="@color/text_body"
                             android:textSize="@dimen/sp_14"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/clearTipImage"
@@ -744,7 +744,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/question_layout"
             app:radius="@dimen/dp_24"
-            app:solidColor="@color/white">
+            app:solidColor="@color/surface_primary">
 
             <TextView
                 android:id="@+id/tvFailed"
@@ -753,7 +753,7 @@
                 android:layout_marginTop="@dimen/dp_12"
                 android:gravity="center"
                 android:text="@string/home_payment_failed"
-                android:textColor="@color/C_111827"
+                android:textColor="@color/text_primary"
                 android:textSize="@dimen/sp_16"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -783,8 +783,8 @@
                 android:layout_marginBottom="@dimen/dp_10"
                 android:text="@string/modify_bank_card"
                 android:textSize="@dimen/sp_14"
-                app:buttonSolidColor="@color/color_E8963B"
-                app:buttonTextColor="@color/white"
+                app:buttonSolidColor="@color/brand_secondary"
+                app:buttonTextColor="@color/text_on_brand"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -797,7 +797,7 @@
                 android:layout_margin="@dimen/dp_8"
                 android:src="@mipmap/ic_dialog_bottom_close"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:tint="@color/C_6D7280"
+                app:tint="@color/text_secondary"
                 app:layout_constraintTop_toTopOf="parent" />
         </com.vaycore.finance.ui.views.StyledConstraintLayout>
 
@@ -819,7 +819,7 @@
                 android:layout_marginTop="@dimen/dp_3"
                 android:gravity="center"
                 android:text="@string/products"
-                android:textColor="@color/C_111827"
+                android:textColor="@color/text_primary"
                 android:textSize="@dimen/sp_16"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -865,7 +865,7 @@
                 android:layout_marginBottom="@dimen/dp_32"
                 android:gravity="center"
                 android:text="@string/empty_home"
-                android:textColor="@color/C_6D7280"
+                android:textColor="@color/text_secondary"
                 android:textSize="@dimen/sp_13" />
         </com.vaycore.finance.ui.views.StyledLinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

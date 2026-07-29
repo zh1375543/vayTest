@@ -76,7 +76,7 @@ class BorrowingHistoryAdapter :
 
             ORDER_STATUS_OVERDUE,
             ORDER_STATUS_BAD_DEBTS -> {
-                binding.tvStatus.setTextColor(binding.root.context.resolveColorCompat(R.color.C_F62909))
+                binding.tvStatus.setTextColor(binding.root.context.resolveColorCompat(R.color.status_error))
                 binding.root.context.getString(R.string.overdue)
             }
 

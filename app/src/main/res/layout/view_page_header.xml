@@ -15,7 +15,7 @@
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
-        android:textColor="@color/C_111827"
+        android:textColor="@color/text_primary"
         android:textSize="@dimen/sp_16"
         android:textStyle="bold"
         tools:text="Title" />

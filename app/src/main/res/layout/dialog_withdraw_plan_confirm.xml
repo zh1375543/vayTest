@@ -29,7 +29,7 @@
         android:layout_marginTop="@dimen/dp_18"
         android:gravity="center"
         android:text="@string/portal_confirm_withdraw_message"
-        android:textColor="@color/C_374151"
+        android:textColor="@color/text_body"
         android:textSize="@dimen/sp_15"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,7 +57,7 @@
         android:layout_marginStart="@dimen/dp_6"
         android:text="@string/confirm"
         android:textSize="@dimen/sp_14"
-        app:buttonSolidColor="@color/C_FA560D"
+        app:buttonSolidColor="@color/action_withdraw"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/btCancel"
         app:layout_constraintTop_toTopOf="@id/btCancel" />

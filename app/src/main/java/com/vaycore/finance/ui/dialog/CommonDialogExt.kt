@@ -68,7 +68,7 @@ fun Context.showConfirmDialog(
             tvDesc.setSpannableClickableText(
                 desc,
                 highLight,
-                resolveColorCompat(R.color.C_111827)
+                resolveColorCompat(R.color.text_primary)
             ) {}
             tvDesc.isVisible = desc.isNotBlank()
             tvSure.text = ok
@@ -155,7 +155,7 @@ fun Context.showPreCreditExpiredDialog(date: String) {
             tvTips.setSpannableClickableText(
                 String.format(getString(R.string.pre_credit_has_expired_tips), date),
                 date.ifBlank { "XXXXXXXX" },
-                resolveColorCompat(R.color.C_111827)
+                resolveColorCompat(R.color.text_primary)
             ) {
             }
         }

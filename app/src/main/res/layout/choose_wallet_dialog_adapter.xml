@@ -21,7 +21,7 @@
         android:layout_marginStart="@dimen/dp_12"
         android:ellipsize="end"
         android:maxLines="1"
-        android:textColor="@color/C_111827"
+        android:textColor="@color/text_primary"
         android:textSize="@dimen/sp_13"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/tvContent"
@@ -47,7 +47,7 @@
         android:id="@+id/divider"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_1"
-        android:background="@color/C_ECEEF3"
+        android:background="@color/surface_muted"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/tvTitle" />

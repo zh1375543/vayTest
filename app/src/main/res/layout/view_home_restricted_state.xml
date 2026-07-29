@@ -29,13 +29,13 @@
         android:lineSpacingExtra="@dimen/dp_4"
         android:paddingHorizontal="@dimen/dp_28"
         android:text="@string/home_calm"
-        android:textColor="@color/C_9CA3AF"
+        android:textColor="@color/text_tertiary"
         android:textSize="@dimen/sp_13"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ivEmptyCalm"
         app:radius="@dimen/dp_24"
-        app:solidColor="@color/white" />
+        app:solidColor="@color/surface_primary" />
 
     <com.vaycore.finance.ui.views.StyledTextView
         android:layout_width="match_parent"
@@ -44,7 +44,7 @@
         app:layout_constraintBottom_toBottomOf="@id/tvCalmTips3"
         app:layout_constraintTop_toTopOf="@id/tvCalmTips1"
         app:radius="@dimen/dp_24"
-        app:solidColor="@color/white" />
+        app:solidColor="@color/surface_primary" />
 
     <TextView
         android:id="@+id/tvCalmTips1"
@@ -56,7 +56,7 @@
         android:drawablePadding="@dimen/dp_8"
         android:paddingTop="@dimen/dp_12"
         android:text="@string/home_calm_tips1"
-        android:textColor="@color/C_9CA3AF"
+        android:textColor="@color/text_tertiary"
         android:textSize="@dimen/sp_12"
         app:layout_constraintTop_toBottomOf="@id/tvEmptyCalm" />
 
@@ -69,7 +69,7 @@
         android:drawableStart="@drawable/shape_gray_dot"
         android:drawablePadding="@dimen/dp_8"
         android:text="@string/home_calm_tips2"
-        android:textColor="@color/C_9CA3AF"
+        android:textColor="@color/text_tertiary"
         android:textSize="@dimen/sp_12"
         app:layout_constraintTop_toBottomOf="@id/tvCalmTips1" />
 
@@ -83,7 +83,7 @@
         android:drawablePadding="@dimen/dp_8"
         android:paddingBottom="@dimen/dp_12"
         android:text="@string/home_calm_tips3"
-        android:textColor="@color/C_9CA3AF"
+        android:textColor="@color/text_tertiary"
         android:textSize="@dimen/sp_12"
         app:layout_constraintTop_toBottomOf="@id/tvCalmTips2" />
 

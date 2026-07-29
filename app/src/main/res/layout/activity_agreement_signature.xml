@@ -67,7 +67,7 @@
         android:layout_marginHorizontal="@dimen/dp_60"
         android:gravity="center"
         android:text="@string/please_sign_name"
-        android:textColor="@color/C_D2D5DA"
+        android:textColor="@color/border_default"
         android:textSize="@dimen/sp_48"
         app:layout_constraintBottom_toTopOf="@id/tvSign"
         app:layout_constraintEnd_toEndOf="parent"

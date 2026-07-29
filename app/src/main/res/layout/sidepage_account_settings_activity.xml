@@ -48,7 +48,7 @@
             android:layout_marginStart="@dimen/dp_16"
             android:includeFontPadding="false"
             android:text="@string/delete_account"
-            android:textColor="@color/C_374151"
+            android:textColor="@color/text_body"
             android:textSize="@dimen/sp_16"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/ivDeleteAccount"

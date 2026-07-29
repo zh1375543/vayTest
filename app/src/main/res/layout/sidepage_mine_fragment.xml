@@ -44,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:includeFontPadding="false"
                     android:text="@string/welcome"
-                    android:textColor="@color/C_374151"
+                    android:textColor="@color/text_body"
                     android:textSize="@dimen/sp_16"
                     android:textStyle="bold" />
 
@@ -54,7 +54,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
                     android:includeFontPadding="false"
-                    android:textColor="@color/C_374151"
+                    android:textColor="@color/text_body"
                     android:textSize="@dimen/sp_20"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -142,7 +142,7 @@
                     android:paddingStart="@dimen/dp_44"
                     android:paddingEnd="@dimen/dp_32"
                     android:text="@string/share_app"
-                    android:textColor="@color/C_374151"
+                    android:textColor="@color/text_body"
                     android:textSize="@dimen/sp_16" />
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -176,7 +176,7 @@
                     android:paddingStart="@dimen/dp_44"
                     android:paddingEnd="@dimen/dp_32"
                     android:text="@string/settings"
-                    android:textColor="@color/C_374151"
+                    android:textColor="@color/text_body"
                     android:textSize="@dimen/sp_16" />
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -210,7 +210,7 @@
                     android:paddingStart="@dimen/dp_44"
                     android:paddingEnd="@dimen/dp_32"
                     android:text="@string/help_center"
-                    android:textColor="@color/C_374151"
+                    android:textColor="@color/text_body"
                     android:textSize="@dimen/sp_16" />
 
                 <androidx.appcompat.widget.AppCompatImageView

@@ -61,7 +61,7 @@ class RepaymentSubmissionActivity :
         tvOrderNo.setSpannableClickableText(
             getString(R.string.order_no) + ":" + orderNo,
             orderNo ?: "",
-            resolveColorCompat(R.color.C_374151)
+            resolveColorCompat(R.color.text_body)
         ) {
             orderNo?.let { ExternalActionLauncher.copyText(this@RepaymentSubmissionActivity, it) }
             getString(R.string.copy_success).showToastMessage()

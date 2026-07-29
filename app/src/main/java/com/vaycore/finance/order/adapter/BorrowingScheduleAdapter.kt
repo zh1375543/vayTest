@@ -40,52 +40,52 @@ class BorrowingScheduleAdapter :
         )
         val isSelect =
             if (position == items.size - 1) item.isSelect else (items[position + 1].isSelect)
-        tvStatus.setTextColor(context.resolveColorCompat(R.color.C_374151))
+        tvStatus.setTextColor(context.resolveColorCompat(R.color.text_body))
         line.isVisible = position != items.size - 1
         dueFeeItem.isVisible = false
         when (item.planStatus) {
             34, 35 -> {
                 dueFeeItem.isVisible = true
                 tvStatus.text = context.getString(R.string.overdue)
-                tvStatus.setTextColor(context.resolveColorCompat(R.color.C_F62909))
+                tvStatus.setTextColor(context.resolveColorCompat(R.color.status_error))
             }
 
             31 -> {
                 tvStatus.text = context.getString(R.string.processing)
-                tvStatus.setTextColor(context.resolveColorCompat(R.color.C_08994E))
+                tvStatus.setTextColor(context.resolveColorCompat(R.color.status_success))
             }
 
             30, 32, 35 -> {
                 tvStatus.text = context.getString(R.string.pending)
-                tvStatus.setTextColor(context.resolveColorCompat(R.color.C_08994E))
+                tvStatus.setTextColor(context.resolveColorCompat(R.color.status_success))
             }
 
             40, 41, 42, 43 -> {
                 tvStatus.text = context.getString(R.string.settled)
 //                    tvDate.setTextColor(context.resolveColorCompat(R.color.C_75707E))
 //                    tvAmount.setTextColor(context.resolveColorCompat(R.color.C_75707E))
-//                tvStatus.setTextColor(context.resolveColorCompat(R.color.C_374151))
+//                tvStatus.setTextColor(context.resolveColorCompat(R.color.text_body))
             }
 
             14, 15 -> {
                 tvStatus.text = context.getString(R.string.rejected)
 //                    tvDate.setTextColor(context.resolveColorCompat(R.color.C_75707E))
 //                    tvAmount.setTextColor(context.resolveColorCompat(R.color.C_75707E))
-//                tvStatus.setTextColor(context.resolveColorCompat(R.color.C_374151))
+//                tvStatus.setTextColor(context.resolveColorCompat(R.color.text_body))
             }
 
             23 -> {
                 tvStatus.text = context.getString(R.string.closed)
 //                    tvDate.setTextColor(context.resolveColorCompat(R.color.C_75707E))
 //                    tvAmount.setTextColor(context.resolveColorCompat(R.color.C_75707E))
-//                tvStatus.setTextColor(context.resolveColorCompat(R.color.C_374151))
+//                tvStatus.setTextColor(context.resolveColorCompat(R.color.text_body))
             }
 
             22 -> {
                 tvStatus.text = context.getString(R.string.invalid)
 //                    tvDate.setTextColor(context.resolveColorCompat(R.color.C_75707E))
 //                    tvAmount.setTextColor(context.resolveColorCompat(R.color.C_75707E))
-//                tvStatus.setTextColor(context.resolveColorCompat(R.color.C_374151))
+//                tvStatus.setTextColor(context.resolveColorCompat(R.color.text_body))
             }
         }
     }

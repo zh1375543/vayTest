@@ -9,7 +9,7 @@
     android:orientation="vertical"
     app:radius="@dimen/dp_12"
     app:gradientStartColor="@color/color_FF8000"
-    app:gradientEndColor="@color/C_F62909"
+    app:gradientEndColor="@color/status_error"
     app:gradientOrientation="TL_BR">
 
     <TextView

@@ -12,7 +12,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:includeFontPadding="false"
-        android:textColor="@color/C_374151"
+        android:textColor="@color/text_body"
         android:textSize="@dimen/sp_14" />
 
 </FrameLayout>

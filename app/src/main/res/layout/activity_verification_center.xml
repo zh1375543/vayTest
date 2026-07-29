@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_16"
         android:text="@string/certification"
-        android:textColor="@color/C_111827"
+        android:textColor="@color/text_primary"
         android:textSize="@dimen/sp_24"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/titleBar" />
@@ -32,7 +32,7 @@
         android:layout_marginTop="@dimen/dp_4"
         android:gravity="start"
         android:text="@string/cert_desc"
-        android:textColor="@color/C_374151"
+        android:textColor="@color/text_body"
         android:textSize="@dimen/sp_14"
         android:textStyle="normal"
         app:layout_constraintTop_toBottomOf="@id/tvCertTitle" />

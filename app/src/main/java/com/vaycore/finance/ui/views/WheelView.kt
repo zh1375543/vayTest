@@ -22,7 +22,7 @@ class WheelView @JvmOverloads constructor(
     private val itemHeight by lazy { dp(50) }
     private val visibleCount = 5
 
-    private val centerColor by lazy { ContextCompat.getColor(context, R.color.C_111827) }
+    private val centerColor by lazy { ContextCompat.getColor(context, R.color.text_primary) }
     private val normalColor by lazy { ContextCompat.getColor(context, R.color.C_9CA3AF) }
 
     private val centerPaint by lazy {

@@ -38,7 +38,7 @@
         app:layout_constraintEnd_toEndOf="@id/ivIcon"
         app:layout_constraintTop_toTopOf="@id/ivIcon"
         app:radius="@dimen/dp_6"
-        app:solidColor="@color/C_F62909" />
+        app:solidColor="@color/status_error" />
 
     <TextView
         android:id="@+id/tvDate"
@@ -61,7 +61,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:text="@{item.theme}"
-        android:textColor="@color/C_111827"
+        android:textColor="@color/text_primary"
         android:textSize="@dimen/sp_14"
         app:layout_constraintEnd_toStartOf="@id/tvDate"
         app:layout_constraintStart_toEndOf="@id/ivIcon"

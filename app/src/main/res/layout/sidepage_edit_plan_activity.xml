@@ -63,7 +63,7 @@
                 android:layout_marginStart="@dimen/dp_16"
                 android:layout_marginTop="@dimen/dp_16"
                 android:text="@string/portal_record_photo"
-                android:textColor="@color/C_374151"
+                android:textColor="@color/text_body"
                 android:textSize="@dimen/sp_14" />
 
             <LinearLayout
@@ -153,8 +153,8 @@
             android:text="@string/portal_abandon_plan"
             android:textSize="@dimen/sp_14"
             app:actionButtonVariant="outline"
-            app:buttonStrokeColor="@color/C_F62909"
-            app:buttonTextColor="@color/C_F62909" />
+            app:buttonStrokeColor="@color/status_error"
+            app:buttonTextColor="@color/status_error" />
 
         <com.vaycore.finance.ui.views.StatefulActionButton
             android:id="@+id/btEditPlan"

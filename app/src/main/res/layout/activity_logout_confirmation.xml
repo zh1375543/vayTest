@@ -73,7 +73,7 @@
         android:lineSpacingExtra="@dimen/dp_4"
         android:padding="@dimen/dp_10"
         android:text="@string/close_account_tips"
-        android:textColor="@color/C_F62909"
+        android:textColor="@color/status_error"
         android:textSize="@dimen/sp_12"
         app:radius="@dimen/dp_24"
         app:solidColor="@color/C_F6F6F6"

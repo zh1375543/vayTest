@@ -7,7 +7,7 @@
     android:layout_marginBottom="@dimen/dp_12"
     android:paddingBottom="@dimen/dp_20"
     app:radius="@dimen/dp_24"
-    app:solidColor="@color/white">
+    app:solidColor="@color/surface_primary">
 
     <TextView
         android:id="@+id/tvName"
@@ -19,7 +19,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:text="Product Name"
-        android:textColor="@color/C_111827"
+        android:textColor="@color/text_primary"
         android:textSize="@dimen/sp_16"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@id/tvRepay"
@@ -36,7 +36,7 @@
         android:minWidth="@dimen/dp_88"
         android:paddingHorizontal="@dimen/dp_16"
         android:text="@string/repay"
-        android:textColor="@color/white"
+        android:textColor="@color/text_inverse"
         android:textSize="@dimen/sp_14"
         android:textStyle="bold"
         android:visibility="visible"
@@ -44,9 +44,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:radius="@dimen/dp_50"
-        app:selectedColor="@color/C_F62909"
-        app:solidColor="@color/color_7087F8"
-        app:textColorSelected="@color/white" />
+        app:selectedColor="@color/status_error"
+        app:solidColor="@color/brand_primary"
+        app:textColorSelected="@color/text_inverse" />
 
     <TextView
         android:id="@+id/tvStateTitle"
@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_12"
         android:text="@string/order_status"
-        android:textColor="@color/C_374151"
+        android:textColor="@color/text_body"
         android:textSize="@dimen/sp_13"
         app:layout_constraintStart_toStartOf="@id/tvName"
         app:layout_constraintTop_toBottomOf="@id/tvName" />
@@ -69,12 +69,12 @@
         android:gravity="end"
         android:maxLines="1"
         android:text="@string/pending_repayment"
-        android:textColor="@color/color_7087F8"
+        android:textColor="@color/brand_primary"
         android:textSize="@dimen/sp_13"
         app:layout_constraintBaseline_toBaselineOf="@id/tvStateTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tvStateTitle"
-        app:textColorSelected="@color/C_F62909" />
+        app:textColorSelected="@color/status_error" />
 
     <TextView
         android:id="@+id/tvDateTitle"
@@ -82,7 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_8"
         android:text="@string/due_date"
-        android:textColor="@color/C_374151"
+        android:textColor="@color/text_body"
         android:textSize="@dimen/sp_13"
         app:layout_constraintStart_toStartOf="@id/tvStateTitle"
         app:layout_constraintTop_toBottomOf="@id/tvStateTitle" />
@@ -97,7 +97,7 @@
         android:gravity="end"
         android:maxLines="1"
         android:text="11/11Day"
-        android:textColor="@color/C_374151"
+        android:textColor="@color/text_body"
         android:textSize="@dimen/sp_13"
         app:layout_constraintBaseline_toBaselineOf="@id/tvDateTitle"
         app:layout_constraintEnd_toEndOf="parent"
@@ -113,7 +113,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvDateTitle"
         app:radius="@dimen/dp_24"
-        app:solidColor="@color/C_F6F6F6">
+        app:solidColor="@color/surface_secondary">
 
         <TextView
             android:id="@+id/tvAmountTitle"
@@ -124,7 +124,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@string/total_repayment"
-            android:textColor="@color/C_9CA3AF"
+            android:textColor="@color/text_tertiary"
             android:textSize="@dimen/sp_13"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/tvLoanAmount"
@@ -139,7 +139,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="200,000,000₫"
-            android:textColor="@color/C_374151"
+            android:textColor="@color/text_body"
             android:textSize="@dimen/sp_18"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -156,12 +156,12 @@
         android:layout_marginTop="@dimen/dp_14"
         android:lineSpacingExtra="@dimen/dp_2"
         android:text="@string/pending_cash_desc"
-        android:textColor="@color/C_9CA3AF"
+        android:textColor="@color/text_tertiary"
         android:textSize="@dimen/sp_12"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/amountLayout"
-        app:textColorSelected="@color/C_F62909" />
+        app:textColorSelected="@color/status_error" />
 
 </com.vaycore.finance.ui.views.StyledConstraintLayout>

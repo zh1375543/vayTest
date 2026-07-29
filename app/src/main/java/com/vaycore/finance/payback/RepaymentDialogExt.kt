@@ -42,14 +42,14 @@ fun Context.showRepayAndReapplyDialog(
                 solidColor = ContextCompat.getColor(
                     this@showRepayAndReapplyDialog,
                     when {
-                        isApplyAll -> R.color.C_89F5C7
-                        isDue -> R.color.C_F62909
+                        isApplyAll -> R.color.action_success
+                        isDue -> R.color.status_error
                         else -> R.color.color_7087F8
                     },
                 ),
                 textColor = ContextCompat.getColor(
                     this@showRepayAndReapplyDialog,
-                    if (isApplyAll) R.color.C_111827 else R.color.white,
+                    if (isApplyAll) R.color.text_primary else R.color.white,
                 ),
             )
             cbUnderstand.singleClick {

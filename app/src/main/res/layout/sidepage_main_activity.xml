@@ -13,7 +13,7 @@
         android:paddingStart="@dimen/dp_24"
         android:paddingEnd="@dimen/dp_24"
         android:text="@string/portal_overview_title"
-        android:textColor="@color/C_111827"
+        android:textColor="@color/text_primary"
         android:textSize="@dimen/sp_20"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -89,7 +89,7 @@
         app:layout_constraintEnd_toEndOf="@id/vHome"
         app:layout_constraintStart_toStartOf="@id/vHome"
         app:layout_constraintTop_toTopOf="@id/vHome"
-        app:textColorSelected="@color/C_111827" />
+        app:textColorSelected="@color/text_primary" />
 
     <com.vaycore.finance.ui.views.StyledTextView
         android:id="@+id/tvOrder"
@@ -105,7 +105,7 @@
         app:layout_constraintEnd_toEndOf="@id/vOrder"
         app:layout_constraintStart_toStartOf="@id/vOrder"
         app:layout_constraintTop_toTopOf="@id/vOrder"
-        app:textColorSelected="@color/C_111827" />
+        app:textColorSelected="@color/text_primary" />
 
     <com.vaycore.finance.ui.views.StyledTextView
         android:id="@+id/tvStats"
@@ -121,7 +121,7 @@
         app:layout_constraintEnd_toEndOf="@id/vStats"
         app:layout_constraintStart_toStartOf="@id/vStats"
         app:layout_constraintTop_toTopOf="@id/vStats"
-        app:textColorSelected="@color/C_111827" />
+        app:textColorSelected="@color/text_primary" />
 
     <com.vaycore.finance.ui.views.StyledTextView
         android:id="@+id/tvMine"
@@ -137,6 +137,6 @@
         app:layout_constraintEnd_toEndOf="@id/vMine"
         app:layout_constraintStart_toStartOf="@id/vMine"
         app:layout_constraintTop_toTopOf="@id/vMine"
-        app:textColorSelected="@color/C_111827" />
+        app:textColorSelected="@color/text_primary" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

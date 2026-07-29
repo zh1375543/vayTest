@@ -161,7 +161,7 @@
                 android:includeFontPadding="false"
                 android:maxLines="2"
                 android:text="@string/credit_dialog_fast_application"
-                android:textColor="@color/C_374151"
+                android:textColor="@color/text_body"
                 android:textSize="@dimen/sp_12" />
         </LinearLayout>
 
@@ -186,7 +186,7 @@
                 android:includeFontPadding="false"
                 android:maxLines="2"
                 android:text="@string/credit_dialog_quick_review"
-                android:textColor="@color/C_374151"
+                android:textColor="@color/text_body"
                 android:textSize="@dimen/sp_12" />
         </LinearLayout>
 
@@ -211,7 +211,7 @@
                 android:includeFontPadding="false"
                 android:maxLines="2"
                 android:text="@string/credit_dialog_funds_after_approval"
-                android:textColor="@color/C_374151"
+                android:textColor="@color/text_body"
                 android:textSize="@dimen/sp_12" />
         </LinearLayout>
     </LinearLayout>

@@ -28,7 +28,7 @@
         android:layout_marginTop="@dimen/dp_12"
         android:gravity="center"
         android:lineSpacingExtra="@dimen/dp_2"
-        android:textColor="@color/C_374151"
+        android:textColor="@color/text_body"
         android:textSize="@dimen/sp_16"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

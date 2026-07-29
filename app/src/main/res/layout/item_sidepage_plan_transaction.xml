@@ -6,7 +6,7 @@
     android:layout_marginBottom="@dimen/dp_16"
     android:padding="@dimen/dp_20"
     app:radius="@dimen/dp_24"
-    app:solidColor="@color/C_F6F6F6">
+    app:solidColor="@color/surface_secondary">
 
     <ImageView
         android:id="@+id/ivTransactionType"
@@ -22,7 +22,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_14"
-        android:textColor="@color/C_9CA3AF"
+        android:textColor="@color/text_tertiary"
         android:textSize="@dimen/sp_14"
         app:layout_constraintEnd_toStartOf="@id/tvTransactionDate"
         app:layout_constraintStart_toEndOf="@id/ivTransactionType"
@@ -32,7 +32,7 @@
         android:id="@+id/tvTransactionDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/C_9CA3AF"
+        android:textColor="@color/text_tertiary"
         android:textSize="@dimen/sp_12"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/ivTransactionType" />
@@ -67,7 +67,7 @@
         android:layout_marginStart="@dimen/dp_12"
         android:ellipsize="end"
         android:maxLines="1"
-        android:textColor="@color/C_6D7280"
+        android:textColor="@color/text_secondary"
         android:textSize="@dimen/sp_12"
         app:layout_constraintBottom_toBottomOf="@id/ivAddress"
         app:layout_constraintEnd_toEndOf="parent"

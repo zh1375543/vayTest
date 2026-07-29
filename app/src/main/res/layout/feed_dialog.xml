@@ -35,7 +35,7 @@
             android:gravity="start"
             android:hint="@string/enter_feedback"
             android:padding="@dimen/dp_12"
-            android:textColor="@color/C_111827"
+            android:textColor="@color/text_primary"
             android:textColorHint="@color/C_9CA3AF"
             android:textSize="@dimen/sp_14"
             app:layout_constraintTop_toBottomOf="@id/tvTitle"

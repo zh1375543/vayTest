@@ -345,7 +345,7 @@ class BorrowingDetailActivity :
                 ORDER_STATUS_BAD_DEBTS,
                     -> {
                     tvOrderStatus.text = getString(R.string.overdue)
-                    tvOrderStatus.setTextColor(resolveColorCompat(R.color.C_F62909))
+                    tvOrderStatus.setTextColor(resolveColorCompat(R.color.status_error))
                 }
 
                 ORDER_STATUS_AUTO_FAIL,
@@ -556,7 +556,7 @@ class BorrowingDetailActivity :
             binding.cbAutoApply.isVisible && !binding.cbAutoApply.isSelected
 
     private fun updateBottomActionColors(isDue: Boolean) = with(binding) {
-        val actionColor = resolveColorCompat(if (isDue) R.color.C_F62909 else R.color.color_7087F8)
+        val actionColor = resolveColorCompat(if (isDue) R.color.status_error else R.color.color_7087F8)
         tvRepay.updateAppearance(
             variant = StatefulActionButton.VARIANT_OUTLINE,
             strokeColor = actionColor,

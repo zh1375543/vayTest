@@ -17,7 +17,7 @@
         android:gravity="center"
         android:paddingHorizontal="@dimen/dp_16"
         android:text="@string/shoot_req"
-        android:textColor="@color/C_111827"
+        android:textColor="@color/text_primary"
         android:textSize="@dimen/sp_16"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent" />
@@ -31,7 +31,7 @@
         android:lineSpacingExtra="@dimen/dp_4"
         android:paddingHorizontal="@dimen/dp_20"
         android:text="@string/dialog_example_card_desc"
-        android:textColor="@color/C_6D7280"
+        android:textColor="@color/text_secondary"
         android:textSize="@dimen/sp_12"
         app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 

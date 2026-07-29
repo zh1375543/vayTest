@@ -60,10 +60,10 @@ class SavingsCalendarDayAdapter :
             setTextColor(
                 when {
                     item.isToday -> ContextCompat.getColor(context, R.color.white)
-                    !item.isCurrentMonth -> ContextCompat.getColor(context, R.color.C_D2D5DA)
-                    item.hasPayoutRecord -> ContextCompat.getColor(context, R.color.C_FA560D)
+                    !item.isCurrentMonth -> ContextCompat.getColor(context, R.color.border_default)
+                    item.hasPayoutRecord -> ContextCompat.getColor(context, R.color.action_withdraw)
                     item.hasSavingRecord -> ContextCompat.getColor(context, R.color.color_7087F8)
-                    else -> ContextCompat.getColor(context, R.color.C_374151)
+                    else -> ContextCompat.getColor(context, R.color.text_body)
                 },
             )
         }

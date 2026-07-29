@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/portal_loan_amount"
-                android:textColor="@color/C_374151"
+                android:textColor="@color/text_body"
                 android:textSize="@dimen/sp_16"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -55,7 +55,7 @@
                 android:layout_marginTop="@dimen/dp_24"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textColor="@color/C_111827"
+                android:textColor="@color/text_primary"
                 android:textSize="@dimen/sp_28"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@id/ivMoney"
@@ -69,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_30"
                 android:text="@string/portal_saved_this_month"
-                android:textColor="@color/C_6D7280"
+                android:textColor="@color/text_secondary"
                 android:textSize="@dimen/sp_14"
                 app:layout_constraintEnd_toStartOf="@id/tvSavedThisMonth"
                 app:layout_constraintStart_toStartOf="parent"
@@ -80,7 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="end"
-                android:textColor="@color/C_374151"
+                android:textColor="@color/text_body"
                 android:textSize="@dimen/sp_14"
                 android:textStyle="bold"
                 app:layout_constraintBaseline_toBaselineOf="@id/tvSavedThisMonthLabel"
@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_16"
                 android:text="@string/portal_total_savings"
-                android:textColor="@color/C_6D7280"
+                android:textColor="@color/text_secondary"
                 android:textSize="@dimen/sp_14"
                 app:layout_constraintEnd_toStartOf="@id/tvTotalSavings"
                 app:layout_constraintStart_toStartOf="parent"
@@ -104,7 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="end"
-                android:textColor="@color/C_374151"
+                android:textColor="@color/text_body"
                 android:textSize="@dimen/sp_14"
                 android:textStyle="bold"
                 app:layout_constraintBaseline_toBaselineOf="@id/tvTotalSavingsLabel"
@@ -170,7 +170,7 @@
             android:layout_marginTop="@dimen/dp_32"
             android:gravity="center"
             android:text="@string/portal_savings_level"
-            android:textColor="@color/C_111827"
+            android:textColor="@color/text_primary"
             android:textSize="@dimen/sp_20"
             android:textStyle="bold" />
 
@@ -194,7 +194,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|bottom"
                 android:layout_marginBottom="@dimen/dp_38"
-                android:textColor="@color/C_FA560D"
+                android:textColor="@color/action_withdraw"
                 android:textSize="@dimen/sp_12"
                 android:textStyle="bold"
                 tools:text="L1 Beginner Saver" />
@@ -207,7 +207,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_20"
             android:gravity="center"
-            android:textColor="@color/C_6D7280"
+            android:textColor="@color/text_secondary"
             android:textSize="@dimen/sp_12" />
 
     </LinearLayout>

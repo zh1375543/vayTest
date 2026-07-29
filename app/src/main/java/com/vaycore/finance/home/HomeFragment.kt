@@ -306,7 +306,7 @@ class HomeFragment : BaseFragment<FragmentLoanHomeBinding>(R.layout.fragment_loa
             binding.calmLayout.tvCalmTips3.setClickableTextWithScale(
                 calmTips,
                 state.enableLoanDate ?: "-",
-                binding.root.context.resolveColorCompat(R.color.C_374151)
+                binding.root.context.resolveColorCompat(R.color.text_body)
             )
             if (!state.showAuthenticatedLayout) {
                 return@apply

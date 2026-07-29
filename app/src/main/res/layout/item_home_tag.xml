@@ -8,9 +8,9 @@
     android:gravity="center"
     android:paddingHorizontal="@dimen/dp_12"
     android:text="fast"
-    android:textColor="@color/color_7087F8"
+    android:textColor="@color/brand_primary"
     android:textSize="@dimen/sp_15"
     app:radius="@dimen/dp_24"
     app:strokeWidth="@dimen/dp_1"
-    app:strokeColor="@color/color_7087F8"
-    app:solidColor="@color/white" />
+    app:strokeColor="@color/brand_primary"
+    app:solidColor="@color/surface_primary" />

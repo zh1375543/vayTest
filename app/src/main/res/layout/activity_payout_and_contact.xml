@@ -88,7 +88,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:text="@string/contact_info"
-                    android:textColor="@color/C_111827"
+                    android:textColor="@color/text_primary"
                     android:textSize="@dimen/sp_18"
                     android:textStyle="bold" />
 
@@ -98,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_10"
                     android:text="@string/contact_tips"
-                    android:textColor="@color/C_6D7280"
+                    android:textColor="@color/text_secondary"
                     android:textSize="@dimen/sp_12"
                     android:visibility="@{!isCertified ? View.VISIBLE : View.GONE}" />
 

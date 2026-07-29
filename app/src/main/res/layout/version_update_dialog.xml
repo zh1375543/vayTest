@@ -19,7 +19,7 @@
         android:layout_marginTop="@dimen/dp_16"
         android:gravity="center"
         android:text="@string/new_version"
-        android:textColor="@color/C_111827"
+        android:textColor="@color/text_primary"
         android:textSize="@dimen/sp_28"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent" />
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_16"
         android:gravity="center"
-        android:textColor="@color/C_6D7280"
+        android:textColor="@color/text_secondary"
         android:text="@string/new_version_desc"
         app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 

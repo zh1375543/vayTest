@@ -67,7 +67,7 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:radius="@dimen/dp_2"
-                                app:solidColor="@color/C_374151" />
+                                app:solidColor="@color/text_body" />
 
                             <TextView
                                 android:id="@+id/tvOrderNo"
@@ -75,7 +75,7 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:text="@string/order_no"
-                                android:textColor="@color/C_374151"
+                                android:textColor="@color/text_body"
                                 android:textSize="@dimen/sp_14"
                                 android:textStyle="bold"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -104,7 +104,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_2"
                             android:gravity="center"
-                            android:textColor="@color/C_111827"
+                            android:textColor="@color/text_primary"
                             android:textSize="@dimen/sp_28"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -122,7 +122,7 @@
                         android:layout_marginTop="@dimen/dp_10"
                         android:gravity="center"
                         android:text="@string/choose_repayment_method"
-                        android:textColor="@color/C_111827"
+                        android:textColor="@color/text_primary"
                         android:textSize="@dimen/sp_18"
                         android:textStyle="bold" />
 
@@ -145,7 +145,7 @@
                         android:layout_marginTop="@dimen/dp_4"
                         android:gravity="center"
                         android:text="@string/repayment_voucher"
-                        android:textColor="@color/C_111827"
+                        android:textColor="@color/text_primary"
                         android:textSize="@dimen/sp_16"
                         android:textStyle="bold" />
 
@@ -205,7 +205,7 @@
                                 android:gravity="center"
                                 android:lineSpacingExtra="@dimen/dp_2"
                                 android:text="@string/upload"
-                                android:textColor="@color/C_374151"
+                                android:textColor="@color/text_body"
                                 android:textSize="@dimen/sp_12"
                                 app:layout_constraintBottom_toBottomOf="parent" />
 

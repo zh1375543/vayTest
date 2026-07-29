@@ -38,7 +38,7 @@
         android:layout_marginTop="@dimen/dp_16"
         android:gravity="center"
         android:text="@string/contact_us"
-        android:textColor="@color/C_111827"
+        android:textColor="@color/text_primary"
         android:textSize="@dimen/sp_20"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/cardLayout"

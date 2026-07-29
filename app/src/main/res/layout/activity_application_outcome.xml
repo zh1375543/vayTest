@@ -7,7 +7,7 @@
     app:gradientCenterColor="@color/C_F6F6F6"
     app:gradientEndColor="@color/C_F6F6F6"
     app:gradientOrientation="TR_BL"
-    app:gradientStartColor="@color/color_A3B2FF">
+    app:gradientStartColor="@color/brand_primary_light">
 
     <com.vaycore.finance.ui.views.ContentStateLayout
         android:id="@+id/loading_layout"
@@ -102,7 +102,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="@string/application_submit"
-                            android:textColor="@color/C_111827"
+                            android:textColor="@color/text_primary"
                             android:textSize="@dimen/sp_20"
                             android:textStyle="bold"
                             android:layout_marginStart="@dimen/dp_10"
@@ -155,7 +155,7 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:text="@string/submit_failed"
-                                android:textColor="@color/C_111827"
+                                android:textColor="@color/text_primary"
                                 android:textSize="@dimen/sp_20"
                                 android:textStyle="bold"
                                 app:layout_constraintBottom_toTopOf="@id/tvFail"
@@ -259,7 +259,7 @@
                                 android:layout_marginTop="@dimen/dp_12"
                                 android:gravity="start"
                                 android:text="@string/products"
-                                android:textColor="@color/C_111827"
+                                android:textColor="@color/text_primary"
                                 android:textSize="@dimen/sp_16"
                                 android:textStyle="bold"
                                 app:layout_constraintEnd_toEndOf="parent"

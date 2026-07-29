@@ -31,7 +31,7 @@
         android:layout_marginTop="@dimen/dp_12"
         android:gravity="center_vertical"
         android:text="@string/withdraw_method"
-        android:textColor="@color/C_111827"
+        android:textColor="@color/text_primary"
         android:textSize="@dimen/sp_18"
         android:textStyle="bold" />
 
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_12"
         android:text="@string/bank_tips"
-        android:textColor="@color/C_6D7280"
+        android:textColor="@color/text_secondary"
         android:textSize="@dimen/sp_12" />
 
     <com.vaycore.finance.ui.views.StyledLinearLayout
@@ -62,7 +62,7 @@
             android:gravity="center_vertical"
             android:paddingHorizontal="@dimen/dp_16"
             android:text="@string/please_select"
-            android:textColor="@color/C_374151"
+            android:textColor="@color/text_body"
             android:textSize="@dimen/sp_14" />
 
         <TextView
@@ -72,7 +72,7 @@
             android:layout_marginHorizontal="@dimen/dp_16"
             android:layout_marginBottom="@dimen/dp_8"
             android:text="@string/select_withdraw_method"
-            android:textColor="@color/C_F62909"
+            android:textColor="@color/status_error"
             android:textSize="@dimen/sp_12"
             android:visibility="gone" />
 

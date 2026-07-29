@@ -8,7 +8,7 @@
     android:clipChildren="false"
     android:clipToPadding="false"
     app:radius="@dimen/dp_30"
-    app:solidColor="@color/white">
+    app:solidColor="@color/surface_primary">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/ivIcon"
@@ -33,7 +33,7 @@
         android:includeFontPadding="false"
         android:maxLines="1"
         android:text="Product Name"
-        android:textColor="@color/C_111827"
+        android:textColor="@color/text_primary"
         android:textSize="@dimen/sp_18"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@id/ivNew"
@@ -87,7 +87,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/headerBottomBarrier"
         app:radius="@dimen/dp_40"
-        app:solidColor="@color/C_F6F6F6">
+        app:solidColor="@color/surface_secondary">
 
         <TextView
             android:id="@+id/tvLoanAmount"
@@ -98,7 +98,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@string/home_product_loan_amount_title"
-            android:textColor="@color/C_9CA3AF"
+            android:textColor="@color/text_tertiary"
             android:textSize="@dimen/sp_15"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/tvAmount"
@@ -113,7 +113,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="200,000,000đ"
-            android:textColor="@color/C_111827"
+            android:textColor="@color/text_primary"
             android:textSize="@dimen/sp_16"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -129,7 +129,7 @@
         android:layout_marginTop="@dimen/dp_18"
         android:layout_marginEnd="@dimen/dp_12"
         android:text="@string/borrow_cycle"
-        android:textColor="@color/C_6D7280"
+        android:textColor="@color/text_secondary"
         android:textSize="@dimen/sp_15"
         app:layout_constraintEnd_toStartOf="@id/tvApply"
         app:layout_constraintStart_toStartOf="parent"
@@ -143,7 +143,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:text="91 Days"
-        android:textColor="@color/C_111827"
+        android:textColor="@color/text_primary"
         android:textSize="@dimen/sp_18"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/tvBorrowDays"
@@ -167,8 +167,8 @@
         app:autoSizeMaxTextSize="@dimen/sp_18"
         app:autoSizeMinTextSize="@dimen/sp_10"
         app:autoSizeTextType="uniform"
-        app:buttonSolidColor="@color/color_7087F8"
-        app:buttonTextColor="@color/white"
+        app:buttonSolidColor="@color/brand_primary"
+        app:buttonTextColor="@color/text_on_brand"
         app:layout_constraintBottom_toBottomOf="@id/tvDays"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tvBorrowDays" />
@@ -197,7 +197,7 @@
             android:drawableTop="@mipmap/ic_loan_unlocked"
             android:drawablePadding="@dimen/dp_14"
             android:text="@string/unlocked"
-            android:textColor="@color/white"
+            android:textColor="@color/text_inverse"
             android:textSize="@dimen/sp_20"
             android:textStyle="bold" />
     </com.vaycore.finance.ui.views.StyledLinearLayout>

@@ -34,7 +34,7 @@
             android:layout_marginEnd="@dimen/dp_24"
             android:includeFontPadding="false"
             android:text="@string/welcome"
-            android:textColor="@color/C_374151"
+            android:textColor="@color/text_body"
             android:textSize="@dimen/sp_12"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/tvPhone"
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_6"
             android:includeFontPadding="false"
-            android:textColor="@color/C_374151"
+            android:textColor="@color/text_body"
             android:textSize="@dimen/sp_15"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/ivAvatar"
@@ -189,7 +189,7 @@
                     android:layout_weight="1"
                     android:includeFontPadding="false"
                     android:text="@string/quick_repayment"
-                    android:textColor="@color/C_374151"
+                    android:textColor="@color/text_body"
                     android:textSize="@dimen/sp_16"
                     android:textStyle="bold" />
 
@@ -243,7 +243,7 @@
                     android:paddingStart="@dimen/dp_34"
                     android:paddingEnd="@dimen/dp_24"
                     android:text="@string/privacy_policy"
-                    android:textColor="@color/C_374151"
+                    android:textColor="@color/text_body"
                     android:textSize="@dimen/sp_13"
                     android:textStyle="bold" />
 
@@ -277,7 +277,7 @@
                     android:paddingStart="@dimen/dp_34"
                     android:paddingEnd="@dimen/dp_24"
                     android:text="@string/settings"
-                    android:textColor="@color/C_374151"
+                    android:textColor="@color/text_body"
                     android:textSize="@dimen/sp_13"
                     android:textStyle="bold" />
 
@@ -311,7 +311,7 @@
                     android:paddingStart="@dimen/dp_34"
                     android:paddingEnd="@dimen/dp_24"
                     android:text="@string/contact_us"
-                    android:textColor="@color/C_374151"
+                    android:textColor="@color/text_body"
                     android:textSize="@dimen/sp_13"
                     android:textStyle="bold" />
 
@@ -345,7 +345,7 @@
                     android:paddingStart="@dimen/dp_34"
                     android:paddingEnd="@dimen/dp_24"
                     android:text="@string/about_us"
-                    android:textColor="@color/C_374151"
+                    android:textColor="@color/text_body"
                     android:textSize="@dimen/sp_13"
                     android:textStyle="bold" />
 

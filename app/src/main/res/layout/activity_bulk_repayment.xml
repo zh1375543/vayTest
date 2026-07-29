@@ -115,7 +115,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/dp_16"
                     android:singleLine="true"
-                    android:textColor="@color/C_111827"
+                    android:textColor="@color/text_primary"
                     android:textSize="@dimen/sp_14"
                     android:textStyle="bold"
                     android:text="@{viewModel.selectedOrderCount}"

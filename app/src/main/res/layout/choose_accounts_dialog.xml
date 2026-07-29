@@ -16,7 +16,7 @@
         android:layout_marginTop="@dimen/dp_24"
         android:gravity="start"
         android:text="@string/choose_account"
-        android:textColor="@color/C_374151"
+        android:textColor="@color/text_body"
         android:textSize="@dimen/sp_16"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

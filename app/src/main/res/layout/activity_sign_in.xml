@@ -22,7 +22,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleBar"
         android:gravity="center_horizontal"
-        android:textColor="@color/C_111827"
+        android:textColor="@color/text_primary"
         android:textSize="@dimen/sp_18"
         android:textStyle="bold" />
 
@@ -50,7 +50,7 @@
             android:inputType="phone"
             android:maxLength="11"
             android:paddingHorizontal="@dimen/dp_12"
-            android:textColor="@color/C_111827"
+            android:textColor="@color/text_primary"
             android:textColorHint="@color/C_9CA3AF"
             android:textSize="@dimen/sp_14"
             app:drawableHeight="@dimen/dp_22"
@@ -58,7 +58,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:radius="@dimen/dp_24"
             app:solidColor="@color/white"
-            app:strokeColor="@color/C_D2D5DA"
+            app:strokeColor="@color/border_default"
             app:validationErrorDrawable="@mipmap/ic_edit_input_fail"
             app:validationSuccessDrawable="@mipmap/ic_edit_input_success"
             tools:ignore="MissingConstraints" />
@@ -77,7 +77,7 @@
             android:inputType="phone"
             android:maxLength="10"
             android:paddingHorizontal="@dimen/dp_12"
-            android:textColor="@color/C_111827"
+            android:textColor="@color/text_primary"
             android:textColorHint="@color/C_9CA3AF"
             android:textSize="@dimen/sp_14"
             app:layout_constraintEnd_toStartOf="@id/tvGetOtp"
@@ -85,7 +85,7 @@
             app:layout_constraintTop_toBottomOf="@id/etPhone"
             app:radius="@dimen/dp_24"
             app:solidColor="@color/white"
-            app:strokeColor="@color/C_D2D5DA"
+            app:strokeColor="@color/border_default"
             tools:ignore="MissingConstraints" />
 
         <com.vaycore.finance.ui.views.StyledTextView
@@ -110,7 +110,7 @@
             android:layout_marginTop="@dimen/dp_24"
             android:gravity="center"
             android:text="@string/login_tip"
-            android:textColor="@color/C_6D7280"
+            android:textColor="@color/text_secondary"
             android:textSize="@dimen/sp_10"
             app:layout_constraintTop_toBottomOf="@id/etOtp" />
 

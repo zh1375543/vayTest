@@ -17,6 +17,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_12"
         android:text="@string/credit_dialog_fast_application"
-        android:textColor="@color/C_6D7280"
+        android:textColor="@color/text_secondary"
         android:textSize="@dimen/sp_15" />
 </LinearLayout>

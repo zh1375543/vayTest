@@ -45,7 +45,7 @@
                 android:layout_marginTop="@dimen/dp_14"
                 app:layout_constraintTop_toBottomOf="@id/noticeLayout"
                 app:radius="@dimen/dp_24"
-                app:solidColor="@color/white">
+                app:solidColor="@color/surface_primary">
 
                 <com.vaycore.finance.ui.views.StyledTextView
                     android:id="@+id/tvOrderNum"
@@ -56,14 +56,14 @@
                     android:gravity="center"
                     android:paddingHorizontal="@dimen/dp_16"
                     android:text="@string/home_order_num"
-                    android:textColor="@color/C_111827"
+                    android:textColor="@color/text_primary"
                     android:textSize="@dimen/sp_15"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:radius="@dimen/dp_20"
-                    app:solidColor="@color/C_F6F6F6" />
+                    app:solidColor="@color/surface_secondary" />
 
                 <TextView
                     android:id="@+id/tvRepaymentTip"
@@ -73,7 +73,7 @@
                     android:layout_marginTop="@dimen/dp_14"
                     android:gravity="center"
                     android:text="@string/batch_repayment_tips"
-                    android:textColor="@color/C_9CA3AF"
+                    android:textColor="@color/text_tertiary"
                     android:textSize="@dimen/sp_13"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -91,8 +91,8 @@
                     android:textSize="@dimen/sp_18"
                     android:textStyle="bold"
                     app:buttonRadius="@dimen/dp_24"
-                    app:buttonSolidColor="@color/color_7087F8"
-                    app:buttonTextColor="@color/white"
+                    app:buttonSolidColor="@color/brand_primary"
+                    app:buttonTextColor="@color/text_on_brand"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -114,7 +114,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/orders"
-                    android:textColor="@color/C_111827"
+                    android:textColor="@color/text_primary"
                     android:textSize="@dimen/sp_18"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -152,7 +152,7 @@
                     android:layout_marginHorizontal="@dimen/dp_16"
                     android:layout_marginTop="@dimen/dp_14"
                     app:radius="@dimen/dp_24"
-                    app:solidColor="@color/white">
+                    app:solidColor="@color/surface_primary">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/ivEmptyOrder"
@@ -170,7 +170,7 @@
                         android:layout_marginTop="@dimen/dp_12"
                         android:gravity="center"
                         android:text="@string/empty_home_order"
-                        android:textColor="@color/C_6D7280"
+                        android:textColor="@color/text_secondary"
                         android:textSize="@dimen/sp_14"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -186,7 +186,7 @@
                     android:layout_marginTop="@dimen/dp_20"
                     android:gravity="center"
                     android:text="@string/benefits_of_paying"
-                    android:textColor="@color/C_111827"
+                    android:textColor="@color/text_primary"
                     android:textSize="@dimen/sp_18"
                     android:textStyle="bold" />
 
@@ -198,7 +198,7 @@
                     android:layout_marginTop="@dimen/dp_16"
                     android:paddingHorizontal="@dimen/dp_20"
                     app:radius="@dimen/dp_24"
-                    app:solidColor="@color/white">
+                    app:solidColor="@color/surface_primary">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/ivTip1"
@@ -214,7 +214,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/home_order_title1"
-                        android:textColor="@color/C_111827"
+                        android:textColor="@color/text_primary"
                         android:textSize="@dimen/sp_14"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toTopOf="@id/tvDesc1"
@@ -230,7 +230,7 @@
                         android:layout_marginTop="@dimen/dp_2"
                         android:lineSpacingExtra="@dimen/dp_1"
                         android:text="@string/home_order_desc1"
-                        android:textColor="@color/C_6D7280"
+                        android:textColor="@color/text_secondary"
                         android:textSize="@dimen/sp_12"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@id/tvTitle1"
@@ -246,7 +246,7 @@
                     android:layout_marginTop="@dimen/dp_12"
                     android:paddingHorizontal="@dimen/dp_20"
                     app:radius="@dimen/dp_24"
-                    app:solidColor="@color/white">
+                    app:solidColor="@color/surface_primary">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/ivTip2"
@@ -264,7 +264,7 @@
                         android:layout_marginStart="@dimen/dp_12"
                         android:gravity="end"
                         android:text="@string/home_order_title2"
-                        android:textColor="@color/C_111827"
+                        android:textColor="@color/text_primary"
                         android:textSize="@dimen/sp_14"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toTopOf="@id/tvDesc2"
@@ -281,7 +281,7 @@
                         android:gravity="end"
                         android:lineSpacingExtra="@dimen/dp_1"
                         android:text="@string/home_order_desc2"
-                        android:textColor="@color/C_6D7280"
+                        android:textColor="@color/text_secondary"
                         android:textSize="@dimen/sp_12"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@id/tvTitle2"
@@ -297,7 +297,7 @@
                     android:layout_marginTop="@dimen/dp_12"
                     android:paddingHorizontal="@dimen/dp_20"
                     app:radius="@dimen/dp_24"
-                    app:solidColor="@color/white">
+                    app:solidColor="@color/surface_primary">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/ivTip3"
@@ -313,7 +313,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/home_order_title3"
-                        android:textColor="@color/C_111827"
+                        android:textColor="@color/text_primary"
                         android:textSize="@dimen/sp_14"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toTopOf="@id/tvDesc3"
@@ -329,7 +329,7 @@
                         android:layout_marginTop="@dimen/dp_2"
                         android:lineSpacingExtra="@dimen/dp_1"
                         android:text="@string/home_order_desc3"
-                        android:textColor="@color/C_6D7280"
+                        android:textColor="@color/text_secondary"
                         android:textSize="@dimen/sp_12"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@id/tvTitle3"

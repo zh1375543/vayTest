@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/portal_record_photo"
-        android:textColor="@color/C_111827"
+        android:textColor="@color/text_primary"
         android:textSize="@dimen/sp_14"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/tvCancel"

@@ -24,7 +24,7 @@
             android:layout_marginTop="@dimen/dp_48"
             android:text="@string/empty_repay"
             android:gravity="center"
-            android:textColor="@color/C_111827"
+            android:textColor="@color/text_primary"
             android:textSize="@dimen/sp_14"
             app:layout_constraintTop_toTopOf="parent" />
 

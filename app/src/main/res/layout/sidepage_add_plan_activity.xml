@@ -89,7 +89,7 @@
                 android:layout_marginTop="@dimen/dp_10"
                 android:layout_marginEnd="@dimen/dp_16"
                 android:text="@string/portal_plan_icon"
-                android:textColor="@color/C_374151"
+                android:textColor="@color/text_body"
                 android:textSize="@dimen/sp_14"
                 android:textStyle="bold" />
 

@@ -94,7 +94,7 @@
                             android:layout_marginTop="@dimen/dp_12"
                             android:lineSpacingExtra="@dimen/dp_4"
                             android:text="@string/identity_verification_tip"
-                            android:textColor="@color/C_6D7280"
+                            android:textColor="@color/text_secondary"
                             android:textSize="@dimen/sp_10"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -146,7 +146,7 @@
                                     android:lineSpacingExtra="@dimen/dp_2"
                                     android:maxLines="1"
                                     android:text="@string/upload_nic_card_front"
-                                    android:textColor="@color/C_374151"
+                                    android:textColor="@color/text_body"
                                     android:textSize="@dimen/sp_12"
                                     app:layout_constraintBottom_toBottomOf="parent" />
 
@@ -233,7 +233,7 @@
                                     android:lineSpacingExtra="@dimen/dp_2"
                                     android:maxLines="1"
                                     android:text="@string/upload_nic_card_back"
-                                    android:textColor="@color/C_374151"
+                                    android:textColor="@color/text_body"
                                     android:textSize="@dimen/sp_12"
                                     app:layout_constraintBottom_toBottomOf="parent" />
 
@@ -325,7 +325,7 @@
                             android:layout_marginHorizontal="@dimen/dp_12"
                             android:lineSpacingExtra="@dimen/dp_4"
                             android:text="@string/self_photo_tips"
-                            android:textColor="@color/C_6D7280"
+                            android:textColor="@color/text_secondary"
                             android:textSize="@dimen/sp_10"
                             android:visibility="@{!isCertified ? View.VISIBLE : View.GONE}"
                             app:layout_constraintTop_toBottomOf="@id/layoutSelfHeader" />
@@ -364,7 +364,7 @@
                                 android:autoSizeTextType="uniform"
                                 android:gravity="center"
                                 android:text="@string/upload_self_photo"
-                                android:textColor="@color/C_374151"
+                                android:textColor="@color/text_body"
                                 android:textSize="@dimen/sp_12"
                                 app:layout_constraintBottom_toBottomOf="parent" />
 

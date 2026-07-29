@@ -79,7 +79,7 @@ class RollingNoticeView @JvmOverloads constructor(
             this.text = text
             gravity = Gravity.CENTER
             maxLines = 1
-            setTextColor(context.resolveColorCompat(if (isWhiteColor) R.color.C_111827 else R.color.C_111827))
+            setTextColor(context.resolveColorCompat(if (isWhiteColor) R.color.text_primary else R.color.text_primary))
             textSize = textSizeSp
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,

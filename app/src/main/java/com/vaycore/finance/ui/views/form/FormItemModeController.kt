@@ -55,7 +55,7 @@ internal class FormItemModeController(
 
         if (hasError) {
             showSelectIndicator()
-            setDrawableTint(R.color.C_F62909)
+            setDrawableTint(R.color.status_error)
         } else if (input.isEnabled) {
             restoreSelectIndicatorIfNeeded()
         }

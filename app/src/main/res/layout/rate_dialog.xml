@@ -16,7 +16,7 @@
         android:layout_marginTop="@dimen/dp_20"
         android:gravity="center"
         android:text="@string/rate_title"
-        android:textColor="@color/C_111827"
+        android:textColor="@color/text_primary"
         android:textSize="@dimen/sp_18"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent" />
@@ -39,7 +39,7 @@
         android:layout_marginTop="@dimen/dp_20"
         android:gravity="center"
         android:text="@string/rate_content"
-        android:textColor="@color/C_6D7280"
+        android:textColor="@color/text_secondary"
         android:textSize="@dimen/sp_14"
         android:textStyle="normal"
         app:layout_constraintTop_toBottomOf="@id/tvTitle" />
@@ -102,7 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/very_sat"
-            android:textColor="@color/C_111827"
+            android:textColor="@color/text_primary"
             android:textSize="@dimen/sp_16" />
     </LinearLayout>
 
@@ -113,7 +113,7 @@
         android:layout_marginStart="@dimen/dp_28"
         android:layout_marginEnd="@dimen/dp_10"
         android:text="@string/rate_name"
-        android:textColor="@color/C_111827"
+        android:textColor="@color/text_primary"
         android:textSize="@dimen/sp_12"
         android:textStyle="italic"
         app:layout_constraintEnd_toStartOf="@id/tvButton"
@@ -145,7 +145,7 @@
         android:layout_height="@dimen/dp_44"
         android:gravity="center"
         android:text="@string/no"
-        android:textColor="@color/C_111827"
+        android:textColor="@color/text_primary"
         android:textSize="@dimen/sp_16"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/ivBg" />

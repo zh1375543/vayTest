@@ -34,7 +34,7 @@ class LogoutSuccessActivity :
             binding.tvTips.setClickableTextWithScale(
                 String.format(getString(R.string.back_to_home_tips), seconds.toString()),
                 seconds.toString(),
-                resolveColorCompat(R.color.C_FA560D)
+                resolveColorCompat(R.color.action_withdraw)
             )
         }, end = {
             handleBackPressed()
@@ -42,7 +42,7 @@ class LogoutSuccessActivity :
         tvTips.setClickableTextWithScale(
             String.format(getString(R.string.back_to_home_tips), "10"),
             "10",
-            resolveColorCompat(R.color.C_FA560D)
+            resolveColorCompat(R.color.action_withdraw)
         )
     }
 

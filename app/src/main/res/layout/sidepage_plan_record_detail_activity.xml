@@ -44,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/dp_20"
                     app:radius="@dimen/dp_24"
-                    app:solidColor="@color/white">
+                    app:solidColor="@color/surface_primary">
 
                     <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/ivPlanIcon"
@@ -64,7 +64,7 @@
                         android:layout_marginStart="@dimen/dp_12"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:textColor="@color/C_111827"
+                        android:textColor="@color/text_primary"
                         android:textSize="@dimen/sp_14"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@id/ivPlanIcon"
@@ -83,13 +83,13 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/ivPlanIcon"
                         app:radius="@dimen/dp_24"
-                        app:solidColor="@color/C_F6F6F6">
+                        app:solidColor="@color/surface_secondary">
 
                         <TextView
                             android:id="@+id/tvAmountLabel"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/C_9CA3AF"
+                            android:textColor="@color/text_tertiary"
                             android:textSize="@dimen/sp_12"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/tvAmount"
@@ -100,7 +100,7 @@
                             android:id="@+id/tvAmount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/C_374151"
+                            android:textColor="@color/text_body"
                             android:textSize="@dimen/sp_16"
                             android:textStyle="bold"
                             app:layout_constraintBaseline_toBaselineOf="@id/tvAmountLabel"
@@ -113,7 +113,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_18"
-                        android:textColor="@color/C_9CA3AF"
+                        android:textColor="@color/text_tertiary"
                         android:textSize="@dimen/sp_12"
                         app:layout_constraintEnd_toStartOf="@id/tvRecordTime"
                         app:layout_constraintStart_toStartOf="parent"
@@ -123,7 +123,7 @@
                         android:id="@+id/tvRecordTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/color_7087F8"
+                        android:textColor="@color/brand_primary"
                         android:textSize="@dimen/sp_12"
                         app:layout_constraintBaseline_toBaselineOf="@id/tvRecordTimeLabel"
                         app:layout_constraintEnd_toEndOf="parent" />
@@ -140,7 +140,7 @@
                     android:paddingEnd="@dimen/dp_10"
                     android:paddingBottom="@dimen/dp_24"
                     app:radius="@dimen/dp_24"
-                    app:solidColor="@color/white">
+                    app:solidColor="@color/surface_primary">
 
                     <com.vaycore.finance.ui.views.FormItemView
                         android:id="@+id/savingAmountView"
@@ -148,7 +148,7 @@
                         android:layout_height="wrap_content"
                         app:formType="input"
                         app:hintText="@string/please_enter"
-                        app:inputBackgroundColor="@color/C_F6F6F6"
+                        app:inputBackgroundColor="@color/surface_secondary"
                         app:inputType="number"
                         app:titleText="@string/portal_today_saving" />
 
@@ -160,7 +160,7 @@
                         app:formEndIcon="@mipmap/ic_as_location"
                         app:formType="select"
                         app:hintText="@string/please_choose"
-                        app:inputBackgroundColor="@color/C_F6F6F6"
+                        app:inputBackgroundColor="@color/surface_secondary"
                         app:inputType="text"
                         app:titleText="@string/portal_savings_location" />
 
@@ -172,7 +172,7 @@
                         android:layout_marginTop="@dimen/dp_12"
                         android:layout_marginEnd="@dimen/dp_16"
                         android:text="@string/portal_record_photo"
-                        android:textColor="@color/C_374151"
+                        android:textColor="@color/text_body"
                         android:textSize="@dimen/sp_14"
                         android:textStyle="bold" />
 
@@ -193,7 +193,7 @@
                         android:layout_marginTop="@dimen/dp_12"
                         app:formType="input"
                         app:hintText="@string/please_enter"
-                        app:inputBackgroundColor="@color/C_F6F6F6"
+                        app:inputBackgroundColor="@color/surface_secondary"
                         app:inputType="text"
                         app:titleText="@string/portal_notes" />
 

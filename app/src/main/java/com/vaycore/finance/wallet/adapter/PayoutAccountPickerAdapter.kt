@@ -28,7 +28,7 @@ class PayoutAccountPickerAdapter(var selectPosition: Int) :
 
         val textColor = ContextCompat.getColor(
             context,
-            if (isSelected) R.color.white else R.color.C_374151,
+            if (isSelected) R.color.white else R.color.text_body,
         )
         tvCard.setTextColor(textColor)
         tvBank.setTextColor(textColor)

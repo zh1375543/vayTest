@@ -13,8 +13,8 @@
     android:paddingRight="@dimen/dp_10"
     android:paddingBottom="@dimen/dp_10"
     app:radius="@dimen/dp_24"
-    app:selectedColor="@color/color_7087F8"
-    app:solidColor="@color/C_F6F6F6">
+    app:selectedColor="@color/brand_primary"
+    app:solidColor="@color/surface_secondary">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -29,12 +29,12 @@
             android:duplicateParentState="true"
             android:gravity="center"
             android:text="1"
-            android:textColor="@color/C_D2D5DA"
+            android:textColor="@color/text_disabled"
             android:textSize="@dimen/sp_18"
             android:textStyle="bold"
             app:radius="@dimen/dp_20"
-            app:solidColor="@color/white"
-            app:textColorSelected="@color/C_374151" />
+            app:solidColor="@color/surface_primary"
+            app:textColorSelected="@color/text_body" />
 
         <com.vaycore.finance.ui.views.StyledTextView
             android:id="@+id/tvPhase"
@@ -44,10 +44,10 @@
             android:duplicateParentState="true"
             android:gravity="center_vertical"
             android:text="@string/phase"
-            android:textColor="@color/C_D2D5DA"
+            android:textColor="@color/text_disabled"
             android:textSize="@dimen/sp_14"
             android:textStyle="bold"
-            app:textColorSelected="@color/white" />
+            app:textColorSelected="@color/text_inverse" />
     </LinearLayout>
 
     <com.vaycore.finance.ui.views.StyledLinearLayout
@@ -66,8 +66,8 @@
         android:paddingRight="@dimen/dp_10"
         android:paddingBottom="@dimen/dp_4"
         app:radius="@dimen/dp_20"
-        app:selectedColor="@color/white"
-        app:solidColor="@color/C_ECEEF3">
+        app:selectedColor="@color/surface_primary"
+        app:solidColor="@color/surface_muted">
 
         <com.vaycore.finance.ui.views.StyledTextView
             android:id="@+id/tvPeriod1"
@@ -76,9 +76,9 @@
             android:duplicateParentState="true"
             android:gravity="center"
             android:text="@string/loan_period"
-            android:textColor="@color/C_D2D5DA"
+            android:textColor="@color/text_disabled"
             android:textSize="@dimen/sp_10"
-            app:textColorSelected="@color/C_6D7280" />
+            app:textColorSelected="@color/text_secondary" />
 
         <com.vaycore.finance.ui.views.StyledTextView
             android:id="@+id/tvPeriodDays1"
@@ -88,10 +88,10 @@
             android:duplicateParentState="true"
             android:gravity="center"
             android:text="1 Days"
-            android:textColor="@color/C_D2D5DA"
+            android:textColor="@color/text_disabled"
             android:textSize="@dimen/sp_12"
             android:textStyle="bold"
-            app:textColorSelected="@color/color_7087F8" />
+            app:textColorSelected="@color/brand_primary" />
     </com.vaycore.finance.ui.views.StyledLinearLayout>
 
     <com.vaycore.finance.ui.views.StyledLinearLayout
@@ -110,8 +110,8 @@
         android:paddingRight="@dimen/dp_10"
         android:paddingBottom="@dimen/dp_4"
         app:radius="@dimen/dp_20"
-        app:selectedColor="@color/white"
-        app:solidColor="@color/C_ECEEF3">
+        app:selectedColor="@color/surface_primary"
+        app:solidColor="@color/surface_muted">
 
         <com.vaycore.finance.ui.views.StyledTextView
             android:id="@+id/tvFirst"
@@ -120,9 +120,9 @@
             android:duplicateParentState="true"
             android:gravity="center"
             android:text="@string/first_repayment"
-            android:textColor="@color/C_D2D5DA"
+            android:textColor="@color/text_disabled"
             android:textSize="@dimen/sp_10"
-            app:textColorSelected="@color/C_6D7280" />
+            app:textColorSelected="@color/text_secondary" />
 
         <com.vaycore.finance.ui.views.StyledTextView
             android:id="@+id/tvAmount1"
@@ -134,10 +134,10 @@
             android:gravity="center"
             android:maxLines="1"
             android:text="5,000"
-            android:textColor="@color/C_D2D5DA"
+            android:textColor="@color/text_disabled"
             android:textSize="@dimen/sp_12"
             android:textStyle="bold"
-            app:textColorSelected="@color/color_7087F8" />
+            app:textColorSelected="@color/brand_primary" />
     </com.vaycore.finance.ui.views.StyledLinearLayout>
 
     <com.vaycore.finance.ui.views.StyledTextView
@@ -155,11 +155,11 @@
         android:paddingRight="@dimen/dp_10"
         android:paddingBottom="@dimen/dp_10"
         android:text="@string/no_installment"
-        android:textColor="@color/C_D2D5DA"
+        android:textColor="@color/text_disabled"
         android:textSize="@dimen/sp_11"
         android:visibility="gone"
         app:radius="@dimen/dp_20"
-        app:selectedColor="@color/white"
-        app:solidColor="@color/C_ECEEF3"
-        app:textColorSelected="@color/C_6D7280" />
+        app:selectedColor="@color/surface_primary"
+        app:solidColor="@color/surface_muted"
+        app:textColorSelected="@color/text_secondary" />
 </com.vaycore.finance.ui.views.StyledLinearLayout>

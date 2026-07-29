@@ -50,7 +50,7 @@
         android:layout_marginBottom="@dimen/dp_8"
         android:gravity="center"
         android:text="@string/contact_tips"
-        android:textColor="@color/C_6D7280"
+        android:textColor="@color/text_secondary"
         android:textSize="@dimen/sp_12"
         app:layout_constraintBottom_toTopOf="@id/tvNext" />
 </androidx.constraintlayout.widget.ConstraintLayout>

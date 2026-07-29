@@ -55,7 +55,7 @@
             android:layout_marginStart="@dimen/dp_8"
             android:layout_weight="1"
             android:text="@string/open_msg_permission"
-            android:textColor="@color/C_111827"
+            android:textColor="@color/text_primary"
             android:textSize="@dimen/sp_11" />
     </com.vaycore.finance.ui.views.StyledLinearLayout>
 

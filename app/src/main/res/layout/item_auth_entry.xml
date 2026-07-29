@@ -46,7 +46,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toStartOf="@id/ivRight"
         app:layout_constraintStart_toEndOf="@id/ivIcon"
-        app:textColorSelected="@color/C_111827" />
+        app:textColorSelected="@color/text_primary" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivRight"

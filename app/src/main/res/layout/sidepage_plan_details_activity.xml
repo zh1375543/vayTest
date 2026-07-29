@@ -46,7 +46,7 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/dp_24"
                     app:radius="@dimen/dp_24"
-                    app:solidColor="@color/white">
+                    app:solidColor="@color/surface_primary">
 
                     <com.vaycore.finance.ui.views.StyledConstraintLayout
                         android:id="@+id/planNameContainer"
@@ -56,7 +56,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:radius="@dimen/dp_30"
-                        app:solidColor="@color/C_F6F6F6">
+                        app:solidColor="@color/surface_secondary">
 
                         <TextView
                             android:id="@+id/tvPlanName"
@@ -64,7 +64,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="@string/portal_plan_name_value"
-                            android:textColor="@color/C_374151"
+                            android:textColor="@color/text_body"
                             android:textSize="@dimen/sp_18"
                             android:textStyle="bold"
                             app:layout_constraintHorizontal_chainStyle="packed"
@@ -93,7 +93,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_18"
                         android:text="@string/portal_savings_goal"
-                        android:textColor="@color/C_9CA3AF"
+                        android:textColor="@color/text_tertiary"
                         android:textSize="@dimen/sp_14"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/planNameContainer" />
@@ -104,7 +104,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_4"
                         android:text="@string/portal_preview_amount"
-                        android:textColor="@color/C_111827"
+                        android:textColor="@color/text_primary"
                         android:textSize="@dimen/sp_18"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
@@ -116,7 +116,7 @@
                         android:layout_height="@dimen/dp_42"
                         android:text="@string/portal_withdraw"
                         android:textSize="@dimen/sp_13"
-                        app:buttonSolidColor="@color/C_FA560D"
+                        app:buttonSolidColor="@color/action_withdraw"
                         app:layout_constraintBottom_toBottomOf="@id/tvSavingsGoalAmount"
                         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -141,7 +141,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_14"
                         android:text="@string/portal_saved"
-                        android:textColor="@color/C_9CA3AF"
+                        android:textColor="@color/text_tertiary"
                         android:textSize="@dimen/sp_12"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/progressPlan" />
@@ -152,7 +152,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="end"
                         android:text="@string/portal_remaining"
-                        android:textColor="@color/C_9CA3AF"
+                        android:textColor="@color/text_tertiary"
                         android:textSize="@dimen/sp_12"
                         app:layout_constraintBaseline_toBaselineOf="@id/tvSavedLabel"
                         app:layout_constraintEnd_toEndOf="parent" />
@@ -163,7 +163,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_4"
                         android:text="@string/portal_preview_amount"
-                        android:textColor="@color/color_7087F8"
+                        android:textColor="@color/brand_primary"
                         android:textSize="@dimen/sp_16"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toStartOf="@id/tvRemainingAmount"
@@ -175,7 +175,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/portal_preview_amount"
-                        android:textColor="@color/C_374151"
+                        android:textColor="@color/text_body"
                         android:textSize="@dimen/sp_16"
                         android:textStyle="bold"
                         app:layout_constraintBaseline_toBaselineOf="@id/tvSavedAmount"
@@ -187,7 +187,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_24"
                         android:text=""
-                        android:textColor="@color/C_9CA3AF"
+                        android:textColor="@color/text_tertiary"
                         android:textSize="@dimen/sp_12"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -199,7 +199,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_18"
                         android:text=""
-                        android:textColor="@color/C_9CA3AF"
+                        android:textColor="@color/text_tertiary"
                         android:textSize="@dimen/sp_12"
                         app:layout_constraintEnd_toStartOf="@id/tvRemainingDays"
                         app:layout_constraintStart_toStartOf="parent"
@@ -211,7 +211,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/dp_4"
                         android:text="@string/portal_remaining_with_colon"
-                        android:textColor="@color/C_374151"
+                        android:textColor="@color/text_body"
                         android:textSize="@dimen/sp_12"
                         app:layout_constraintBaseline_toBaselineOf="@id/tvPlanEndDate"
                         app:layout_constraintEnd_toStartOf="@id/tvRemainingDaysValue" />
@@ -221,7 +221,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
-                        android:textColor="@color/color_7087F8"
+                        android:textColor="@color/brand_primary"
                         android:textSize="@dimen/sp_14"
                         android:textStyle="bold"
                         app:layout_constraintBaseline_toBaselineOf="@id/tvRemainingDays"
@@ -233,7 +233,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_18"
                         android:text=""
-                        android:textColor="@color/C_9CA3AF"
+                        android:textColor="@color/text_tertiary"
                         android:textSize="@dimen/sp_12"
                         app:layout_constraintEnd_toStartOf="@id/tvNextSavingDays"
                         app:layout_constraintStart_toStartOf="parent"
@@ -245,7 +245,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/dp_4"
                         android:text="@string/portal_remaining_with_colon"
-                        android:textColor="@color/C_374151"
+                        android:textColor="@color/text_body"
                         android:textSize="@dimen/sp_12"
                         app:layout_constraintBaseline_toBaselineOf="@id/tvNextSavingTime"
                         app:layout_constraintEnd_toStartOf="@id/tvNextSavingDaysValue" />
@@ -255,7 +255,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
-                        android:textColor="@color/color_7087F8"
+                        android:textColor="@color/brand_primary"
                         android:textSize="@dimen/sp_14"
                         android:textStyle="bold"
                         app:layout_constraintBaseline_toBaselineOf="@id/tvNextSavingDays"
@@ -267,7 +267,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_18"
                         android:text="@string/portal_plan_status"
-                        android:textColor="@color/C_9CA3AF"
+                        android:textColor="@color/text_tertiary"
                         android:textSize="@dimen/sp_12"
                         android:visibility="gone"
                         app:layout_constraintEnd_toStartOf="@id/tvPlanStatusValue"
@@ -279,7 +279,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="end"
-                        android:textColor="@color/color_7087F8"
+                        android:textColor="@color/brand_primary"
                         android:textSize="@dimen/sp_14"
                         android:textStyle="bold"
                         android:visibility="gone"
@@ -312,7 +312,7 @@
                     android:layout_marginTop="@dimen/dp_28"
                     android:layout_marginBottom="@dimen/dp_16"
                     android:text="@string/portal_transaction_details"
-                    android:textColor="@color/C_374151"
+                    android:textColor="@color/text_body"
                     android:textSize="@dimen/sp_18"
                     android:textStyle="bold" />
 
@@ -322,7 +322,7 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/dp_16"
                     app:radius="@dimen/dp_24"
-                    app:solidColor="@color/white">
+                    app:solidColor="@color/surface_primary">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvTransactions"
