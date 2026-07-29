@@ -168,7 +168,7 @@
         app:autoSizeMinTextSize="@dimen/sp_10"
         app:autoSizeTextType="uniform"
         app:buttonSolidColor="@color/brand_primary"
-        app:buttonTextColor="@color/text_on_brand"
+        app:buttonTextColor="@color/text_inverse"
         app:layout_constraintBottom_toBottomOf="@id/tvDays"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tvBorrowDays" />

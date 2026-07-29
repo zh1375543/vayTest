@@ -93,7 +93,7 @@ class OrderFragment : BaseFragment<FragmentBorrowingOverviewBinding>(R.layout.fr
                                 size.toString()
                             ),
                             size.toString(),
-                            root.context.resolveColorCompat(R.color.color_7087F8)
+                            root.context.resolveColorCompat(R.color.brand_primary)
                         )
                         repaymentLayout.isVisible = it.showMultipleRepaySign == 1 && size > 0
                     }

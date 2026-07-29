@@ -5,7 +5,7 @@
     android:layout_height="@dimen/dp_82"
     android:layout_marginTop="@dimen/dp_10"
     app:radius="@dimen/dp_24"
-    app:solidColor="@color/white">
+    app:solidColor="@color/text_inverse">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivTelegram"
@@ -53,7 +53,7 @@
         app:autoSizeTextType="uniform"
         android:paddingHorizontal="@dimen/dp_4"
         android:text="@string/copy"
-        android:textColor="@color/white"
+        android:textColor="@color/text_inverse"
         android:textSize="@dimen/sp_14"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

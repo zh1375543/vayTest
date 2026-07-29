@@ -129,13 +129,13 @@ class BorrowingDetailActivity :
             listOf(
                 ClickablePart(
                     getString(R.string.lease_contract),
-                    resolveColorCompat(R.color.color_7087F8),
+                    resolveColorCompat(R.color.brand_primary),
                 ) {
                     showLoanAgreement(getString(R.string.lease_contract), LEASE_AGREEMENT)
                 },
                 ClickablePart(
                     getString(R.string.mortgage_contract),
-                    resolveColorCompat(R.color.color_7087F8),
+                    resolveColorCompat(R.color.brand_primary),
                 ) {
                     showLoanAgreement(getString(R.string.mortgage_contract), PAWN_AGREEMENT)
                 },
@@ -312,7 +312,7 @@ class BorrowingDetailActivity :
             tvModel.text = "${Build.BRAND} ${Build.MODEL}"
             tvProductName.text = order.productName
             tvOrderNo.text = order.orderNo
-            tvOrderStatus.setTextColor(resolveColorCompat(R.color.color_7087F8))
+            tvOrderStatus.setTextColor(resolveColorCompat(R.color.brand_primary))
             when (order.status) {
                 ORDER_STATUS_SUCCESS,
                 ORDER_STATUS_REVIEW,
@@ -556,7 +556,7 @@ class BorrowingDetailActivity :
             binding.cbAutoApply.isVisible && !binding.cbAutoApply.isSelected
 
     private fun updateBottomActionColors(isDue: Boolean) = with(binding) {
-        val actionColor = resolveColorCompat(if (isDue) R.color.status_error else R.color.color_7087F8)
+        val actionColor = resolveColorCompat(if (isDue) R.color.status_error else R.color.brand_primary)
         tvRepay.updateAppearance(
             variant = StatefulActionButton.VARIANT_OUTLINE,
             strokeColor = actionColor,
@@ -565,7 +565,7 @@ class BorrowingDetailActivity :
         tvBorrow.updateAppearance(
             variant = StatefulActionButton.VARIANT_FILLED,
             solidColor = actionColor,
-            textColor = resolveColorCompat(R.color.white),
+            textColor = resolveColorCompat(R.color.text_inverse),
         )
     }
 }

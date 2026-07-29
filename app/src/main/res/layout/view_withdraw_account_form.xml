@@ -50,7 +50,7 @@
         android:layout_marginTop="@dimen/dp_14"
         android:orientation="vertical"
         app:radius="@dimen/dp_12"
-        app:solidColor="@color/white">
+        app:solidColor="@color/text_inverse">
 
         <com.vaycore.finance.ui.views.StyledTextView
             android:id="@+id/methodSelectionView"

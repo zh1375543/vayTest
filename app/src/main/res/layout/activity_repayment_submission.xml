@@ -44,7 +44,7 @@
                         android:paddingTop="@dimen/dp_22"
                         android:paddingBottom="@dimen/dp_14"
                         app:radius="@dimen/dp_24"
-                        app:solidColor="@color/white">
+                        app:solidColor="@color/text_inverse">
 
                         <com.vaycore.finance.ui.views.StyledConstraintLayout
                             android:id="@+id/orderNumberContainer"
@@ -54,7 +54,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:radius="@dimen/dp_24"
-                            app:solidColor="@color/C_F6F6F6">
+                            app:solidColor="@color/surface_secondary">
 
                             <com.vaycore.finance.ui.views.StyledConstraintLayout
                                 android:id="@+id/orderNumberDot"
@@ -91,7 +91,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_14"
                             android:text="@string/repayment_amount"
-                            android:textColor="@color/C_9CA3AF"
+                            android:textColor="@color/text_tertiary"
                             android:textSize="@dimen/sp_14"
                             android:textStyle="normal"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -156,7 +156,7 @@
                         android:layout_marginTop="@dimen/dp_10"
                         android:paddingBottom="@dimen/dp_20"
                         app:radius="@dimen/dp_24"
-                        app:solidColor="@color/white">
+                        app:solidColor="@color/text_inverse">
 
                         <TextView
                             android:id="@+id/tvSelect"
@@ -175,12 +175,12 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/dp_12"
                             android:text="@string/choose"
-                            android:textColor="@color/white"
+                            android:textColor="@color/text_inverse"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
                             android:textSize="@dimen/sp_11"
                             app:radius="@dimen/dp_24"
-                            app:solidColor="@color/color_7087F8"
+                            app:solidColor="@color/brand_primary"
                             app:layout_constraintBottom_toBottomOf="@id/tvSelect"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@id/tvSelect" />

@@ -167,7 +167,7 @@
             android:paddingHorizontal="@dimen/dp_12"
             android:paddingVertical="@dimen/dp_8"
             android:text="@string/change"
-            android:textColor="@color/text_on_brand"
+            android:textColor="@color/text_inverse"
             android:textSize="@dimen/sp_14"
             app:layout_constraintBottom_toBottomOf="@id/tvAccountTitle"
             app:layout_constraintEnd_toEndOf="parent"

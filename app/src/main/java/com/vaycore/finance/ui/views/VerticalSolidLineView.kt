@@ -20,7 +20,7 @@ class VerticalSolidLineView @JvmOverloads constructor(
         strokeCap = Paint.Cap.SQUARE
     }
 
-    private var lineColor = ContextCompat.getColor(context, R.color.C_9CA3AF)
+    private var lineColor = ContextCompat.getColor(context, R.color.text_tertiary)
     private var lineStrokeWidth = resources.displayMetrics.density
 
     init {

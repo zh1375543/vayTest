@@ -81,7 +81,7 @@
                 android:layout_marginEnd="@dimen/dp_110"
                 android:includeFontPadding="false"
                 android:text="@string/account_rate_message"
-                android:textColor="@color/white"
+                android:textColor="@color/text_inverse"
                 android:textSize="@dimen/sp_13"
                 android:textStyle="italic" />
 
@@ -93,7 +93,7 @@
                 android:layout_marginEnd="@dimen/dp_110"
                 android:includeFontPadding="false"
                 android:text="@string/account_rate_prompt"
-                android:textColor="@color/white"
+                android:textColor="@color/text_inverse"
                 android:textSize="@dimen/sp_16"
                 android:textStyle="bold" />
 
@@ -106,11 +106,11 @@
                 android:layout_marginBottom="@dimen/dp_12"
                 android:gravity="center"
                 android:text="@string/rate"
-                android:textColor="@color/color_7087F8"
+                android:textColor="@color/brand_primary"
                 android:textSize="@dimen/sp_16"
                 android:textStyle="bold"
                 app:radius="@dimen/dp_18"
-                app:solidColor="@color/white" />
+                app:solidColor="@color/text_inverse" />
         </FrameLayout>
 
         <LinearLayout

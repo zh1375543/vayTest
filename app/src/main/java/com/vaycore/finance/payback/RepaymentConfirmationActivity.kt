@@ -27,7 +27,7 @@ class RepaymentConfirmationActivity :
         binding.tvTips.setClickableTextWithScale(
             String.format(getString(R.string.back_to_home_tips), "10"),
             "10",
-            resolveColorCompat(R.color.color_7087F8)
+            resolveColorCompat(R.color.brand_primary)
         )
         lifecycleScope.countdownTimer(
             10,
@@ -35,7 +35,7 @@ class RepaymentConfirmationActivity :
                 binding.tvTips.setClickableTextWithScale(
                     String.format(getString(R.string.back_to_home_tips), seconds.toString()),
                     seconds.toString(),
-                    resolveColorCompat(R.color.color_7087F8)
+                    resolveColorCompat(R.color.brand_primary)
                 )
             },
             end = {

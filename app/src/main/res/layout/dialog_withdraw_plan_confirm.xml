@@ -10,7 +10,7 @@
     android:paddingEnd="@dimen/dp_22"
     android:paddingBottom="@dimen/dp_20"
     app:radius="@dimen/dp_16"
-    app:solidColor="@color/white">
+    app:solidColor="@color/text_inverse">
 
     <ImageView
         android:id="@+id/ivPayout"
@@ -44,8 +44,8 @@
         android:layout_marginEnd="@dimen/dp_6"
         android:text="@string/cancel"
         android:textSize="@dimen/sp_14"
-        app:buttonSolidColor="@color/C_F6F6F6"
-        app:buttonTextColor="@color/color_7087F8"
+        app:buttonSolidColor="@color/surface_secondary"
+        app:buttonTextColor="@color/brand_primary"
         app:layout_constraintEnd_toStartOf="@id/btConfirm"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvMessage" />

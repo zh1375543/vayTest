@@ -51,7 +51,7 @@ class SavingsCalendarDayAdapter :
                 shape = GradientDrawable.OVAL
                 setColor(
                     if (item.isToday) {
-                        ContextCompat.getColor(context, R.color.color_7087F8)
+                        ContextCompat.getColor(context, R.color.brand_primary)
                     } else {
                         Color.TRANSPARENT
                     },
@@ -59,10 +59,10 @@ class SavingsCalendarDayAdapter :
             }
             setTextColor(
                 when {
-                    item.isToday -> ContextCompat.getColor(context, R.color.white)
+                    item.isToday -> ContextCompat.getColor(context, R.color.text_inverse)
                     !item.isCurrentMonth -> ContextCompat.getColor(context, R.color.border_default)
                     item.hasPayoutRecord -> ContextCompat.getColor(context, R.color.action_withdraw)
-                    item.hasSavingRecord -> ContextCompat.getColor(context, R.color.color_7087F8)
+                    item.hasSavingRecord -> ContextCompat.getColor(context, R.color.brand_primary)
                     else -> ContextCompat.getColor(context, R.color.text_body)
                 },
             )

@@ -60,7 +60,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:radius="@dimen/dp_24"
-                app:solidColor="@color/white">
+                app:solidColor="@color/text_inverse">
 
                 <TextView
                     android:id="@+id/tvAmountTitle"
@@ -72,7 +72,7 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:text="@string/total_repayment"
-                    android:textColor="@color/C_9CA3AF"
+                    android:textColor="@color/text_tertiary"
                     android:textSize="@dimen/sp_12"
                     app:layout_constraintEnd_toStartOf="@id/tvAmount"
                     app:layout_constraintStart_toStartOf="parent"
@@ -85,7 +85,7 @@
                     android:layout_marginEnd="@dimen/dp_16"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:textColor="@color/color_7087F8"
+                    android:textColor="@color/brand_primary"
                     android:textSize="@dimen/sp_14"
                     android:textStyle="bold"
                     android:text="@{viewModel.selectedOrderAmount}"
@@ -103,7 +103,7 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:text="@string/together_num"
-                    android:textColor="@color/C_9CA3AF"
+                    android:textColor="@color/text_tertiary"
                     android:textSize="@dimen/sp_12"
                     app:layout_constraintEnd_toStartOf="@id/tvNum"
                     app:layout_constraintStart_toStartOf="parent"

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:background="@color/white">
+    tools:background="@color/text_inverse">
 
     <com.vaycore.finance.ui.views.ParticleLoadingView
         android:layout_width="@dimen/dp_72"

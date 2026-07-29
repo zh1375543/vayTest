@@ -6,7 +6,7 @@
     android:minHeight="@dimen/dp_260"
     android:padding="@dimen/dp_16"
     app:radius="@dimen/dp_16"
-    app:solidColor="@color/white">
+    app:solidColor="@color/text_inverse">
 
     <com.vaycore.finance.ui.views.StyledTextView
         android:id="@+id/tvCancel"
@@ -16,12 +16,12 @@
         android:paddingStart="@dimen/dp_8"
         android:paddingEnd="@dimen/dp_8"
         android:text="@string/cancel"
-        android:textColor="@color/C_9CA3AF"
+        android:textColor="@color/text_tertiary"
         android:textSize="@dimen/sp_12"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:radius="@dimen/dp_14"
-        app:solidColor="@color/C_F6F6F6" />
+        app:solidColor="@color/surface_secondary" />
 
     <TextView
         android:id="@+id/tvTitle"
@@ -45,13 +45,13 @@
         android:paddingStart="@dimen/dp_8"
         android:paddingEnd="@dimen/dp_8"
         android:text="@string/confirm"
-        android:textColor="@color/white"
+        android:textColor="@color/text_inverse"
         android:textSize="@dimen/sp_12"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:radius="@dimen/dp_14"
-        app:solidColor="@color/color_7087F8" />
+        app:solidColor="@color/brand_primary" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPhotos"
@@ -70,7 +70,7 @@
         android:layout_marginTop="@dimen/dp_16"
         android:gravity="center"
         android:text="@string/portal_no_photo_added"
-        android:textColor="@color/C_9CA3AF"
+        android:textColor="@color/text_tertiary"
         android:textSize="@dimen/sp_12"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -88,7 +88,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textColor="@color/C_9CA3AF"
+        android:textColor="@color/text_tertiary"
         android:textSize="@dimen/sp_12"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -102,8 +102,8 @@
         android:text="@string/portal_choose_from_gallery"
         android:textSize="@dimen/sp_13"
         app:actionButtonVariant="outline"
-        app:buttonSolidColor="@color/C_F6F6F6"
-        app:buttonStrokeColor="@color/C_F6F6F6"
+        app:buttonSolidColor="@color/surface_secondary"
+        app:buttonStrokeColor="@color/surface_secondary"
         app:layout_constraintEnd_toStartOf="@id/btCamera"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvPhotoCount" />

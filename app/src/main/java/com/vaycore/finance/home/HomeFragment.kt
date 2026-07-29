@@ -390,7 +390,7 @@ class HomeFragment : BaseFragment<FragmentLoanHomeBinding>(R.layout.fragment_loa
                 tvPreTimes.setClickableTextWithScale(
                     fullText,
                     t.toString(),
-                    root.context.resolveColorCompat(R.color.color_7087F8)
+                    root.context.resolveColorCompat(R.color.brand_primary)
                 )
             }, end = {
                 tvPreTimes.isVisible = false
@@ -400,7 +400,7 @@ class HomeFragment : BaseFragment<FragmentLoanHomeBinding>(R.layout.fragment_loa
             tvPreTimes.setClickableTextWithScale(
                 fullText,
                 it.toString(),
-                root.context.resolveColorCompat(R.color.color_7087F8)
+                root.context.resolveColorCompat(R.color.brand_primary)
             )
         }
     }

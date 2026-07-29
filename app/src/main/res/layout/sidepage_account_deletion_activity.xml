@@ -60,7 +60,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvDescription"
         app:radius="@dimen/dp_24"
-        app:solidColor="@color/white">
+        app:solidColor="@color/text_inverse">
 
         <TextView
             android:id="@+id/tvAppNameLabel"
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:includeFontPadding="false"
             android:text="@string/close_app_name"
-            android:textColor="@color/C_9CA3AF"
+            android:textColor="@color/text_tertiary"
             android:textSize="@dimen/sp_12"
             app:layout_constraintBottom_toTopOf="@id/tvAccountNumberLabel"
             app:layout_constraintStart_toStartOf="parent"
@@ -82,7 +82,7 @@
             android:layout_marginTop="@dimen/dp_14"
             android:includeFontPadding="false"
             android:text="@string/account_number"
-            android:textColor="@color/C_9CA3AF"
+            android:textColor="@color/text_tertiary"
             android:textSize="@dimen/sp_12"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

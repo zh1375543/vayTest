@@ -25,7 +25,7 @@
             android:layout_marginTop="@dimen/dp_4"
             android:gravity="center"
             android:text="@string/loading"
-            android:textColor="@color/white"
+            android:textColor="@color/text_inverse"
             android:textSize="@dimen/sp_15"
             android:textStyle="bold" />
     </com.vaycore.finance.ui.views.StyledLinearLayout>

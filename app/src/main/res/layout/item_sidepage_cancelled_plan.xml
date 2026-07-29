@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/dp_24"
         app:radius="@dimen/dp_24"
-        app:solidColor="@color/white">
+        app:solidColor="@color/text_inverse">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ivPlanIcon"
@@ -47,7 +47,7 @@
             android:layout_marginTop="@dimen/dp_4"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textColor="@color/C_9CA3AF"
+            android:textColor="@color/text_tertiary"
             android:textSize="@dimen/sp_14"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/ivPlanIcon"
@@ -64,14 +64,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ivPlanIcon"
             app:radius="@dimen/dp_20"
-            app:solidColor="@color/C_F6F6F6">
+            app:solidColor="@color/surface_secondary">
 
             <TextView
                 android:id="@+id/tvSavedLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/portal_amount_saved_plain"
-                android:textColor="@color/C_9CA3AF"
+                android:textColor="@color/text_tertiary"
                 android:textSize="@dimen/sp_14"
                 app:layout_constraintBottom_toTopOf="@id/tvGoalLabel"
                 app:layout_constraintStart_toStartOf="parent"
@@ -85,7 +85,7 @@
                 android:ellipsize="end"
                 android:gravity="end"
                 android:maxLines="1"
-                android:textColor="@color/color_7087F8"
+                android:textColor="@color/brand_primary"
                 android:textSize="@dimen/sp_18"
                 android:textStyle="bold"
                 app:layout_constraintBaseline_toBaselineOf="@id/tvSavedLabel"
@@ -99,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_14"
                 android:text="@string/portal_goal"
-                android:textColor="@color/C_9CA3AF"
+                android:textColor="@color/text_tertiary"
                 android:textSize="@dimen/sp_14"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvSavedLabel" />

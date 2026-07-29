@@ -19,7 +19,7 @@
         android:layout_marginTop="@dimen/dp_12"
         android:layout_marginEnd="@dimen/dp_12"
         app:radius="@dimen/dp_24"
-        app:solidColor="@color/white">
+        app:solidColor="@color/text_inverse">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivIcon"
@@ -39,7 +39,7 @@
         android:gravity="center_vertical"
         android:selected="@{item.isCertified}"
         android:text="@{item.title}"
-        android:textColor="@color/C_9CA3AF"
+        android:textColor="@color/text_tertiary"
         android:textSize="@dimen/sp_13"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

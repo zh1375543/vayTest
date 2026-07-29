@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:paddingBottom="@dimen/dp_30"
     app:radius="@dimen/dp_12"
-    app:solidColor="@color/white">
+    app:solidColor="@color/text_inverse">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_title"
@@ -45,8 +45,8 @@
         android:text="@string/closed"
         android:textSize="@dimen/sp_14"
         android:textStyle="bold"
-        app:buttonSolidColor="@color/C_F6F6F6"
-        app:buttonTextColor="@color/color_7087F8"
+        app:buttonSolidColor="@color/surface_secondary"
+        app:buttonTextColor="@color/brand_primary"
         app:layout_constraintEnd_toStartOf="@id/btnSure"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvDesc" />

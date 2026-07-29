@@ -52,7 +52,7 @@
         app:errorText="@string/portal_please_enter_plan_name"
         app:formType="input"
         app:hintText="@string/please_enter"
-        app:inputBackgroundColor="@color/white"
+        app:inputBackgroundColor="@color/text_inverse"
         app:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +72,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:left_top_radius="@dimen/dp_30"
         app:right_top_radius="@dimen/dp_30"
-        app:solidColor="@color/white">
+        app:solidColor="@color/text_inverse">
 
         <com.vaycore.finance.ui.views.StatefulActionButton
             android:id="@+id/btNext"

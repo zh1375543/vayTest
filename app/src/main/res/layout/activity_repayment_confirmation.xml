@@ -36,7 +36,7 @@
             android:layout_marginTop="@dimen/dp_28"
             android:gravity="center"
             android:text="@string/loan_result"
-            android:textColor="@color/C_9CA3AF"
+            android:textColor="@color/text_tertiary"
             android:textSize="@dimen/sp_13"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

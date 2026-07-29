@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:paddingBottom="@dimen/dp_20"
     app:radius="@dimen/dp_12"
-    app:solidColor="@color/white">
+    app:solidColor="@color/text_inverse">
 
 
     <TextView
@@ -48,15 +48,15 @@
         android:layout_marginTop="@dimen/dp_30"
         android:gravity="center"
         android:text="@string/closed"
-        android:textColor="@color/color_7087F8"
+        android:textColor="@color/brand_primary"
         android:textSize="@dimen/sp_14"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@id/tvSure"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvDesc"
         app:radius="@dimen/dp_41"
-        app:solidColor="@color/C_F6F6F6"
-        app:strokeColor="@color/C_F6F6F6"
+        app:solidColor="@color/surface_secondary"
+        app:strokeColor="@color/surface_secondary"
         app:strokeWidth="@dimen/dp_1" />
 
     <com.vaycore.finance.ui.views.StyledTextView
@@ -67,13 +67,13 @@
         android:layout_marginEnd="@dimen/dp_16"
         android:gravity="center"
         android:text="@string/sure"
-        android:textColor="@color/white"
+        android:textColor="@color/text_inverse"
         android:textSize="@dimen/sp_14"
         android:textStyle="bold"
         app:radius="@dimen/dp_41"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tvClose"
         app:layout_constraintTop_toTopOf="@id/tvClose"
-        app:solidColor="@color/color_7087F8" />
+        app:solidColor="@color/brand_primary" />
 
 </com.vaycore.finance.ui.views.StyledConstraintLayout>

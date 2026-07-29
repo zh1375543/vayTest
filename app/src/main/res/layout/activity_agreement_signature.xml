@@ -20,7 +20,7 @@
         android:layout_marginBottom="@dimen/dp_20"
         android:gravity="center"
         android:text="@string/back_to_home"
-        android:textColor="@color/white"
+        android:textColor="@color/text_inverse"
         android:textSize="@dimen/sp_14"
         android:textStyle="bold"
         android:visibility="visible"
@@ -28,7 +28,7 @@
         app:layout_constraintEnd_toStartOf="@id/tvSign"
         app:layout_constraintStart_toStartOf="parent"
         app:radius="@dimen/dp_50"
-        app:solidColor="@color/color_7087F8" />
+        app:solidColor="@color/brand_primary" />
 
     <com.vaycore.finance.ui.views.StyledTextView
         android:id="@+id/tvSign"
@@ -39,7 +39,7 @@
         android:gravity="center"
         android:maxWidth="@dimen/dp_265"
         android:text="@string/sign_borrow"
-        android:textColor="@color/white"
+        android:textColor="@color/text_inverse"
         android:textSize="@dimen/sp_14"
         android:textStyle="bold"
         android:visibility="visible"
@@ -50,7 +50,7 @@
         app:layout_goneMarginEnd="@dimen/dp_190"
         app:layout_goneMarginStart="@dimen/dp_190"
         app:radius="@dimen/dp_50"
-        app:solidColor="@color/color_7087F8" />
+        app:solidColor="@color/brand_primary" />
 
     <com.vaycore.finance.ui.views.SignatureView
         android:id="@+id/signView"
@@ -81,7 +81,7 @@
         android:layout_marginBottom="@dimen/dp_20"
         android:gravity="center"
         android:text="@string/sign_borrow"
-        android:textColor="@color/white"
+        android:textColor="@color/text_inverse"
         android:textSize="@dimen/sp_14"
         android:textStyle="bold"
         android:visibility="gone"

@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:radius="@dimen/dp_24"
-        app:solidColor="@color/white">
+        app:solidColor="@color/text_inverse">
 
         <com.vaycore.finance.ui.views.StyledTextView
             android:id="@+id/tvActive"
@@ -27,12 +27,12 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/portal_plan_status_active"
-            android:textColor="@color/C_9CA3AF"
+            android:textColor="@color/text_tertiary"
             android:textSize="@dimen/sp_16"
             android:textStyle="bold"
             app:radius="@dimen/dp_20"
-            app:selectedColor="@color/color_7087F8"
-            app:textColorSelected="@color/white" />
+            app:selectedColor="@color/brand_primary"
+            app:textColorSelected="@color/text_inverse" />
 
         <com.vaycore.finance.ui.views.StyledTextView
             android:id="@+id/tvCompleted"
@@ -41,11 +41,11 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/portal_plan_status_completed"
-            android:textColor="@color/C_9CA3AF"
+            android:textColor="@color/text_tertiary"
             android:textSize="@dimen/sp_16"
             app:radius="@dimen/dp_20"
-            app:selectedColor="@color/color_7087F8"
-            app:textColorSelected="@color/white" />
+            app:selectedColor="@color/brand_primary"
+            app:textColorSelected="@color/text_inverse" />
 
         <com.vaycore.finance.ui.views.StyledTextView
             android:id="@+id/tvCancelled"
@@ -54,11 +54,11 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/portal_plan_status_cancelled"
-            android:textColor="@color/C_9CA3AF"
+            android:textColor="@color/text_tertiary"
             android:textSize="@dimen/sp_16"
             app:radius="@dimen/dp_20"
-            app:selectedColor="@color/color_7087F8"
-            app:textColorSelected="@color/white" />
+            app:selectedColor="@color/brand_primary"
+            app:textColorSelected="@color/text_inverse" />
 
     </com.vaycore.finance.ui.views.StyledLinearLayout>
 

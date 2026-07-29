@@ -81,7 +81,7 @@ class CombinedLoanOfferActivity : BaseActivity<ActivityCombinedLoanOfferBinding>
             arrayListOf(
                 ClickablePart(
                     getString(R.string.lease_contract),
-                    resolveColorCompat(R.color.color_7087F8),
+                    resolveColorCompat(R.color.brand_primary),
                     onClick = {
                         LoanEventRecorder.record(LoanEvent.CLICK_OPEN_AGREEMENT)
                         WebViewActivity.Companion.launch(
@@ -93,7 +93,7 @@ class CombinedLoanOfferActivity : BaseActivity<ActivityCombinedLoanOfferBinding>
                 ),
                 ClickablePart(
                     getString(R.string.mortgage_contract),
-                    resolveColorCompat(R.color.color_7087F8),
+                    resolveColorCompat(R.color.brand_primary),
                     onClick = {
                         LoanEventRecorder.record(LoanEvent.CLICK_OPEN_AGREEMENT)
                         WebViewActivity.Companion.launch(

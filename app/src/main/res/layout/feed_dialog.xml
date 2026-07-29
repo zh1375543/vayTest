@@ -12,7 +12,7 @@
         android:layout_gravity="center"
         android:layout_marginHorizontal="@dimen/dp_20"
         app:radius="@dimen/dp_16"
-        app:solidColor="@color/white">
+        app:solidColor="@color/text_inverse">
 
         <TextView
             android:id="@+id/tvTitle"
@@ -36,11 +36,11 @@
             android:hint="@string/enter_feedback"
             android:padding="@dimen/dp_12"
             android:textColor="@color/text_primary"
-            android:textColorHint="@color/C_9CA3AF"
+            android:textColorHint="@color/text_tertiary"
             android:textSize="@dimen/sp_14"
             app:layout_constraintTop_toBottomOf="@id/tvTitle"
             app:radius="@dimen/dp_16"
-            app:solidColor="@color/C_F6F6F6" />
+            app:solidColor="@color/surface_secondary" />
 
         <com.vaycore.finance.ui.views.StyledTextView
             android:id="@+id/tvSubmit"

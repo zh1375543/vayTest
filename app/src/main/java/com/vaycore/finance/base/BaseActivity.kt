@@ -59,7 +59,7 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
         setupClipboardListener()
     }
 
-    /** Connects LiveData in migrated Data Binding layouts to this Activity lifecycle. */
+    /** Connects LiveData in Data Binding layouts to this Activity lifecycle. */
     private fun setupDataBindingLifecycle() {
         (binding as? ViewDataBinding)?.lifecycleOwner = this
     }

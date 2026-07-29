@@ -24,11 +24,11 @@
         android:inputType="textMultiLine"
         android:padding="@dimen/dp_16"
         android:textColor="@color/text_primary"
-        android:textColorHint="@color/C_9CA3AF"
+        android:textColorHint="@color/text_tertiary"
         android:textSize="@dimen/sp_13"
         app:layout_constraintTop_toBottomOf="@id/titleBar"
         app:radius="@dimen/dp_12"
-        app:solidColor="@color/white" />
+        app:solidColor="@color/text_inverse" />
     <com.vaycore.finance.ui.views.StatefulActionButton
         android:id="@+id/tvSubmit"
         android:textStyle="bold"

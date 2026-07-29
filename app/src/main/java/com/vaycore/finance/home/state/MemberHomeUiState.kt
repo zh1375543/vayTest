@@ -96,12 +96,12 @@ fun LoanDashboardResponse.toMemberHomeUiState(): MemberHomeUiState {
         isApprovedCredit = isApprovedCredit,
         loanEnabled = togetherLoanSign == 1 && userCreditAmount.isPositive(),
         showAuthenticatedLayout = creditStage == CreditStage.APPROVED,
-        // The legacy screen hides this header when there are no products.
+        // Hide this header when there are no products.
         showCreditHeader = isApprovedCredit && hasProducts,
         showProductList = hasProducts,
         showEmptyProducts = !hasProducts,
         showBankError = bankErrorFlag,
-        // Certification states return before calm-page handling in the legacy renderer.
+        // Certification states return before calm-page handling.
         showCalmPage = creditStage == CreditStage.APPROVED && calmFlag,
         showReviewLayout = creditStage == CreditStage.REVIEWING,
         showRejectedLayout = creditStage == CreditStage.REJECTED,

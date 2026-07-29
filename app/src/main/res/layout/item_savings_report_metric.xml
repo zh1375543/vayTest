@@ -7,7 +7,7 @@
     android:paddingStart="@dimen/dp_10"
     android:paddingEnd="@dimen/dp_10"
     app:radius="@dimen/dp_16"
-    app:solidColor="@color/white">
+    app:solidColor="@color/text_inverse">
 
     <TextView
         android:id="@+id/tvMetricTitle"

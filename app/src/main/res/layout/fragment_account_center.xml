@@ -167,7 +167,7 @@
             android:padding="@dimen/dp_10"
             app:radius="@dimen/dp_18"
             app:strokeWidth="1dp"
-            app:solidColor="@color/C_F6F6F6"
+            app:solidColor="@color/surface_secondary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/profileShortcutRow">
@@ -180,7 +180,7 @@
                 android:paddingStart="@dimen/dp_14"
                 android:paddingEnd="@dimen/dp_8"
                 app:radius="@dimen/dp_15"
-                app:solidColor="@color/white">
+                app:solidColor="@color/text_inverse">
 
                 <TextView
                     android:id="@+id/tvQuickText"
@@ -200,11 +200,11 @@
                     android:gravity="center"
                     android:includeFontPadding="false"
                     android:text="@string/pay_back_now"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_inverse"
                     android:textSize="@dimen/sp_12"
                     android:textStyle="bold"
                     app:radius="@dimen/dp_18"
-                    app:solidColor="@color/color_7087F8" />
+                    app:solidColor="@color/brand_primary" />
             </com.vaycore.finance.ui.views.StyledLinearLayout>
         </com.vaycore.finance.ui.views.StyledLinearLayout>
 

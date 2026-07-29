@@ -42,7 +42,7 @@
             android:paddingEnd="@dimen/dp_10"
             android:paddingBottom="@dimen/dp_24"
             app:radius="@dimen/dp_24"
-            app:solidColor="@color/white">
+            app:solidColor="@color/text_inverse">
 
             <com.vaycore.finance.ui.views.FormItemView
                 android:id="@+id/planNameView"
@@ -52,7 +52,7 @@
                 app:errorText="@string/portal_please_enter_plan_name"
                 app:formType="input"
                 app:hintText="@string/please_enter"
-                app:inputBackgroundColor="@color/C_F6F6F6"
+                app:inputBackgroundColor="@color/surface_secondary"
                 app:inputType="text"
                 app:titleText="@string/portal_plan_name" />
 
@@ -109,7 +109,7 @@
                     android:layout_height="@dimen/dp_104"
                     app:autoFillPressedColor="true"
                     app:radius="@dimen/dp_18"
-                    app:solidColor="@color/C_F6F6F6">
+                    app:solidColor="@color/surface_secondary">
 
                     <ImageView
                         android:layout_width="0dp"

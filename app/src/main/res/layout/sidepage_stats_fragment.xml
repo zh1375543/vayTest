@@ -26,7 +26,7 @@
             android:paddingEnd="@dimen/dp_24"
             android:paddingBottom="@dimen/dp_24"
             app:radius="@dimen/dp_24"
-            app:solidColor="@color/white">
+            app:solidColor="@color/text_inverse">
 
             <TextView
                 android:id="@+id/tvLoanAmountLabel"

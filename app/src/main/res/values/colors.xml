@@ -1,24 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00000000</color>
     <color name="p40_FFFFFF">#66FFFFFF</color>
     <color name="p50_000000">#80000000</color>
-    <color name="color_7087F8">#5965F6</color>
-
-    <color name="C_9CA3AF">#9CA3AF</color>
-    <color name="C_F6F6F6">#F6F6F6</color>
     <color name="color_FF8000">#FF8000</color>
 
-    <!-- Semantic design tokens. Keep legacy color names until all usages are migrated. -->
     <color name="text_primary">#111827</color>
     <color name="text_body">#374151</color>
     <color name="text_secondary">#6D7280</color>
     <color name="text_tertiary">#9CA3AF</color>
     <color name="text_disabled">#D2D5DA</color>
-    <color name="text_on_brand">#FFFFFFFF</color>
-    <color name="text_on_disabled">#FFFFFFFF</color>
     <color name="text_inverse">#FFFFFFFF</color>
     <color name="text_on_success">#111827</color>
 
@@ -31,7 +23,6 @@
     <color name="surface_tint">#F8F7F3</color>
     <color name="badge_promotion">#FFDD00</color>
 
-    <!-- The existing brand color is #5965F6 despite the legacy resource name. -->
     <color name="brand_primary">#5965F6</color>
     <color name="brand_primary_light">#A3B2FF</color>
     <color name="brand_secondary">#E8963B</color>

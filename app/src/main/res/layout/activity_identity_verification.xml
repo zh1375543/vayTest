@@ -59,7 +59,7 @@
                         android:visibility="@{viewModel.configResult != null &amp;&amp; (viewModel.configResult.KYC_FRONT != 0 || viewModel.configResult.KYC_BACK != 0) ? View.VISIBLE : View.GONE}"
                         app:layout_constraintTop_toTopOf="parent"
                         app:radius="@dimen/dp_24"
-                        app:solidColor="@color/white">
+                        app:solidColor="@color/text_inverse">
 
                         <com.vaycore.finance.ui.views.StyledConstraintLayout
                             android:id="@+id/laoutId"
@@ -121,7 +121,7 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:radius="@dimen/dp_6"
-                                app:solidColor="@color/C_F6F6F6">
+                                app:solidColor="@color/surface_secondary">
 
                                 <androidx.appcompat.widget.AppCompatImageView
                                     android:layout_width="@dimen/dp_32"
@@ -180,7 +180,7 @@
                                         android:drawableTop="@mipmap/ic_verify_kyc_success"
                                         android:gravity="center"
                                         android:text="@string/re_up"
-                                        android:textColor="@color/white"
+                                        android:textColor="@color/text_inverse"
                                         android:textSize="@dimen/sp_14" />
                                 </FrameLayout>
 
@@ -207,7 +207,7 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:radius="@dimen/dp_6"
-                                app:solidColor="@color/C_F6F6F6">
+                                app:solidColor="@color/surface_secondary">
 
 
                                 <androidx.appcompat.widget.AppCompatImageView
@@ -268,7 +268,7 @@
                                         android:drawableTop="@mipmap/ic_verify_kyc_success"
                                         android:gravity="center"
                                         android:text="@string/re_up"
-                                        android:textColor="@color/white"
+                                        android:textColor="@color/text_inverse"
                                         android:textSize="@dimen/sp_14" />
                                 </FrameLayout>
 
@@ -289,7 +289,7 @@
                         android:layout_marginTop="@dimen/dp_12"
                         app:layout_constraintTop_toBottomOf="@id/id_layout"
                         app:radius="@dimen/dp_12"
-                        app:solidColor="@color/white">
+                        app:solidColor="@color/text_inverse">
 
                         <com.vaycore.finance.ui.views.StyledConstraintLayout
                             android:id="@+id/layoutSelfHeader"
@@ -341,7 +341,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/tvSelfDesc"
                             app:radius="@dimen/dp_6"
-                            app:solidColor="@color/C_F6F6F6">
+                            app:solidColor="@color/surface_secondary">
 
                             <androidx.appcompat.widget.AppCompatImageView
                                 android:layout_width="@dimen/dp_32"
@@ -399,7 +399,7 @@
                                     android:drawableTop="@mipmap/ic_verify_kyc_success"
                                     android:gravity="center"
                                     android:text="@string/re_up"
-                                    android:textColor="@color/white"
+                                    android:textColor="@color/text_inverse"
                                     android:textSize="@dimen/sp_14" />
                             </FrameLayout>
 

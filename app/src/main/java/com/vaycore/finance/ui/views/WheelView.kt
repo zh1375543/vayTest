@@ -23,7 +23,7 @@ class WheelView @JvmOverloads constructor(
     private val visibleCount = 5
 
     private val centerColor by lazy { ContextCompat.getColor(context, R.color.text_primary) }
-    private val normalColor by lazy { ContextCompat.getColor(context, R.color.C_9CA3AF) }
+    private val normalColor by lazy { ContextCompat.getColor(context, R.color.text_tertiary) }
 
     private val centerPaint by lazy {
         Paint(Paint.ANTI_ALIAS_FLAG).apply {

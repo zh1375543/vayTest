@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:radius="@dimen/dp_24"
-    app:solidColor="@color/white">
+    app:solidColor="@color/text_inverse">
 
     <ImageView
         android:id="@+id/ivTip"
@@ -59,13 +59,13 @@
         android:paddingHorizontal="@dimen/dp_14"
         android:paddingVertical="@dimen/dp_12"
         android:text="@string/repay_auto_apply_dialog_hint"
-        android:textColor="@color/C_9CA3AF"
+        android:textColor="@color/text_tertiary"
         android:textSize="@dimen/sp_12"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvDesc"
         app:radius="@dimen/dp_18"
-        app:solidColor="@color/C_F6F6F6" />
+        app:solidColor="@color/surface_secondary" />
 
     <com.vaycore.finance.ui.views.SelectableImageView
         android:id="@+id/cbUnderstand"
@@ -114,8 +114,8 @@
         android:textSize="@dimen/sp_14"
         android:textStyle="bold"
         app:buttonRadius="@dimen/dp_22"
-        app:buttonSolidColor="@color/C_F6F6F6"
-        app:buttonTextColor="@color/color_7087F8"
+        app:buttonSolidColor="@color/surface_secondary"
+        app:buttonTextColor="@color/brand_primary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/buttonGuide"
         app:layout_constraintStart_toStartOf="parent"
@@ -133,8 +133,8 @@
         android:textSize="@dimen/sp_14"
         android:textStyle="bold"
         app:buttonRadius="@dimen/dp_22"
-        app:buttonSolidColor="@color/color_7087F8"
-        app:buttonTextColor="@color/white"
+        app:buttonSolidColor="@color/brand_primary"
+        app:buttonTextColor="@color/text_inverse"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/buttonGuide"

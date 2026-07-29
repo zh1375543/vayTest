@@ -7,8 +7,8 @@
     android:gravity="center"
     android:orientation="vertical"
     app:radius="@dimen/dp_24"
-    app:gradientStartColor="@color/white"
-    app:gradientEndColor="@color/white"
+    app:gradientStartColor="@color/text_inverse"
+    app:gradientEndColor="@color/text_inverse"
     app:gradientOrientation="TOP_BOTTOM">
 
     <TextView

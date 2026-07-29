@@ -52,7 +52,7 @@ class ParticleLoadingView @JvmOverloads constructor(
     }
 
     @ColorInt
-    private var particleColor = ContextCompat.getColor(context, R.color.color_7087F8)
+    private var particleColor = ContextCompat.getColor(context, R.color.brand_primary)
 
     private var orbitAngle = 0f
     private var particleRadius = 0f

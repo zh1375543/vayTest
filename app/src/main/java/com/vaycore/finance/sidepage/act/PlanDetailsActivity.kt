@@ -208,7 +208,7 @@ class PlanDetailsActivity : BaseActivity<SidepagePlanDetailsActivityBinding>() {
         tvPlanStatusValue.text = statusText
         tvPlanStatusValue.setTextColor(
             getColor(
-                if (plan?.status == STATUS_CANCELLED) R.color.action_withdraw else R.color.color_7087F8,
+                if (plan?.status == STATUS_CANCELLED) R.color.action_withdraw else R.color.brand_primary,
             ),
         )
     }

@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     app:left_top_radius="@dimen/dp_20"
     app:right_top_radius="@dimen/dp_20"
-    app:solidColor="@color/white">
+    app:solidColor="@color/text_inverse">
 
     <TextView
         android:id="@+id/tvProvince"
@@ -18,7 +18,7 @@
         android:maxLines="1"
         android:text=""
         android:textColor="@color/text_primary"
-        android:textColorHint="@color/C_9CA3AF"
+        android:textColorHint="@color/text_tertiary"
         android:textSize="@dimen/sp_15"
         app:layout_constraintEnd_toStartOf="@id/tvCity"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +34,7 @@
         android:hint="@string/please_choose"
         android:maxLines="1"
         android:textColor="@color/text_primary"
-        android:textColorHint="@color/C_9CA3AF"
+        android:textColorHint="@color/text_tertiary"
         android:textSize="@dimen/sp_15"
         app:layout_constraintEnd_toStartOf="@id/tvArea"
         app:layout_constraintStart_toEndOf="@id/tvProvince"
@@ -50,7 +50,7 @@
         android:hint="@string/please_choose"
         android:maxLines="1"
         android:textColor="@color/text_primary"
-        android:textColorHint="@color/C_9CA3AF"
+        android:textColorHint="@color/text_tertiary"
         android:textSize="@dimen/sp_15"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tvCity"

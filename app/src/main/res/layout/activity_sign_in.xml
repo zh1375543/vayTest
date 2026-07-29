@@ -51,13 +51,13 @@
             android:maxLength="11"
             android:paddingHorizontal="@dimen/dp_12"
             android:textColor="@color/text_primary"
-            android:textColorHint="@color/C_9CA3AF"
+            android:textColorHint="@color/text_tertiary"
             android:textSize="@dimen/sp_14"
             app:drawableHeight="@dimen/dp_22"
             app:drawableWidth="@dimen/dp_22"
             app:layout_constraintTop_toTopOf="parent"
             app:radius="@dimen/dp_24"
-            app:solidColor="@color/white"
+            app:solidColor="@color/text_inverse"
             app:strokeColor="@color/border_default"
             app:validationErrorDrawable="@mipmap/ic_edit_input_fail"
             app:validationSuccessDrawable="@mipmap/ic_edit_input_success"
@@ -78,13 +78,13 @@
             android:maxLength="10"
             android:paddingHorizontal="@dimen/dp_12"
             android:textColor="@color/text_primary"
-            android:textColorHint="@color/C_9CA3AF"
+            android:textColorHint="@color/text_tertiary"
             android:textSize="@dimen/sp_14"
             app:layout_constraintEnd_toStartOf="@id/tvGetOtp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/etPhone"
             app:radius="@dimen/dp_24"
-            app:solidColor="@color/white"
+            app:solidColor="@color/text_inverse"
             app:strokeColor="@color/border_default"
             tools:ignore="MissingConstraints" />
 
@@ -98,10 +98,10 @@
             android:gravity="center"
             android:paddingHorizontal="@dimen/dp_25"
             android:text="@string/get_str"
-            android:textColor="@color/white"
+            android:textColor="@color/text_inverse"
             app:layout_constraintBottom_toBottomOf="@id/etOtp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:solidColor="@color/color_7087F8" />
+            app:solidColor="@color/brand_primary" />
 
         <TextView
             android:id="@+id/tvTips"
@@ -124,7 +124,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:left_top_radius="@dimen/dp_30"
         app:right_top_radius="@dimen/dp_30"
-        app:solidColor="@color/white">
+        app:solidColor="@color/text_inverse">
 
         <com.vaycore.finance.ui.views.StatefulActionButton
             android:id="@+id/tvLogin"
@@ -148,7 +148,7 @@
             android:gravity="center"
             android:paddingBottom="@dimen/dp_10"
             android:text="@string/accept_policy"
-            android:textColor="@color/C_9CA3AF"
+            android:textColor="@color/text_tertiary"
             android:textSize="@dimen/sp_10"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvLogin" />

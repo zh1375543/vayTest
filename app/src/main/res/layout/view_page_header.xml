@@ -38,7 +38,7 @@
         android:layout_gravity="end|center_vertical"
         android:layout_marginEnd="@dimen/dp_16"
         android:gravity="center_vertical"
-        android:textColor="@color/color_7087F8"
+        android:textColor="@color/brand_primary"
         android:textSize="@dimen/sp_12"
         android:paddingVertical="@dimen/dp_5"
         android:paddingHorizontal="@dimen/dp_12"

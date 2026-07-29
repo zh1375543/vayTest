@@ -47,7 +47,7 @@ class BorrowingHistoryAdapter :
         binding.tvAmount.text = item.loanAmount.formatAmountWithPrefix(item.currencySymbol)
         binding.tvDateTitle.text = binding.root.context.getString(R.string.apply_date)
         binding.tvDate.text = item.createTime?.substringBefore(' ')
-        binding.tvStatus.setTextColor(binding.root.context.resolveColorCompat(R.color.color_7087F8))
+        binding.tvStatus.setTextColor(binding.root.context.resolveColorCompat(R.color.brand_primary))
         binding.tvStatus.text = when (item.status) {
             ORDER_STATUS_SETTLE,
             ORDER_STATUS_SETTLE_REDUCE,

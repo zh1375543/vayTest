@@ -30,7 +30,7 @@
         android:layout_height="@dimen/dp_42"
         android:layout_marginHorizontal="@dimen/dp_16"
         app:radius="@dimen/dp_24"
-        app:solidColor="@color/C_F6F6F6"
+        app:solidColor="@color/surface_secondary"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingHorizontal="@dimen/dp_20"
@@ -43,11 +43,11 @@
             android:gravity="center"
             android:paddingHorizontal="@dimen/dp_14"
             android:text="@string/open"
-            android:textColor="@color/white"
+            android:textColor="@color/text_inverse"
             android:textSize="@dimen/sp_12"
             android:textStyle="bold"
             app:radius="@dimen/dp_24"
-            app:solidColor="@color/color_7087F8" />
+            app:solidColor="@color/brand_primary" />
 
         <TextView
             android:layout_width="0dp"

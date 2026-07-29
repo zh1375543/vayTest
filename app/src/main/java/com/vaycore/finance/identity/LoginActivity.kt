@@ -182,7 +182,7 @@ class LoginActivity : BaseActivity<ActivitySignInBinding>() {
             arrayListOf(
                 ClickablePart(
                     getString(R.string.privacy_agreement),
-                    resolveColorCompat(R.color.color_7087F8),
+                    resolveColorCompat(R.color.brand_primary),
                     onClick = {
                         WebViewActivity.Companion.launch(
                             this@LoginActivity,
@@ -192,7 +192,7 @@ class LoginActivity : BaseActivity<ActivitySignInBinding>() {
                     }),
                 ClickablePart(
                     getString(R.string.privacy_blue),
-                    resolveColorCompat(R.color.color_7087F8),
+                    resolveColorCompat(R.color.brand_primary),
                     onClick = {
                         WebViewActivity.Companion.launch(
                             this@LoginActivity,

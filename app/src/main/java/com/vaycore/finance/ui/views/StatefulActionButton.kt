@@ -136,8 +136,8 @@ class StatefulActionButton @JvmOverloads constructor(
     }
 
     private fun render() {
-        val themeColor = ContextCompat.getColor(context, R.color.color_7087F8)
-        val filledText = ContextCompat.getColor(context, R.color.white)
+        val themeColor = ContextCompat.getColor(context, R.color.brand_primary)
+        val filledText = ContextCompat.getColor(context, R.color.text_inverse)
 
         val defaultSolid = if (variant == VARIANT_OUTLINE) Color.TRANSPARENT else themeColor
         val defaultStroke = if (variant == VARIANT_OUTLINE) themeColor else Color.TRANSPARENT

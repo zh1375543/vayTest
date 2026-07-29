@@ -400,7 +400,7 @@ class SavingsRecordActivity : BaseActivity<SidepageSavingsRecordActivityBinding>
                             ForegroundColorSpan(
                                 ContextCompat.getColor(
                                     this@SavingsRecordActivity,
-                                    R.color.color_7087F8,
+                                    R.color.brand_primary,
                                 ),
                             ),
                             start,

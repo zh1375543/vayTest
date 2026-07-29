@@ -28,7 +28,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleBar"
         app:radius="@dimen/dp_24"
-        app:solidColor="@color/white">
+        app:solidColor="@color/text_inverse">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ivAppLogo"
@@ -73,7 +73,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvAppName"
             app:radius="@dimen/dp_16"
-            app:solidColor="@color/C_F6F6F6">
+            app:solidColor="@color/surface_secondary">
 
             <TextView
                 android:layout_width="0dp"
@@ -115,7 +115,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvContactUs"
             app:radius="@dimen/dp_16"
-            app:solidColor="@color/C_F6F6F6">
+            app:solidColor="@color/surface_secondary">
 
             <TextView
                 android:layout_width="0dp"
@@ -153,7 +153,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvFaq"
             app:radius="@dimen/dp_16"
-            app:solidColor="@color/C_F6F6F6">
+            app:solidColor="@color/surface_secondary">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -174,7 +174,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/dp_18"
                 android:includeFontPadding="false"
-                android:textColor="@color/color_7087F8"
+                android:textColor="@color/brand_primary"
                 android:textSize="@dimen/sp_14"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

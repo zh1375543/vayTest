@@ -36,7 +36,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:visibility="gone"
-        android:textColor="@color/C_9CA3AF"
+        android:textColor="@color/text_tertiary"
         android:textSize="@dimen/sp_12"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/tvTitle"

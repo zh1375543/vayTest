@@ -7,7 +7,7 @@
     android:paddingBottom="@dimen/dp_20"
     app:left_top_radius="@dimen/dp_20"
     app:right_top_radius="@dimen/dp_20"
-    app:solidColor="@color/white">
+    app:solidColor="@color/text_inverse">
 
     <TextView
         android:id="@+id/tvTitle"
@@ -39,11 +39,11 @@
         android:maxLines="1"
         android:paddingHorizontal="@dimen/dp_16"
         android:textColor="@color/text_primary"
-        android:textColorHint="@color/C_9CA3AF"
+        android:textColorHint="@color/text_tertiary"
         android:textSize="@dimen/sp_13"
         app:layout_constraintTop_toBottomOf="@id/tvTitle"
         app:radius="@dimen/dp_24"
-        app:solidColor="@color/C_F6F6F6" />
+        app:solidColor="@color/surface_secondary" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvBank"
@@ -64,7 +64,7 @@
         android:layout_height="@dimen/dp_500"
         android:gravity="center"
         android:text="@string/empty_search"
-        android:textColor="@color/C_9CA3AF"
+        android:textColor="@color/text_tertiary"
         android:textSize="@dimen/sp_12"
         app:layout_constraintTop_toBottomOf="@id/etSearch" />
 

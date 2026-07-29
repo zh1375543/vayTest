@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/dp_57"
-    tools:background="@color/white">
+    tools:background="@color/text_inverse">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivBank"
@@ -37,7 +37,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:text="Vietcombank"
-        android:textColor="@color/C_9CA3AF"
+        android:textColor="@color/text_tertiary"
         android:textSize="@dimen/sp_12"
         app:layout_constraintEnd_toEndOf="@id/tvTitle"
         app:layout_constraintStart_toStartOf="@id/tvTitle"

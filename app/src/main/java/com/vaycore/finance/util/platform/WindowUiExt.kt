@@ -40,7 +40,7 @@ val Context.statusBarHeight: Int
 
 fun AppCompatActivity.configureSystemBars(
     @ColorInt statusBarColor: Int = resolveColorCompat(R.color.transparent),
-    @ColorInt navBarColor: Int = resolveColorCompat(R.color.white),
+    @ColorInt navBarColor: Int = resolveColorCompat(R.color.surface_primary),
     darkMode: Boolean = false,
     adjustForIme: Boolean = true,
 ) {

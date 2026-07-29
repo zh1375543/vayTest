@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_24"
         android:layout_marginEnd="@dimen/dp_24"
-        app:solidColor="@color/white"
+        app:solidColor="@color/text_inverse"
         app:radius="@dimen/dp_12"
         android:layout_gravity="center">
 

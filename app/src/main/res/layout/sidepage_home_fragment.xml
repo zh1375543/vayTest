@@ -33,7 +33,7 @@
             android:minHeight="@dimen/dp_220"
             android:padding="@dimen/dp_20"
             app:radius="@dimen/dp_24"
-            app:solidColor="@color/white">
+            app:solidColor="@color/text_inverse">
 
             <TextView
                 android:id="@+id/tvLoanAmountTitle"
@@ -100,7 +100,7 @@
                 android:layout_marginTop="@dimen/dp_24"
                 android:gravity="center"
                 android:text="@string/portal_add_savings_plan"
-                android:textColor="@color/white"
+                android:textColor="@color/text_inverse"
                 android:textSize="@dimen/sp_16"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -155,14 +155,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ivPlanState"
                 app:radius="@dimen/dp_16"
-                app:solidColor="@color/white">
+                app:solidColor="@color/text_inverse">
 
                 <TextView
                     android:id="@+id/tvEmptyPlanMessage"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textColor="@color/C_9CA3AF"
+                    android:textColor="@color/text_tertiary"
                     android:textSize="@dimen/sp_12"
                     app:layout_constraintBottom_toTopOf="@id/tvLogin"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -181,7 +181,7 @@
                     android:paddingStart="@dimen/dp_16"
                     android:paddingEnd="@dimen/dp_16"
                     android:text="@string/portal_login_now"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_inverse"
                     android:textSize="@dimen/sp_12"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

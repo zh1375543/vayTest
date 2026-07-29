@@ -95,8 +95,8 @@
                     android:orientation="horizontal"
                     app:layout_constraintTop_toBottomOf="@id/rvAccounts"
                     app:radius="@dimen/dp_28"
-                    app:solidColor="@color/white"
-                    app:strokeColor="@color/color_7087F8"
+                    app:solidColor="@color/text_inverse"
+                    app:strokeColor="@color/brand_primary"
                     app:strokeWidth="@dimen/dp_1">
 
                     <androidx.appcompat.widget.AppCompatImageView

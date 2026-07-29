@@ -108,7 +108,7 @@
                     android:layout_marginTop="@dimen/dp_12"
                     android:orientation="vertical"
                     app:radius="@dimen/dp_12"
-                    app:solidColor="@color/white">
+                    app:solidColor="@color/text_inverse">
 
                 <!-- Relationship 1 -->
                 <com.vaycore.finance.ui.views.FormItemView

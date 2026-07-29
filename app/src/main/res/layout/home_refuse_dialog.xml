@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:radius="@dimen/dp_8"
-        app:solidColor="@color/white" />
+        app:solidColor="@color/text_inverse" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivRefuse"

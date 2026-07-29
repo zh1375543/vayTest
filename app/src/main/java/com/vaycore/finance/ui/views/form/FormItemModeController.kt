@@ -89,7 +89,7 @@ internal class FormItemModeController(
             clearEndDrawable()
         } else {
             showSelectIndicator()
-            setDrawableTint(R.color.C_9CA3AF)
+            setDrawableTint(R.color.text_tertiary)
         }
     }
 

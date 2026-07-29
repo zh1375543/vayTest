@@ -42,14 +42,14 @@
                 android:orientation="vertical"
                 android:padding="@dimen/dp_24"
                 app:radius="@dimen/dp_24"
-                app:solidColor="@color/white">
+                app:solidColor="@color/text_inverse">
 
                 <com.vaycore.finance.ui.views.StyledConstraintLayout
                     android:id="@+id/monthSelector"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_56"
                     app:radius="@dimen/dp_28"
-                    app:solidColor="@color/C_F6F6F6">
+                    app:solidColor="@color/surface_secondary">
 
                     <TextView
                         android:id="@+id/tvMonth"
@@ -116,7 +116,7 @@
                     android:layout_height="@dimen/dp_80"
                     android:gravity="center"
                     android:text="@string/portal_no_month_transactions"
-                    android:textColor="@color/C_9CA3AF"
+                    android:textColor="@color/text_tertiary"
                     android:textSize="@dimen/sp_14"
                     android:visibility="gone" />
 

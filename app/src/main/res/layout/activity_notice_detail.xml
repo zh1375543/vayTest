@@ -69,7 +69,7 @@
                 android:textColor="@color/text_primary"
                 android:textSize="@dimen/sp_13"
                 app:radius="@dimen/dp_24"
-                app:solidColor="@color/white" />
+                app:solidColor="@color/text_inverse" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

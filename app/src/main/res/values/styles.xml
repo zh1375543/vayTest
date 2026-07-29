@@ -99,7 +99,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">@dimen/dp_36</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:textColor">@color/text_on_brand</item>
+        <item name="android:textColor">@color/text_inverse</item>
         <item name="android:textSize">@dimen/sp_16</item>
         <item name="android:textStyle">bold</item>
     </style>

@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:paddingBottom="@dimen/dp_20"
     app:radius="@dimen/dp_20"
-    app:solidColor="@color/white">
+    app:solidColor="@color/text_inverse">
 
     <TextView
         android:id="@+id/tvTitle"
@@ -52,8 +52,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rvCard"
         app:radius="@dimen/dp_22"
-        app:solidColor="@color/white"
-        app:strokeColor="@color/color_7087F8"
+        app:solidColor="@color/text_inverse"
+        app:strokeColor="@color/brand_primary"
         app:strokeWidth="@dimen/dp_1">
 
         <ImageView

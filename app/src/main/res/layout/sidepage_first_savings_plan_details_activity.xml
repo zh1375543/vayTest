@@ -38,7 +38,7 @@
         app:errorText="@string/portal_please_enter_target_amount"
         app:formType="input"
         app:hintText="@string/please_enter"
-        app:inputBackgroundColor="@color/white"
+        app:inputBackgroundColor="@color/text_inverse"
         app:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +55,7 @@
         app:errorText="@string/portal_please_choose_frequency"
         app:formType="select"
         app:hintText="@string/please_choose"
-        app:inputBackgroundColor="@color/white"
+        app:inputBackgroundColor="@color/text_inverse"
         app:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +73,7 @@
         app:errorText="@string/portal_please_enter_each_amount"
         app:formType="input"
         app:hintText="@string/please_enter"
-        app:inputBackgroundColor="@color/white"
+        app:inputBackgroundColor="@color/text_inverse"
         app:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -93,7 +93,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:left_top_radius="@dimen/dp_30"
         app:right_top_radius="@dimen/dp_30"
-        app:solidColor="@color/white">
+        app:solidColor="@color/text_inverse">
 
         <com.vaycore.finance.ui.views.StatefulActionButton
             android:id="@+id/btSubmit"

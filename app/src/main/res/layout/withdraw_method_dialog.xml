@@ -8,7 +8,7 @@
     android:paddingTop="@dimen/dp_32"
     android:paddingBottom="@dimen/dp_24"
     app:radius="@dimen/dp_24"
-    app:solidColor="@color/white">
+    app:solidColor="@color/text_inverse">
 
     <TextView
         android:layout_width="match_parent"
@@ -31,7 +31,7 @@
         android:paddingHorizontal="@dimen/dp_16"
         android:paddingVertical="@dimen/dp_15"
         app:radius="@dimen/dp_24"
-        app:solidColor="@color/C_F6F6F6">
+        app:solidColor="@color/surface_secondary">
 
         <ImageView
             android:layout_width="@dimen/dp_36"
@@ -66,10 +66,10 @@
                     android:paddingHorizontal="@dimen/dp_10"
                     android:gravity="center"
                     android:text="@string/gcash"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_inverse"
                     android:textSize="@dimen/sp_12"
                     app:radius="@dimen/dp_14"
-                    app:solidColor="@color/color_7087F8" />
+                    app:solidColor="@color/brand_primary" />
 
                 <com.vaycore.finance.ui.views.StyledTextView
                     android:layout_width="wrap_content"
@@ -79,10 +79,10 @@
                     android:paddingVertical="@dimen/dp_3"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:text="@string/maya"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_inverse"
                     android:textSize="@dimen/sp_12"
                     app:radius="@dimen/dp_14"
-                    app:solidColor="@color/color_7087F8" />
+                    app:solidColor="@color/brand_primary" />
 
                 <com.vaycore.finance.ui.views.StyledTextView
                     android:layout_width="wrap_content"
@@ -92,10 +92,10 @@
                     android:paddingHorizontal="@dimen/dp_10"
                     android:gravity="center"
                     android:text="@string/more"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_inverse"
                     android:textSize="@dimen/sp_12"
                     app:radius="@dimen/dp_14"
-                    app:solidColor="@color/color_7087F8" />
+                    app:solidColor="@color/brand_primary" />
             </LinearLayout>
         </LinearLayout>
 
@@ -118,7 +118,7 @@
         android:paddingHorizontal="@dimen/dp_16"
         android:paddingVertical="@dimen/dp_15"
         app:radius="@dimen/dp_24"
-        app:solidColor="@color/C_F6F6F6">
+        app:solidColor="@color/surface_secondary">
 
         <ImageView
             android:layout_width="@dimen/dp_36"
@@ -154,7 +154,7 @@
                     android:drawablePadding="@dimen/dp_4"
                     android:gravity="center_vertical"
                     android:text="@string/higher_credit_limit"
-                    android:textColor="@color/color_7087F8"
+                    android:textColor="@color/brand_primary"
                     android:textSize="@dimen/sp_12" />
             </LinearLayout>
 
@@ -163,7 +163,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
                 android:text="@string/all_major_banks"
-                android:textColor="@color/C_9CA3AF"
+                android:textColor="@color/text_tertiary"
                 android:textSize="@dimen/sp_12" />
         </LinearLayout>
 
@@ -182,7 +182,7 @@
         android:layout_marginTop="@dimen/dp_20"
         android:gravity="center"
         android:text="@string/cancel"
-        android:textColor="@color/color_7087F8"
+        android:textColor="@color/brand_primary"
         android:textSize="@dimen/sp_18"
         app:actionButtonVariant="outline"
         android:textStyle="bold" />

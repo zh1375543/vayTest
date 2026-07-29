@@ -7,7 +7,7 @@
     android:layout_marginHorizontal="@dimen/dp_20"
     android:paddingBottom="@dimen/dp_20"
     app:radius="@dimen/dp_24"
-    app:solidColor="@color/white">
+    app:solidColor="@color/text_inverse">
 
     <TextView
         android:id="@+id/tvTitle"
