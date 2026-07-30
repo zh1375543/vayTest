@@ -9,6 +9,7 @@ import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.sidepage.act.AccountSettingsActivity
 import com.vaycore.finance.sidepage.act.HelpCenterActivity
 import com.vaycore.finance.util.ExternalActionLauncher
+import com.vaycore.finance.util.showToastMessage
 import com.vaycore.finance.util.start
 import com.vaycore.finance.util.viewBinding
 
@@ -20,7 +21,12 @@ class AccountFragment : BaseFragment<SidepageMineFragmentBinding>(
 
     override fun initView() = with(binding) {
         tvRate.singleClick {
-            context?.let { ExternalActionLauncher.openStoreListing(it) }
+            val opened = context?.let {
+                ExternalActionLauncher.openRatingPage(it)
+            } ?: false
+            if (!opened) {
+                getString(R.string.unable_open_google).showToastMessage()
+            }
         }
         tvShareApp.singleClick {
             shareApp()

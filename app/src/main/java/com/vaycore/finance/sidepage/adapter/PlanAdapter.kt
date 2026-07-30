@@ -40,7 +40,7 @@ class PlanAdapter :
             ivPlanIcon.imageTintList = null
         } else {
             ivPlanIcon.imageTintList = null
-            ivPlanIcon.loadImage(item.planIcon)
+            ivPlanIcon.loadImage(item.planIcon, R.mipmap.ic_product_defalut_img)
         }
 
         btSaveMoney.singleClick {

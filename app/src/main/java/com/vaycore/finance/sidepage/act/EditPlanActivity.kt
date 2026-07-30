@@ -221,7 +221,7 @@ class EditPlanActivity : BaseActivity<SidepageEditPlanActivityBinding>() {
     private fun clearPlanPhoto() {
         selectedPlanPhotoUri = null
         activePhotoUploadUri = null
-        planIconUrl = null
+        planIconUrl = ""
         isPlanPhotoUploadFailed = false
         renderPlanPhoto()
     }
