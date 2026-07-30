@@ -60,49 +60,66 @@
             </LinearLayout>
         </LinearLayout>
 
-        <FrameLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ratingCard"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_110"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_20">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:contentDescription="@null"
                 android:scaleType="fitXY"
-                android:src="@mipmap/ic_as_content_bg" />
+                android:src="@mipmap/ic_as_content_bg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/ratingContentEndGuide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.68" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/tvRatingMessage"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_20"
                 android:layout_marginTop="@dimen/dp_18"
-                android:layout_marginEnd="@dimen/dp_110"
                 android:includeFontPadding="false"
                 android:text="@string/account_rate_message"
                 android:textColor="@color/text_inverse"
                 android:textSize="@dimen/sp_13"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                app:layout_constraintEnd_toStartOf="@id/ratingContentEndGuide"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/tvRatingPrompt"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_20"
-                android:layout_marginTop="@dimen/dp_36"
-                android:layout_marginEnd="@dimen/dp_110"
+                android:layout_marginTop="@dimen/dp_2"
                 android:includeFontPadding="false"
                 android:text="@string/account_rate_prompt"
                 android:textColor="@color/text_inverse"
                 android:textSize="@dimen/sp_16"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/ratingContentEndGuide"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvRatingMessage" />
 
             <com.vaycore.finance.ui.views.StyledTextView
                 android:id="@+id/tvRate"
                 android:layout_width="@dimen/dp_96"
                 android:layout_height="@dimen/dp_36"
-                android:layout_gravity="start|bottom"
                 android:layout_marginStart="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_7"
                 android:layout_marginBottom="@dimen/dp_12"
                 android:gravity="center"
                 android:text="@string/rate"
@@ -110,8 +127,11 @@
                 android:textSize="@dimen/sp_16"
                 android:textStyle="bold"
                 app:radius="@dimen/dp_18"
-                app:solidColor="@color/text_inverse" />
-        </FrameLayout>
+                app:solidColor="@color/text_inverse"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvRatingPrompt" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -633,7 +633,7 @@ No personal SMS messages will be accessed, read, or collected.</string>
     <string name="portal_transaction_details">Transaction Details</string>
     <string name="portal_savings_calendar">Savings Calendar</string>
     <string name="portal_year_month_value">%1$d.%2$d</string>
-    <string name="portal_no_month_transactions">No transactions this month</string>
+    <string name="portal_no_month_transactions">No transactions on this date</string>
     <string name="calendar_sunday_short">S</string>
     <string name="calendar_monday_short">M</string>
     <string name="calendar_tuesday_short">T</string>

@@ -11,6 +11,8 @@ import com.vaycore.finance.model.side.PlanDetailResponse
 import com.vaycore.finance.model.side.PlanHomeResponse
 import com.vaycore.finance.model.side.PlanListRequest
 import com.vaycore.finance.model.side.PlanListResponse
+import com.vaycore.finance.model.side.RecordListRequest
+import com.vaycore.finance.model.side.RecordListResponse
 import com.vaycore.finance.model.side.SavePlanRequest
 import com.vaycore.finance.model.side.SavePlanResponse
 import com.vaycore.finance.model.side.SavingsReportResponse
@@ -64,5 +66,8 @@ interface SidePageApi {
 
     @POST("api/user/app/saving/plan/list")
     suspend fun getPlanList(@Body param: PlanListRequest): ApiResponse<PlanListResponse?>
+
+    @POST("api/user/app/saving/record/list")
+    suspend fun  getRecordList(@Body param: RecordListRequest): ApiResponse<RecordListResponse?>
 
 }

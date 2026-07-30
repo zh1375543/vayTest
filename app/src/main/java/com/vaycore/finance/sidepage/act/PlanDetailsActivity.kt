@@ -57,7 +57,7 @@ class PlanDetailsActivity : BaseActivity<SidepagePlanDetailsActivityBinding>() {
         titleBar.setNavigationAction(::finish)
         titleBar.setRightImage(R.mipmap.ic_at_date)
         titleBar.setRightImageAction {
-            startActivity(Intent(this@PlanDetailsActivity, SavingsCalendarActivity::class.java))
+            startActivity(SavingsCalendarActivity.createIntent(this@PlanDetailsActivity, planId))
         }
     }
 
@@ -200,6 +200,7 @@ class PlanDetailsActivity : BaseActivity<SidepagePlanDetailsActivityBinding>() {
 
         planNameContainer.isEnabled = isActive
         planNameContainer.isClickable = isActive
+        ivUpdatePlan.isVisible = isActive
         activePlanContentGroup.isVisible = isActive
 
         val shouldShowStatus = plan?.status == STATUS_COMPLETED || plan?.status == STATUS_CANCELLED

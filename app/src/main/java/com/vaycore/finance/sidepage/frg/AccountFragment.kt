@@ -6,9 +6,9 @@ import com.vaycore.finance.base.BaseFragment
 import com.vaycore.finance.data.loginInfo
 import com.vaycore.finance.databinding.SidepageMineFragmentBinding
 import com.vaycore.finance.ui.extension.singleClick
-import com.vaycore.finance.ui.showAppRatingDialog
 import com.vaycore.finance.sidepage.act.AccountSettingsActivity
 import com.vaycore.finance.sidepage.act.HelpCenterActivity
+import com.vaycore.finance.util.ExternalActionLauncher
 import com.vaycore.finance.util.start
 import com.vaycore.finance.util.viewBinding
 
@@ -20,7 +20,7 @@ class AccountFragment : BaseFragment<SidepageMineFragmentBinding>(
 
     override fun initView() = with(binding) {
         tvRate.singleClick {
-            activity?.showAppRatingDialog { }
+            context?.let { ExternalActionLauncher.openStoreListing(it) }
         }
         tvShareApp.singleClick {
             shareApp()

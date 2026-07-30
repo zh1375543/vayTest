@@ -1,12 +1,13 @@
 package com.vaycore.finance.model.side
 
 import com.vaycore.finance.data.APPCODE
+import java.math.BigDecimal
 
 data class CreatePlanRequest(
     val planName: String? = null,
-    val eachAmount: Int? = null,
+    val eachAmount: BigDecimal? = null,
     val frequencyType: Int? = null,
-    val targetAmount: Int? = null,
+    val targetAmount: BigDecimal? = null,
     val planIcon: String? = null,
     val appCode: String = APPCODE,
 

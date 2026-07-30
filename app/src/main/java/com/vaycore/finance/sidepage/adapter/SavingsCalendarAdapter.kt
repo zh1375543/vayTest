@@ -13,22 +13,38 @@ data class SavingsMonthItem(val year: Int, val month: Int)
 
 data class CalendarDayItem(
     val day: Int,
+    val date: String? = null,
     val isCurrentMonth: Boolean,
-    val isToday: Boolean,
+    val isSelected: Boolean,
     val hasSavingRecord: Boolean,
     val hasPayoutRecord: Boolean,
 )
 
-/** Read-only date cells; transaction dates are represented by color only. */
 class SavingsCalendarDayAdapter :
     RecyclerView.Adapter<SavingsCalendarDayAdapter.DayViewHolder>() {
 
     private val items = mutableListOf<CalendarDayItem>()
+    private var onDayClick: ((CalendarDayItem) -> Unit)? = null
+
+    fun setOnDayClickListener(listener: (CalendarDayItem) -> Unit) {
+        onDayClick = listener
+    }
 
     fun submitItems(newItems: List<CalendarDayItem>) {
         items.clear()
         items.addAll(newItems)
         notifyDataSetChanged()
+    }
+
+    fun selectDate(date: String) {
+        for (index in items.indices) {
+            val item = items[index]
+            val isSelected = item.date == date
+            if (item.isSelected == isSelected) continue
+
+            items[index] = item.copy(isSelected = isSelected)
+            notifyItemChanged(index)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DayViewHolder {
@@ -37,8 +53,6 @@ class SavingsCalendarDayAdapter :
             parent,
             false,
         )
-        binding.root.isClickable = false
-        binding.root.isFocusable = false
         return DayViewHolder(binding)
     }
 
@@ -50,7 +64,7 @@ class SavingsCalendarDayAdapter :
             background = GradientDrawable().apply {
                 shape = GradientDrawable.OVAL
                 setColor(
-                    if (item.isToday) {
+                    if (item.isSelected) {
                         ContextCompat.getColor(context, R.color.brand_primary)
                     } else {
                         Color.TRANSPARENT
@@ -59,13 +73,21 @@ class SavingsCalendarDayAdapter :
             }
             setTextColor(
                 when {
-                    item.isToday -> ContextCompat.getColor(context, R.color.text_inverse)
+                    item.isSelected -> ContextCompat.getColor(context, R.color.text_inverse)
                     !item.isCurrentMonth -> ContextCompat.getColor(context, R.color.border_default)
                     item.hasPayoutRecord -> ContextCompat.getColor(context, R.color.action_withdraw)
                     item.hasSavingRecord -> ContextCompat.getColor(context, R.color.brand_primary)
                     else -> ContextCompat.getColor(context, R.color.text_body)
                 },
             )
+        }
+        holder.binding.root.apply {
+            isEnabled = item.isCurrentMonth && !item.date.isNullOrBlank()
+            isClickable = isEnabled
+            isFocusable = isEnabled
+            setOnClickListener {
+                onDayClick?.invoke(item)
+            }
         }
     }
 

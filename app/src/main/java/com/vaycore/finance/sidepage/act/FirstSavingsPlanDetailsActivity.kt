@@ -14,6 +14,7 @@ import com.vaycore.finance.sidepage.PortalActivity
 import com.vaycore.finance.sidepage.SideHomeViewModel
 import com.vaycore.finance.util.showToastMessage
 import com.vaycore.finance.util.viewBinding
+import java.math.BigDecimal
 
 /** Completes the required fields for a savings plan created during first login. */
 class FirstSavingsPlanDetailsActivity :
@@ -88,15 +89,9 @@ class FirstSavingsPlanDetailsActivity :
         val eachAmount = eachAmountView.getText().toPlanAmountOrNull()
         val invalid = when {
             targetAmountView.getText().isBlank() -> targetAmountView.apply { showError() }
-            targetAmount == null || targetAmount <= 0 -> targetAmountView.apply {
-                showError(getString(R.string.portal_amount_must_be_greater_than_zero))
-            }
             selectedFrequency == null -> frequencyView.apply { showError() }
             eachAmountView.getText().isBlank() -> eachAmountView.apply { showError() }
-            eachAmount == null || eachAmount <= 0 -> eachAmountView.apply {
-                showError(getString(R.string.portal_amount_must_be_greater_than_zero))
-            }
-            eachAmount > targetAmount -> eachAmountView.apply {
+            targetAmount != null && eachAmount != null && eachAmount > targetAmount -> eachAmountView.apply {
                 showError(getString(R.string.portal_each_amount_exceeds_target))
             }
             else -> null
@@ -114,7 +109,9 @@ class FirstSavingsPlanDetailsActivity :
         )
     }
 
-    private fun String.toPlanAmountOrNull() = trim().replace(",", "").toIntOrNull()
+    private fun String.toPlanAmountOrNull() = runCatching {
+        BigDecimal(trim().replace(",", ""))
+    }.getOrNull()
 
     private fun skipPlanSetup() {
         setResult(RESULT_OK)

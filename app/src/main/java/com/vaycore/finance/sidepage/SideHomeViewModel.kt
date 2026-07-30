@@ -11,6 +11,7 @@ import com.vaycore.finance.model.side.PlanCalendarResponse
 import com.vaycore.finance.model.side.PlanDetailResponse
 import com.vaycore.finance.model.side.PlanHomeResponse
 import com.vaycore.finance.model.side.PlanListResponse
+import com.vaycore.finance.model.side.RecordListResponse
 import com.vaycore.finance.model.side.SavePlanRequest
 import com.vaycore.finance.model.side.SavePlanResponse
 import com.vaycore.finance.model.side.SavingsReportResponse
@@ -38,6 +39,7 @@ class SideHomeViewModel(
     val planListResult = MutableLiveData<PlanListPage>()
     val planDetailResult = MutableLiveData<PlanDetailResponse?>()
     val planCalendarResult = MutableLiveData<PlanCalendarResponse?>()
+    val recordListResult = MutableLiveData<RecordListResponse?>()
     val planImageUploadState = MutableLiveData<PlanImageUploadState>()
     val addPlanResult = MutableLiveData<Event<Unit>>()
     val updatePlanResult = MutableLiveData<Event<Unit>>()
@@ -50,12 +52,14 @@ class SideHomeViewModel(
     val planListFailed = MutableLiveData<Event<PlanListPage>>()
     val planDetailFailed = MutableLiveData<Event<Unit>>()
     val planCalendarFailed = MutableLiveData<Event<Unit>>()
+    val recordListFailed = MutableLiveData<Event<Unit>>()
 
     private var planHomeJob: Job? = null
     private var savingsReportJob: Job? = null
     private var planListJob: Job? = null
     private var planDetailJob: Job? = null
     private var planCalendarJob: Job? = null
+    private var recordListJob: Job? = null
     private var addPlanJob: Job? = null
     private var updatePlanJob: Job? = null
     private var cancelPlanJob: Job? = null
@@ -121,6 +125,18 @@ class SideHomeViewModel(
             planCalendarResult.value = it
         }.onFailed {
             planCalendarFailed.value = Event(Unit)
+            false
+        }
+    }
+
+    fun getRecordList(planId: Int, startTime: String, endTime: String) {
+        recordListJob?.cancel()
+        recordListJob = createNetworkRequest {
+            repository.getRecordList(planId, startTime, endTime)
+        }.onSuccess {
+            recordListResult.value = it
+        }.onFailed {
+            recordListFailed.value = Event(Unit)
             false
         }
     }

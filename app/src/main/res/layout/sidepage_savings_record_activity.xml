@@ -132,7 +132,6 @@
                         android:id="@+id/savingAmountView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:editMaxLength="12"
                         app:errorText="@string/portal_please_enter_saving_amount"
                         app:formType="input"
                         app:hintText="@string/please_enter"

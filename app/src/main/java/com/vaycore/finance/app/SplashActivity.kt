@@ -65,8 +65,7 @@ class SplashActivity :
         if (hasJump) return
         hasJump = true
         if (isLogin) {
-//          MainNavigator.launch(this@SplashActivity, clearTask = true)
-            MainActivity.launch(this@SplashActivity)
+            MainNavigator.launch(this@SplashActivity, clearTask = true)
         } else {
             startActivity(
                 Intent(this@SplashActivity, LoginActivity::class.java).apply {

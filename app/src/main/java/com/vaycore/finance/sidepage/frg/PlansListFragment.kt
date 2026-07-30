@@ -62,6 +62,10 @@ class ActivePlansFragment : PlansListFragment(R.string.portal_no_active_plans) {
         binding.swipeRefreshLayout.setOnRefreshListener { refreshPlans() }
         planAdapter.setOnItemClickListener { plan, _ -> openPlanDetails(plan) }
         planAdapter.onSaveMoney = ::openSavingsRecord
+    }
+
+    override fun onResume() {
+        super.onResume()
         refreshPlans()
     }
 
@@ -174,6 +178,10 @@ class CompletedPlansFragment : PlansListFragment(R.string.portal_no_completed_pl
         binding.swipeRefreshLayout.setOnRefreshListener { refreshPlans() }
         planAdapter.setOnItemClickListener { plan, _ -> openPlanDetails(plan) }
         planAdapter.onViewDetails = ::openPlanDetails
+    }
+
+    override fun onResume() {
+        super.onResume()
         refreshPlans()
     }
 
@@ -281,6 +289,10 @@ class CancelledPlansFragment : PlansListFragment(R.string.portal_no_cancelled_pl
         binding.swipeRefreshLayout.setOnRefreshListener { refreshPlans() }
         planAdapter.setOnItemClickListener { plan, _ -> openPlanDetails(plan) }
         planAdapter.onViewDetails = ::openPlanDetails
+    }
+
+    override fun onResume() {
+        super.onResume()
         refreshPlans()
     }
 

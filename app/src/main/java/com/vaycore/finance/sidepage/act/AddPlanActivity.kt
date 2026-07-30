@@ -28,6 +28,7 @@ import com.vaycore.finance.util.PermissionCoordinator
 import com.vaycore.finance.util.showToastMessage
 import com.vaycore.finance.util.viewBinding
 import java.io.File
+import java.math.BigDecimal
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -129,30 +130,26 @@ class AddPlanActivity : BaseActivity<SidepageAddPlanActivityBinding>() {
         viewModel.addPlan(
             CreatePlanRequest(
                 planName = planNameView.getText().trim(),
-                targetAmount = targetAmountView.getText().toPlanAmountOrNull(),
+                targetAmount = targetAmountView.getText().toAmount(),
                 frequencyType = selectedFrequency,
-                eachAmount = eachAmountView.getText().toPlanAmountOrNull(),
+                eachAmount = eachAmountView.getText().toAmount(),
                 planIcon = planIconUrl,
             )
         )
     }
 
     private fun validateForm(): Boolean = with(binding) {
-        val targetAmount = targetAmountView.getText().toPlanAmountOrNull()
-        val eachAmount = eachAmountView.getText().toPlanAmountOrNull()
+        val targetAmount = targetAmountView.getText().toAmountOrNull()
+        val eachAmount = eachAmountView.getText().toAmountOrNull()
         val invalidView = when {
             planNameView.getText().isBlank() -> planNameView.apply { showError() }
             targetAmountView.getText().isBlank() -> targetAmountView.apply { showError() }
-            targetAmount == null || targetAmount <= 0 -> targetAmountView.apply {
-                showError(getString(R.string.portal_amount_must_be_greater_than_zero))
-            }
             selectedFrequency == null -> frequencyView.apply { showError() }
             eachAmountView.getText().isBlank() -> eachAmountView.apply { showError() }
-            eachAmount == null || eachAmount <= 0 -> eachAmountView.apply {
-                showError(getString(R.string.portal_amount_must_be_greater_than_zero))
-            }
-            eachAmount > targetAmount -> eachAmountView.apply {
-                showError(getString(R.string.portal_each_amount_exceeds_target))
+            targetAmount != null && eachAmount != null && eachAmount > targetAmount -> {
+                eachAmountView.apply {
+                    showError(getString(R.string.portal_each_amount_exceeds_target))
+                }
             }
             else -> null
         }
@@ -165,9 +162,11 @@ class AddPlanActivity : BaseActivity<SidepageAddPlanActivityBinding>() {
         return true
     }
 
-    private fun String.toPlanAmountOrNull() = trim()
-        .replace(",", "")
-        .toIntOrNull()
+    private fun String.toAmount() = BigDecimal(trim().replace(",", ""))
+
+    private fun String.toAmountOrNull() = runCatching {
+        toAmount()
+    }.getOrNull()
 
     private fun scrollToInvalidView(view: View) = with(binding) {
         view.requestFocus()

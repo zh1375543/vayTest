@@ -36,7 +36,7 @@ object MainNavigator {
 
     internal fun resolveDestination(): MainDestination {
         if (!isLogin) return MainDestination.PORTAL
-        return if (activityUrl.isNotBlank()) MainDestination.PORTAL else MainDestination.MAIN
+        return if (activityUrl.isNotBlank()) MainDestination.MAIN else MainDestination.PORTAL
     }
 }
 

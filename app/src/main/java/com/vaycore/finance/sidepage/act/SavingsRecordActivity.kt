@@ -67,6 +67,7 @@ class SavingsRecordActivity : BaseActivity<SidepageSavingsRecordActivityBinding>
     private var photoDialog: PhotoManagerDialog? = null
     private var currentLatitude: Double? = null
     private var currentLongitude: Double? = null
+    private var currentLocationText: String? = null
     private val recordPhotoAdapter by lazy {
         RecordPhotoAdapter(onPhotoClick = { showPhotoManagerDialog() })
     }
@@ -252,13 +253,13 @@ class SavingsRecordActivity : BaseActivity<SidepageSavingsRecordActivityBinding>
 
         val request = SavePlanRequest(
             id = planId.toLong(),
-            amount = amount.toDouble(),
+            amount = amount,
             remark = etNotes.text?.toString()?.trim()?.takeIf(String::isNotBlank),
             imageUrls = selectedPhotos
                 .mapNotNull(uploadedPhotoUrls::get)
                 .joinToString(",")
                 .takeIf(String::isNotBlank),
-            locationText = locationView.getText().trim().takeIf(String::isNotBlank),
+            locationText = currentLocationText,
             latitude = currentLatitude,
             longitude = currentLongitude,
         )
@@ -315,17 +316,18 @@ class SavingsRecordActivity : BaseActivity<SidepageSavingsRecordActivityBinding>
 
     private fun loadCurrentLocation() {
         lifecycleScope.launch {
-            val location = LocationInfoHelper.getLocation()
-            if (BuildConfig.DEBUG) {
-                Log.d(
-                    LOCATION_LOG_TAG,
-                    "location=$location",
+            val info = LocationInfoHelper.getLocationInfo()
+            val location = info.first ?: return@launch
+            val address = info.second?.getAddressLine(0)
+            val locationText = address?.takeIf(String::isNotBlank) ?: run {
+                String.format(
+                    Locale.ENGLISH,
+                    "%.6f, %.6f",
+                    location.latitude,
+                    location.longitude,
                 )
             }
-            val locationText = location?.let {
-                String.format(Locale.ENGLISH, "%.6f, %.6f", it.latitude, it.longitude)
-            }
-                ?: return@launch
+            currentLocationText = locationText
             currentLatitude = location.latitude
             currentLongitude = location.longitude
             binding.locationView.setText(locationText)

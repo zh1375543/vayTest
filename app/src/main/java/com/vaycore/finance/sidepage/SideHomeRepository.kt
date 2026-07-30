@@ -13,6 +13,8 @@ import com.vaycore.finance.model.side.PlanDetailResponse
 import com.vaycore.finance.model.side.PlanHomeResponse
 import com.vaycore.finance.model.side.PlanListRequest
 import com.vaycore.finance.model.side.PlanListResponse
+import com.vaycore.finance.model.side.RecordListRequest
+import com.vaycore.finance.model.side.RecordListResponse
 import com.vaycore.finance.model.side.SavePlanRequest
 import com.vaycore.finance.model.side.SavePlanResponse
 import com.vaycore.finance.model.side.SavingsReportResponse
@@ -58,6 +60,20 @@ class SideHomeRepository(
             PlanCalendarRequest(
                 year = year,
                 month = month,
+            ),
+        ).dataOrThrow()
+    }
+
+    suspend fun getRecordList(
+        planId: Int,
+        startTime: String,
+        endTime: String,
+    ): RecordListResponse? {
+        return api.getRecordList(
+            RecordListRequest(
+                planId = planId,
+                startTime = startTime,
+                endTime = endTime,
             ),
         ).dataOrThrow()
     }
