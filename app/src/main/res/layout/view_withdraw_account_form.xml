@@ -141,7 +141,7 @@
                 app:errorText="@string/please_choose_wallet"
                 app:formType="select"
                 app:hintText="@string/please_choose"
-                app:titleText="@string/first_name" />
+                app:titleText="@string/e_wallet" />
 
             <com.vaycore.finance.ui.views.FormItemView
                 android:id="@+id/walletAccountView"

@@ -3,10 +3,15 @@ package com.vaycore.finance.util
 import android.Manifest
 import android.app.Activity
 import android.content.Context
-import com.hjq.permissions.XXPermissions
-import com.hjq.permissions.permission.PermissionLists
-import com.hjq.permissions.permission.base.IPermission
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
+import android.provider.Settings
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.vaycore.finance.R
+import com.vaycore.finance.base.BaseActivity
 import com.vaycore.finance.ui.showConfirmDialog
 
 enum class PermissionScenario {
@@ -17,30 +22,36 @@ enum class PermissionScenario {
 /** Owns permission scenarios, requests, denial handling, and settings navigation. */
 object PermissionCoordinator {
 
-    fun permissionsFor(scenario: PermissionScenario): Array<IPermission> = when (scenario) {
+    private const val REQUEST_HISTORY = "runtime_permission_history"
+
+    fun permissionsFor(scenario: PermissionScenario): Array<String> = when (scenario) {
         PermissionScenario.ONBOARDING -> arrayOf(
-            PermissionLists.getAccessCoarseLocationPermission(),
-            PermissionLists.getReadPhoneStatePermission(),
-            PermissionLists.getPostNotificationsPermission(),
-            PermissionLists.getReadSmsPermission(),
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.POST_NOTIFICATIONS,
+            Manifest.permission.READ_SMS,
         )
 
         PermissionScenario.DEVICE_RISK -> arrayOf(
-            PermissionLists.getAccessCoarseLocationPermission(),
-            PermissionLists.getReadPhoneStatePermission(),
-            PermissionLists.getReadSmsPermission(),
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.READ_SMS,
         )
     }
 
     fun hasAll(context: Context, scenario: PermissionScenario): Boolean =
-        XXPermissions.isGrantedPermissions(context, permissionsFor(scenario))
+        permissionsFor(scenario).all { hasPermission(context, it) }
+
+    fun hasPermission(context: Context, permission: String): Boolean =
+        !isRuntimePermissionSupported(permission) ||
+            ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED
 
     fun request(
-        activity: Activity,
+        activity: BaseActivity<*>,
         scenario: PermissionScenario,
-        onDenied: (isPermanentlyDenied: Boolean, permissions: List<IPermission?>) -> Unit = { _, _ -> },
+        onDenied: (isPermanentlyDenied: Boolean, permissions: List<String>) -> Unit = { _, _ -> },
         showSettingsGuide: Boolean = true,
-        onGranted: (permissions: List<IPermission?>) -> Unit,
+        onGranted: (permissions: List<String>) -> Unit,
     ) = request(
         activity = activity,
         permissions = permissionsFor(scenario),
@@ -50,25 +61,41 @@ object PermissionCoordinator {
     )
 
     fun request(
-        activity: Activity,
-        permissions: Array<IPermission>,
-        onDenied: (isPermanentlyDenied: Boolean, permissions: List<IPermission?>) -> Unit = { _, _ -> },
+        activity: BaseActivity<*>,
+        permissions: Array<String>,
+        onDenied: (isPermanentlyDenied: Boolean, permissions: List<String>) -> Unit = { _, _ -> },
         showSettingsGuide: Boolean = true,
-        onGranted: (permissions: List<IPermission?>) -> Unit,
+        onGranted: (permissions: List<String>) -> Unit,
     ) {
-        XXPermissions.with(activity)
-            .unchecked()
-            .permissions(permissions)
-            .request { grantedPermissions, deniedPermissions ->
-                if (deniedPermissions.isEmpty()) {
-                    onGranted(grantedPermissions)
-                    return@request
-                }
+        val requestedPermissions = permissions
+            .filter(::isRuntimePermissionSupported)
+            .distinct()
+        val deniedBeforeRequest = requestedPermissions.filterNot { hasPermission(activity, it) }
+        if (deniedBeforeRequest.isEmpty()) {
+            onGranted(requestedPermissions)
+            return
+        }
 
-                val isPermanentlyDenied = XXPermissions.isDoNotAskAgainPermissions(activity, deniedPermissions)
-                onDenied(isPermanentlyDenied, deniedPermissions)
-                if (showSettingsGuide) showSettingsGuide(activity, deniedPermissions)
+        val history = activity.getSharedPreferences(REQUEST_HISTORY, Context.MODE_PRIVATE)
+        val previouslyRequested = deniedBeforeRequest.associateWith { history.getBoolean(it, false) }
+        history.edit().apply {
+            deniedBeforeRequest.forEach { putBoolean(it, true) }
+        }.apply()
+
+        activity.launchRuntimePermissions(deniedBeforeRequest.toTypedArray()) { result ->
+            val deniedPermissions = deniedBeforeRequest.filter { result[it] != true }
+            if (deniedPermissions.isEmpty()) {
+                onGranted(requestedPermissions)
+                return@launchRuntimePermissions
             }
+
+            val isPermanentlyDenied = deniedPermissions.any { permission ->
+                previouslyRequested[permission] == true &&
+                    !ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)
+            }
+            onDenied(isPermanentlyDenied, deniedPermissions)
+            if (showSettingsGuide) showSettingsGuide(activity, deniedPermissions)
+        }
     }
 
     fun permissionLabel(context: Context, permissionName: String?): String = when (permissionName) {
@@ -81,12 +108,26 @@ object PermissionCoordinator {
         else -> ""
     }
 
-    fun openSystemSettings(activity: Activity, permissions: List<IPermission?>) {
-        XXPermissions.startPermissionActivity(activity, permissions)
+    fun openSystemSettings(activity: Activity, permissions: List<String>) {
+        val intent = if (
+            permissions.size == 1 &&
+            permissions.first() == Manifest.permission.POST_NOTIFICATIONS &&
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
+        ) {
+            Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).apply {
+                putExtra(Settings.EXTRA_APP_PACKAGE, activity.packageName)
+            }
+        } else {
+            Intent(
+                Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                Uri.fromParts("package", activity.packageName, null),
+            )
+        }
+        activity.startActivity(intent)
     }
 
-    private fun showSettingsGuide(activity: Activity, deniedPermissions: List<IPermission?>) {
-        val labels = deniedPermissions.joinToString { permissionLabel(activity, it?.permissionName) }
+    private fun showSettingsGuide(activity: Activity, deniedPermissions: List<String>) {
+        val labels = deniedPermissions.joinToString { permissionLabel(activity, it) }
         activity.showConfirmDialog(
             title = String.format(activity.getString(R.string.dialog_permission_title), labels),
             desc = "",
@@ -94,4 +135,8 @@ object PermissionCoordinator {
             openSystemSettings(activity, deniedPermissions)
         }
     }
+
+    private fun isRuntimePermissionSupported(permission: String): Boolean =
+        permission != Manifest.permission.POST_NOTIFICATIONS ||
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
 }

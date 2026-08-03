@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -40,12 +41,31 @@ import java.util.Locale
 
 abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
 
+    private var permissionResultCallback: ((Map<String, Boolean>) -> Unit)? = null
+    private val permissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions(),
+    ) { result ->
+        val callback = permissionResultCallback
+        permissionResultCallback = null
+        callback?.invoke(result)
+    }
+
     private val loadingDialog by lazy { createLoadingDialog() }
 
     private val updateDialog by lazy { createVersionUpdateDialog() }
 
     protected abstract val binding: VB
     protected open val adjustForImeInsets: Boolean = true
+
+    /** Launches the platform runtime-permission dialog for PermissionCoordinator. */
+    fun launchRuntimePermissions(
+        permissions: Array<String>,
+        onResult: (Map<String, Boolean>) -> Unit,
+    ) {
+        check(permissionResultCallback == null) { "A permission request is already in progress" }
+        permissionResultCallback = onResult
+        permissionLauncher.launch(permissions)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

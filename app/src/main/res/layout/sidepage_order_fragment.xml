@@ -29,7 +29,6 @@
             android:text="@string/portal_plan_status_active"
             android:textColor="@color/text_tertiary"
             android:textSize="@dimen/sp_16"
-            android:textStyle="bold"
             app:radius="@dimen/dp_20"
             app:selectedColor="@color/brand_primary"
             app:textColorSelected="@color/text_inverse" />

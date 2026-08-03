@@ -1,5 +1,6 @@
 package com.vaycore.finance.identity
 
+import android.Manifest
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -10,7 +11,6 @@ import androidx.activity.viewModels
 import androidx.core.content.FileProvider
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
-import com.hjq.permissions.permission.PermissionLists
 import com.liveness.dflivenesslibrary.liveness.DFSilentLivenessActivity
 import com.vaycore.finance.R
 import com.vaycore.finance.app.App
@@ -216,7 +216,7 @@ class IdentityVerificationActivity : BaseActivity<ActivityIdentityVerificationBi
             )
             PermissionCoordinator.request(
                 this@IdentityVerificationActivity,
-                arrayOf(PermissionLists.getCameraPermission()),
+                arrayOf(Manifest.permission.CAMERA),
             ) {
                 trackEvent(KYC_AADHAAR_FRONT_CLICK)
                 val outputFile = File(cacheDir, "camera_temp_${System.currentTimeMillis()}.jpg")
@@ -237,7 +237,7 @@ class IdentityVerificationActivity : BaseActivity<ActivityIdentityVerificationBi
             )
             PermissionCoordinator.request(
                 this@IdentityVerificationActivity,
-                arrayOf(PermissionLists.getCameraPermission()),
+                arrayOf(Manifest.permission.CAMERA),
             ) {
                 when (kycType) {
                     1 -> {
@@ -287,7 +287,7 @@ class IdentityVerificationActivity : BaseActivity<ActivityIdentityVerificationBi
             )
             PermissionCoordinator.request(
                 this@IdentityVerificationActivity,
-                arrayOf(PermissionLists.getCameraPermission()),
+                arrayOf(Manifest.permission.CAMERA),
             ) {
                 trackEvent(KYC_AADHAAR_BACK_CLICK)
                 val outputFile = File(cacheDir, "camera_temp_${System.currentTimeMillis()}.jpg")

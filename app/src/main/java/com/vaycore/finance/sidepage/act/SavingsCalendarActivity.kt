@@ -38,7 +38,7 @@ class SavingsCalendarActivity : BaseActivity<SidepageSavingsCalendarActivityBind
     private val today = Calendar.getInstance()
     private var selectedYear = today.get(Calendar.YEAR)
     private var selectedMonth = today.get(Calendar.MONTH) + 1
-    private var selectedDate = today.toApiDate()
+    private var selectedDate: String? = today.toApiDate()
 
     override fun initView() = with(binding) {
         applyTopInset(root)
@@ -48,7 +48,9 @@ class SavingsCalendarActivity : BaseActivity<SidepageSavingsCalendarActivityBind
             showYearMonthPickerDialog(selectedYear, selectedMonth) { year, month ->
                 selectedYear = year
                 selectedMonth = month
+                selectedDate = null
                 loadPlanCalendar()
+                loadRecordsForSelectedMonth()
             }
         }
         rvCalendar.apply {
@@ -99,7 +101,7 @@ class SavingsCalendarActivity : BaseActivity<SidepageSavingsCalendarActivityBind
             return
         }
         loadPlanCalendar()
-        loadRecordsForDate(selectedDate)
+        loadRecordsForSelectedMonth()
     }
 
     private fun loadPlanCalendar() {
@@ -118,10 +120,34 @@ class SavingsCalendarActivity : BaseActivity<SidepageSavingsCalendarActivityBind
     private fun loadRecordsForDate(date: String) {
         val apiDate = date.toApiDate() ?: return
         selectedDate = apiDate
+        loadRecords(apiDate, apiDate)
+    }
+
+    private fun loadRecordsForSelectedMonth() {
+        val now = Calendar.getInstance()
+        val isCurrentMonth = selectedYear == now.get(Calendar.YEAR) &&
+            selectedMonth == now.get(Calendar.MONTH) + 1
+
+        if (isCurrentMonth) {
+            loadRecordsForDate(now.toApiDate())
+            return
+        }
+
+        selectedDate = null
+        val month = Calendar.getInstance().apply {
+            clear()
+            set(selectedYear, selectedMonth - 1, 1)
+        }
+        val startDate = month.toApiDate()
+        month.set(Calendar.DAY_OF_MONTH, month.getActualMaximum(Calendar.DAY_OF_MONTH))
+        loadRecords(startDate, month.toApiDate())
+    }
+
+    private fun loadRecords(startDate: String, endDate: String) {
         viewModel.getRecordList(
             planId = planId,
-            startTime = "$apiDate 00:00:00",
-            endTime = "$apiDate 23:59:59",
+            startTime = "$startDate 00:00:00",
+            endTime = "$endDate 23:59:59",
         )
     }
 
@@ -170,16 +196,25 @@ class SavingsCalendarActivity : BaseActivity<SidepageSavingsCalendarActivityBind
             }
 
             val calendarDay = if (isCurrentMonth) currentMonthDays[day] else null
+            val date = if (isCurrentMonth) month.toApiDate(day) else null
             CalendarDayItem(
                 day = day,
-                date = calendarDay?.date.toApiDate(),
+                date = date,
                 isCurrentMonth = isCurrentMonth,
-                isSelected = calendarDay?.date.toApiDate() == selectedDate,
+                isSelected = date != null && date == selectedDate,
                 hasSavingRecord = calendarDay?.saveAmount?.signum() == 1,
                 hasPayoutRecord = calendarDay?.withdrawAmount?.signum() == 1,
             )
         }
     }
+
+    private fun SavingsMonthItem.toApiDate(day: Int): String = String.format(
+        Locale.US,
+        "%04d-%02d-%02d",
+        year,
+        month,
+        day,
+    )
 
     private fun RecordItem.toTransactionItem() = PlanTransactionItem(
         id = id,

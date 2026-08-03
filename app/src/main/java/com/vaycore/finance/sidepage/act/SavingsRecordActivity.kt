@@ -1,5 +1,6 @@
 package com.vaycore.finance.sidepage.act
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -16,7 +17,6 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import com.hjq.permissions.permission.PermissionLists
 import com.vaycore.finance.BuildConfig
 import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseActivity
@@ -156,7 +156,7 @@ class SavingsRecordActivity : BaseActivity<SidepageSavingsRecordActivityBinding>
     private fun requestRecordPhotoCamera() {
         PermissionCoordinator.request(
             activity = this@SavingsRecordActivity,
-            permissions = arrayOf(PermissionLists.getCameraPermission()),
+            permissions = arrayOf(Manifest.permission.CAMERA),
             showSettingsGuide = false,
         ) {
             val outputFile = File(cacheDir, "saving_record_${System.currentTimeMillis()}.jpg")
@@ -294,7 +294,7 @@ class SavingsRecordActivity : BaseActivity<SidepageSavingsRecordActivityBinding>
     private fun requestLocationPermission() {
         PermissionCoordinator.request(
             activity = this@SavingsRecordActivity,
-            permissions = arrayOf(PermissionLists.getAccessCoarseLocationPermission()),
+            permissions = arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
             onDenied = { isNever, permissions ->
                 if (isNever) {
                     showConfirmDialog(

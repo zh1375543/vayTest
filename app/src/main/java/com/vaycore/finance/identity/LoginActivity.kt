@@ -1,5 +1,6 @@
 package com.vaycore.finance.identity
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -10,8 +11,6 @@ import androidx.activity.viewModels
 import androidx.core.widget.doAfterTextChanged
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
-import com.hjq.permissions.XXPermissions
-import com.hjq.permissions.permission.PermissionLists
 import com.vaycore.finance.app.App
 import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseActivity
@@ -44,6 +43,7 @@ import com.vaycore.finance.sidepage.PortalActivity
 import com.vaycore.finance.sidepage.act.FirstSavingsPlanActivity
 import com.vaycore.finance.home.viewmodel.GuestDashboardViewModel
 import com.vaycore.finance.util.LOGIN_VIA_OTP
+import com.vaycore.finance.util.PermissionCoordinator
 import com.vaycore.finance.util.SPUtil
 import com.vaycore.finance.util.context.resolveColorCompat
 import com.vaycore.finance.util.countdownTimer
@@ -243,9 +243,9 @@ class LoginActivity : BaseActivity<ActivitySignInBinding>() {
             )
         }
         if (location.first == 0.0
-            && XXPermissions.isGrantedPermissions(
+            && PermissionCoordinator.hasPermission(
                 this@LoginActivity,
-                listOf(PermissionLists.getAccessCoarseLocationPermission())
+                Manifest.permission.ACCESS_COARSE_LOCATION,
             )
         ) {
             locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)?.let {

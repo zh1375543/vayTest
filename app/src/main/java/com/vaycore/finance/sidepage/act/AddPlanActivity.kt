@@ -1,5 +1,6 @@
 package com.vaycore.finance.sidepage.act
 
+import android.Manifest
 import android.content.Intent
 import android.net.Uri
 import android.provider.MediaStore
@@ -11,7 +12,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
-import com.hjq.permissions.permission.PermissionLists
 import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseActivity
 import com.vaycore.finance.model.side.CreatePlanRequest
@@ -229,7 +229,7 @@ class AddPlanActivity : BaseActivity<SidepageAddPlanActivityBinding>() {
     private fun requestCameraPermission() {
         PermissionCoordinator.request(
             activity = this@AddPlanActivity,
-            permissions = arrayOf(PermissionLists.getCameraPermission()),
+            permissions = arrayOf(Manifest.permission.CAMERA),
         ) {
             openPlanIconCamera()
         }

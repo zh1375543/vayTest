@@ -303,8 +303,7 @@ No personal SMS messages will be accessed, read, or collected.</string>
     <string name="please_select">Please select</string>
     <string name="select_withdraw_method">Select withdraw method</string>
     <string name="select_e_wallet">Select E-Wallet</string>
-    <string name="gcash">GCash</string>
-    <string name="maya">maya</string>
+    <string name="gcash">Gcash</string>
     <string name="more">more</string>
     <string name="higher_credit_limit">Higher credit limit</string>
     <string name="all_major_banks">All major banks in the Philippines</string>

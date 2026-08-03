@@ -14,85 +14,116 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.core.content.ContextCompat
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.Priority
+import com.google.android.gms.tasks.CancellationTokenSource
 import com.vaycore.finance.app.App
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.suspendCancellableCoroutine
-import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeoutOrNull
 import java.util.Locale
+import java.util.concurrent.Executors
 import kotlin.coroutines.resume
+import kotlin.time.Duration.Companion.seconds
 
 object LocationInfoHelper {
 
-    // ── coarse location permission check only ──────────────────────────
+    private val fusedCacheTimeout = 2.seconds
+    private val fusedCurrentTimeout = 10.seconds
+    private val platformCurrentTimeout = 10.seconds
+    private const val ADDRESS_TIMEOUT_MS = 3_000L
+    private val totalTimeout = 15.seconds
+    private val geocoderExecutor = Executors.newCachedThreadPool()
+
     private fun hasCoarsePermission() =
         ContextCompat.checkSelfPermission(
             App.appContext, Manifest.permission.ACCESS_COARSE_LOCATION
         ) == PackageManager.PERMISSION_GRANTED
 
-    /**
-     * Only allow COARSE-related providers (no GPS)
-     * fused > network > passive, priority determined by order
-     */
-    private fun coarseProviders(lm: LocationManager): List<String> {
-        val enabled = runCatching { lm.getProviders(true) }.getOrDefault(emptyList())
-        return listOf(
-            "fused",                            // Google Play fused location, best accuracy
-            LocationManager.NETWORK_PROVIDER,   // Wi-Fi / cell tower
-            LocationManager.PASSIVE_PROVIDER    // fallback: reuse other apps' location results
-        ).filter { enabled.contains(it) }
+    @SuppressLint("MissingPermission")
+    suspend fun getLocationInfo(): Pair<Location?, Address?> =
+        withTimeoutOrNull(totalTimeout) {
+            if (!hasCoarsePermission()) return@withTimeoutOrNull null to null
+
+            val lm = App.appContext.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+            val location = getFusedCache()
+                ?: getManagerCache(lm)
+                ?: getFusedCurrentLocation()
+                ?: getPlatformCurrentLocation(lm)
+
+            location to location?.let { getAddress(it.latitude, it.longitude) }
+        } ?: (null to null)
+
+    @SuppressLint("MissingPermission")
+    private suspend fun getFusedCache(): Location? =
+        withTimeoutOrNull(fusedCacheTimeout) {
+            val client = LocationServices.getFusedLocationProviderClient(App.appContext)
+            suspendCancellableCoroutine<Location?> { cont ->
+                client.lastLocation
+                    .addOnSuccessListener { location ->
+                        if (cont.isActive) cont.resume(location)
+                    }
+                    .addOnFailureListener {
+                        if (cont.isActive) cont.resume(null)
+                    }
+            }
+        }
+
+    @SuppressLint("MissingPermission")
+    private suspend fun getFusedCurrentLocation(): Location? =
+        withTimeoutOrNull(fusedCurrentTimeout) {
+            val cancellationTokenSource = CancellationTokenSource()
+            val client = LocationServices.getFusedLocationProviderClient(App.appContext)
+            suspendCancellableCoroutine { cont ->
+                client.getCurrentLocation(
+                    Priority.PRIORITY_BALANCED_POWER_ACCURACY,
+                    cancellationTokenSource.token,
+                )
+                    .addOnSuccessListener { location ->
+                        if (cont.isActive) cont.resume(location)
+                    }
+                    .addOnFailureListener {
+                        if (cont.isActive) cont.resume(null)
+                    }
+                    .addOnCanceledListener {
+                        if (cont.isActive) cont.resume(null)
+                    }
+                cont.invokeOnCancellation { cancellationTokenSource.cancel() }
+            }
+        }
+
+    @SuppressLint("MissingPermission")
+    private fun getManagerCache(lm: LocationManager): Location? {
+        return listOf(LocationManager.NETWORK_PROVIDER, LocationManager.PASSIVE_PROVIDER)
+            .mapNotNull { p -> runCatching { lm.getLastKnownLocation(p) }.getOrNull() }
+            .maxByOrNull { it.time }
     }
 
-    // ── public entry ─────────────────────────────────────────────────
+    private fun coarseProviders(lm: LocationManager): List<String> {
+        val enabled = runCatching { lm.getProviders(true) }.getOrDefault(emptyList())
+        return listOf(LocationManager.NETWORK_PROVIDER, LocationManager.PASSIVE_PROVIDER)
+            .filter { enabled.contains(it) }
+    }
+
     @SuppressLint("MissingPermission")
-    suspend fun getLocation(): Location? = withContext(Dispatchers.IO) {
-        if (!hasCoarsePermission()) return@withContext null
-
-        val lm = App.appContext
-            .getSystemService(Context.LOCATION_SERVICE) as LocationManager
+    private suspend fun getPlatformCurrentLocation(lm: LocationManager): Location? {
         val providers = coarseProviders(lm)
-        if (providers.isEmpty()) return@withContext null
-
-        // ① return cached location first, avoid unnecessary listening
-        getCachedLocation(lm, providers)?.let { return@withContext it }
-
-        // ② no cache, request all providers concurrently with 10s timeout
-        withTimeoutOrNull(10_000L) {
+        if (providers.isEmpty()) return null
+        return withTimeoutOrNull(platformCurrentTimeout) {
             requestFirstResult(lm, providers)
         }
     }
 
-    // ── cache: pick the most recent ──────────────────────────────────
-    @SuppressLint("MissingPermission")
-    private fun getCachedLocation(lm: LocationManager, providers: List<String>): Location? =
-        providers
-            .mapNotNull { runCatching { lm.getLastKnownLocation(it) }.getOrNull() }
-            .maxByOrNull { it.time }
-
-    /**
-     * Listen to all providers concurrently; first non-null result wins, rest cancelled.
-     *
-     * Key improvements:
-     * - Each provider has an 8s built-in timeout (Handler.postDelayed) to prevent
-     *   hanging when neither onLocationChanged nor onProviderDisabled is called.
-     * - Uses `async + awaitFirst` instead of the flawed select loop.
-     * - Uses requestLocationUpdates (replaces deprecated requestSingleUpdate).
-     */
     @SuppressLint("MissingPermission")
     private suspend fun requestFirstResult(
         lm: LocationManager,
-        providers: List<String>
+        providers: List<String>,
     ): Location? = coroutineScope {
-
-        val mainHandler = Handler(Looper.getMainLooper())
-        val PROVIDER_TIMEOUT_MS = 8_000L
-
+        val handler = Handler(Looper.getMainLooper())
         val deferred = providers.map { provider ->
             async {
                 suspendCancellableCoroutine { cont ->
-
                     val listener = object : LocationListener {
                         override fun onLocationChanged(loc: Location) {
                             if (cont.isActive) cont.resume(loc)
@@ -101,79 +132,67 @@ object LocationInfoHelper {
                         override fun onStatusChanged(p: String?, s: Int, e: Bundle?) {}
                         override fun onProviderEnabled(p: String) {}
                         override fun onProviderDisabled(p: String) {
-                            // fail fast when provider is disabled, don't wait for timeout
                             if (cont.isActive) cont.resume(null)
                             runCatching { lm.removeUpdates(this) }
                         }
                     }
-
-                    // provider built-in timeout: end with null after 8s if no result
-                    val timeoutRunnable = Runnable {
+                    val timeout = Runnable {
                         if (cont.isActive) cont.resume(null)
                         runCatching { lm.removeUpdates(listener) }
                     }
-
-                    mainHandler.post {
+                    handler.post {
                         runCatching {
-                            lm.requestLocationUpdates(
-                                provider,
-                                0L, 0f,
-                                listener,
-                                Looper.getMainLooper()
-                            )
-                            mainHandler.postDelayed(timeoutRunnable, PROVIDER_TIMEOUT_MS)
+                            lm.requestLocationUpdates(provider, 0L, 0f, listener, Looper.getMainLooper())
+                            handler.postDelayed(timeout, 8_000L)
                         }.onFailure {
-                            mainHandler.removeCallbacks(timeoutRunnable)
+                            handler.removeCallbacks(timeout)
                             if (cont.isActive) cont.resume(null)
                         }
                     }
-
                     cont.invokeOnCancellation {
-                        mainHandler.removeCallbacks(timeoutRunnable)
+                        handler.removeCallbacks(timeout)
                         runCatching { lm.removeUpdates(listener) }
                     }
                 }
             }
         }
-
-        // await in provider priority order:
-        // fused first, cancel rest on first non-null; return null if all null
         var result: Location? = null
         for (d in deferred) {
             val loc = d.await()
-            if (loc != null) {
-                result = loc
-                break
-            }
+            if (loc != null) { result = loc; break }
         }
-        // ensure all pending requests are cancelled
         deferred.forEach { it.cancel() }
         result
     }
 
-    // ── address resolution ───────────────────────────────────────────
-    suspend fun getAddress(latitude: Double, longitude: Double): Address? =
-        withContext(Dispatchers.IO) {
-            runCatching {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                    suspendCancellableCoroutine { cont ->
-                        Geocoder(App.appContext, Locale.getDefault())
-                            .getFromLocation(latitude, longitude, 1) { results ->
-                                cont.resume(results.firstOrNull())
-                            }
-                    }
-                } else {
-                    @Suppress("DEPRECATION")
-                    Geocoder(App.appContext, Locale.getDefault())
-                        .getFromLocation(latitude, longitude, 1)
-                        ?.firstOrNull()
-                }
-            }.getOrNull()
-        }
+    private suspend fun getAddress(latitude: Double, longitude: Double): Address? =
+        suspendCancellableCoroutine { cont ->
+            val handler = Handler(Looper.getMainLooper())
+            val timeout = Runnable {
+                if (cont.isActive) cont.resume(null)
+            }
+            val complete: (Address?) -> Unit = { address ->
+                handler.removeCallbacks(timeout)
+                if (cont.isActive) cont.resume(address)
+            }
 
-    suspend fun getLocationInfo(): Pair<Location?, Address?> {
-        val location = getLocation() ?: return null to null
-        val address = getAddress(location.latitude, location.longitude)
-        return location to address
-    }
+            handler.postDelayed(timeout, ADDRESS_TIMEOUT_MS)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                runCatching {
+                    Geocoder(App.appContext, Locale.getDefault())
+                        .getFromLocation(latitude, longitude, 1) { complete(it.firstOrNull()) }
+                }.onFailure { complete(null) }
+            } else {
+                geocoderExecutor.execute {
+                    val address = runCatching {
+                        @Suppress("DEPRECATION")
+                        Geocoder(App.appContext, Locale.getDefault())
+                            .getFromLocation(latitude, longitude, 1)
+                            ?.firstOrNull()
+                    }.getOrNull()
+                    complete(address)
+                }
+            }
+            cont.invokeOnCancellation { handler.removeCallbacks(timeout) }
+        }
 }

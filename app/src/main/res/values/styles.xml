@@ -161,7 +161,7 @@
         <item name="android:paddingEnd">@dimen/dp_15</item>
         <item name="android:textColor">@color/text_secondary</item>
         <item name="android:textSize">@dimen/sp_14</item>
-        <item name="drawableStartSelected">@mipmap/ic_due_select</item>
+        <item name="drawableEndSelected">@mipmap/ic_due_select</item>
         <item name="radius">@dimen/dp_24</item>
         <item name="solidColor">@color/surface_primary</item>
         <item name="textColorSelected">@color/text_primary</item>

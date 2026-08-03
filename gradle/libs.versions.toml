@@ -1,5 +1,5 @@
 [versions]
-agp = "9.1.0"
+agp = "9.2.1"
 coil = "3.4.0"
 crashreport = "4.1.9.3"
 kotlin = "2.3.21"
@@ -13,7 +13,6 @@ kotlinx-coroutines-core = "1.11.0"
 gson = "2.14.0"
 lifecycle-viewmodel-ktx = "2.10.0"
 retrofit = "3.0.0"
-githubXxpermissions = "28.2"
 material = "1.14.0"
 okhttp = "5.3.2"
 identifier = "18.3.0"
@@ -24,6 +23,7 @@ firebaseBom = "34.14.0"
 review= "2.0.2"
 playServicesAuth = "21.6.0"
 playServicesAuthApiPhone = "18.3.0"
+playServicesLocation = "21.3.0"
 
 
 
@@ -46,7 +46,6 @@ gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines-core" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
-github-xxpermissions = { module = "com.github.getActivity:XXPermissions", version.ref = "githubXxpermissions" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
 logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
@@ -61,6 +60,7 @@ firebase-appcheck-playintegrity = { module = "com.google.firebase:firebase-appch
 review = { module = "com.google.android.play:review", version.ref = "review" }
 gms-play-services-auth-api-phone = { module = "com.google.android.gms:play-services-auth-api-phone", version.ref = "playServicesAuthApiPhone" }
 play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
+play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
 
 
 appsflyer = { group = "com.appsflyer", name = "af-android-sdk", version.ref = "appsflyer" }
@@ -69,4 +69,3 @@ installreferrer = { group = "com.android.installreferrer", name = "installreferr
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-

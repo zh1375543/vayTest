@@ -121,10 +121,9 @@ dependencies {
     implementation(libs.androidx.lifecycle.process)
 
     // Utility libraries
-    implementation(libs.github.xxpermissions)
-    implementation(libs.coil)
-    implementation(libs.coil.network.okhttp)
-//    implementation(libs.glide)
+//    implementation(libs.coil)
+//    implementation(libs.coil.network.okhttp)
+    implementation(libs.glide)
 
     // Networking
     implementation(libs.okhttp)
@@ -152,4 +151,5 @@ dependencies {
     implementation(libs.review)
     implementation(libs.gms.play.services.auth.api.phone)
     implementation(libs.play.services.auth)
+    implementation(libs.play.services.location)
 }

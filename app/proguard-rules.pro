@@ -142,10 +142,6 @@
 -keep public class com.android.installreferrer.** { *; }
 -dontwarn com.android.installreferrer
 
-# HJQ Permissions
--keepclassmembers interface com.hjq.permissions.start.IStartActivityDelegate { <methods>; }
--keepclassmembers interface com.hjq.permissions.fragment.IFragmentMethodNative { <methods>; }
-
 # DfSDK
 -keep class com.dfsdk.** { *; }
 -dontwarn com.dfsdk.**

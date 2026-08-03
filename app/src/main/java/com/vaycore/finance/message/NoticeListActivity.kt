@@ -1,9 +1,8 @@
 package com.vaycore.finance.message
 
+import android.Manifest
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
-import com.hjq.permissions.XXPermissions
-import com.hjq.permissions.permission.PermissionLists
 import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseActivity
 import com.vaycore.finance.databinding.ActivityNoticeListBinding
@@ -57,7 +56,7 @@ class NoticeListActivity : BaseActivity<ActivityNoticeListBinding>() {
         tvOpen.singleClick {
             PermissionCoordinator.request(
                 this@NoticeListActivity,
-                arrayOf(PermissionLists.getPostNotificationsPermission()),
+                arrayOf(Manifest.permission.POST_NOTIFICATIONS),
                 onDenied = { isPermanentlyDenied, deniedPermissions ->
                     if (isPermanentlyDenied) {
                         PermissionCoordinator.openSystemSettings(
@@ -78,9 +77,9 @@ class NoticeListActivity : BaseActivity<ActivityNoticeListBinding>() {
 
     override fun onResume() {
         super.onResume()
-        binding.noticeLayout.isVisible = !XXPermissions.isGrantedPermission(
+        binding.noticeLayout.isVisible = !PermissionCoordinator.hasPermission(
             this,
-            PermissionLists.getPostNotificationsPermission()
+            Manifest.permission.POST_NOTIFICATIONS,
         )
     }
 

@@ -525,7 +525,7 @@ class ApplicantProfileActivity :
                     vm.submitTrackingEvents(pList.map { it1 ->
                         TrackBean(
                             p = PagePrivacy,
-                            act = when (it1?.permissionName) {
+                            act = when (it1) {
                                 Manifest.permission.ACCESS_COARSE_LOCATION -> "gps"
                                 Manifest.permission.READ_PHONE_STATE -> "device"
                                 Manifest.permission.READ_SMS -> "sms"
@@ -544,7 +544,7 @@ class ApplicantProfileActivity :
                 vm.submitTrackingEvents(it.map { it1 ->
                     TrackBean(
                         p = PagePrivacy,
-                        act = when (it1?.permissionName) {
+                        act = when (it1) {
                             Manifest.permission.ACCESS_COARSE_LOCATION -> "gps"
                             Manifest.permission.READ_PHONE_STATE -> "device"
                             Manifest.permission.READ_SMS -> "sms"
@@ -553,11 +553,9 @@ class ApplicantProfileActivity :
                         result = "agree"
                     )
                 })
-                PermissionCoordinator.request(this@ApplicantProfileActivity, PermissionScenario.DEVICE_RISK) {
-                    App.Companion.appViewModel.postRiskInfo(PageInfoPersonal) { isSuccess ->
-                        if (isSuccess) {
-                            submit()
-                        }
+                App.appViewModel.postRiskInfo(PageInfoPersonal) { isSuccess ->
+                    if (isSuccess) {
+                        submit()
                     }
                 }
             }

@@ -93,19 +93,19 @@ class VerificationCenterActivity : BaseActivity<ActivityVerificationCenterBindin
         mapOf(
             "KYC" to Triple(
                 R.string.kyc_certification,
-                R.mipmap.ic_cert_kyc
+                R.mipmap.ic_kyc_cert_status
             ) { bean: UserAuthStatusResponse ->
                 bean.kycState == "30"
             },
             "ID" to Triple(
                 R.string.personal_info,
-                R.mipmap.ic_cert_personal
+                R.mipmap.ic_personal_status
             ) { bean ->
                 bean.idState == "30"
             },
             "BANK" to Triple(
                 R.string.contact_info,
-                R.mipmap.ic_cert_submit_infor
+                R.mipmap.ic_contact_status
             ) { bean ->
                 bean.bankCardState == "30"
             },

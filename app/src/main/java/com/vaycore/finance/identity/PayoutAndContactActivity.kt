@@ -75,6 +75,7 @@ class PayoutAndContactActivity : BaseActivity<ActivityPayoutAndContactBinding>()
     private var shouldShowBottomAction = false
     private var isKeyboardVisible = false
     private var selectedWithdrawMethod: WithdrawMethod? = null
+    private var shouldShowWalletPicker = false
 
     override fun initView() {
         renderBankEntryState()
@@ -106,12 +107,15 @@ class PayoutAndContactActivity : BaseActivity<ActivityPayoutAndContactBinding>()
         with(withdrawAccountForm) {
             methodSelectionView.setOnClickListener {
                 showWithdrawMethodDialog(
-                    walletAction = { accountVm.getWalletList() },
+                    walletAction = { selectDefaultWallet() },
                     bankAction = { accountVm.getPayChannelList() },
                 )
             }
             bankView.setOnClick { accountVm.getPayChannelList() }
-            walletProviderView.setOnClick { accountVm.getWalletList() }
+            walletProviderView.setOnClick {
+                shouldShowWalletPicker = true
+                accountVm.getWalletList()
+            }
             bankAccountView.getEditText().doAfterTextChanged {
                 bankAccountView.hideError()
                 if (it.toString() == confirmBankView.getText()) {
@@ -250,6 +254,11 @@ class PayoutAndContactActivity : BaseActivity<ActivityPayoutAndContactBinding>()
                         scrollView.scrollTo(0, walletProviderView.top)
                         return false
                     }
+                    if (walletBean == null) {
+                        walletProviderView.showError()
+                        scrollView.scrollTo(0, walletProviderView.top)
+                        return false
+                    }
                     if (walletAccountView.getText().isBlank()) {
                         walletAccountView.showError()
                         scrollView.scrollTo(0, walletAccountView.top)
@@ -357,6 +366,8 @@ class PayoutAndContactActivity : BaseActivity<ActivityPayoutAndContactBinding>()
 
     private fun clearWithdrawMethodSelection() = with(binding.withdrawAccountForm) {
         selectedWithdrawMethod = null
+        shouldShowWalletPicker = false
+        walletBean = null
         tvWithdrawMethodError.isVisible = false
         val arrowSize = resources.getDimensionPixelSize(R.dimen.dp_24)
         val arrow = AppCompatResources.getDrawable(this@PayoutAndContactActivity, R.mipmap.mine_right)?.apply {
@@ -465,12 +476,15 @@ class PayoutAndContactActivity : BaseActivity<ActivityPayoutAndContactBinding>()
         }
         accountVm.walletList.observe(this@PayoutAndContactActivity) {
             val walletItems = it ?: arrayListOf()
-            chooseWalletDialog(walletItems) { wallet ->
-                selectWithdrawMethod(WithdrawMethod.WALLET)
-                binding.withdrawAccountForm.walletProviderView.setText(wallet.walletName)
-                binding.withdrawAccountForm.walletProviderView.hideError()
-                walletBean = wallet
-                fillWalletAccountFromLoginPhone()
+            if (shouldShowWalletPicker) {
+                shouldShowWalletPicker = false
+                chooseWalletDialog(walletItems) { wallet ->
+                    applyWalletSelection(wallet)
+                }
+            } else if (selectedWithdrawMethod == WithdrawMethod.WALLET) {
+                walletBean = walletItems.firstOrNull {
+                    it.walletName.equals(getString(R.string.gcash), ignoreCase = true)
+                }
             }
         }
         contractResult.observe(this@PayoutAndContactActivity) {
@@ -486,6 +500,17 @@ class PayoutAndContactActivity : BaseActivity<ActivityPayoutAndContactBinding>()
                     friendView.setText(it.otherRelativesStr)
                     friendNameView.setText(it.otherName)
                     friendPhoneView.setText(it.otherMobile)
+                    additionalContactStatus = it.thirdRelatives
+                    additionalContactNameView.setText(it.thirdName)
+                    additionalContactPhoneView.setText(it.thirdMobile)
+                    it.thirdRelatives?.let { thirdRelationship ->
+                        vm.getContactEnum { options ->
+                            val relationship = options.otherRelatives?.firstOrNull {
+                                it.state == thirdRelationship
+                            }
+                            additionalContactRelationshipView.setText(relationship?.info)
+                        }
+                    }
                     withdrawAccountForm.holderView.setText(it.accountUser)
                 }
             }
@@ -511,6 +536,25 @@ class PayoutAndContactActivity : BaseActivity<ActivityPayoutAndContactBinding>()
             walletAccountView.setText(walletAccount)
             confirmWalletAccountView.setText(walletAccount)
         }
+    }
+
+    /** Shows Gcash immediately, then resolves its server-issued ID in the background. */
+    private fun selectDefaultWallet() = with(binding.withdrawAccountForm) {
+        shouldShowWalletPicker = false
+        walletBean = null
+        selectWithdrawMethod(WithdrawMethod.WALLET)
+        walletProviderView.setText(getString(R.string.gcash))
+        walletProviderView.hideError()
+        fillWalletAccountFromLoginPhone()
+        accountVm.getWalletList()
+    }
+
+    private fun applyWalletSelection(wallet: WalletResponse) = with(binding.withdrawAccountForm) {
+        selectWithdrawMethod(WithdrawMethod.WALLET)
+        walletProviderView.setText(wallet.walletName)
+        walletProviderView.hideError()
+        walletBean = wallet
+        fillWalletAccountFromLoginPhone()
     }
 
     private var contactPickTarget = ContactPickTarget.PRIMARY

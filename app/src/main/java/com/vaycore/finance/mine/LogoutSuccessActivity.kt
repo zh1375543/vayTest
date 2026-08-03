@@ -47,14 +47,7 @@ class LogoutSuccessActivity :
     }
 
     private fun handleBackPressed() {
-        logOut(false)
-        if (returnToPortal) {
-            AppStackUtil.finishActivity(AccountSettingsActivity::class.java)
-            PortalActivity.launch(this)
-        } else {
-            AppStackUtil.finishActivity(SetActivity::class.java)
-            MainActivity.launch(this)
-        }
+        logOut(true)
     }
 
     companion object {
