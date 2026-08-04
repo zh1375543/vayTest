@@ -116,11 +116,10 @@
                     android:id="@+id/idCardView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:editMaxLength="12"
-                    app:errorText="@string/please_enter_id_card"
+                    app:errorText="@string/please_enter_current_info"
                     app:formType="input"
                     app:hintText="@string/please_enter_id_card"
-                    app:inputType="number"
+                    app:inputType="text"
                     app:editable="@{!isCertified}"
                     app:titleText="@string/id_card_number" />
 

@@ -1,9 +1,9 @@
 package com.vaycore.finance.identity
 
 import android.Manifest
+import android.graphics.Rect
+import android.view.MotionEvent
 import androidx.activity.viewModels
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.core.widget.doOnTextChanged
@@ -43,6 +43,7 @@ import com.vaycore.finance.data.bean.TrackBean
 import com.vaycore.finance.databinding.ActivityApplicantProfileBinding
 import com.vaycore.finance.identity.viewmodel.AuthStatusViewModel
 import com.vaycore.finance.identity.viewmodel.PersonalInfoViewModel
+import com.vaycore.finance.ui.extension.hideKeyboard
 import com.vaycore.finance.ui.extension.resetScale
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.ui.showAddressPickerDialog
@@ -54,7 +55,6 @@ import com.vaycore.finance.util.PERSON_INFO_PAGE
 import com.vaycore.finance.util.PermissionCoordinator
 import com.vaycore.finance.util.PermissionScenario
 import com.vaycore.finance.util.isAdult
-import com.vaycore.finance.util.isIdCardValid
 import com.vaycore.finance.util.showToastMessage
 import com.vaycore.finance.util.toDmyDateString
 import com.vaycore.finance.util.toYmdDateString
@@ -76,7 +76,6 @@ class ApplicantProfileActivity :
     private val homeVm by viewModels<AuthStatusViewModel>()
     private val debounceTime = 500L  // treat as input finished after 500ms idle
     private var shouldShowBottomAction = false
-    private var isKeyboardVisible = false
 
     private var startSalaryTime: Long = 0L
     private var salaryJob: Job? = null
@@ -84,6 +83,12 @@ class ApplicantProfileActivity :
     private var nameJob: Job? = null
     private var startIDTime: Long = 0L
     private var idJob: Job? = null
+
+    override fun shouldDismissKeyboardOnOutsideTouch(ev: MotionEvent): Boolean {
+        val bottomActionBounds = Rect()
+        binding.bottomActionLayout.getGlobalVisibleRect(bottomActionBounds)
+        return !bottomActionBounds.contains(ev.rawX.toInt(), ev.rawY.toInt())
+    }
 
     override fun initView() {
         initializePersonalScreen()
@@ -94,7 +99,7 @@ class ApplicantProfileActivity :
     private fun initializePersonalScreen() = with(binding) {
         isCertified = isCert
         shouldShowBottomAction = !isCert
-        setupBottomActionKeyboardBehavior()
+        bottomActionLayout.isVisible = shouldShowBottomAction
         trackEvent(PERSON_INFO_PAGE)
         vm.submitTrackingEvent(
             TrackBean(
@@ -444,6 +449,7 @@ class ApplicantProfileActivity :
             btNext.resetScale()
         }
         btNext.singleClick {
+            btNext.hideKeyboard()
             if (lastNameView.getText().isBlank()) {
                 lastNameView.showError()
                 scrollView.scrollTo(0, lastNameView.top)
@@ -467,7 +473,7 @@ class ApplicantProfileActivity :
                 }
                 return@singleClick
             }
-            if (!idCardView.getText().isIdCardValid()) {
+            if (idCardView.getText().isBlank()) {
                 getString(R.string.id_number_error).showToastMessage()
                 idCardView.showError()
                 scrollView.scrollTo(0, idCardView.top)
@@ -669,19 +675,6 @@ class ApplicantProfileActivity :
                 .firstOrNull { it.info == binding.professionView.getText() }
                 ?.state ?: professionStatus
         }
-    }
-
-    private fun setupBottomActionKeyboardBehavior() {
-        ViewCompat.setOnApplyWindowInsetsListener(binding.bottomActionLayout) { _, insets ->
-            isKeyboardVisible = insets.isVisible(WindowInsetsCompat.Type.ime())
-            updateBottomActionVisibility()
-            insets
-        }
-        ViewCompat.requestApplyInsets(binding.bottomActionLayout)
-    }
-
-    private fun updateBottomActionVisibility() {
-        binding.bottomActionLayout.isVisible = shouldShowBottomAction && !isKeyboardVisible
     }
 
     private fun confirmProfileExit() {

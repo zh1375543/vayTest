@@ -38,12 +38,13 @@ class IdentityVerificationRepository(
         return api.getH5Result(ApiRequest(bizNo = bizNo)).dataOrThrow()
     }
 
-    suspend fun uploadKycImage(imageUri: Uri, imageType: String): Any? {
+    suspend fun uploadKycImage(imageUri: Uri, imageType: String, cardType: String): Any? {
         val formMedia = HashMap<String, String>()
         formMedia["mobileType"] = "2"
         formMedia["appCode"] = APPCODE
         formMedia["version"] = BuildConfig.VERSION_NAME
         formMedia["imgType"] = imageType
+        formMedia["cardType"] = cardType
         return api.submitKycImage(
             imageUri.uriToPart("image"),
             formMedia.generateRequestBody()

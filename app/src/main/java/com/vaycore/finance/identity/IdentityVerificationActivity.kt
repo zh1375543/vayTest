@@ -31,6 +31,7 @@ import com.vaycore.finance.data.authConfigList
 import com.vaycore.finance.data.bean.TrackBean
 import com.vaycore.finance.identity.viewmodel.AuthStatusViewModel
 import com.vaycore.finance.identity.viewmodel.KycUploadViewModel
+import com.vaycore.finance.identity.viewmodel.PersonalInfoViewModel
 import com.vaycore.finance.browser.WebViewActivity
 import com.vaycore.finance.util.KYC_AADHAAR_BACK_CLICK
 import com.vaycore.finance.util.KYC_AADHAAR_FRONT_CLICK
@@ -45,6 +46,7 @@ import com.vaycore.finance.util.trackEvent
 import com.vaycore.finance.ui.showConfirmDialog
 import com.vaycore.finance.ui.showKycCardExampleDialog
 import com.vaycore.finance.ui.showKycSelfieExampleDialog
+import com.vaycore.finance.ui.showOptionPickerDialog
 import com.vaycore.finance.util.viewBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -57,6 +59,7 @@ class IdentityVerificationActivity : BaseActivity<ActivityIdentityVerificationBi
     override val binding by viewBinding(ActivityIdentityVerificationBinding::inflate)
     private val vm by viewModels<KycUploadViewModel>()
     private val homeVm by viewModels<AuthStatusViewModel>()
+    private val personalVm by viewModels<PersonalInfoViewModel>()
 
     private val isCert by lazy { intent.getBooleanExtra("isCert", false) }
     private val frontLauncher = registerForActivityResult(
@@ -74,7 +77,7 @@ class IdentityVerificationActivity : BaseActivity<ActivityIdentityVerificationBi
                         result = System.currentTimeMillis().toString()
                     )
                 )
-                frontUri?.let { vm.submitKycFront(it) }
+                frontUri?.let { uri -> idType?.let { vm.submitKycFront(uri, it) } }
             }
         }
     }
@@ -94,7 +97,7 @@ class IdentityVerificationActivity : BaseActivity<ActivityIdentityVerificationBi
                         result = System.currentTimeMillis().toString()
                     )
                 )
-                backUri?.let { vm.submitKycBack(it) }
+                backUri?.let { uri -> idType?.let { vm.submitKycBack(uri, it) } }
             }
         }
     }
@@ -172,6 +175,8 @@ class IdentityVerificationActivity : BaseActivity<ActivityIdentityVerificationBi
     private var selfUri: Uri? = null
     private var frontUri: Uri? = null
     private var backUri: Uri? = null
+    private var idType: String? = null
+    private var hasUploadedCardImages = false
 
     override fun initView() {
         renderKycEntryState()
@@ -203,10 +208,29 @@ class IdentityVerificationActivity : BaseActivity<ActivityIdentityVerificationBi
         tvExample2.singleClick {
             showKycSelfieExampleDialog()
         }
+        typeView.setOnClick {
+            personalVm.getEnums { options ->
+                val cardTypes = options.idCardTypeV2.orEmpty()
+                if (cardTypes.isEmpty()) return@getEnums
+                showOptionPickerDialog(
+                    cardTypes.indexOfFirst { it.info == typeView.getText() },
+                    cardTypes.map { com.vaycore.finance.data.bean.SelectionOption(it.info.orEmpty()) },
+                ) { index ->
+                    typeView.setText(cardTypes[index].info)
+                    typeView.hideError()
+                    idType = cardTypes[index].state
+                    updateIdImageSections()
+                }
+            }
+        }
     }
 
     private fun routeMediaRequests() = with(binding) {
         ivCardFront.singleClick {
+            if (typeView.getText().isBlank()) {
+                typeView.showError()
+                return@singleClick
+            }
             vm.submitTrackingEvent(
                 TrackBean(
                     p = PageInfoKyc,
@@ -278,6 +302,10 @@ class IdentityVerificationActivity : BaseActivity<ActivityIdentityVerificationBi
             }
         }
         ivCardBack.singleClick {
+            if (typeView.getText().isBlank()) {
+                typeView.showError()
+                return@singleClick
+            }
             vm.submitTrackingEvent(
                 TrackBean(
                     p = PageInfoKyc,
@@ -302,6 +330,10 @@ class IdentityVerificationActivity : BaseActivity<ActivityIdentityVerificationBi
 
     private fun connectKycCompletion() = with(binding) {
         btNext.singleClick {
+            if (typeView.isVisible && typeView.getText().isBlank()) {
+                typeView.showError()
+                return@singleClick
+            }
             if (frontLayout.isVisible) {
                 if (frontUri == null && vm.frontImageSource.value == null) {
                     getString(R.string.please_upload_nic_card_front).showToastMessage()
@@ -347,6 +379,11 @@ class IdentityVerificationActivity : BaseActivity<ActivityIdentityVerificationBi
         kycResult.observe(this@IdentityVerificationActivity) {
             it?.let {
                 binding.loadingLayout.showContent()
+                binding.typeView.setText(it.idCardType)
+                hasUploadedCardImages =
+                    !it.frontImageUrl.isNullOrBlank() || !it.backImageUrl.isNullOrBlank()
+                resolveIdType(it.idCardType)
+                updateIdImageSections()
             }
         }
         compareResult.observe(this@IdentityVerificationActivity) {
@@ -381,6 +418,24 @@ class IdentityVerificationActivity : BaseActivity<ActivityIdentityVerificationBi
                 WebViewActivity.getIntent(this@IdentityVerificationActivity, it.verifyUrl)
             )
         }
+    }
+
+    private fun resolveIdType(cardTypeName: String?) {
+        if (cardTypeName.isNullOrBlank()) return
+        personalVm.getEnums { options ->
+            idType = options.idCardTypeV2
+                ?.firstOrNull { it.info == cardTypeName }
+                ?.state
+        }
+    }
+
+    private fun updateIdImageSections() = with(binding) {
+        val hasCardType = typeView.getText().isNotBlank()
+        val shouldShowCardImages = isCert || hasUploadedCardImages || hasCardType
+        frontLayout.isVisible = shouldShowCardImages && vm.configResult.value?.KYC_FRONT != 0
+        backLayout.isVisible = shouldShowCardImages && vm.configResult.value?.KYC_BACK != 0
+        tvExample1.isVisible = !isCert && shouldShowCardImages
+        tvIdentityVerificationTip.isVisible = !isCert && (frontLayout.isVisible || backLayout.isVisible)
     }
 
     private fun getUri(outputFile: File): Uri {

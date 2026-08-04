@@ -6,4 +6,5 @@ data class KycDocumentResponse(
     val frontImageUrl: String? = null,
     val backImageUrl: String? = null,
     val liveImageUrl: String? = null,
+    val idCardType: String? = null,
 )

@@ -86,6 +86,21 @@
 
                         </com.vaycore.finance.ui.views.StyledConstraintLayout>
 
+                        <com.vaycore.finance.ui.views.FormItemView
+                            android:id="@+id/typeView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_12"
+                            android:visibility="@{!isCertified ? View.VISIBLE : View.GONE}"
+                            app:editable="@{!isCertified}"
+                            app:errorText="@string/please_choose_current_info"
+                            app:formType="select"
+                            app:hintText="@string/please_choose"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/laoutId"
+                            app:titleText="@string/id_type" />
+
                         <com.vaycore.finance.ui.views.StyledTextView
                             android:id="@+id/tvIdentityVerificationTip"
                             android:layout_width="0dp"
@@ -96,17 +111,16 @@
                             android:text="@string/identity_verification_tip"
                             android:textColor="@color/text_secondary"
                             android:textSize="@dimen/sp_10"
+                            android:visibility="gone"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/laoutId" />
-
-
+                            app:layout_constraintTop_toBottomOf="@id/typeView" />
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/front_layout"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:visibility="@{viewModel.configResult != null &amp;&amp; viewModel.configResult.KYC_FRONT != 0 ? View.VISIBLE : View.GONE}"
+                            android:visibility="gone"
                             app:layout_constraintEnd_toStartOf="@id/back_layout"
                             app:layout_constraintHorizontal_chainStyle="packed"
                             app:layout_constraintStart_toStartOf="parent"
@@ -194,7 +208,7 @@
                             android:layout_width="wrap_content"
                             android:layout_marginTop="@dimen/dp_16"
                             android:layout_height="wrap_content"
-                            android:visibility="@{viewModel.configResult != null &amp;&amp; viewModel.configResult.KYC_BACK != 0 ? View.VISIBLE : View.GONE}"
+                            android:visibility="gone"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/front_layout"
                             app:layout_constraintTop_toBottomOf="@id/tvIdentityVerificationTip">

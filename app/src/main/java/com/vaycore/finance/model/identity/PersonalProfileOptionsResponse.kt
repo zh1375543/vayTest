@@ -8,5 +8,11 @@ data class PersonalProfileOptionsResponse(
     val maritalStatus: MutableList<SelectionOption>? = null,
     val purpose: MutableList<SelectionOption>? = null,
     val education: MutableList<SelectionOption>? = null,
+    val idCardTypeV2: MutableList<IdCardTypeOption>? = null,
     val workTime: MutableList<SelectionOption>? = null,
+)
+
+data class IdCardTypeOption(
+    val state: String? = null,
+    val info: String? = null,
 )

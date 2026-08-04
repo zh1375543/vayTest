@@ -352,6 +352,7 @@ No personal SMS messages will be accessed, read, or collected.</string>
     <string name="submit_info">Submit information</string>
 
     <string name="nic_card">ID Card</string>
+    <string name="id_type">ID Type</string>
     <string name="nic_card_front">ID Card Front</string>
     <string name="upload_nic_card_front">Upload ID card front</string>
     <string name="please_upload_nic_card_front">Please upload the front of your ID card</string>

@@ -31,6 +31,7 @@ class PayoutAccountSetupActivity : BaseActivity<ActivityPayoutAccountSetupBindin
     private var selectedWithdrawMethod: WithdrawMethod? = null
     private var bankBean: BankChannelResponse? = null
     private var walletBean: WalletResponse? = null
+    private var shouldShowWalletPicker = false
 
     override fun initView() {
         setupWithdrawMethodSelection()
@@ -43,12 +44,15 @@ class PayoutAccountSetupActivity : BaseActivity<ActivityPayoutAccountSetupBindin
 
         methodSelectionView.singleClick {
             showWithdrawMethodDialog(
-                walletAction = { vm.getWalletList() },
+                walletAction = { selectDefaultWallet() },
                 bankAction = { vm.getPayChannelList() },
             )
         }
         bankView.setOnClick { vm.getPayChannelList() }
-        walletProviderView.setOnClick { vm.getWalletList() }
+        walletProviderView.setOnClick {
+            shouldShowWalletPicker = true
+            vm.getWalletList()
+        }
     }
 
     private fun setupAccountValidation() = with(binding.withdrawAccountForm) {
@@ -92,7 +96,6 @@ class PayoutAccountSetupActivity : BaseActivity<ActivityPayoutAccountSetupBindin
                 WithdrawMethod.WALLET -> submitWalletAccount()
                 null -> {
                     withdrawAccountForm.tvWithdrawMethodError.isVisible = true
-                    withdrawAccountForm.methodSelectionView.performClick()
                 }
             }
         }
@@ -177,6 +180,8 @@ class PayoutAccountSetupActivity : BaseActivity<ActivityPayoutAccountSetupBindin
 
     private fun clearWithdrawMethodSelection() = with(binding.withdrawAccountForm) {
         selectedWithdrawMethod = null
+        shouldShowWalletPicker = false
+        walletBean = null
         tvWithdrawMethodError.isVisible = false
         val arrowSize = resources.getDimensionPixelSize(R.dimen.dp_24)
         val arrow = AppCompatResources.getDrawable(this@PayoutAccountSetupActivity, R.mipmap.mine_right)?.apply {
@@ -186,6 +191,22 @@ class PayoutAccountSetupActivity : BaseActivity<ActivityPayoutAccountSetupBindin
         methodSelectionView.text = getString(R.string.please_select)
         bankFieldsLayout.isVisible = false
         walletFieldsLayout.isVisible = false
+    }
+
+    private fun selectDefaultWallet() = with(binding.withdrawAccountForm) {
+        shouldShowWalletPicker = false
+        walletBean = null
+        selectWithdrawMethod(WithdrawMethod.WALLET)
+        walletProviderView.setText(getString(R.string.gcash))
+        walletProviderView.hideError()
+        vm.getWalletList()
+    }
+
+    private fun applyWalletSelection(wallet: WalletResponse) = with(binding.withdrawAccountForm) {
+        selectWithdrawMethod(WithdrawMethod.WALLET)
+        walletProviderView.setText(wallet.walletName)
+        walletProviderView.hideError()
+        walletBean = wallet
     }
 
     override fun initObserve() = with(vm) {
@@ -199,11 +220,16 @@ class PayoutAccountSetupActivity : BaseActivity<ActivityPayoutAccountSetupBindin
             }
         }
         walletList.observe(this@PayoutAccountSetupActivity) {
-            chooseWalletDialog(it ?: emptyList()) { wallet ->
-                selectWithdrawMethod(WithdrawMethod.WALLET)
-                binding.withdrawAccountForm.walletProviderView.setText(wallet.walletName)
-                binding.withdrawAccountForm.walletProviderView.hideError()
-                walletBean = wallet
+            val walletItems = it ?: emptyList()
+            if (shouldShowWalletPicker) {
+                shouldShowWalletPicker = false
+                chooseWalletDialog(walletItems) { wallet ->
+                    applyWalletSelection(wallet)
+                }
+            } else if (selectedWithdrawMethod == WithdrawMethod.WALLET) {
+                walletBean = walletItems.firstOrNull {
+                    it.walletName.equals(getString(R.string.gcash), ignoreCase = true)
+                }
             }
         }
         addResult.observe(this@PayoutAccountSetupActivity) {

@@ -68,8 +68,10 @@ class KycUploadViewModel(
     }
 
     val submitFrontResult = MutableLiveData<Uri>()
-    fun submitKycFront(frontUri: Uri) {
-        createNetworkRequest { verificationRepository.uploadKycImage(frontUri, "IDCARD_CARD_FRONT") }
+    fun submitKycFront(frontUri: Uri, cardType: String) {
+        createNetworkRequest {
+            verificationRepository.uploadKycImage(frontUri, "IDCARD_CARD_FRONT", cardType)
+        }
             .showLoading()
             .onSuccess {
                 submitTrackingEvent(
@@ -96,8 +98,10 @@ class KycUploadViewModel(
     }
 
     val submitBackResult = MutableLiveData<Uri>()
-    fun submitKycBack(backUri: Uri) {
-        createNetworkRequest { verificationRepository.uploadKycImage(backUri, "IDCARD_CARD_BACK") }
+    fun submitKycBack(backUri: Uri, cardType: String) {
+        createNetworkRequest {
+            verificationRepository.uploadKycImage(backUri, "IDCARD_CARD_BACK", cardType)
+        }
             .showLoading()
             .onSuccess {
                 submitTrackingEvent(
