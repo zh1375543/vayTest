@@ -3,6 +3,7 @@ package com.vaycore.finance.identity
 import android.Manifest
 import android.graphics.Rect
 import android.view.MotionEvent
+import android.view.View
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
@@ -450,22 +451,22 @@ class ApplicantProfileActivity :
         btNext.singleClick {
             if (lastNameView.getText().isBlank()) {
                 lastNameView.showError()
-                scrollView.scrollTo(0, lastNameView.top)
+                scrollToInvalidField(lastNameView)
                 return@singleClick
             }
             if (firstNameView.getText().isBlank()) {
                 firstNameView.showError()
-                scrollView.scrollTo(0, firstNameView.top)
+                scrollToInvalidField(firstNameView)
                 return@singleClick
             }
             if (genderView.getText().isBlank()) {
                 genderView.showError()
-                scrollView.scrollTo(0, genderView.top)
+                scrollToInvalidField(genderView)
                 return@singleClick
             }
             if (birthView.getText().isBlank() || !birthView.getText().isAdult()) {
                 birthView.showError()
-                scrollView.scrollTo(0, birthView.top)
+                scrollToInvalidField(birthView)
                 if (!birthView.getText().isAdult()) {
                     getString(R.string.under_18).showToastMessage()
                 }
@@ -474,52 +475,52 @@ class ApplicantProfileActivity :
             if (idCardView.getText().isBlank()) {
                 getString(R.string.id_number_error).showToastMessage()
                 idCardView.showError()
-                scrollView.scrollTo(0, idCardView.top)
+                scrollToInvalidField(idCardView)
                 return@singleClick
             }
             if (educationView.getText().isBlank()) {
                 educationView.showError()
-                scrollView.scrollTo(0, educationView.top)
+                scrollToInvalidField(educationView)
                 return@singleClick
             }
             if (industryView.getText().isBlank()) {
                 industryView.showError()
-                scrollView.scrollTo(0, industryView.top)
+                scrollToInvalidField(industryView)
                 return@singleClick
             }
             if (professionView.getText().isBlank()) {
                 professionView.showError()
-                scrollView.scrollTo(0, professionView.top)
+                scrollToInvalidField(professionView)
                 return@singleClick
             }
             if (workTimeView.getText().isBlank()) {
                 workTimeView.showError()
-                scrollView.scrollTo(0, workTimeView.top)
+                scrollToInvalidField(workTimeView)
                 return@singleClick
             }
             if (reasonView.getText().isBlank()) {
                 reasonView.showError()
-                scrollView.scrollTo(0, reasonView.top)
+                scrollToInvalidField(reasonView)
                 return@singleClick
             }
             if (monthlyView.getText().isBlank()) {
                 monthlyView.showError()
-                scrollView.scrollTo(0, monthlyView.top)
+                scrollToInvalidField(monthlyView)
                 return@singleClick
             }
             if (marryView.getText().isBlank()) {
                 marryView.showError()
-                scrollView.scrollTo(0, marryView.top)
+                scrollToInvalidField(marryView)
                 return@singleClick
             }
             if (provinceId == null || cityId == null || areaId == null) {
                 provinceView.showError()
-                scrollView.scrollTo(0, provinceView.top)
+                scrollToInvalidField(provinceView)
                 return@singleClick
             }
             if (addressView.getText().isBlank()) {
                 addressView.showError()
-                scrollView.scrollTo(0, addressView.top)
+                scrollToInvalidField(addressView)
                 return@singleClick
             }
             PermissionCoordinator.request(
@@ -568,6 +569,41 @@ class ApplicantProfileActivity :
             loadingLayout.showLoading()
             vm.getPersonalInfo {
                 loadingLayout.showError()
+            }
+        }
+    }
+
+    /** Keeps the first invalid field fully visible above the keyboard-attached action area. */
+    private fun scrollToInvalidField(target: View) = with(binding) {
+        scrollView.post {
+            val targetBounds = Rect().also(target::getDrawingRect)
+            scrollView.offsetDescendantRectToMyCoords(target, targetBounds)
+
+            val scrollLocation = IntArray(2)
+            val actionLocation = IntArray(2)
+            scrollView.getLocationOnScreen(scrollLocation)
+            bottomActionLayout.getLocationOnScreen(actionLocation)
+
+            val spacing = resources.getDimensionPixelSize(R.dimen.dp_12)
+            val viewportTop = scrollView.paddingTop + spacing
+            val scrollBottom = scrollView.height - scrollView.paddingBottom - spacing
+            val actionTop = actionLocation[1] - scrollLocation[1] - spacing
+            val viewportBottom = minOf(scrollBottom, actionTop)
+            if (viewportBottom <= viewportTop) return@post
+
+            // targetBounds uses content coordinates; include scrollY in the visible bounds too.
+            val visibleTop = scrollView.scrollY + viewportTop
+            val visibleBottom = scrollView.scrollY + viewportBottom
+
+            val availableHeight = visibleBottom - visibleTop
+            val scrollDelta = when {
+                targetBounds.height() > availableHeight -> targetBounds.top - visibleTop
+                targetBounds.top < visibleTop -> targetBounds.top - visibleTop
+                targetBounds.bottom > visibleBottom -> targetBounds.bottom - visibleBottom
+                else -> 0
+            }
+            if (scrollDelta != 0) {
+                scrollView.smoothScrollBy(0, scrollDelta)
             }
         }
     }

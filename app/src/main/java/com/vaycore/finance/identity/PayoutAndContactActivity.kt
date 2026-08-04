@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Rect
 import android.provider.ContactsContract
 import android.view.MotionEvent
+import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.content.res.AppCompatResources
@@ -234,85 +235,120 @@ class PayoutAndContactActivity : BaseActivity<ActivityPayoutAndContactBinding>()
                 WithdrawMethod.BANK -> {
                     if (bankView.getText().isBlank()) {
                         bankView.showError()
-                        scrollView.scrollTo(0, bankView.top)
+                        scrollToInvalidField(bankView)
                         return false
                     }
                     if (holderView.getText().isBlank()) {
                         holderView.showError()
-                        scrollView.scrollTo(0, holderView.top)
+                        scrollToInvalidField(holderView)
                         return false
                     }
                     if (bankAccountView.getText().isBlank()) {
                         bankAccountView.showError()
-                        scrollView.scrollTo(0, bankAccountView.top)
+                        scrollToInvalidField(bankAccountView)
                         return false
                     }
                     if (confirmBankView.getText() != bankAccountView.getText()) {
                         confirmBankView.showError()
-                        scrollView.scrollTo(0, confirmBankView.top)
+                        scrollToInvalidField(confirmBankView)
                         return false
                     }
                 }
                 WithdrawMethod.WALLET -> {
                     if (walletProviderView.getText().isBlank()) {
                         walletProviderView.showError()
-                        scrollView.scrollTo(0, walletProviderView.top)
+                        scrollToInvalidField(walletProviderView)
                         return false
                     }
                     if (walletBean == null) {
                         walletProviderView.showError()
-                        scrollView.scrollTo(0, walletProviderView.top)
+                        scrollToInvalidField(walletProviderView)
                         return false
                     }
                     if (walletAccountView.getText().isBlank()) {
                         walletAccountView.showError()
-                        scrollView.scrollTo(0, walletAccountView.top)
+                        scrollToInvalidField(walletAccountView)
                         return false
                     }
                     if (confirmWalletAccountView.getText() != walletAccountView.getText()) {
                         confirmWalletAccountView.showError()
-                        scrollView.scrollTo(0, confirmWalletAccountView.top)
+                        scrollToInvalidField(confirmWalletAccountView)
                         return false
                     }
                 }
                 null -> {
                     tvWithdrawMethodError.isVisible = true
-                    scrollView.smoothScrollTo(0, withdrawMethodCard.top)
+                    scrollToInvalidField(withdrawMethodCard)
                     return false
                 }
             }
         }
         if (relativesView.getText().isBlank()) {
             relativesView.showError()
-            scrollView.scrollTo(0, relativesView.top)
+            scrollToInvalidField(relativesView)
             return false
         }
         if (relativesNameView.getText().isBlank()) {
             relativesNameView.showError()
-            scrollView.scrollTo(0, relativesNameView.top)
+            scrollToInvalidField(relativesNameView)
             return false
         }
         if (relativesPhoneView.getText().isBlank()) {
             relativesPhoneView.showError()
-            scrollView.scrollTo(0, relativesPhoneView.top)
+            scrollToInvalidField(relativesPhoneView)
             return false
         }
         if (friendView.getText().isBlank()) {
             friendView.showError()
-            scrollView.scrollTo(0, friendView.top)
+            scrollToInvalidField(friendView)
             return false
         }
         if (friendNameView.getText().isBlank()) {
             friendNameView.showError()
-            scrollView.scrollTo(0, friendNameView.top)
+            scrollToInvalidField(friendNameView)
             return false
         }
         if (friendPhoneView.getText().isBlank()) {
             friendPhoneView.showError()
-            scrollView.scrollTo(0, friendPhoneView.top)
+            scrollToInvalidField(friendPhoneView)
             return false
         }
         return true
+    }
+
+    /** Keeps the first invalid field fully visible above the keyboard-attached action area. */
+    private fun scrollToInvalidField(target: View) = with(binding) {
+        scrollView.post {
+            val targetBounds = Rect().also(target::getDrawingRect)
+            scrollView.offsetDescendantRectToMyCoords(target, targetBounds)
+
+            val scrollLocation = IntArray(2)
+            val actionLocation = IntArray(2)
+            scrollView.getLocationOnScreen(scrollLocation)
+            bottomActionLayout.getLocationOnScreen(actionLocation)
+
+            val spacing = resources.getDimensionPixelSize(R.dimen.dp_12)
+            val viewportTop = scrollView.paddingTop + spacing
+            val scrollBottom = scrollView.height - scrollView.paddingBottom - spacing
+            val actionTop = actionLocation[1] - scrollLocation[1] - spacing
+            val viewportBottom = minOf(scrollBottom, actionTop)
+            if (viewportBottom <= viewportTop) return@post
+
+            // targetBounds uses content coordinates; include scrollY in the visible bounds too.
+            val visibleTop = scrollView.scrollY + viewportTop
+            val visibleBottom = scrollView.scrollY + viewportBottom
+
+            val availableHeight = visibleBottom - visibleTop
+            val scrollDelta = when {
+                targetBounds.height() > availableHeight -> targetBounds.top - visibleTop
+                targetBounds.top < visibleTop -> targetBounds.top - visibleTop
+                targetBounds.bottom > visibleBottom -> targetBounds.bottom - visibleBottom
+                else -> 0
+            }
+            if (scrollDelta != 0) {
+                scrollView.smoothScrollBy(0, scrollDelta)
+            }
+        }
     }
 
     private fun recordContactPickStart(event: String, target: ContactPickTarget) {
