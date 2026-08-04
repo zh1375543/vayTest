@@ -43,7 +43,6 @@ import com.vaycore.finance.data.bean.TrackBean
 import com.vaycore.finance.databinding.ActivityApplicantProfileBinding
 import com.vaycore.finance.identity.viewmodel.AuthStatusViewModel
 import com.vaycore.finance.identity.viewmodel.PersonalInfoViewModel
-import com.vaycore.finance.ui.extension.hideKeyboard
 import com.vaycore.finance.ui.extension.resetScale
 import com.vaycore.finance.ui.extension.singleClick
 import com.vaycore.finance.ui.showAddressPickerDialog
@@ -449,7 +448,6 @@ class ApplicantProfileActivity :
             btNext.resetScale()
         }
         btNext.singleClick {
-            btNext.hideKeyboard()
             if (lastNameView.getText().isBlank()) {
                 lastNameView.showError()
                 scrollView.scrollTo(0, lastNameView.top)

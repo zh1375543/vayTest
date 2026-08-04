@@ -2,12 +2,12 @@ package com.vaycore.finance.identity
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Rect
 import android.provider.ContactsContract
+import android.view.MotionEvent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import com.vaycore.finance.R
@@ -30,6 +30,7 @@ import com.vaycore.finance.data.loginInfo
 import com.vaycore.finance.data.bean.ApiRequest
 import com.vaycore.finance.model.wallet.BankChannelResponse
 import com.vaycore.finance.model.identity.RelativesBean
+import com.vaycore.finance.model.identity.WorkContactProfileResponse
 import com.vaycore.finance.data.bean.TrackBean
 import com.vaycore.finance.identity.viewmodel.AuthStatusViewModel
 import com.vaycore.finance.identity.viewmodel.PersonalInfoViewModel
@@ -73,9 +74,14 @@ class PayoutAndContactActivity : BaseActivity<ActivityPayoutAndContactBinding>()
     private val accountVm by viewModels<WalletViewModel>()
     private val isCert by lazy { intent.getBooleanExtra("isCert", false) }
     private var shouldShowBottomAction = false
-    private var isKeyboardVisible = false
     private var selectedWithdrawMethod: WithdrawMethod? = null
     private var shouldShowWalletPicker = false
+
+    override fun shouldDismissKeyboardOnOutsideTouch(ev: MotionEvent): Boolean {
+        val bottomActionBounds = Rect()
+        binding.bottomActionLayout.getGlobalVisibleRect(bottomActionBounds)
+        return !bottomActionBounds.contains(ev.rawX.toInt(), ev.rawY.toInt())
+    }
 
     override fun initView() {
         renderBankEntryState()
@@ -88,7 +94,6 @@ class PayoutAndContactActivity : BaseActivity<ActivityPayoutAndContactBinding>()
         isCertified = isCert
         showBankFields = false
         showWalletFields = false
-        setupBottomActionKeyboardBehavior()
         vm.submitTrackingEvent(TrackBean(p = PageInfoBank, act = ACT_in))
         titleBar.setAction("${authConfigList.indexOf("BANK") + 1}/${authConfigList.size}")
         clearWithdrawMethodSelection()
@@ -272,7 +277,7 @@ class PayoutAndContactActivity : BaseActivity<ActivityPayoutAndContactBinding>()
                 }
                 null -> {
                     tvWithdrawMethodError.isVisible = true
-                    methodSelectionView.performClick()
+                    scrollView.smoothScrollTo(0, withdrawMethodCard.top)
                     return false
                 }
             }
@@ -322,22 +327,9 @@ class PayoutAndContactActivity : BaseActivity<ActivityPayoutAndContactBinding>()
         pickContact()
     }
 
-    private fun setupBottomActionKeyboardBehavior() {
-        ViewCompat.setOnApplyWindowInsetsListener(binding.bottomActionLayout) { _, insets ->
-            isKeyboardVisible = insets.isVisible(WindowInsetsCompat.Type.ime())
-            updateBottomActionVisibility()
-            insets
-        }
-        ViewCompat.requestApplyInsets(binding.bottomActionLayout)
-    }
-
     private fun setBottomActionVisible(visible: Boolean) {
         shouldShowBottomAction = visible
-        updateBottomActionVisibility()
-    }
-
-    private fun updateBottomActionVisibility() {
-        binding.bottomActionLayout.isVisible = shouldShowBottomAction && !isKeyboardVisible
+        binding.bottomActionLayout.isVisible = visible
     }
 
     private fun selectWithdrawMethod(method: WithdrawMethod) = with(binding.withdrawAccountForm) {
@@ -491,6 +483,7 @@ class PayoutAndContactActivity : BaseActivity<ActivityPayoutAndContactBinding>()
             binding.apply {
                 loadingLayout.showContent()
                 setBottomActionVisible(!isCert)
+                additionalContactContainer.isVisible = !isCert || it.hasAdditionalContact()
                 it?.let {
                     relativesStatus = it.relatives
                     friendStatus = it.otherRelatives
@@ -525,6 +518,12 @@ class PayoutAndContactActivity : BaseActivity<ActivityPayoutAndContactBinding>()
             it?.routeToNextAuthStep(this@PayoutAndContactActivity)
             finish()
         }
+    }
+
+    private fun WorkContactProfileResponse?.hasAdditionalContact(): Boolean {
+        return this?.thirdRelatives != null ||
+            !this?.thirdName.isNullOrBlank() ||
+            !this?.thirdMobile.isNullOrBlank()
     }
 
     private fun fillWalletAccountFromLoginPhone() {

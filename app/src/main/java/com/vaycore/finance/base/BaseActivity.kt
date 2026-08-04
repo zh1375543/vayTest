@@ -233,13 +233,18 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
         })
     }
 
+    /** Lets a screen keep the IME open while a keyboard-attached action receives its click. */
+    protected open fun shouldDismissKeyboardOnOutsideTouch(ev: MotionEvent): Boolean = true
+
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
         if (ev.action == MotionEvent.ACTION_DOWN) {
             val v = currentFocus
             if (v is EditText) {
                 val outRect = Rect()
                 v.getGlobalVisibleRect(outRect)
-                if (!outRect.contains(ev.rawX.toInt(), ev.rawY.toInt())) {
+                if (!outRect.contains(ev.rawX.toInt(), ev.rawY.toInt()) &&
+                    shouldDismissKeyboardOnOutsideTouch(ev)
+                ) {
                     v.clearFocus()
                     val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
                     imm.hideSoftInputFromWindow(v.windowToken, 0)
