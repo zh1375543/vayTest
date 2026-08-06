@@ -97,7 +97,7 @@
         android:layout_height="wrap_content"
         android:drawableTop="@mipmap/tab_order_normal"
         android:gravity="center"
-        android:text="@string/order"
+        android:text="@string/plan"
         android:textColor="@color/text_tertiary"
         android:textSize="@dimen/sp_12"
         app:drawableTopSelected="@mipmap/tab_order_select"

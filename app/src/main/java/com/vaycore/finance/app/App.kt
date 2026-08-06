@@ -64,9 +64,7 @@ class App : Application(), DFTransferResultInterface {
         appContext = applicationContext
         instance = this
         AppFontInstaller.install(this, "fonts/medium.otf", "fonts/bold.otf")
-        if (agreePrivacy) {
-            startAppsFlyer()
-        }
+        startAppsFlyer()
         bootstrapFirebase()
         setupAppViewModel()
         fetchAdId()

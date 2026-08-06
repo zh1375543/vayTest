@@ -17,11 +17,11 @@ class InstallmentScheduleAdapter :
     ) = with(binding) {
         tvDueDate.text = item.repayTime?.substringBefore(" ")
         tvAmount.text = item.totalRepayment.formatAmountWithPrefix()
-        ivArrow.rotation = 0f
+        ivArrow.rotation = 180f
         infoLayout.isVisible = false
         val toggleDetails = {
             infoLayout.isVisible = !infoLayout.isVisible
-            ivArrow.rotation = if (!infoLayout.isVisible) 0f else 180f
+            ivArrow.rotation = if (infoLayout.isVisible) 0f else 180f
             if (context is LoanOfferActivity) {
                 (context as LoanOfferActivity?)?.scrollToOfferActions()
             }

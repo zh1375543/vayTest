@@ -71,41 +71,6 @@ class CombinedLoanOfferActivity : BaseActivity<ActivityCombinedLoanOfferBinding>
                 AGREEMENT_ABOUT,
             )
         }
-
-        tvPrivacy.setSpannableClickableTexts(
-            String.format(
-                getString(R.string.product_detail_agreement),
-                getString(R.string.lease_contract),
-                getString(R.string.mortgage_contract),
-            ),
-            arrayListOf(
-                ClickablePart(
-                    getString(R.string.lease_contract),
-                    resolveColorCompat(R.color.brand_primary),
-                    onClick = {
-                        LoanEventRecorder.record(LoanEvent.CLICK_OPEN_AGREEMENT)
-                        WebViewActivity.Companion.launch(
-                            this@CombinedLoanOfferActivity,
-                            getString(R.string.lease_contract),
-                            leaseUrl,
-                        )
-                    },
-                ),
-                ClickablePart(
-                    getString(R.string.mortgage_contract),
-                    resolveColorCompat(R.color.brand_primary),
-                    onClick = {
-                        LoanEventRecorder.record(LoanEvent.CLICK_OPEN_AGREEMENT)
-                        WebViewActivity.Companion.launch(
-                            this@CombinedLoanOfferActivity,
-                            getString(R.string.mortgage_contract),
-                            pawnUrl,
-                        )
-                    },
-                ),
-            ),
-        )
-
         tvChange.singleClick {
             vm.submitTrackingEvent(
                 TrackBean(

@@ -33,7 +33,7 @@
         android:id="@+id/loading_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/tvPrivacy"
+        app:layout_constraintBottom_toTopOf="@id/bottomCard"
         app:layout_constraintTop_toBottomOf="@id/titleBar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -82,20 +82,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.vaycore.finance.ui.views.ContentStateLayout>
 
-    <TextView
-        android:id="@+id/tvPrivacy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/dp_12"
-        android:gravity="center"
-        android:lineSpacingExtra="@dimen/dp_4"
-        android:paddingHorizontal="@dimen/dp_36"
-        android:paddingTop="@dimen/dp_15"
-        android:paddingBottom="@dimen/dp_6"
-        android:text="@string/product_detail_agreement"
-        android:textColor="@color/text_secondary"
-        android:textSize="@dimen/sp_13"
-        app:layout_constraintBottom_toTopOf="@id/bottomCard" />
 
     <com.vaycore.finance.ui.views.StyledConstraintLayout
         android:id="@+id/bottomCard"
@@ -120,7 +106,7 @@
             android:layout_marginTop="@dimen/dp_20"
             android:text="@string/account_receivable"
             android:textColor="@color/text_tertiary"
-            android:textSize="@dimen/sp_14"
+            android:textSize="@dimen/sp_12"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -181,8 +167,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp_16"
             android:layout_marginTop="@dimen/dp_16"
-            android:paddingHorizontal="@dimen/dp_16"
-            android:paddingVertical="@dimen/dp_14"
+            android:padding="@dimen/dp_10"
             android:visibility="@{account == null || account.payWay != `CARD` ? View.VISIBLE : View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -192,8 +177,8 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivLoanTip"
-                android:layout_width="@dimen/dp_32"
-                android:layout_height="@dimen/dp_32"
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_30"
                 android:src="@mipmap/ic_loan_tip"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -207,7 +192,7 @@
                 android:lineSpacingExtra="@dimen/dp_2"
                 android:text="@string/loan_account_tip"
                 android:textColor="@color/text_tertiary"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp_11"
                 app:layout_constraintBottom_toBottomOf="@id/ivLoanTip"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/ivLoanTip"
@@ -218,9 +203,9 @@
             android:id="@+id/repaymentLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
-            android:paddingTop="@dimen/dp_16"
-            android:paddingBottom="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_5"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_10"
             app:layout_constraintTop_toBottomOf="@id/loanTipLayout"
             app:radius="@dimen/dp_30"
             app:solidColor="@color/surface_primary">

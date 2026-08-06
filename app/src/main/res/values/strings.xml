@@ -34,8 +34,9 @@
     <string name="privacy_toast_agree2">Please consent to the Privacy Policy and Terms and Conditions.</string>
 
     <string name="home">Home</string>
-    <string name="order">Order</string>
+    <string name="order">order</string>
     <string name="stats">Stats</string>
+    <string name="plan">Plan</string>
     <string name="mine">Mine</string>
     <string name="again_exit">Press again to exit the app.</string>
 
@@ -573,7 +574,7 @@ No personal SMS messages will be accessed, read, or collected.</string>
     <string name="portal_cancelled_time">Cancelled Time : %1$s</string>
     <string name="portal_amount_saved_plain">Amount Saved</string>
     <string name="portal_insights_title">My Savings Report</string>
-    <string name="portal_loan_amount">Loan amount</string>
+    <string name="portal_loan_amount">I have saved</string>
     <string name="portal_saved_this_month">Saved this month :</string>
     <string name="portal_total_savings">Total Savings :</string>
     <string name="portal_savings_day_value">%1$d Day</string>

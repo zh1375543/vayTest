@@ -20,7 +20,7 @@ class SingleProductDetailView @JvmOverloads constructor(
     attrs: AttributeSet? = null
 ) : ConstraintLayout(context, attrs) {
 
-    private val binding =
+    private val binding = 
         SingleProductDetailViewBinding.inflate(LayoutInflater.from(context), this, true)
 
     private val repaymentMenuAdapter by lazy { RepaymentPlanOptionAdapter() }
@@ -42,29 +42,29 @@ class SingleProductDetailView @JvmOverloads constructor(
         rvRepayment.adapter = installAdapter
         rvHeaderFee.adapter = headerFeeAdapter
 
-        ivMoreDetail.rotation = 180f
+        ivMoreDetail.rotation = 0f
         val toggleDetails = {
             detailsGroup.isVisible = !detailsGroup.isVisible
-            ivMoreDetail.rotation = if (detailsGroup.isVisible) 180f else 0f
+            ivMoreDetail.rotation = if (detailsGroup.isVisible) 0f else 180f
         }
         ivMoreDetail.setOnClickListener { toggleDetails() }
         tvDetailTitle.setOnClickListener { toggleDetails() }
 
-        ivMorePlan.rotation = 180f
+        ivMorePlan.rotation = 0f
         val togglePlans = {
             val isPlanVisible = !rvPlan.isVisible
             rvPlan.isVisible = isPlanVisible
             repaymentHeaderGroup.isVisible = isPlanVisible
             repaymentGroup.isVisible = isPlanVisible
-            ivMorePlan.rotation = if (isPlanVisible) 180f else 0f
+            ivMorePlan.rotation = if (isPlanVisible) 0f else 180f
         }
         ivMorePlan.setOnClickListener { togglePlans() }
         tvInstallDetail.setOnClickListener { togglePlans() }
 
-        ivMoreRepayment.rotation = 180f
+        ivMoreRepayment.rotation = 0f
         val toggleRepayment = {
             repaymentGroup.isVisible = !repaymentGroup.isVisible
-            ivMoreRepayment.rotation = if (repaymentGroup.isVisible) 180f else 0f
+            ivMoreRepayment.rotation = if (repaymentGroup.isVisible) 0f else 180f
         }
         ivMoreRepayment.setOnClickListener { toggleRepayment() }
         tvRepaymentDetail.setOnClickListener { toggleRepayment() }

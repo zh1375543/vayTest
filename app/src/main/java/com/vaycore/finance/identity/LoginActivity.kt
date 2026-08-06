@@ -4,7 +4,9 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.graphics.Rect
 import android.location.LocationManager
+import android.view.MotionEvent
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -31,7 +33,6 @@ import com.vaycore.finance.data.bean.ClickablePart
 import com.vaycore.finance.data.bean.TrackBean
 import com.vaycore.finance.data.location
 import com.vaycore.finance.databinding.ActivitySignInBinding
-import com.vaycore.finance.app.MainActivity
 import com.vaycore.finance.browser.WebViewActivity
 import com.vaycore.finance.ui.extension.setSpannableClickableTexts
 import com.vaycore.finance.ui.extension.singleClick
@@ -59,7 +60,6 @@ import kotlin.time.Duration.Companion.milliseconds
 class LoginActivity : BaseActivity<ActivitySignInBinding>() {
 
     override val binding by viewBinding(ActivitySignInBinding::inflate)
-     override val adjustForImeInsets = false
 
     private val vm by viewModels<SessionViewModel>()
     private val homeVm by viewModels<GuestDashboardViewModel>()
@@ -72,8 +72,11 @@ class LoginActivity : BaseActivity<ActivitySignInBinding>() {
 
     private var canNavigateBack = false
     private var lastBackPressTime = 0L
-    private val returnToPortal by lazy {
-        intent.getBooleanExtra(EXTRA_RETURN_TO_PORTAL, false)
+
+    override fun shouldDismissKeyboardOnOutsideTouch(ev: MotionEvent): Boolean {
+        val bottomActionBounds = Rect()
+        binding.bottomAction.getGlobalVisibleRect(bottomActionBounds)
+        return !bottomActionBounds.contains(ev.rawX.toInt(), ev.rawY.toInt())
     }
 
     private val firstSavingsPlanLauncher = registerForActivityResult(
@@ -133,14 +136,11 @@ class LoginActivity : BaseActivity<ActivitySignInBinding>() {
                     )
                 )
             }
-
             // 2. typing → reset end timer
             debounceJob?.cancel()
             debounceJob = lifecycleScope.launch {
                 delay(debounceTime.milliseconds)
-
                 // 3. user stopped typing → record end time
-
                 vm.submitTrackingEvent(
                     TrackBean(
                         p = PageLogin,
@@ -287,11 +287,7 @@ class LoginActivity : BaseActivity<ActivitySignInBinding>() {
 
     private fun handleLoginBack() {
         if (canNavigateBack) {
-            if (returnToPortal) {
-                PortalActivity.Companion.launch(this)
-            } else {
-                MainActivity.Companion.launch(this)
-            }
+            PortalActivity.Companion.launch(this)
             finish()
             return
         }
