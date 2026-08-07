@@ -14,7 +14,7 @@ import com.vaycore.finance.data.bean.TrackBean
 /** Launches actions handled outside the app with an explicit caller context. */
 object ExternalActionLauncher {
 
-    fun openBrowser(context: Context, url: String): Boolean {
+    fun openBrowser(context: Context, url: String) {
         val validUrl = if (url.startsWith("http://") || url.startsWith("https://")) url else "https://$url"
         try {
             val baseIntent = Intent(Intent.ACTION_VIEW, validUrl.toUri()).apply {
@@ -33,7 +33,7 @@ object ExternalActionLauncher {
                     val browserIntent = Intent(baseIntent).apply { setPackage(browserPackage) }
                     if (browserIntent.resolveActivity(context.packageManager) != null) {
                         context.startActivity(browserIntent)
-                        return true
+                        return
                     }
                 } catch (exception: Exception) {
                     LogUtil.w("Failed with $browserPackage: ${exception.message}")
@@ -43,15 +43,37 @@ object ExternalActionLauncher {
         } catch (exception: Exception) {
             LogUtil.e("Failed to open external browser: ${exception.message}")
         }
-        return false
     }
 
     /** Opens the Google Play listing through the device browser, matching the tracker flow. */
     fun openRatingPage(context: Context): Boolean {
-        return openBrowser(
-            context,
-            "https://play.google.com/store/apps/details?id=${context.packageName}",
+        val ratingIntent = Intent(
+            Intent.ACTION_VIEW,
+            "https://play.google.com/store/apps/details?id=${context.packageName}".toUri(),
+        ).apply {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            addCategory(Intent.CATEGORY_BROWSABLE)
+        }
+        val browserPackages = listOf(
+            "com.android.browser",
+            "com.android.chrome",
+            "org.mozilla.firefox",
+            null,
         )
+        browserPackages.forEach { browserPackage ->
+            try {
+                val browserIntent = Intent(ratingIntent).apply { setPackage(browserPackage) }
+                if (browserIntent.resolveActivity(context.packageManager) != null) {
+                    context.startActivity(browserIntent)
+                    return true
+                }
+            } catch (exception: Exception) {
+                LogUtil.w("Failed to open rating page with $browserPackage: ${exception.message}")
+            }
+        }
+        LogUtil.e("No browser available for the rating page")
+        return false
     }
 
     fun openStoreListing(context: Context, listingUrl: String? = null) {
