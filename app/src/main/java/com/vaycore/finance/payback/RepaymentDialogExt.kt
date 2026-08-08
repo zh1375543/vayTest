@@ -30,7 +30,6 @@ fun Context.showRepayAndReapplyDialog(
     ) {
         override fun initView() = with(binding) {
             super.initView()
-            setCanceledOnTouchOutside(false)
             setOnCancelListener { closeAction() }
             cbUnderstand.isSelected = true
             tvHint.text = this@showRepayAndReapplyDialog.createRepayHintText()

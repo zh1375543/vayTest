@@ -20,6 +20,7 @@ data class ProductBean(
     val downloadUrl: String? = null,
     val tagList: List<String>? = null,
     val productImageUrl: String? = null,
+    val iconUrl: String? = null,
     var canApply: Boolean = true,
     val showConditionTypeSign: String? = null,
     val creditStatus: Int? = null,

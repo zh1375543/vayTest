@@ -533,7 +533,6 @@ class ApplicantProfileActivity :
                             act = when (it1) {
                                 Manifest.permission.ACCESS_COARSE_LOCATION -> "gps"
                                 Manifest.permission.READ_PHONE_STATE -> "device"
-                                Manifest.permission.READ_SMS -> "sms"
                                 else -> "notification"
                             },
                             result = "reject"
@@ -552,7 +551,6 @@ class ApplicantProfileActivity :
                         act = when (it1) {
                             Manifest.permission.ACCESS_COARSE_LOCATION -> "gps"
                             Manifest.permission.READ_PHONE_STATE -> "device"
-                            Manifest.permission.READ_SMS -> "sms"
                             else -> "notification"
                         },
                         result = "agree"

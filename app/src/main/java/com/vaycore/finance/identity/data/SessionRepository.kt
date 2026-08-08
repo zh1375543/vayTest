@@ -21,8 +21,21 @@ class SessionRepository(
     private val api: Api,
 ) {
 
-    suspend fun sendOTP(phone: String): Any? {
-        return api.sendSMS(ApiRequest(phone = phone)).dataOrThrow()
+    suspend fun sendOTP(phone: String,coordinate: Pair<Double, Double> = location,): Any? {
+        val param = ApiRequest(
+            phone = phone,
+            coordinate = "${coordinate.first},${coordinate.second}",
+            regClient = "Android",
+            appsflyerId = AppsFlyerLib.getInstance()
+                .getAppsFlyerUID(App.Companion.appContext)
+                ?: "",
+            content = appFlyer,
+            phoneMark = DeviceIdentityReader.getDeviceId(),
+            firebaseClientId = firebaseId,
+            firebaseToken = firebaseToken,
+        )
+
+        return api.sendSMS(param).dataOrThrow()
     }
 
     suspend fun login(

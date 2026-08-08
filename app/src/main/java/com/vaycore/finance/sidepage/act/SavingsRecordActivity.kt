@@ -345,8 +345,6 @@ class SavingsRecordActivity : BaseActivity<SidepageSavingsRecordActivityBinding>
         })
 
         override fun initView() = with(binding) {
-            setCancelable(false)
-            setCanceledOnTouchOutside(false)
             rvPhotos.layoutManager = GridLayoutManager(this@SavingsRecordActivity, MAX_PHOTO_COUNT)
             rvPhotos.adapter = photoAdapter
 

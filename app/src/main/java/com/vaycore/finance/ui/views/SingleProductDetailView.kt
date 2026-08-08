@@ -88,7 +88,12 @@ class SingleProductDetailView @JvmOverloads constructor(
         tvInterestTitle.text = context.getString(R.string.interest_day, "${plan.interestRate}%")
         tvInterest.text = plan.interestAmount.formatAmountWithPrefix(currencySymbol)
         tvDate.text = plan.repayTimeStr
-        tvInstallFee.text = plan.installmentServiceFee.formatAmountWithPrefix(plan.currencySymbol)
+        val hasInstallmentFee = plan.installmentServiceFee?.signum() == 1
+        tvInstallFeeTitle.isVisible = hasInstallmentFee
+        tvInstallFee.isVisible = hasInstallmentFee
+        if (hasInstallmentFee) {
+            tvInstallFee.text = plan.installmentServiceFee.formatAmountWithPrefix(plan.currencySymbol)
+        }
         tvModel.text = "${Build.BRAND} ${Build.MODEL}"
         headerFeeAdapter.submitItems(plan.appProductHandleFeeConfigDtos)
     }

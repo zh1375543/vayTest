@@ -27,7 +27,7 @@ class LoanProductSummaryView @JvmOverloads constructor(
 
     fun bind(product: ProductBean, displayAmount: CharSequence) = with(binding) {
         tvProductName.text = product.productName
-        ivProductIcon.loadImage(product.productImageUrl, R.mipmap.ic_product_defalut_img)
+        ivProductIcon.loadImage(product.iconUrl, R.mipmap.ic_product_defalut_img)
         tvLoanAmount.text = context.getString(R.string.loan_amount, product.currency)
         tvAmount.text = displayAmount
     }

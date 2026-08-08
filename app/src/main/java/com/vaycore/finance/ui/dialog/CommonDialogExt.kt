@@ -223,7 +223,6 @@ fun Activity.showFeedbackDialog(action: (String) -> Unit) {
             root.setOnClickListener {
                 etContent.hideKeyboard()
             }
-            setCanceledOnTouchOutside(false)
             tvSubmit.setOnClickListener {
                 if (etContent.text.isNullOrBlank()) {
                     getString(R.string.enter_feedback).showToastMessage()

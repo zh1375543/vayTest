@@ -6,11 +6,9 @@
     <string name="welcome_to_app">Welcome to %1$s</string>
 
     <string name="permissions">Permissions</string>
-    <string name="permission_desc">Dear Customer,\nIn order to process and disburse your loan quickly, we need to collect certain permissions, including access to your LOCATION, CAMERA, PHONE STATE, NOTIFICATIONS, INSTALLED APPLICATIONS, SMS MESSAGES, and CALL LOGS.\nPlease grant the necessary permissions as specified below.</string>
+    <string name="permission_desc">Dear Customer,\nIn order to process and disburse your loan quickly, we need to collect certain permissions, including access to your LOCATION, CAMERA, PHONE STATE, NOTIFICATIONS, INSTALLED APPLICATIONS, and CALL LOGS.\nPlease grant the necessary permissions as specified below.</string>
     <string name="permission_call_title">COLLECTION OF CALL RECORDS</string>
     <string name="permission_call_content">In order to ensure that real users use the app in a normal environment, rather than using a simulator for fraudulent behavior, we need to obtain your call records, including phone number, name, and call time. The call records information will be uploaded to %s and will not be shared with third parties.</string>
-    <string name="permission_sms_title">SMS</string>
-    <string name="permission_sms_content">We collect all your SMS data but only monitor your messages related to financial transactions. To be specific, we will monitor the name of the sender, the description and the amount of transaction to perform credit risk assessment. This enables faster and quicker loan disbursal. No personal SMS data is monitored, read, stored or shared.</string>
     <string name="permissions_notification_title">NOTIFICATION</string>
     <string name="permissions_notification_content">Turn on message notifications to receive loan order progress notifications and service messages as soon as possible to avoid missing important information and help improve your user experience.Please read carefully and agree to the following agreement in order to use the APP.</string>
     <string name="permission_location_title">LOCATION</string>
@@ -69,7 +67,6 @@
     <string name="dialog_permission_calendar">calendar</string>
     <string name="dialog_permission_call">call log</string>
     <string name="dialog_permission_location">location</string>
-    <string name="dialog_permission_sms">Sms</string>
     <string name="dialog_permission_notification">Notification</string>
     <string name="please_sign">Please sign.</string>
     <string name="camera_str">Camera</string>
@@ -262,6 +259,7 @@
 
     <string name="loan_application">Loan Application</string>
     <string name="total_repayment">Total repayment</string>
+    <string name="total_Loan">Total loan</string>
     <string name="choose_account">Choose account receivable</string>
     <string name="bank_card_selected_count">%1$d/%2$d</string>
     <string name="add_account">Add Account receivable</string>
@@ -269,9 +267,7 @@
     <string name="agreement_confirmation_desc">We require image and file information to assist us in performing a credit risk assessment to identify your risk profile and provide customers with accurate credit analysis.
 The file information will be %s.
 We will delete the calendar information after we have determined your risk profile.
-We only collect and monitor financial transaction data, which includes transaction party name, transaction description, and transaction amount, for credit risk assessment purposes.
-This credit risk assessment can help make loan approvals faster and more efficient.
-No personal SMS messages will be accessed, read, or collected.</string>
+This credit risk assessment can help make loan approvals faster and more efficient.</string>
     <string name="please_review_agreement_confirmation">Please review the agreement and confirm signature</string>
     <string name="lease_contract">Lease contract</string>
     <string name="mortgage_contract">Mortgage contract</string>

@@ -186,13 +186,13 @@ class PayoutAndContactActivity : BaseActivity<ActivityPayoutAndContactBinding>()
                 }
             }
         }
-        relativesPhoneView.setContactClick {
+        relativesNameView.setContactClick {
             recordContactPickStart(ACT_selectContactName1Start, ContactPickTarget.PRIMARY)
         }
-        friendPhoneView.setContactClick {
+        friendNameView.setContactClick {
             recordContactPickStart(ACT_selectContactName2Start, ContactPickTarget.SECONDARY)
         }
-        additionalContactPhoneView.setContactClick {
+        additionalContactNameView.setContactClick {
             recordContactPickStart(ACT_selectContactName3Start, ContactPickTarget.ADDITIONAL)
         }
     }

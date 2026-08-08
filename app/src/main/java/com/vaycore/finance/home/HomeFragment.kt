@@ -280,7 +280,14 @@ class HomeFragment : BaseFragment<FragmentLoanHomeBinding>(R.layout.fragment_loa
             questionLayout.isVisible = false
             productLayout.isVisible = state.showProductList
             topLayout.isVisible = state.showCreditHeader
-            marqueeView.setTexts()
+            val showProductChrome = !state.showCalmPage
+            noticeLayout.isVisible = state.showProductList && showProductChrome
+            homeTicketCard.isVisible = state.showCreditHeader && showProductChrome
+            if (state.showProductList && showProductChrome) {
+                marqueeView.setTexts()
+            } else {
+                marqueeView.stop()
+            }
             contentLayout.isVisible = !state.showCalmPage
             loanDateStr = state.enableLoanDate
             tvLoan.isEnabled = state.loanEnabled

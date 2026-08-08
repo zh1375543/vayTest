@@ -215,7 +215,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_20"
-                android:text="@string/total_repayment"
+                android:text="@string/total_Loan"
                 android:textColor="@color/text_tertiary"
                 android:textSize="@dimen/sp_14"
                 app:layout_constraintBottom_toBottomOf="@id/tvAmount"
@@ -281,7 +281,7 @@
         android:id="@+id/bottomLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="tvPrivacy,bottomCard"
+        app:constraint_referenced_ids="bottomCard"
         tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

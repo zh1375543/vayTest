@@ -29,13 +29,11 @@ object PermissionCoordinator {
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.READ_PHONE_STATE,
             Manifest.permission.POST_NOTIFICATIONS,
-            Manifest.permission.READ_SMS,
         )
 
         PermissionScenario.DEVICE_RISK -> arrayOf(
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.READ_PHONE_STATE,
-            Manifest.permission.READ_SMS,
         )
     }
 
@@ -102,7 +100,6 @@ object PermissionCoordinator {
         Manifest.permission.READ_PHONE_STATE -> context.getString(R.string.dialog_permission_phone)
         Manifest.permission.READ_CALENDAR -> context.getString(R.string.dialog_permission_calendar)
         Manifest.permission.ACCESS_COARSE_LOCATION -> context.getString(R.string.dialog_permission_location)
-        Manifest.permission.READ_SMS -> context.getString(R.string.dialog_permission_sms)
         Manifest.permission.POST_NOTIFICATIONS -> context.getString(R.string.dialog_permission_notification)
         Manifest.permission.CAMERA -> context.getString(R.string.camera_str)
         else -> ""

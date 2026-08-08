@@ -128,6 +128,7 @@
                     android:layout_height="wrap_content"
                     app:errorText="@string/please_enter_contact_name"
                     app:formType="input"
+                    app:contactPickerVisible="@{!isCertified}"
                     app:hintText="@string/please_enter_contact_name"
                     app:inputType="text"
                     app:editable="@{!isCertified}"
@@ -143,8 +144,6 @@
                     app:formType="input"
                     app:hintText="@string/please_enter_phone_number"
                     app:inputType="phone"
-                    app:showContactIcon="true"
-                    app:contactPickerVisible="@{!isCertified}"
                     app:editable="@{!isCertified}"
                     app:titleText="@string/contact_phone_number" />
 
@@ -164,6 +163,7 @@
                     android:layout_height="wrap_content"
                     app:errorText="@string/please_enter_contact_name"
                     app:formType="input"
+                    app:contactPickerVisible="@{!isCertified}"
                     app:hintText="@string/please_enter_contact_name"
                     app:inputType="text"
                     app:editable="@{!isCertified}"
@@ -178,8 +178,6 @@
                     app:formType="input"
                     app:hintText="@string/please_enter_phone_number"
                     app:inputType="phone"
-                    app:showContactIcon="true"
-                    app:contactPickerVisible="@{!isCertified}"
                     app:editable="@{!isCertified}"
                     app:titleText="@string/contact_phone_number" />
 
@@ -205,6 +203,7 @@
                         android:layout_height="wrap_content"
                         app:errorText="@string/please_enter_contact_name"
                         app:formType="input"
+                        app:contactPickerVisible="@{!isCertified}"
                         app:hintText="@string/please_enter_contact_name"
                         app:inputType="text"
                         app:editable="@{!isCertified}"
@@ -219,8 +218,6 @@
                         app:formType="input"
                         app:hintText="@string/please_enter_phone_number"
                         app:inputType="phone"
-                        app:showContactIcon="true"
-                        app:contactPickerVisible="@{!isCertified}"
                         app:editable="@{!isCertified}"
                         app:titleText="@string/contact_phone_number" />
                 </LinearLayout>
