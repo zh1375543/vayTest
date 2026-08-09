@@ -91,6 +91,7 @@ class HomeFragment : BaseFragment<FragmentLoanHomeBinding>(R.layout.fragment_loa
                                 requireContext(),
                                 product.downloadUrl,
                             )
+                            4 -> context.start<CombinedLoanOfferActivity>()
                             else -> {
                                 productVm.getProductDetail(
                                     PageHome,

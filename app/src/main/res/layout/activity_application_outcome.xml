@@ -218,6 +218,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/resultCardBottomBarrier"
+                        app:layout_constraintVertical_bias="0"
                         app:radius="@dimen/dp_24"
                         app:solidColor="@color/surface_secondary"
                         tools:visibility="visible">

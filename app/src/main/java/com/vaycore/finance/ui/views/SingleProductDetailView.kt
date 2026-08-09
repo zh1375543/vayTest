@@ -158,6 +158,8 @@ class SingleProductDetailView @JvmOverloads constructor(
     private fun updateInstallment(item: ProductBean) {
         binding.apply {
             val productId = currentProduct?.id ?: currentProduct?.productId
+            tvInstallDetail.isVisible = true
+            ivMorePlan.isVisible = true
 
             if (!item.productInstallmentPlanDTOList.isNullOrEmpty()) {
                 val list = item.productInstallmentPlanDTOList
@@ -175,14 +177,10 @@ class SingleProductDetailView @JvmOverloads constructor(
 
                 repaymentGroup.isVisible = true
                 repaymentHeaderGroup.isVisible = true
-                ivMorePlan.isVisible = true
-                tvInstallDetail.isVisible = true
             } else {
                 onInstallmentChanged?.invoke(productId, null)
                 repaymentGroup.isVisible = false
                 repaymentHeaderGroup.isVisible = false
-                ivMorePlan.isVisible = false
-                tvInstallDetail.isVisible = false
             }
         }
     }

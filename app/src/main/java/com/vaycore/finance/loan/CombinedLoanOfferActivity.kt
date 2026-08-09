@@ -177,15 +177,14 @@ class CombinedLoanOfferActivity : BaseActivity<ActivityCombinedLoanOfferBinding>
             pawnUrl = PAWN_AGREEMENT +
                 "userId=${loginInfo?.id}&productId=$agreementProductIds&amount=${loan.canApplyAmount}"
 
-            if (cardInfo == null) {
-                cardInfo = BankAccountResponse(
-                    id = loan.userCashWalletId ?: loan.bankInfoId,
-                    bankNo = loan.walletAccount ?: loan.bankNo,
-                    payWay = if (loan.userCashWalletId != null) "WALLET" else "CARD",
+            renderPayoutAccount(
+                BankAccountResponse(
+                    id = loan.bankInfoId ?: loan.userCashWalletId,
+                    bankNo = loan.bankNo ?: loan.walletAccount,
+                    payWay = if (loan.bankInfoId != null) "CARD" else "WALLET",
                 )
-            }
+            )
             binding.togetherInfo = loan
-            binding.account = cardInfo
             binding.bottomLayout.isVisible = true
             binding.loadingLayout.showContent()
         }
@@ -193,8 +192,7 @@ class CombinedLoanOfferActivity : BaseActivity<ActivityCombinedLoanOfferBinding>
         accountVm.loanAccountList.observe(this@CombinedLoanOfferActivity) { accounts ->
             accounts ?: return@observe
             chooseAccountsDialog(cardInfo?.bankNo, accounts, false) { card ->
-                cardInfo = card
-                binding.account = card
+                renderPayoutAccount(card)
             }
         }
     }
@@ -207,6 +205,12 @@ class CombinedLoanOfferActivity : BaseActivity<ActivityCombinedLoanOfferBinding>
 
     private fun productIdsForTrack(): String = togetherAdapter.items.joinToString(",") { product ->
         (product.id ?: product.productId).toString()
+    }
+
+    private fun renderPayoutAccount(account: BankAccountResponse) = with(binding) {
+        cardInfo = account
+        binding.account = account
+        loanTipLayout.isVisible = account.payWay == "WALLET"
     }
 
     private fun buildSubmissionMaps(): Pair<MutableMap<Long?, Int?>, MutableMap<Long?, Long?>> {

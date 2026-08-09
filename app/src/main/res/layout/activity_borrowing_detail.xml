@@ -209,10 +209,40 @@
 
                         <TextView
                             style="@style/OrderDetailInfoLabel"
+                            android:id="@+id/tvLoanDateTitle"
+                            android:text="@string/loan_date"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvApplyDateTitle" />
+
+                        <TextView
+                            style="@style/OrderDetailInfoValue"
+                            android:id="@+id/tvLoanDate"
+                            app:layout_constraintBaseline_toBaselineOf="@id/tvLoanDateTitle"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tvLoanDateTitle"
+                            tools:text="1/2/2025" />
+
+                        <TextView
+                            style="@style/OrderDetailInfoLabel"
+                            android:id="@+id/tvDueDateTitle"
+                            android:text="@string/due_date"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvLoanDateTitle" />
+
+                        <TextView
+                            style="@style/OrderDetailInfoValue"
+                            android:id="@+id/tvDueDate"
+                            app:layout_constraintBaseline_toBaselineOf="@id/tvDueDateTitle"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tvDueDateTitle"
+                            tools:text="1/2/2025" />
+
+                        <TextView
+                            style="@style/OrderDetailInfoLabel"
                             android:id="@+id/tvLoanPeriodTitle"
                             android:text="@string/loan_period"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/tvApplyDateTitle" />
+                            app:layout_constraintTop_toBottomOf="@id/tvDueDateTitle" />
 
                         <TextView
                             style="@style/OrderDetailInfoValue"
@@ -223,18 +253,6 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/tvLoanPeriodTitle"
                             tools:text="91 Days" />
-
-                        <TextView
-                            android:id="@+id/tvLoanDate"
-                            android:layout_width="@dimen/dp_0"
-                            android:layout_height="@dimen/dp_0"
-                            android:visibility="gone" />
-
-                        <TextView
-                            android:id="@+id/tvDueDate"
-                            android:layout_width="@dimen/dp_0"
-                            android:layout_height="@dimen/dp_0"
-                            android:visibility="gone" />
 
                         <TextView
                             android:id="@+id/tvDaysLegacy"
@@ -274,18 +292,6 @@
 
                         <TextView
                             android:id="@+id/tvLoanAmountLegacy"
-                            android:layout_width="@dimen/dp_0"
-                            android:layout_height="@dimen/dp_0"
-                            android:visibility="gone" />
-
-                        <TextView
-                            android:id="@+id/tvLoanDateTitle"
-                            android:layout_width="@dimen/dp_0"
-                            android:layout_height="@dimen/dp_0"
-                            android:visibility="gone" />
-
-                        <TextView
-                            android:id="@+id/tvDueDateTitle"
                             android:layout_width="@dimen/dp_0"
                             android:layout_height="@dimen/dp_0"
                             android:visibility="gone" />
@@ -585,15 +591,25 @@
                             android:textColor="@color/text_primary"
                             android:textSize="@dimen/sp_16"
                             android:textStyle="bold"
-                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/ivInstallmentArrow"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/ivInstallmentArrow"
+                            android:layout_width="@dimen/dp_22"
+                            android:layout_height="@dimen/dp_22"
+                            android:layout_marginEnd="@dimen/dp_9"
+                            android:src="@mipmap/order_arrow_bottom"
+                            app:layout_constraintBottom_toBottomOf="@id/tvInstallment"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/tvInstallment" />
 
                         <androidx.constraintlayout.widget.Group
                             android:id="@+id/installLayout"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:constraint_referenced_ids="tvInstallment" />
+                            app:constraint_referenced_ids="tvInstallment,ivInstallmentArrow" />
 
                         <TextView
                             android:id="@+id/tvDate"
@@ -717,6 +733,50 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="₱500,000,000" />
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/state1ActionLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp_48"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:visibility="gone"
+                    app:layout_goneMarginTop="@dimen/dp_16"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvSelectAmount">
+
+                    <com.vaycore.finance.ui.views.StatefulActionButton
+                        android:id="@+id/state1Repay"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/repay"
+                        android:textSize="@dimen/sp_14"
+                        android:textStyle="bold"
+                        app:actionButtonVariant="outline"
+                        app:buttonStrokeColor="@color/brand_primary"
+                        app:buttonTextColor="@color/brand_primary"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_percent="0.33" />
+
+                    <com.vaycore.finance.ui.views.StatefulActionButton
+                        android:id="@+id/state1Borrow"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/dp_8"
+                        android:gravity="center"
+                        android:text="@string/borrow_and_repay"
+                        android:textSize="@dimen/sp_14"
+                        android:textStyle="bold"
+                        app:buttonRadius="@dimen/dp_24"
+                        app:buttonSolidColor="@color/brand_primary"
+                        app:buttonTextColor="@color/text_inverse"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/state1Repay"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <com.vaycore.finance.ui.views.StatefulActionButton
                     android:id="@+id/tvRepay"
                     android:layout_width="0dp"
@@ -781,7 +841,7 @@
                     android:id="@+id/tvBorrowAll"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/dp_52"
-                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginTop="@dimen/dp_20"
                     android:gravity="center"
                     android:text="@string/repay_auto_apply_all"
                     android:textSize="@dimen/sp_18"
@@ -809,7 +869,7 @@
                     app:layout_constraintEnd_toEndOf="@id/tvBorrow"
                     app:layout_constraintTop_toTopOf="@id/tvBorrow"
                     app:radius="@dimen/dp_14"
-                    app:solidColor="@color/badge_highlight" />
+                    app:solidColor="@color/status_error" />
 
                 <com.vaycore.finance.ui.views.StyledTextView
                     android:id="@+id/tvBorrowAllTip"
@@ -826,7 +886,7 @@
                     app:layout_constraintEnd_toEndOf="@id/tvBorrowAll"
                     app:layout_constraintTop_toTopOf="@id/tvBorrowAll"
                     app:radius="@dimen/dp_14"
-                    app:solidColor="@color/badge_highlight" />
+                    app:solidColor="@color/status_error" />
 
                 <androidx.constraintlayout.widget.Barrier
                     android:id="@+id/bottomActionBarrier"
@@ -834,7 +894,7 @@
                     android:layout_height="wrap_content"
                     app:barrierAllowsGoneWidgets="false"
                     app:barrierDirection="bottom"
-                    app:constraint_referenced_ids="tvRepay,tvBorrow,tvBorrowAll" />
+                    app:constraint_referenced_ids="state1ActionLayout,tvRepay,tvBorrow,tvBorrowAll" />
 
                 <View
                     android:layout_width="@dimen/dp_0"

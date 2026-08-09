@@ -330,7 +330,7 @@ class IdentityVerificationActivity : BaseActivity<ActivityIdentityVerificationBi
 
     private fun connectKycCompletion() = with(binding) {
         btNext.singleClick {
-            if (typeView.isVisible && typeView.getText().isBlank()) {
+            if (idLayout.isVisible && typeView.getText().isBlank()) {
                 typeView.showError()
                 return@singleClick
             }

@@ -16,6 +16,7 @@
     <TextView
         android:id="@+id/tvCertTitle"
         android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/dp_10"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_16"
         android:text="@string/certification"
@@ -29,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_16"
-        android:layout_marginTop="@dimen/dp_4"
+        android:layout_marginTop="@dimen/dp_10"
         android:gravity="start"
         android:text="@string/cert_desc"
         android:textColor="@color/text_body"

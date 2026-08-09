@@ -10,7 +10,11 @@ import java.math.BigDecimal
 
 @BindingAdapter("accountType")
 fun TextView.bindAccountType(payWay: String?) {
-    text = payWay?.lowercase().orEmpty()
+    text = when (payWay) {
+        "CARD" -> context.getString(R.string.bank)
+        "WALLET" -> context.getString(R.string.e_wallet)
+        else -> ""
+    }
 }
 
 /** Renders the local icon that matches the selected payout account type. */

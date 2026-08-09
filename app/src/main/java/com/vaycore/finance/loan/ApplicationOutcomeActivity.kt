@@ -26,7 +26,10 @@ import com.vaycore.finance.loan.adapter.ApplicationResultAdapter
 import com.vaycore.finance.loan.viewmodel.LoanApplyViewModel
 import com.vaycore.finance.loan.viewmodel.LoanProductViewModel
 import com.vaycore.finance.ui.extension.singleClick
+import com.vaycore.finance.ui.showCreditUnderReviewDialog
+import com.vaycore.finance.ui.showPreCreditExpiredDialog
 import com.vaycore.finance.util.AppStackUtil
+import com.vaycore.finance.util.ExternalActionLauncher
 import com.vaycore.finance.util.LOAN_GET_NOW_CLICK
 import com.vaycore.finance.util.loanevent.LoanEventRecorder
 import com.vaycore.finance.util.LogUtil
@@ -96,7 +99,7 @@ class ApplicationOutcomeActivity :
             setOnChildClickListener { view, _, position ->
                 if (view.id == R.id.tvApply) {
                     items.getOrNull(position)?.let { item ->
-                        handleRecommendedProductClick(item.product)
+                        handleRecommendedProductClick(item)
                     }
                 }
             }
@@ -110,7 +113,7 @@ class ApplicationOutcomeActivity :
         }
         titleBar.setNavigationAction { returnToDashboard() }
         tvWithdrawal.singleClick {
-            start<CombinedLoanOfferActivity>()
+            openCombinedLoanOffer()
         }
         rvProduct.adapter = resultAdapter
         rvCashableProduct.adapter = homeAdapter
@@ -134,14 +137,33 @@ class ApplicationOutcomeActivity :
         MainActivity.Companion.launch(this)
     }
 
-    private fun handleRecommendedProductClick(item: ProductBean) {
+    private fun handleRecommendedProductClick(item: HomeProductUi) {
         trackEvent(LOAN_GET_NOW_CLICK)
-        productVm.getProductDetail(
-            PageHome,
-            item.productId.toString(),
-            item.maxLoanAmount.toString(),
-            true,
-        ) {}
+        if (!item.canApply) return
+
+        val product = item.product
+        if (product.creditStatus == 2) {
+            showPreCreditExpiredDialog(product.enableLoanStr.orEmpty())
+            return
+        }
+        if (product.creditStatus == 0) {
+            showCreditUnderReviewDialog()
+            return
+        }
+
+        when (product.jumpType) {
+            1 -> product.downloadUrl?.let {
+                ExternalActionLauncher.openBrowser(this, it)
+            }
+            2 -> ExternalActionLauncher.openStoreListing(this, product.downloadUrl)
+            4 -> openCombinedLoanOffer()
+            else -> productVm.getProductDetail(
+                PageHome,
+                product.productId.toString(),
+                product.maxLoanAmount.toString(),
+                true,
+            ) {}
+        }
     }
 
     private fun refreshRecommendedProducts() {
@@ -188,10 +210,23 @@ class ApplicationOutcomeActivity :
 
     private fun handleProductDetail(data: ProductBean?) {
         data ?: return
-        AppStackUtil.finishActivity(LoanOfferActivity::class.java)
+        finishPreviousLoanFlow()
         start<LoanOfferActivity> {
             putExtra("product", data)
         }
+        finish()
+    }
+
+    private fun openCombinedLoanOffer() {
+        finishPreviousLoanFlow()
+        start<CombinedLoanOfferActivity>()
+        finish()
+    }
+
+    private fun finishPreviousLoanFlow() {
+        AppStackUtil.finishActivity(CombinedLoanOfferActivity::class.java)
+        AppStackUtil.finishActivity(AgreementSignatureActivity::class.java)
+        AppStackUtil.finishActivity(LoanOfferActivity::class.java)
     }
 
 

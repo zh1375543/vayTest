@@ -71,6 +71,31 @@
                     app:radius="@dimen/dp_14"
                     app:solidColor="@color/brand_primary" />
 
+                <com.vaycore.finance.ui.views.StyledTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:paddingVertical="@dimen/dp_3"
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:gravity="center"
+                    android:text="@string/payso"
+                    android:textColor="@color/text_inverse"
+                    android:textSize="@dimen/sp_12"
+                    app:radius="@dimen/dp_14"
+                    app:solidColor="@color/brand_primary" />
+                <com.vaycore.finance.ui.views.StyledTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:paddingVertical="@dimen/dp_3"
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:gravity="center"
+                    android:text="@string/more"
+                    android:textColor="@color/text_inverse"
+                    android:textSize="@dimen/sp_12"
+                    app:radius="@dimen/dp_14"
+                    app:solidColor="@color/brand_primary" />
+
 
             </LinearLayout>
         </LinearLayout>

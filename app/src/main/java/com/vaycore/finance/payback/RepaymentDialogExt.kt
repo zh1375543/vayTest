@@ -9,6 +9,7 @@ import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.view.WindowManager
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import com.vaycore.finance.R
 import com.vaycore.finance.base.BaseDialog
 import com.vaycore.finance.databinding.PaybackDialogBinding
@@ -32,6 +33,14 @@ fun Context.showRepayAndReapplyDialog(
             super.initView()
             setOnCancelListener { closeAction() }
             cbUnderstand.isSelected = true
+            tvTitle.isVisible = !isApplyAll
+            tvDesc.setText(
+                if (isApplyAll) {
+                    R.string.repay_auto_apply_all_dialog_desc
+                } else {
+                    R.string.repay_auto_apply_dialog_desc
+                }
+            )
             tvHint.text = this@showRepayAndReapplyDialog.createRepayHintText()
             btnApply.text = getString(
                 if (isApplyAll) R.string.repay_auto_apply_all else R.string.repay_auto_apply
@@ -57,10 +66,6 @@ fun Context.showRepayAndReapplyDialog(
             tvUnderstand.singleClick {
                 cbUnderstand.isSelected = !cbUnderstand.isSelected
             }
-            btnClose.singleClick {
-                dismiss()
-                closeAction()
-            }
             btnApply.singleClick {
                 if (!cbUnderstand.isSelected) {
                     getString(R.string.toast_repay_auto_apply_agreement).showToastMessage()
@@ -82,7 +87,7 @@ private fun Context.createRepayHintText(): CharSequence {
             val repayEnd = repayStart + repayText.length
             setSpan(
                 ForegroundColorSpan(
-                    ContextCompat.getColor(this@createRepayHintText, R.color.color_FF8000)
+                    ContextCompat.getColor(this@createRepayHintText, R.color.brand_primary)
                 ),
                 repayStart,
                 repayEnd,

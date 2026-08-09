@@ -148,7 +148,7 @@
     <string name="message_content">Message Content</string>
 
     <string name="account_receivable">Accounts receivable</string>
-    <string name="account_receivable_tips">Add or delete transaction bank account</string>
+    <string name="account_receivable_tips">Add or delete transaction account</string>
     <string name="empty_bankcard">No Accounts Receivable, please complete the information and evaluate the credit value</string>
     <string name="add_account_receivable">Add Collection Account</string>
     <string name="toast_add_account_receivable">Collection account added successfully!</string>
@@ -222,6 +222,7 @@
     <string name="disbursed_quickly">Disbursed quickly</string>
     <string name="repay_auto_apply_dialog_title">Auto-renewal after repayment!</string>
     <string name="repay_auto_apply_dialog_desc">Enjoy exclusive priority review and lightning-fast disbursement!</string>
+    <string name="repay_auto_apply_all_dialog_desc">Repay this loan and automatically apply for all eligible loan products available to you!</string>
     <string name="repay_auto_apply_dialog_hint">If you prefer not to continue, close this window and tap &quot;Repay&quot; only.</string>
     <string name="repay_auto_apply_dialog_understand">I understand.</string>
     <string name="select_amount">Selected amount</string>
@@ -301,7 +302,8 @@ This credit risk assessment can help make loan approvals faster and more efficie
     <string name="select_withdraw_method">Select withdraw method</string>
     <string name="select_e_wallet">Select E-Wallet</string>
     <string name="gcash">Gcash</string>
-    <string name="more">more</string>
+    <string name="payso">Payso</string>
+    <string name="more">More</string>
     <string name="higher_credit_limit">Higher credit limit</string>
     <string name="all_major_banks">All major banks in the Philippines</string>
     <string name="first_name">First name</string>

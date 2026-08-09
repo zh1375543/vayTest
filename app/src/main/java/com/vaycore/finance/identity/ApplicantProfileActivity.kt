@@ -464,12 +464,16 @@ class ApplicantProfileActivity :
                 scrollToInvalidField(genderView)
                 return@singleClick
             }
-            if (birthView.getText().isBlank() || !birthView.getText().isAdult()) {
+            val birthDate = birthView.getText()
+            if (birthDate.isBlank()) {
                 birthView.showError()
                 scrollToInvalidField(birthView)
-                if (!birthView.getText().isAdult()) {
-                    getString(R.string.under_18).showToastMessage()
-                }
+                return@singleClick
+            }
+            if (!birthDate.isAdult()) {
+                birthView.showError()
+                scrollToInvalidField(birthView)
+                getString(R.string.under_18).showToastMessage()
                 return@singleClick
             }
             if (idCardView.getText().isBlank()) {

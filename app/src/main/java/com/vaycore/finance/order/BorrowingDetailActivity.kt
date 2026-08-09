@@ -142,10 +142,15 @@ class BorrowingDetailActivity :
             ),
         )
         rvPlan.adapter = installAdapter
-        tvInstallment.singleClick {
+        state1Repay.singleClick { tvRepay.performClick() }
+        state1Borrow.singleClick { tvBorrow.performClick() }
+        val toggleInstallmentContent = {
             val expanded = !installmentContentGroup.isVisible
             installmentContentGroup.isVisible = expanded
+            ivInstallmentArrow.rotation = if (expanded) 180f else 0f
         }
+        tvInstallment.singleClick { toggleInstallmentContent() }
+        ivInstallmentArrow.singleClick { toggleInstallmentContent() }
     }
 
     private fun connectPaymentEntry() = with(binding) {
@@ -204,10 +209,6 @@ class BorrowingDetailActivity :
             } else {
                 showRepayAndReapplyDialog(
                     isDue = tvBorrow.isSelected,
-                    closeAction = {
-                        cbAutoApply.isSelected = false
-                        refreshAutoApplyButtons()
-                    },
                     confirmAction = {
                         vm.repayAndBorrow(orderId, 1) {
                             proceedWithSelectedRepayment()
@@ -217,13 +218,13 @@ class BorrowingDetailActivity :
             }
         }
         tvBorrowAll.singleClick {
+            if (installLayout.isVisible && installAdapter.items.none { item -> !item.isSettle() && item.isSelect }) {
+                getString(R.string.toast_repayment_select).showToastMessage()
+                return@singleClick
+            }
             showRepayAndReapplyDialog(
                 isDue = tvBorrow.isSelected,
                 isApplyAll = true,
-                closeAction = {
-                    cbAutoApply.isSelected = false
-                    refreshAutoApplyButtons()
-                },
                 confirmAction = {
                     vm.repayAndBorrow(orderId, 2) {
                         proceedWithSelectedRepayment()
@@ -304,6 +305,7 @@ class BorrowingDetailActivity :
         installmentTipLayout.isVisible = hasInstallments
         installLayout.isVisible = hasInstallments
         installmentContentGroup.isVisible = hasInstallments
+        ivInstallmentArrow.rotation = if (hasInstallments) 180f else 0f
         detail.appOrderInfoDto?.let { order ->
             tvLoanAmount.text =
                 String.format(getString(R.string.loan_amount), order.currency)
@@ -523,7 +525,6 @@ class BorrowingDetailActivity :
             "0" -> tvRepay.text = getString(R.string.repay)
             "1" -> {
                 tvRepay.text = getString(R.string.repay)
-                tvBorrow.text = getString(R.string.repay_auto_apply)
             }
             "3", "4" -> refreshAutoApplyButtons()
             else -> {
@@ -539,12 +540,14 @@ class BorrowingDetailActivity :
         val isState3 = sign == "3"
         val isState4 = sign == "4"
         val isState2 = !isState0 && !isState1 && !isState3 && !isState4
-        tvSelect.isVisible = true
-        tvSelectAmount.isVisible = true
-        tvRepay.isVisible = isState0 || isState1 || isState2
+        val showSelectedAmount = installLayout.isVisible
+        tvSelect.isVisible = showSelectedAmount
+        tvSelectAmount.isVisible = showSelectedAmount
+        state1ActionLayout.isVisible = isState1
+        tvRepay.isVisible = isState0 || isState2
         cbAutoApply.isVisible = isState2 || isState3 || isState4
         tvPrivacy.isVisible = isState2 || isState3 || isState4
-        tvBorrow.isVisible = !isState0
+        tvBorrow.isVisible = !isState0 && !isState1
         tvBorrowAll.isVisible = isState4 && cbAutoApply.isSelected
         tvBorrowTip.isVisible = isState2 || (isState3 && cbAutoApply.isSelected)
         tvBorrowAllTip.isVisible = isState4 && cbAutoApply.isSelected

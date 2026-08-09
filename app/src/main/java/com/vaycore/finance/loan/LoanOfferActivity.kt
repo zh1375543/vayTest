@@ -303,14 +303,13 @@ class LoanOfferActivity : BaseActivity<ActivityLoanOfferBinding>() {
                     productSummaryView.setExpanded(detailView.isVisible)
 
                     detailView.setData(it)
-                    if (cardInfo == null) {
-                        cardInfo = BankAccountResponse(
+                    renderPayoutAccount(
+                        BankAccountResponse(
                             id = it.bankInfoId ?: it.userCashWalletId,
                             bankNo = it.bankNo ?: it.walletAccount,
                             payWay = if (it.bankInfoId != null) "CARD" else "WALLET",
                         )
-                        binding.account = cardInfo
-                    }
+                    )
                     if (it.bankInfoPayOutFailSign && !isShowBankcardError) {
                         lifecycleScope.launch {
                             delay(500.milliseconds)
@@ -331,8 +330,7 @@ class LoanOfferActivity : BaseActivity<ActivityLoanOfferBinding>() {
         accountVm.loanAccountList.observe(this@LoanOfferActivity) {
             it?.let {
                 chooseAccountsDialog(cardInfo?.bankNo, it, false) { card ->
-                    cardInfo = card
-                    binding.account = card
+                    renderPayoutAccount(card)
                 }
             }
         }
@@ -355,5 +353,11 @@ class LoanOfferActivity : BaseActivity<ActivityLoanOfferBinding>() {
     private fun renderOfferSummary(plan: ProductBean) = with(binding) {
         val currencySymbol = plan.currencySymbol ?: product?.currencySymbol
         detailView.bindHeaderDetail(plan, currencySymbol)
+    }
+
+    private fun renderPayoutAccount(account: BankAccountResponse) = with(binding) {
+        cardInfo = account
+        binding.account = account
+        loanTipLayout.isVisible = account.payWay == "WALLET"
     }
 }
