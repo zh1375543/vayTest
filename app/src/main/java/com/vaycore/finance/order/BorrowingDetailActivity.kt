@@ -66,6 +66,7 @@ class BorrowingDetailActivity :
     private val orderId by lazy { intent.getLongExtra("orderId", 0L) }
     // Server state reloanButtonSign supports "0"-"4"; null/unknown values fall back to state 2.
     private var currentButtonSign: String? = null
+    private var isCurrentOrderDue = false
     private var isAwaitingBottomActionState = false
     private val feeAdapter by lazy {
         BorrowingFeeBreakdownAdapter()
@@ -264,6 +265,7 @@ class BorrowingDetailActivity :
             tvBorrowAll.isVisible = currentButtonSign == "4" && cbAutoApply.isSelected
             tvBorrowTip.isVisible = currentButtonSign == "3" && cbAutoApply.isSelected
             tvBorrowAllTip.isVisible = currentButtonSign == "4" && cbAutoApply.isSelected
+            updateBottomActionColors(isCurrentOrderDue)
         }
     }
 
@@ -412,6 +414,7 @@ class BorrowingDetailActivity :
                 detail.actualNeedRepayAmount.formatAmountWithPrefix(order.currencySymbol)
             val isDue =
                 order.status == ORDER_STATUS_OVERDUE || order.status == ORDER_STATUS_BAD_DEBTS
+            isCurrentOrderDue = isDue
             tvDueFee.isVisible = isDue
             tvDueFeeTitle.isVisible = isDue
             tvDueFee.text =
@@ -468,6 +471,7 @@ class BorrowingDetailActivity :
         }
         buttonResult.observe(this@BorrowingDetailActivity) { sign ->
             if (isAwaitingBottomActionState) {
+                // TODO: Test only. Restore the server-provided button state after state 1 verification.
                 renderRepaymentActionState(sign)
                 binding.bottomActionLayout.visibility = View.VISIBLE
                 isAwaitingBottomActionState = false
@@ -532,6 +536,7 @@ class BorrowingDetailActivity :
                 tvBorrow.text = getString(R.string.repay_auto_apply)
             }
         }
+        updateBottomActionColors(isCurrentOrderDue)
     }
 
     private fun syncBottomVisibility(sign: String?) = with(binding) {
@@ -544,31 +549,48 @@ class BorrowingDetailActivity :
         tvSelect.isVisible = showSelectedAmount
         tvSelectAmount.isVisible = showSelectedAmount
         state1ActionLayout.isVisible = isState1
+        state1BorrowTip.isVisible = isState1
         tvRepay.isVisible = isState0 || isState2
-        cbAutoApply.isVisible = isState2 || isState3 || isState4
-        tvPrivacy.isVisible = isState2 || isState3 || isState4
+        cbAutoApply.isVisible = isState1 || isState2 || isState3 || isState4
+        tvPrivacy.isVisible = isState1 || isState2 || isState3 || isState4
         tvBorrow.isVisible = !isState0 && !isState1
         tvBorrowAll.isVisible = isState4 && cbAutoApply.isSelected
         tvBorrowTip.isVisible = isState2 || (isState3 && cbAutoApply.isSelected)
         tvBorrowAllTip.isVisible = isState4 && cbAutoApply.isSelected
     }
 
-    // Only state 2 blocks Auto-Apply while the agreement is unchecked.
+    // States 1 and 2 require agreement before Repay & Auto-Apply can continue.
     private fun shouldBlockUncheckedAgreement(): Boolean =
-        currentButtonSign != "1" && currentButtonSign != "3" && currentButtonSign != "4" &&
-            binding.cbAutoApply.isVisible && !binding.cbAutoApply.isSelected
+        (currentButtonSign == "1" || currentButtonSign == "2") &&
+            !binding.cbAutoApply.isSelected
 
     private fun updateBottomActionColors(isDue: Boolean) = with(binding) {
         val actionColor = resolveColorCompat(if (isDue) R.color.status_error else R.color.brand_primary)
+        val borrowColor =
+            if (currentButtonSign == "2" || currentButtonSign == "3") {
+                resolveColorCompat(R.color.brand_primary)
+            } else {
+                actionColor
+            }
         tvRepay.updateAppearance(
             variant = StatefulActionButton.VARIANT_OUTLINE,
             strokeColor = actionColor,
             textColor = actionColor,
         )
-        tvBorrow.updateAppearance(
-            variant = StatefulActionButton.VARIANT_FILLED,
-            solidColor = actionColor,
-            textColor = resolveColorCompat(R.color.text_inverse),
-        )
+        val showRepayStyle =
+            (currentButtonSign == "3" || currentButtonSign == "4") && !cbAutoApply.isSelected
+        if (showRepayStyle) {
+            tvBorrow.updateAppearance(
+                variant = StatefulActionButton.VARIANT_OUTLINE,
+                strokeColor = actionColor,
+                textColor = actionColor,
+            )
+        } else {
+            tvBorrow.updateAppearance(
+                variant = StatefulActionButton.VARIANT_FILLED,
+                solidColor = borrowColor,
+                textColor = resolveColorCompat(R.color.text_inverse),
+            )
+        }
     }
 }

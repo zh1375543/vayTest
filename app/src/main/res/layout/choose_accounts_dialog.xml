@@ -27,7 +27,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCard"
         android:layout_width="@dimen/dp_0"
-        android:layout_height="@dimen/dp_132"
+        android:layout_height="@dimen/dp_148"
         android:layout_marginHorizontal="@dimen/dp_20"
         android:layout_marginTop="@dimen/dp_16"
         android:orientation="vertical"

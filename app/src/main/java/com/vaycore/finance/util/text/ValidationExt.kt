@@ -15,35 +15,16 @@ fun String.isIdCardValid(): Boolean {
 }
 
 fun String.isAdult(): Boolean {
-    val parts = split("-")
-    if (parts.size != 3) return false
-
-    val day = parts[0].toIntOrNull() ?: return false
-    val month = parts[1].toIntOrNull() ?: return false
-    val year = parts[2].toIntOrNull() ?: return false
-    if (year <= 0 || month !in 1..12 || day <= 0) return false
-
-    val birth = Calendar.getInstance().apply {
-        isLenient = false
-        clear()
-        set(year, month - 1, day) // Calendar months are 0-based
+    val date = parseDmyDateParts() ?: return false
+    val today = Calendar.getInstance()
+    var age = today.get(Calendar.YEAR) - date.year
+    if (today.get(Calendar.MONTH) < date.month - 1 ||
+        (today.get(Calendar.MONTH) == date.month - 1 &&
+            today.get(Calendar.DAY_OF_MONTH) < date.day)
+    ) {
+        age--
     }
-
-    return try {
-        birth.timeInMillis // Force strict validation for dates such as 31-02-2000.
-
-        val today = Calendar.getInstance()
-        var age = today.get(Calendar.YEAR) - year
-        if (today.get(Calendar.MONTH) < month - 1 ||
-            (today.get(Calendar.MONTH) == month - 1 &&
-                    today.get(Calendar.DAY_OF_MONTH) < day)
-        ) {
-            age--
-        }
-        age >= 18
-    } catch (_: IllegalArgumentException) {
-        false
-    }
+    return age >= 18
 }
 
 fun String.isEmailValid(): Boolean {

@@ -14,16 +14,28 @@
 
     <TextView
         android:id="@+id/tvName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_12"
+        android:layout_marginEnd="@dimen/dp_10"
+        android:ellipsize="end"
+        android:gravity="end"
+        android:maxLines="1"
         android:text="Loan A"
         android:textColor="@color/text_inverse"
         android:textSize="@dimen/sp_14"
         android:textStyle="normal"
-        android:layout_marginEnd="@dimen/dp_10"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/leftContentEndBarrier"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/leftContentEndBarrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="tvLoan,tvAmount" />
 
     <TextView
         android:id="@+id/tvAmount"

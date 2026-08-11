@@ -40,7 +40,7 @@ class WheelDateView @JvmOverloads constructor(
             refreshMonthWheel()
         }
         monthWheel.setOnSelectListener { _, v ->
-            selectedMonth = v.info.toIntOrNull() ?: selectedMonth
+            selectedMonth = v.id.takeIf { it in 1..12 } ?: selectedMonth
             refreshDayWheel()
         }
         dayWheel.setOnSelectListener { _, v ->
@@ -80,7 +80,12 @@ class WheelDateView @JvmOverloads constructor(
         val maxMonth = if (year == today.get(Calendar.YEAR)) {
             today.get(Calendar.MONTH) + 1
         } else 12
-        return (1..maxMonth).map { SelectionOption(it.toString()) }
+        return (1..maxMonth).map { month ->
+            SelectionOption(
+                info = MONTH_ABBREVIATIONS[month - 1],
+                id = month,
+            )
+        }
     }
 
     private fun makeDays(year: Int, month: Int): List<SelectionOption> {
@@ -101,10 +106,17 @@ class WheelDateView @JvmOverloads constructor(
     }
 
     fun getDateString(): String = String.format(
-        Locale.getDefault(),
-        "%d-%02d-%02d",
+        Locale.ENGLISH,
+        "%d-%s-%d",
         selectedDay,
-        selectedMonth,
+        MONTH_ABBREVIATIONS[selectedMonth - 1],
         selectedYear
     )
+
+    private companion object {
+        val MONTH_ABBREVIATIONS = listOf(
+            "JAN", "FEB", "MAR", "APR", "MAY", "JUN",
+            "JUL", "AUG", "SEP", "OCT", "NOV", "DEC",
+        )
+    }
 }

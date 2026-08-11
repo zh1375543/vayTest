@@ -738,11 +738,13 @@
                     android:layout_width="0dp"
                     android:layout_height="@dimen/dp_48"
                     android:layout_marginTop="@dimen/dp_16"
+                    android:clipChildren="false"
+                    android:clipToPadding="false"
                     android:visibility="gone"
                     app:layout_goneMarginTop="@dimen/dp_16"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvSelectAmount">
+                    app:layout_constraintTop_toBottomOf="@id/cbAutoApply">
 
                     <com.vaycore.finance.ui.views.StatefulActionButton
                         android:id="@+id/state1Repay"
@@ -765,7 +767,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginStart="@dimen/dp_8"
                         android:gravity="center"
-                        android:text="@string/borrow_and_repay"
+                        android:text="@string/repay_auto_apply"
                         android:textSize="@dimen/sp_14"
                         android:textStyle="bold"
                         app:buttonRadius="@dimen/dp_24"
@@ -776,6 +778,24 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <com.vaycore.finance.ui.views.StyledTextView
+                    android:id="@+id/state1BorrowTip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dp_28"
+                    android:layout_marginEnd="@dimen/dp_8"
+                    android:gravity="center"
+                    android:paddingHorizontal="@dimen/dp_16"
+                    android:text="@string/disbursed_quickly"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_13"
+                    android:translationY="-10dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@id/state1ActionLayout"
+                    app:layout_constraintTop_toTopOf="@id/state1ActionLayout"
+                    app:radius="@dimen/dp_14"
+                    app:solidColor="@color/status_error"
+                    tools:visibility="visible" />
 
                 <com.vaycore.finance.ui.views.StatefulActionButton
                     android:id="@+id/tvRepay"
@@ -862,7 +882,7 @@
                     android:gravity="center"
                     android:paddingHorizontal="@dimen/dp_16"
                     android:text="@string/disbursed_quickly"
-                    android:textColor="@color/text_primary"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/sp_13"
                     android:translationY="-10dp"
                     android:visibility="gone"
@@ -879,7 +899,7 @@
                     android:gravity="center"
                     android:paddingHorizontal="@dimen/dp_16"
                     android:text="@string/disbursed_quickly"
-                    android:textColor="@color/text_primary"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/sp_13"
                     android:translationY="-10dp"
                     android:visibility="gone"

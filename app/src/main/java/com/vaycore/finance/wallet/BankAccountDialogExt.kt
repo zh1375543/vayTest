@@ -67,7 +67,7 @@ fun Context.chooseAccountsDialog(
             val currentAccountIndex = list.indexOfFirst { it.bankNo == cardNo }
             val defaultAccountIndex = list.indexOfFirst { it.isDefault == 1 }
             val index = max(0, if (currentAccountIndex >= 0) currentAccountIndex else defaultAccountIndex)
-            val itemHeight = resources.getDimensionPixelSize(R.dimen.dp_66)
+            val itemHeight = resources.getDimensionPixelSize(R.dimen.dp_74)
             val visibleItemCount = list.size.coerceIn(2, 4)
             rvCard.layoutParams = rvCard.layoutParams.apply {
                 height = itemHeight * visibleItemCount

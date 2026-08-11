@@ -1,6 +1,8 @@
 package com.vaycore.finance.ui
 
 import android.content.Context
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.vaycore.finance.base.BaseDialog
 import com.vaycore.finance.base.BaseSheetDialog
 import com.vaycore.finance.data.bean.SelectionOption
@@ -102,17 +104,36 @@ private class AddressPickerDialog(
     private var cityId: Long? = null
     private var areaId: Long? = null
     private var activeTab = AddressLevel.PROVINCE
+    private val addressAdapter = AddressOptionAdapter()
+    private var letterPositions: Map<Char, Int> = emptyMap()
 
     override fun initView() {
         super.initView()
+        setupAddressList()
         bindLevelSelection()
         bindConfirmAction()
         setOnShowListener { loadAddressLevel(AddressLevel.PROVINCE) }
     }
 
+    private fun setupAddressList() = with(binding) {
+        rvAddress.adapter = addressAdapter
+        alphabetIndex.setOnLetterSelectedListener { letter ->
+            val position = letterPositions[letter] ?: return@setOnLetterSelectedListener
+            (rvAddress.layoutManager as? LinearLayoutManager)
+                ?.scrollToPositionWithOffset(position, 0)
+        }
+        rvAddress.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                val layoutManager = recyclerView.layoutManager as? LinearLayoutManager ?: return
+                val position = layoutManager.findFirstVisibleItemPosition()
+                val letter = addressAdapter.getItem(position)?.let { addressInitial(it.info) }
+                if (letter != '#') alphabetIndex.setSelectedLetter(letter)
+            }
+        })
+    }
+
     private fun loadAddressLevel(level: AddressLevel) = with(binding) {
         activeTab = level
-        wheelView.setOnSelectListener(null)
 
         val parentId = when (level) {
             AddressLevel.PROVINCE -> null
@@ -122,29 +143,44 @@ private class AddressPickerDialog(
         viewModel.getAddressList(parentId) { addressList ->
             if (activeTab != level) return@getAddressList
 
-            val applySelection: (SelectionOption) -> Unit = { item ->
-                when (level) {
-                    AddressLevel.PROVINCE -> {
-                        tvProvince.text = item.info
-                        provinceId = item.id.toLong()
-                    }
-
-                    AddressLevel.CITY -> {
-                        tvCity.text = item.info
-                        cityId = item.id.toLong()
-                    }
-
-                    AddressLevel.AREA -> {
-                        tvArea.text = item.info
-                        areaId = item.id.toLong()
-                    }
+            val sortedItems = sortAddressOptions(addressList)
+            letterPositions = buildMap {
+                sortedItems.forEachIndexed { index, item ->
+                    val letter = addressInitial(item.info)
+                    if (letter != '#' && letter !in this) put(letter, index)
                 }
             }
-            wheelView.setData(addressList)
-            wheelView.setOnSelectListener { _, item -> applySelection(item) }
-            addressList.firstOrNull()?.let { defaultItem ->
-                applySelection(defaultItem)
-                wheelView.setDefaultSelected(0)
+            addressAdapter.resetSelection()
+            addressAdapter.submitItems(sortedItems)
+            alphabetIndex.setAvailableLetters(letterPositions.keys)
+            addressAdapter.setOnItemClickListener { item, position ->
+                addressAdapter.select(position)
+                applyAddressSelection(item)
+            }
+            sortedItems.firstOrNull()?.let { defaultItem ->
+                addressAdapter.select(0)
+                applyAddressSelection(defaultItem)
+                rvAddress.scrollToPosition(0)
+                alphabetIndex.setSelectedLetter(addressInitial(defaultItem.info))
+            }
+        }
+    }
+
+    private fun applyAddressSelection(item: SelectionOption) = with(binding) {
+        when (activeTab) {
+            AddressLevel.PROVINCE -> {
+                tvProvince.text = item.info
+                provinceId = item.id.toLong()
+            }
+
+            AddressLevel.CITY -> {
+                tvCity.text = item.info
+                cityId = item.id.toLong()
+            }
+
+            AddressLevel.AREA -> {
+                tvArea.text = item.info
+                areaId = item.id.toLong()
             }
         }
     }

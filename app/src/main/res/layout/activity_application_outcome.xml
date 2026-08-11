@@ -226,7 +226,7 @@
                         <com.vaycore.finance.ui.views.StyledRecyclerView
                             android:id="@+id/rvProduct"
                             android:layout_width="0dp"
-                            android:layout_height="0dp"
+                            android:layout_height="wrap_content"
                             android:nestedScrollingEnabled="false"
                             android:orientation="vertical"
                             android:overScrollMode="never"
@@ -234,8 +234,6 @@
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                             app:layout_constraintBottom_toTopOf="@id/cashableProductLayout"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHeight_default="wrap"
-                            app:layout_constraintHeight_max="@dimen/dp_250"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             tools:itemCount="4"

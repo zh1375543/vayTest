@@ -66,13 +66,25 @@
         style="@style/mainButton"
         android:text="@string/next"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/wheelView"/>
+        app:layout_constraintTop_toBottomOf="@id/rvAddress" />
 
-    <com.vaycore.finance.ui.views.WheelView
-        android:id="@+id/wheelView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:maxHeight="@dimen/dp_500"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvAddress"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_300"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toStartOf="@id/alphabetIndex"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvProvince" />
+
+    <com.vaycore.finance.ui.views.AlphabetIndexView
+        android:id="@+id/alphabetIndex"
+        android:layout_width="@dimen/dp_24"
+        android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/dp_8"
+        app:layout_constraintBottom_toBottomOf="@id/rvAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/rvAddress" />
 </com.vaycore.finance.ui.views.StyledConstraintLayout>
