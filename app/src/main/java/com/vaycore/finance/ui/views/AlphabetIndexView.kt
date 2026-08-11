@@ -14,16 +14,15 @@ class AlphabetIndexView @JvmOverloads constructor(
     attrs: AttributeSet? = null,
 ) : View(context, attrs) {
 
-    private val letters = ('A'..'Z').toList()
+    private val alphabet = ('A'..'Z').toList()
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         textAlign = Paint.Align.CENTER
         textSize = resources.getDimension(R.dimen.sp_10)
     }
     private val activeColor = ContextCompat.getColor(context, R.color.brand_primary)
     private val normalColor = ContextCompat.getColor(context, R.color.text_tertiary)
-    private val disabledColor = ContextCompat.getColor(context, R.color.text_disabled)
 
-    private var availableLetters: Set<Char> = emptySet()
+    private var displayedLetters: List<Char> = emptyList()
     private var selectedLetter: Char? = null
     private var onLetterSelected: ((Char) -> Unit)? = null
 
@@ -32,13 +31,13 @@ class AlphabetIndexView @JvmOverloads constructor(
     }
 
     fun setAvailableLetters(letters: Set<Char>) {
-        availableLetters = letters
-        if (selectedLetter !in availableLetters) selectedLetter = null
+        displayedLetters = alphabet.filter { it in letters }
+        if (selectedLetter !in displayedLetters) selectedLetter = null
         invalidate()
     }
 
     fun setSelectedLetter(letter: Char?) {
-        if (letter == selectedLetter || letter !in availableLetters) return
+        if (letter == selectedLetter || letter !in displayedLetters) return
         selectedLetter = letter
         invalidate()
     }
@@ -49,16 +48,12 @@ class AlphabetIndexView @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        if (height == 0) return
+        if (height == 0 || displayedLetters.isEmpty()) return
 
-        val slotHeight = height.toFloat() / letters.size
+        val slotHeight = height.toFloat() / displayedLetters.size
         val textOffset = -(paint.ascent() + paint.descent()) / 2f
-        letters.forEachIndexed { index, letter ->
-            paint.color = when {
-                letter == selectedLetter -> activeColor
-                letter in availableLetters -> normalColor
-                else -> disabledColor
-            }
+        displayedLetters.forEachIndexed { index, letter ->
+            paint.color = if (letter == selectedLetter) activeColor else normalColor
             paint.isFakeBoldText = letter == selectedLetter
             canvas.drawText(
                 letter.toString(),
@@ -97,10 +92,12 @@ class AlphabetIndexView @JvmOverloads constructor(
     }
 
     private fun selectLetterAt(y: Float) {
-        if (height == 0) return
-        val index = ((y / height) * letters.size).toInt().coerceIn(0, letters.lastIndex)
-        val letter = letters[index]
-        if (letter !in availableLetters || letter == selectedLetter) return
+        if (height == 0 || displayedLetters.isEmpty()) return
+        val index = ((y / height) * displayedLetters.size)
+            .toInt()
+            .coerceIn(0, displayedLetters.lastIndex)
+        val letter = displayedLetters[index]
+        if (letter == selectedLetter) return
         selectedLetter = letter
         invalidate()
         onLetterSelected?.invoke(letter)

@@ -15,6 +15,7 @@ import androidx.core.content.FileProvider
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.vaycore.finance.BuildConfig
@@ -68,6 +69,7 @@ class SavingsRecordActivity : BaseActivity<SidepageSavingsRecordActivityBinding>
     private var currentLatitude: Double? = null
     private var currentLongitude: Double? = null
     private var currentLocationText: String? = null
+    private var isApplyingDetectedLocation = false
     private val recordPhotoAdapter by lazy {
         RecordPhotoAdapter(onPhotoClick = { showPhotoManagerDialog() })
     }
@@ -106,8 +108,13 @@ class SavingsRecordActivity : BaseActivity<SidepageSavingsRecordActivityBinding>
         photoUploadView.singleClick {
             showPhotoManagerDialog()
         }
-        locationView.setOnClickListener { requestLocationPermission() }
-        locationView.setOnClick(::requestLocationPermission)
+        locationView.getEditText().doAfterTextChanged { editable ->
+            currentLocationText = editable?.toString()?.trim()?.takeIf(String::isNotBlank)
+            if (!isApplyingDetectedLocation) {
+                currentLatitude = null
+                currentLongitude = null
+            }
+        }
         locationView.setEndIconClick(::requestLocationPermission)
         btSubmitRecord.singleClick { submitRecord() }
     }
@@ -327,10 +334,12 @@ class SavingsRecordActivity : BaseActivity<SidepageSavingsRecordActivityBinding>
                     location.longitude,
                 )
             }
+            isApplyingDetectedLocation = true
+            binding.locationView.setText(locationText)
+            isApplyingDetectedLocation = false
             currentLocationText = locationText
             currentLatitude = location.latitude
             currentLongitude = location.longitude
-            binding.locationView.setText(locationText)
         }
     }
 

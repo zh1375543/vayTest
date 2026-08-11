@@ -124,8 +124,7 @@ class BorrowingDetailActivity :
         contractLayout.setSpannableClickableTexts(
             String.format(
                 getString(R.string.product_detail_agreement),
-                getString(R.string.lease_contract),
-                getString(R.string.mortgage_contract),
+                getString(R.string.lease_contract)
             ),
             listOf(
                 ClickablePart(
@@ -133,13 +132,7 @@ class BorrowingDetailActivity :
                     resolveColorCompat(R.color.brand_primary),
                 ) {
                     showLoanAgreement(getString(R.string.lease_contract), LEASE_AGREEMENT)
-                },
-                ClickablePart(
-                    getString(R.string.mortgage_contract),
-                    resolveColorCompat(R.color.brand_primary),
-                ) {
-                    showLoanAgreement(getString(R.string.mortgage_contract), PAWN_AGREEMENT)
-                },
+                }
             ),
         )
         rvPlan.adapter = installAdapter

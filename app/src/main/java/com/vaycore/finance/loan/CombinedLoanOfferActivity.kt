@@ -64,13 +64,6 @@ class CombinedLoanOfferActivity : BaseActivity<ActivityCombinedLoanOfferBinding>
     }
 
     private fun connectBundleUtilities() = with(binding) {
-        tvAbout.singleClick {
-            WebViewActivity.Companion.launch(
-                this@CombinedLoanOfferActivity,
-                tvAbout.text.toString(),
-                AGREEMENT_ABOUT,
-            )
-        }
         tvChange.singleClick {
             vm.submitTrackingEvent(
                 TrackBean(

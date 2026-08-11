@@ -40,33 +40,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <!-- Kept outside RecyclerView so the agreement entry stays fixed. -->
-            <com.vaycore.finance.ui.views.StyledTextView
-                android:id="@+id/tvAbout"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/dp_48"
-                android:layout_marginHorizontal="@dimen/dp_16"
-                android:layout_marginTop="@dimen/dp_12"
-                android:drawableEnd="@mipmap/mine_right"
-                android:drawablePadding="@dimen/dp_8"
-                android:gravity="center_vertical"
-                android:paddingStart="@dimen/dp_20"
-                android:paddingEnd="@dimen/dp_16"
-                android:text="@string/about_lease"
-                android:textColor="@color/brand_primary"
-                android:textSize="@dimen/sp_15"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:radius="@dimen/dp_16"
-                app:solidColor="@color/surface_primary" />
-
             <com.vaycore.finance.ui.views.StyledRecyclerView
                 android:id="@+id/rvProduct"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginHorizontal="@dimen/dp_16"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_12"
                 android:orientation="vertical"
                 android:overScrollMode="never"
                 android:paddingBottom="@dimen/dp_4"
@@ -75,7 +54,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvAbout"
+                app:layout_constraintTop_toTopOf="parent"
                 app:solidColor="@color/transparent"
                 tools:itemCount="2"
                 tools:listitem="@layout/item_combo" />

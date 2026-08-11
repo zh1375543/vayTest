@@ -36,7 +36,6 @@ fun Context.showLoanAgreementDialog(
             )
             tvPlease.isVisible = !isTogether
             tvLease.isVisible = !isTogether
-            tvMortgage.isVisible = !isTogether
             btnApply.singleClick {
                 dismiss()
                 applyAction()
@@ -45,12 +44,6 @@ fun Context.showLoanAgreementDialog(
                 WebViewActivity.launch(
                     this@showLoanAgreementDialog, tvLease.text.toString(),
                     LEASE_AGREEMENT + "userId=${loginInfo?.id}&productId=${productId}&amount=${amount}"
-                )
-            }
-            tvMortgage.singleClick {
-                WebViewActivity.launch(
-                    this@showLoanAgreementDialog, tvMortgage.text.toString(),
-                    PAWN_AGREEMENT + "userId=${loginInfo?.id}&productId=${productId}&amount=${amount}"
                 )
             }
         }

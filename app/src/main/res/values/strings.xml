@@ -228,7 +228,7 @@
     <string name="select_amount">Selected amount</string>
 
     <string name="confirmed_contract_title">I have confirmed the contract</string>
-    <string name="product_detail_agreement">I have confirmed the contract %s and %s</string>
+    <string name="product_detail_agreement">I have confirmed the contract %s</string>
     <string name="about_lease">About mortgage and leasing</string>
     <string name="num_days">%s Days</string>
     <string name="loan_period_days">Loan period</string>
@@ -271,7 +271,6 @@ We will delete the calendar information after we have determined your risk profi
 This credit risk assessment can help make loan approvals faster and more efficient.</string>
     <string name="please_review_agreement_confirmation">Please review the agreement and confirm signature</string>
     <string name="lease_contract">Lease contract</string>
-    <string name="mortgage_contract">Mortgage contract</string>
     <string name="application_being_submit">Application is being submitted</string>
     <string name="application_submit">Application Submitted !</string>
     <string name="application_submit_desc">Your application has been submitted, we will remind you of the review result by SMS</string>

@@ -98,23 +98,13 @@ class LoanOfferActivity : BaseActivity<ActivityLoanOfferBinding>() {
         tvPrivacy.setSpannableClickableTexts(
             String.format(
                 getString(R.string.product_detail_agreement),
-                getString(R.string.lease_contract),
-                getString(R.string.mortgage_contract)
+                getString(R.string.lease_contract)
             ), arrayListOf(
                 ClickablePart(
                     getString(R.string.lease_contract), resolveColorCompat(R.color.brand_primary), onClick = {
                         LoanEventRecorder.record(LoanEvent.CLICK_OPEN_AGREEMENT)
                         WebViewActivity.Companion.launch(
                             this@LoanOfferActivity, getString(R.string.lease_contract), leaseUrl
-                        )
-                    }),
-                ClickablePart(
-                    getString(R.string.mortgage_contract),
-                    resolveColorCompat(R.color.brand_primary),
-                    onClick = {
-                        LoanEventRecorder.record(LoanEvent.CLICK_OPEN_AGREEMENT)
-                        WebViewActivity.Companion.launch(
-                            this@LoanOfferActivity, getString(R.string.mortgage_contract), pawnUrl
                         )
                     }),
             )

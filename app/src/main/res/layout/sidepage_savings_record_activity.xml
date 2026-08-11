@@ -145,8 +145,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
                         app:formEndIcon="@mipmap/ic_as_location"
-                        app:formType="select"
-                        app:hintText="@string/please_choose"
+                        app:formType="input"
+                        app:hintText="@string/please_enter"
                         app:inputBackgroundColor="@color/surface_secondary"
                         app:inputType="text"
                         app:titleText="@string/portal_savings_location" />

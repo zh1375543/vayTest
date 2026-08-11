@@ -16,15 +16,11 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.supervisorScope
 import kotlinx.coroutines.withContext
-import kotlinx.coroutines.withTimeoutOrNull
 import org.json.JSONArray
 import org.json.JSONObject
-import kotlin.time.Duration.Companion.seconds
 
 /** Concurrently collects risk sections and assembles the fixed risk snapshot payload. */
 object RiskSnapshotCollector {
-
-    private val riskLocationTimeout = 15.seconds
 
     suspend fun collect(): String = withContext(Dispatchers.IO) {
         val sections = supervisorScope {
@@ -124,11 +120,7 @@ object RiskSnapshotCollector {
     private suspend fun getLocationInfo(): JSONObject {
         val json = JSONObject()
         runCatching {
-            val locationInfo = withTimeoutOrNull(riskLocationTimeout) {
-                LocationInfoHelper.getLocationInfo()
-            }
-            val location = locationInfo?.first
-            val address = locationInfo?.second
+            val (location, address) = LocationInfoHelper.getLocationInfo()
             json.put("province", address?.adminArea)
             json.put("city", address?.locality)
             json.put("street", address?.thoroughfare)
