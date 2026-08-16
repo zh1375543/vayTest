@@ -58,15 +58,34 @@ fun Context.chooseAccountsDialog(
     list: List<BankAccountResponse>,
     isRepay: Boolean = false,
     title: String = getString(R.string.choose_account),
+    selectedAccountId: Long? = null,
+    selectedPayWay: String? = null,
     applyAction: (info: BankAccountResponse) -> Unit,
 ) {
     object : BaseDialog<ChooseAccountsDialogBinding>(this, ChooseAccountsDialogBinding::inflate) {
         override fun initView() = with(binding) {
             tvTitle.text = title
             tvAdd.isVisible = !isRepay
-            val currentAccountIndex = list.indexOfFirst { it.bankNo == cardNo }
+            // A card number can exist in both a bank account and an e-wallet.
+            // Use the account identity first so a same-number wallet cannot replace
+            // the current bank account (or vice versa) as the dialog's preselection.
+            val currentAccountIndex = if (selectedAccountId != null && selectedPayWay != null) {
+                list.indexOfFirst { account ->
+                    account.id == selectedAccountId && account.payWay == selectedPayWay
+                }
+            } else {
+                -1
+            }
+            val cardNoIndex = list.indexOfFirst { it.bankNo == cardNo }
             val defaultAccountIndex = list.indexOfFirst { it.isDefault == 1 }
-            val index = max(0, if (currentAccountIndex >= 0) currentAccountIndex else defaultAccountIndex)
+            val index = max(
+                0,
+                when {
+                    currentAccountIndex >= 0 -> currentAccountIndex
+                    cardNoIndex >= 0 -> cardNoIndex
+                    else -> defaultAccountIndex
+                }
+            )
             val itemHeight = resources.getDimensionPixelSize(R.dimen.dp_74)
             val visibleItemCount = list.size.coerceIn(2, 4)
             rvCard.layoutParams = rvCard.layoutParams.apply {

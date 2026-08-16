@@ -184,7 +184,12 @@ class CombinedLoanOfferActivity : BaseActivity<ActivityCombinedLoanOfferBinding>
 
         accountVm.loanAccountList.observe(this@CombinedLoanOfferActivity) { accounts ->
             accounts ?: return@observe
-            chooseAccountsDialog(cardInfo?.bankNo, accounts, false) { card ->
+            chooseAccountsDialog(
+                cardNo = cardInfo?.bankNo,
+                list = accounts,
+                selectedAccountId = cardInfo?.id,
+                selectedPayWay = cardInfo?.payWay,
+            ) { card ->
                 renderPayoutAccount(card)
             }
         }

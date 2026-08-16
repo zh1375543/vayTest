@@ -319,7 +319,12 @@ class LoanOfferActivity : BaseActivity<ActivityLoanOfferBinding>() {
         }
         accountVm.loanAccountList.observe(this@LoanOfferActivity) {
             it?.let {
-                chooseAccountsDialog(cardInfo?.bankNo, it, false) { card ->
+                chooseAccountsDialog(
+                    cardNo = cardInfo?.bankNo,
+                    list = it,
+                    selectedAccountId = cardInfo?.id,
+                    selectedPayWay = cardInfo?.payWay,
+                ) { card ->
                     renderPayoutAccount(card)
                 }
             }

@@ -29,6 +29,7 @@ class SingleProductDetailView @JvmOverloads constructor(
 
     private var currentProduct: ProductBean? = null
     private var hasInstallmentFee = false
+    private var isDetailsExpanded = true
 
     var onTermChanged: ((productId: Long?, termId: Long?) -> Unit)? = null
     var onInstallmentChanged: ((productId: Long?, planNum: Int?) -> Unit)? = null
@@ -45,9 +46,7 @@ class SingleProductDetailView @JvmOverloads constructor(
 
         ivMoreDetail.rotation = 0f
         val toggleDetails = {
-            detailsGroup.isVisible = !detailsGroup.isVisible
-            ivMoreDetail.rotation = if (detailsGroup.isVisible) 0f else 180f
-            updateInstallmentFeeVisibility()
+            setDetailsExpanded(!isDetailsExpanded)
         }
         ivMoreDetail.setOnClickListener { toggleDetails() }
         tvDetailTitle.setOnClickListener { toggleDetails() }
@@ -91,20 +90,27 @@ class SingleProductDetailView @JvmOverloads constructor(
         tvInterest.text = plan.interestAmount.formatAmountWithPrefix(currencySymbol)
         tvDate.text = plan.repayTimeStr
         hasInstallmentFee = plan.installmentServiceFee?.signum() == 1
-        updateInstallmentFeeVisibility()
         if (hasInstallmentFee) {
             tvInstallFee.text = plan.installmentServiceFee.formatAmountWithPrefix(plan.currencySymbol)
         } else {
             tvInstallFee.text = null
         }
+        updateInstallmentFeeVisibility()
         tvModel.text = "${Build.BRAND} ${Build.MODEL}"
         headerFeeAdapter.submitItems(plan.appProductHandleFeeConfigDtos)
     }
 
     private fun updateInstallmentFeeVisibility() = with(binding) {
-        val shouldShow = detailsGroup.isVisible && hasInstallmentFee
+        val shouldShow = isDetailsExpanded && hasInstallmentFee
         tvInstallFeeTitle.isVisible = shouldShow
         tvInstallFee.isVisible = shouldShow
+    }
+
+    private fun setDetailsExpanded(isExpanded: Boolean) = with(binding) {
+        isDetailsExpanded = isExpanded
+        detailsGroup.isVisible = isExpanded
+        ivMoreDetail.rotation = if (isExpanded) 0f else 180f
+        updateInstallmentFeeVisibility()
     }
 
     fun setData(product: ProductBean) {

@@ -104,6 +104,7 @@ private class AddressPickerDialog(
     private var cityId: Long? = null
     private var areaId: Long? = null
     private var activeTab = AddressLevel.PROVINCE
+    private var pendingSelection: SelectionOption? = null
     private val addressAdapter = AddressOptionAdapter()
     private var letterPositions: Map<Char, Int> = emptyMap()
 
@@ -133,13 +134,13 @@ private class AddressPickerDialog(
     }
 
     private fun loadAddressLevel(level: AddressLevel) = with(binding) {
-        activeTab = level
-
         val parentId = when (level) {
             AddressLevel.PROVINCE -> null
-            AddressLevel.CITY -> provinceId.toString()
-            AddressLevel.AREA -> cityId.toString()
+            AddressLevel.CITY -> provinceId?.toString() ?: return@with
+            AddressLevel.AREA -> cityId?.toString() ?: return@with
         }
+        activeTab = level
+        pendingSelection = null
         viewModel.getAddressList(parentId) { addressList ->
             if (activeTab != level) return@getAddressList
 
@@ -155,32 +156,51 @@ private class AddressPickerDialog(
             alphabetIndex.setAvailableLetters(letterPositions.keys)
             addressAdapter.setOnItemClickListener { item, position ->
                 addressAdapter.select(position)
-                applyAddressSelection(item)
+                pendingSelection = item
+                when (level) {
+                    AddressLevel.PROVINCE -> tvProvince.text = item.info
+                    AddressLevel.CITY -> tvCity.text = item.info
+                    AddressLevel.AREA -> tvArea.text = item.info
+                }
             }
             sortedItems.firstOrNull()?.let { defaultItem ->
                 addressAdapter.select(0)
-                applyAddressSelection(defaultItem)
+                pendingSelection = defaultItem
+                when (level) {
+                    AddressLevel.PROVINCE -> tvProvince.text = defaultItem.info
+                    AddressLevel.CITY -> tvCity.text = defaultItem.info
+                    AddressLevel.AREA -> tvArea.text = defaultItem.info
+                }
                 rvAddress.scrollToPosition(0)
                 alphabetIndex.setSelectedLetter(addressInitial(defaultItem.info))
             }
         }
     }
 
-    private fun applyAddressSelection(item: SelectionOption) = with(binding) {
+    private fun confirmAddressSelection(item: SelectionOption) = with(binding) {
         when (activeTab) {
             AddressLevel.PROVINCE -> {
                 tvProvince.text = item.info
                 provinceId = item.id.toLong()
+                loadAddressLevel(AddressLevel.CITY)
             }
 
             AddressLevel.CITY -> {
                 tvCity.text = item.info
                 cityId = item.id.toLong()
+                loadAddressLevel(AddressLevel.AREA)
             }
 
             AddressLevel.AREA -> {
                 tvArea.text = item.info
                 areaId = item.id.toLong()
+                dismiss()
+                onAddressSelected(
+                    "${tvProvince.text}/${tvCity.text}/${tvArea.text}",
+                    provinceId,
+                    cityId,
+                    areaId,
+                )
             }
         }
     }
@@ -197,6 +217,7 @@ private class AddressPickerDialog(
         }
 
         tvCity.singleClick {
+            if (provinceId == null) return@singleClick
             tvCity.text = ""
             cityId = null
             tvArea.text = ""
@@ -205,6 +226,7 @@ private class AddressPickerDialog(
         }
 
         tvArea.singleClick {
+            if (cityId == null) return@singleClick
             tvArea.text = ""
             areaId = null
             loadAddressLevel(AddressLevel.AREA)
@@ -213,26 +235,7 @@ private class AddressPickerDialog(
 
     private fun bindConfirmAction() = with(binding) {
         tvOk.singleClick {
-            if (tvProvince.text.isNullOrBlank() || provinceId == null) {
-                loadAddressLevel(AddressLevel.PROVINCE)
-                return@singleClick
-            }
-            if (tvCity.text.isNullOrBlank() || cityId == null) {
-                loadAddressLevel(AddressLevel.CITY)
-                return@singleClick
-            }
-            if (tvArea.text.isNullOrBlank() || areaId == null) {
-                loadAddressLevel(AddressLevel.AREA)
-                return@singleClick
-            }
-
-            dismiss()
-            onAddressSelected(
-                "${tvProvince.text}/${tvCity.text}/${tvArea.text}",
-                provinceId,
-                cityId,
-                areaId,
-            )
+            pendingSelection?.let(::confirmAddressSelection)
         }
     }
 }
